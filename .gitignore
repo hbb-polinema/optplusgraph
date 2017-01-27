@@ -2,6 +2,8 @@
 *.out_py3
 *.pyc
 *.pyo
+*.map
+*.js.map
 src/dev/node_modules/
 src/dev/typings/
 
