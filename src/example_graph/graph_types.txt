@@ -1,0 +1,14 @@
+[OK=c] 1. Breadth First Search (BFS)
+[OK=c] 2. Depth First Search (DFS)
+[OK=c] 3. Prim
+[OK=c] 4. Djikstra
+[OK=c] 5. Bellman-Ford
+[OK=c] 6. Floyd-Warshall
+[OK=c] 7. Kruskal
+
+[http://cyberlingo.blogspot.co.id/2015/07/bellman-ford-algorithm.html]
+Breadth First Search : For graphs where the edge-weights are either zero or all same.
+Dijkstra's Alogrithm : For graphs where the edge-weights are non-negative. Uses greedy strategy.
+Bellman-Ford Algorithm : For graphs where the edge-weights may be negative, but no negative weight cycle exists. Uses dynamic programming.
+
+http://www.codingalpha.com/difference-between-c-and-cpp/

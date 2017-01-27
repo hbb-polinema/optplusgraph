@@ -1,0 +1,10 @@
+*.out
+*.out_py3
+*.pyc
+*.pyo
+src/dev/node_modules/
+src/dev/typings/
+
+# for regression tests
+*.diff.png
+*.fail.png

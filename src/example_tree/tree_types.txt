@@ -1,0 +1,7 @@
+[OK=c] 		1. Binary Search Tree (BST)
+		2. Digital Search Tree
+[OK=cpp,c]	3. Radix Tree
+[OK=c,cpp]	4. Adelson-Velskii and Landis (AVL)
+[OK=c] 		5. Red-Black Tree
+		6. Search Tree Traversal
+[OK=cpp] 	7. Splay Tree
