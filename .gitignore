@@ -1,3 +1,6 @@
+src/dev/.vscode/
+*.vsd
+*.~vsd
 *.out
 *.out_py3
 *.pyc
