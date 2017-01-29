@@ -44,6 +44,7 @@ module.exports = {
         'index': "./js/index.ts",
         'composingprograms': "./js/composingprograms.ts",
         'csc108h': "./js/csc108h.ts",
+        'demo_binary_search_tree':"./js/demo_binary_search_tree.ts"
     },
 
     output: {
