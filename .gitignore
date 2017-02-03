@@ -7,8 +7,10 @@ src/dev/.vscode/
 *.pyo
 *.map
 *.js.map
-src/dev/node_modules/
+src/dev/node_modules/*
 src/dev/typings/
+src/dev/backend/usercode.c
+src/dev/backend/usercode.exe
 
 # for regression tests
 *.diff.png
