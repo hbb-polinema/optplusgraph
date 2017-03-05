@@ -1,4 +1,5 @@
-src/dev/.vscode/
+src/dev/.vscode/*
+src/dev/backend/node_modules/*
 *.vsd
 *.~vsd
 *.out
@@ -8,7 +9,7 @@ src/dev/.vscode/
 *.map
 *.js.map
 src/dev/node_modules/*
-src/dev/typings/
+src/dev/typings/*
 src/dev/backend/usercode.c
 src/dev/backend/usercode.exe
 
