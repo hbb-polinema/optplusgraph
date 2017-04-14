@@ -1,5 +1,6 @@
 src/dev/.vscode/*
 src/dev/backend/node_modules/*
+src/demo/node_modules/*
 *.vsd
 *.~vsd
 *.out
