@@ -42,7 +42,7 @@ p = Popen([CC, DIALECT, '-ggdb', '-O0', '-fno-omit-frame-pointer', '-o', EXE_PAT
           stdout=PIPE, stderr=PIPE)
 (gcc_stdout, gcc_stderr) = p.communicate()
 gcc_retcode = p.returncode
-print('>>> gcc_retcode: ',gcc_retcode)
+
 if gcc_retcode == 0:
     print >> sys.stderr, '=== gcc stderr ==='
     print >> sys.stderr, gcc_stderr
@@ -51,7 +51,7 @@ if gcc_retcode == 0:
     # run it with Valgrind
     VALGRIND_EXE = 'valgrind' #os.path.join(DN, 'valgrind')
     # tricky! --source-filename takes a basename only, not a full pathname:
-    print('>>> FN:'+FN+' VGTRACE_PATH: '+VGTRACE_PATH+' EXE_PATH: '+EXE_PATH)
+    
     valgrind_p = Popen(['stdbuf', '-o0', # VERY IMPORTANT to disable stdout buffering so that stdout is traced properly
                         VALGRIND_EXE,
                         '--tool=memcheck',
@@ -74,7 +74,7 @@ if gcc_retcode == 0:
     # TODO: integrate call into THIS SCRIPT since it's simply Python
     # code; no need to call it as an external script
     POSTPROCESS_EXE = os.path.join(DN, 'vg_to_opt_trace.py')
-    print(DN)
+    
     postprocess_p = Popen(['python', POSTPROCESS_EXE,
                            '--jsondump', F_PATH],
                           stdout=PIPE, stderr=PIPE)

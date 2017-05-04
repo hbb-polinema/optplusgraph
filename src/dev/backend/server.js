@@ -57,9 +57,7 @@ var JAVA_TIMEOUT_SECS = 15; // the Java backend is SUPER SLOW :/
 var CPP_TIMEOUT_SECS = 15; // the C/C++ backend is also SUPER SLOW :/
 
 var MAX_BUFFER_SIZE = 10 * 1024 * 1024;
-
 var MEM_LIMIT = "512M";
-
 
 // bind() res and useJSONP before using
 function postExecHandler(res, useJSONP, err, stdout, stderr) {
@@ -106,7 +104,8 @@ function postExecHandler(res, useJSONP, err, stdout, stderr) {
       res.send(stdout);
     }
   }
-}
+  
+} // END function postExecHandler()
 
 
 var app = express();
@@ -239,12 +238,15 @@ function exec_cpp_handler(useCPP /* use bind first */, useJSONP /* use bind firs
   var args = [];
 
   // this needs to match the docker setup in opt-cpp-backend/Dockerfile (in the https://github.com/pgbovine/opt-cpp-backend repo)
-  exeFile = '/usr/bin/docker'; // absolute path to docker executable
-  args.push('run', '-m', MEM_LIMIT, '--rm', '--user=netuser', '--net=none', '--cap-drop', 'all', 'pgbovine/opt-cpp-backend:v1',
-            'python',
-            '/tmp/opt-cpp-backend/run_cpp_backend.py',
-            usrCod,
-            useCPP ? 'cpp' : 'c');
+  //exeFile = '/usr/bin/docker'; // absolute path to docker executable
+  //args.push('run', '-m', MEM_LIMIT, '--rm', '--user=netuser', '--net=none', '--cap-drop', 'all', 'pgbovine/opt-cpp-backend:v1',
+  //          'python',
+  //          '/tmp/opt-cpp-backend/run_cpp_backend.py',
+  //          usrCod,
+  //          useCPP ? 'cpp' : 'c');
+
+  exeFile = 'python';
+  args.push('run_cpp_backend.py', usrCod, useCPP ? 'cpp' : 'c');
 
   child_process.execFile(exeFile, args,
                          {timeout: CPP_TIMEOUT_SECS * 1000 /* milliseconds */,
@@ -257,7 +259,20 @@ function exec_cpp_handler(useCPP /* use bind first */, useJSONP /* use bind firs
                          postExecHandler.bind(null, res, useJSONP));
 }
 
-app.get('/post_ajax', post_ajax.bind(null, true));
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded body
+app.use(bodyParser.urlencoded({ extended: true})); // support encoded bodies
+
+// ex: post http://localhost:3000/test?id=4&token=sdfa3&geo=us
+app.post('/test', function(req, res) {
+    var user_id = req.body.id;
+    var token = req.body.token;
+    var geo = req.body.geo;
+
+    res.send('user_id:' + user_id + ' ' + token + ' ' + geo);
+});
+
+app.post('/post_ajax', post_ajax.bind(null, true));
 function post_ajax(request, result){
   var user_code = request.query.user_script;
   var python;

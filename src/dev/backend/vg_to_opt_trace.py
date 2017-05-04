@@ -225,7 +225,6 @@ if __name__ == '__main__':
     cur_record_lines = []
 
     success = True
-    print('>>> basename: ' + basename)
 
     for line in open('usercode.vgtrace'):
         line = line.strip()
