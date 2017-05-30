@@ -3,8 +3,7 @@ Proyek ini adalah Tesis dari Habibie Ed Dien, untuk memenuhi persyaratan kelulus
 Dikembangkan Oleh:<br>
 Nama		: Habibie Ed Dien<br>
 Email		: habibieeddien@students.itb.ac.id<br>
-Biodata		: http://about.me/habibieeddien<br>
-Blog/Web	: http://habibie.tk<br>
+Blog/Web	: http://www.habibie.tk<br>
 Tanggal Mulai	: Agustus 2016<br>
 
 Apa tujuan utama pengembangan?
