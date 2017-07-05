@@ -1,0 +1,56 @@
+/** http://animateddata.co.uk/slides/d3-layouts/slides/#/4/4 **/
+/**** Data Structure ****/
+{
+  children: [
+    {
+    },
+    {
+      children: [
+        {
+        },
+        {
+        }        
+      ]
+    }
+  ]
+}
+
+/**** Data Structure with name and value ****/
+{
+  name: 'Top of the tree',
+  children: [
+    {
+      name: 'A leaf node',
+      value: 10
+    },
+    {
+      name: 'In the middle',
+      children: [
+        {
+          name: 'Another leaf',
+          value: 20
+        },
+        {
+          name: 'One more leaf',
+          value: 15
+        }        
+      ]
+    }
+  ]
+}
+
+/**** Tree Layout ****/
+var treeLayout = d3.layout.tree()
+  .size([600, 400]);
+
+var nodes = treeLayout(data);
+var links = treeLayout.links(nodes);
+
+d3.select('svg')
+  .selectAll('circle')
+  .data(nodes)
+  .enter()
+  .append('circle')
+  .attr('cx', function(d) {return d.x;})
+  .attr('cy', function(d) {return d.y;});
+

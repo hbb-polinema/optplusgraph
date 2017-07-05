@@ -1,0 +1,58 @@
+/** http://animateddata.co.uk/slides/d3-layouts/slides/#/5/1 **/
+/**** Data Structure ****/
+var nodes = [
+  {},
+  {},
+  ...
+];
+
+var links = [
+  {source: 0, target: 1},
+  {source: 1, target: 5},
+  ...
+];
+
+/**** Force Layout ****/
+var forceLayout = d3.layout.force()
+    .size([500, 500])
+    .on('tick', forceTick);
+
+forceLayout
+  .nodes(nodes)
+  .links(links)
+  .start();
+
+function forceTick() {
+  d3.selectAll('line.link')
+    .attr('x1', function(d) {return d.source.x;})
+    .attr('y1', function(d) {return d.source.y;})
+    .attr('x2', function(d) {return d.target.x;})
+    .attr('y2', function(d) {return d.target.y;});
+
+  d3.selectAll('circle.node')
+    .attr('cx', function(d) {return d.x;})
+    .attr('cy', function(d) {return d.y;});
+}
+
+/**** FORCE WITH CUSTOM FORCES ****/
+var forceLayout = d3.layout.force()
+    .size([500, 500])
+    .on('tick', forceTick);
+
+forceLayout
+  .nodes(nodes)
+  .start();
+
+function forceTick(e) {
+  var k = 0.5 * e.alpha;
+
+  d3.selectAll('circle.node')
+    .attr('cx', function(d) {
+      d.x += (foci[d.group].x - d.x) * k;
+      return d.x;
+    })
+    .attr('cy', function(d) {
+      d.y += (foci[d.group].y - d.y) * k;
+      return d.y;
+    });
+}
