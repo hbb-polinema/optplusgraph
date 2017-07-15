@@ -1,0 +1,107 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <style>
+        .node {
+            padding-left: 20px;
+            display: block;
+        }
+        
+        .node_collapsed {
+            padding-left: 20px;
+            display: none;
+            visibility: hidden;
+            display: none;
+        }
+        
+        a:active {
+            text-decoration: none;
+            color: #0000FF;
+            font-weight: bold;
+        }
+        
+        a:visited {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        a:link {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+            color: #500;
+            font-weight: bold;
+        }
+    </style>
+
+
+    <script language="javascript">
+        var displayStates = [];
+
+        function showDiv(div) {
+            div.style.height = "";
+            div.style.display = "block";
+            div.style.visibility = "visible";
+        }
+
+        function hideDiv(div) {
+            div.style.height = "0px";
+            div.style.display = "none";
+            div.style.visibility = "hidden";
+        }
+
+        function toggleDiv(div, defaultState) {
+
+            // set default on first use
+            if (displayStates[div] == undefined)
+                displayStates[div] = defaultState;
+
+            // toggle state
+            displayStates[div] = !displayStates[div];
+
+            // hide / show
+            if (displayStates[div])
+                showDiv(div);
+            else {
+                hideDiv(div);
+            }
+        }
+
+        function toggleDivName(divname, defaultState) {
+            toggleDiv(document.getElementById(divname), defaultState);
+        }
+    </script>
+
+    <nobr><tt><a href='javascript: toggleDivName("graf", true)'>+</a>&nbsp;</tt>Graf</nobr><br/>
+    <div id='graf' class='node'>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='graf/breadth_first_search.html' target='viewer'>1. Breadth First Search (BFS)</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='graf/depth_first_search.html' target='viewer'>2. Depth First Search (DFS)</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='graf/prim.html' target='viewer'>3. Prim</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='graf/dijkstra.html' target='viewer'>4. Dijkstra</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='graf/bellman_ford.html' target='viewer'>5. Bellman-Ford</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='graf/floyd_warshall.html' target='viewer'>6. Floyd-Warshall</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='graf/kruskal.html' target='viewer'>7. Kruskal</a></nobr><br/>
+    </div>
+
+    <nobr><tt><a href='javascript: toggleDivName("tree", true)'>+</a>&nbsp;</tt>Tree</nobr><br/>
+    <div id='tree' class='node'>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='tree/binary_search_tree.html' target='viewer'>1. Binary Search Tree (BST)</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='tree/digital_search_tree.html' target='viewer'>2. Digital Search Tree</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='tree/radix_tree.html' target='viewer'>3. Radix Tree</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='tree/avl.html' target='viewer'>4. AVL (Adelson-Velskii dan Landis) Tree</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='tree/red_black_tree.html' target='viewer'>5. Red-Black Tree</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='tree/search_tree_traversal.html' target='viewer'>6. Search Tree Traversal</a></nobr><br/>
+        <nobr><tt>&nbsp;&nbsp;</tt><a href='tree/splay_tree.html' target='viewer'>7. Splay Tree</a></nobr><br/>
+    </div>
+</body>
+
+</html>
