@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>5. Red-Black Tree</title>
+
+    <style>
+        .node {
+            cursor: pointer;
+        }
+        
+        .node text {
+            font: 13px sans-serif;
+            fill: white;
+        }
+        
+        .link {
+            fill: none;
+            stroke: black;
+            stroke-width: 1px;
+        }
+        
+        svg {
+            background-color: aquamarine;
+        }
+    </style>
+    <h3>5. Red-Black Tree</h3>
+</head>
+
+<body>
+
+    <!-- load the d3.js library -->
+    <script src="../d3.v2.min.js" charset="utf-8"></script>
+
+    <script>
+        var treeData = [{
+            "name": "13",
+            "parent": "null",
+            "children": [{
+                "name": "17",
+                "parent": "13",
+                "children": [{
+                    "name": "25",
+                    "parent": "17",
+                    "children": [{
+                        "name": "27",
+                        "parent": "25",
+                        "children": [{
+                            "name": "NIL",
+                            "parent": "27"
+                        }, {
+                            "name": "NIL",
+                            "parent": "27"
+                        }]
+                    }, {
+                        "name": "22",
+                        "parent": "25",
+                        "children": [{
+                            "name": "NIL",
+                            "parent": "22"
+                        }, {
+                            "name": "NIL",
+                            "parent": "22"
+                        }]
+                    }]
+                }, {
+                    "name": "15",
+                    "parent": "17",
+                    "children": [{
+                        "name": "NIL",
+                        "parent": "15"
+                    }, {
+                        "name": "NIL",
+                        "parent": "15"
+                    }]
+                }]
+            }, {
+                "name": "8",
+                "parent": "13",
+                "children": [{
+                    "name": "11",
+                    "parent": "8",
+                    "children": [{
+                        "name": "NIL",
+                        "parent": "11"
+                    }, {
+                        "name": "NIL",
+                        "parent": "11"
+                    }]
+                }, {
+                    "name": "1",
+                    "parent": "8",
+                    "children": [{
+                        "name": "6",
+                        "parent": "1",
+                        "children": [{
+                            "name": "NIL",
+                            "parent": "6"
+                        }, {
+                            "name": "NIL",
+                            "parent": "6"
+                        }]
+                    }, {
+                        "name": "NIL",
+                        "parent": "1"
+                    }]
+                }]
+            }]
+        }];
+
+
+        // ************** Generate the tree diagram	 *****************
+        var margin = {
+                top: 20,
+                right: 120,
+                bottom: 20,
+                left: 120
+            },
+            width = 960 - margin.right - margin.left,
+            height = 960 - margin.top - margin.bottom;
+
+        var i = 0,
+            duration = 1000,
+            root;
+
+        var tree = d3.layout.tree()
+            .size([width, height]);
+
+        var diagonal = d3.svg.diagonal()
+            .projection(function(d) {
+                return [d.x, d.y]; // variabel untuk proyeksi garis (edge) di pohon (vertikal: top to bottom)
+            });
+
+        var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.right + margin.left)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.right + ")");
+
+        root = treeData[0];
+        root.x0 = width / 2;
+        root.y0 = 0;
+
+        update(root);
+
+        d3.select(self.frameElement).style("width", "500px");
+
+        function update(source) {
+
+            // Compute the new tree layout.
+            var nodes = tree.nodes(root).reverse(),
+                links = tree.links(nodes);
+
+            // Normalize for fixed-depth.
+            nodes.forEach(function(d) {
+                // variabel d.depth --> untuk kedalaman / level pohon (0, 1, 2, ...)
+                d.y = d.depth * 180;
+            });
+
+            // Update the nodes�
+            var node = svg.selectAll("g.node")
+                .data(nodes, function(d) {
+                    return d.id || (d.id = ++i);
+                });
+
+            // Enter any new nodes at the parent's previous position.
+            var nodeEnter = node.enter().append("g")
+                .attr("class", "node")
+                .attr("transform", function(d) {
+                    return "translate(" + source.x0 + "," + source.y0 + ")";
+                })
+                .on("click", click);
+
+            nodeEnter.append("circle")
+                .attr("r", 1e-3)
+                .style("fill", function(d) {
+                    return d.depth % 2 === 0 ? "black" : "red";
+                });
+
+            // posisi + label teks
+            nodeEnter.append("text")
+                .attr("dy", ".4em")
+                .attr("text-anchor", "middle")
+                .text(function(d) {
+                    return d.name;
+                })
+                .style("fill-opacity", 1e-6)
+                .style("color-text", "white");
+
+            // Transition nodes to their new position.
+            var nodeUpdate = node.transition()
+                .duration(duration)
+                .attr("transform", function(d) {
+                    return "translate(" + d.x + "," + d.y + ")"; // posisi pohon vertical
+                });
+
+            nodeUpdate.select("circle")
+                .attr("r", 15) // diameter node
+                .style("fill", function(d) {
+                    return d.depth % 2 === 0 ? "black" : "red";
+                });
+
+            nodeUpdate.select("text")
+                .style("fill-opacity", 1);
+
+            // Transition exiting nodes to the parent's new position.
+            var nodeExit = node.exit().transition()
+                .duration(duration)
+                .attr("transform", function(d) {
+                    return "translate(" + source.x + "," + source.y + ")";
+                })
+                .remove();
+
+            nodeExit.select("circle")
+                .attr("r", 1e-6);
+
+            nodeExit.select("text")
+                .style("fill-opacity", 1e-6);
+
+            // Update the links�
+            var link = svg.selectAll("path.link")
+                .data(links, function(d) {
+                    return d.target.id;
+                });
+
+            // Enter any new links at the parent's previous position.
+            link.enter().insert("path", "g")
+                .attr("class", "link")
+                .attr("d", function(d) {
+                    var o = {
+                        x: source.x0,
+                        y: source.y0
+                    };
+                    return diagonal({
+                        source: o,
+                        target: o
+                    });
+                });
+
+            // Transition links to their new position.
+            link.transition()
+                .duration(duration)
+                .attr("d", diagonal);
+
+            // Transition exiting nodes to the parent's new position.
+            link.exit().transition()
+                .duration(duration)
+                .attr("d", function(d) {
+                    var o = {
+                        x: source.x,
+                        y: source.y
+                    };
+                    return diagonal({
+                        source: o,
+                        target: o
+                    });
+                })
+                .remove();
+
+            // Stash the old positions for transition.
+            nodes.forEach(function(d) {
+                d.x0 = d.x;
+                d.y0 = d.y;
+            });
+        }
+
+        // Toggle children on click.
+        function click(d) {
+            if (d.children) {
+                d._children = d.children;
+                d.children = null;
+            } else {
+                d.children = d._children;
+                d._children = null;
+            }
+            update(d); // update d = datum
+        }
+    </script>
+
+</body>
+
+</html>
