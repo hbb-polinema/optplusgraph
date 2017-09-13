@@ -8,14 +8,15 @@
   "scripts": {
     "start": "python bottle_server.py",
     "webpack": "webpack --devtool sourcemap --progress --colors --watch",
-    "production-build": "rm -f build/* && webpack --optimize-minimize && python add_cache_busting_query_strings.py"
+    "production-build": "rm -f build/* && webpack && uglifyjs build/visualize.bundle.js -o build/visualize.min.js -m && python add_cache_busting_query_strings.py"
   },
   "dependencies": {
     "css-loader": "",
+    "express": "^4.15.4",
     "on-build-webpack": "^0.1.0",
     "script-loader": "",
     "style-loader": "",
-    "ts-loader": "",
+    "ts-loader": "^2.3.7",
     "url-loader": ""
   }
 }
