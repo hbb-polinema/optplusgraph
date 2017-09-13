@@ -19,20 +19,19 @@ except:
 import json
 import pg_logger
 
-DEBUG = True
 
 @route('/web_exec_<name:re:.+>.py')
 @route('/LIVE_exec_<name:re:.+>.py')
 @route('/viz_interaction.py')
 @route('/syntax_err_survey.py')
+@route('/runtime_err_survey.py')
+@route('/eureka_survey.py')
 def dummy_ok(name=None):
-	if(DEBUG): print "\ndummy_ok"
-	return 'OK'
+    return 'OK'
 
 @route('/<filepath:path>')
 def index(filepath):
-	if(DEBUG): print "\nindex() = ",filepath
-	return static_file(filepath, root='.')
+    return static_file(filepath, root='.')
 
 
 # Note that this will run either Python 2 or 3, depending on which
@@ -43,11 +42,9 @@ def index(filepath):
 @route('/LIVE_exec_py2.py')
 @route('/LIVE_exec_py3.py')
 def get_py_exec():
-  if(DEBUG): print "\ndef get_py_exec()"
   out_s = StringIO.StringIO()
 
   def json_finalizer(input_code, output_trace):
-    if(DEBUG): print "\ndef json_finalizer() = ", input_code
     ret = dict(code=input_code, trace=output_trace)
     json_output = json.dumps(ret, indent=None)
     out_s.write(json_output)
@@ -64,4 +61,4 @@ def get_py_exec():
 
 
 if __name__ == "__main__":
-    run(host='localhost', port=8080, reloader=True)
+    run(host='localhost', port=8003, reloader=True)

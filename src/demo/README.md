@@ -1,6 +1,7 @@
 # Useful Links #
 
 * https://www.dashingd3js.com/why-build-with-d3js
+* http://bl.ocks.org/sathomas/191a8a302a363ac6a4b0 --> Understanding D3.js Force Layout - 8: gravity (Button Play)
 
 *noted from ebook:*
 

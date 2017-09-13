@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+
+<head>
+    <title>Transition Animation</title>
+    <script src="../d3.v3.min.js" charset="utf-8"></script>
+    <script>
+        var data = [30, 400, 170, 280, 460, 40, 250];
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", 500)
+            .attr("height", 100);
+        var circle = svg.append("circle")
+            .attr("cy", 50)
+            .attr("cx", 250)
+            .attr("r", 10)
+            .attr("fill", "tan")
+            .attr("stroke", "black");
+
+        var counter = 0;
+
+        loop();
+
+        function loop() {
+            if (data[counter + 1]) {
+                //d3.timeout(loop, 1000)
+            }
+            circle.transition()
+                .duration(500)
+                .attr("cx", data[counter]);
+            counter++
+        }
+
+        // Testing
+        var t = d3.timer(function(elapsed){
+            console.log(elapsed);
+            if(elapsed > 200) t.stop();
+        }, 150);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

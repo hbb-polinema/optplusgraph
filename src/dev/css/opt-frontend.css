@@ -81,6 +81,12 @@ button.surveyBtn {
   margin-top: 8px;
 }
 
+button.surveyBtnBig {
+  font-size: 11pt;
+  padding: 5px;
+  margin-top: 0px;
+}
+
 #footer {
   color: #999;
   font-size: 9pt;
@@ -184,7 +190,7 @@ button.surveyBtn {
 
 
 #syntaxErrBubbleContents {
-  font-size: 9pt;
+  font-size: 9.5pt;
   cursor: default;
 }
 
@@ -240,8 +246,8 @@ textarea.bubbleInputText {
 	color: #333;
 	background-color: #ffffff;
 
-	max-width: 350px;
-	width: 350px;
+	max-width: 390px;
+	width: 390px;
 
 	border: 2px solid #e93f34;
 

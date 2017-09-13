@@ -137,7 +137,7 @@
             .attr("width", width + margin.right + margin.left)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.right + ")");
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         root = treeData[0];
         root.x0 = width / 2;
@@ -145,7 +145,7 @@
 
         update(root);
 
-        d3.select(self.frameElement).style("width", "500px");
+        d3.select(self.frameElement).style("width", "960px");
 
         function update(source) {
 

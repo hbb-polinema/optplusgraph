@@ -16,15 +16,15 @@ declare var diff_match_patch: any;
 declare var codeopticonUsername: string; // FIX later when porting Codeopticon
 declare var codeopticonSession: string;  // FIX later when porting Codeopticon
 
-// debugging
-var DEBUG:boolean = true;
-
 require('./lib/diff_match_patch.js');
 require('./lib/jquery.ba-dotimeout.min.js');
 
 // need to directly import the class for type checking to work
-import {ExecutionVisualizer, assert, htmlspecialchars} from './pytutor.ts';
+import {ExecutionVisualizer, assert, htmlspecialchars} from './pytutor';
 
+// by habibieeddien
+import {tracking} from './helper';
+var name_file: string = 'opt-frontend-common.ts';
 
 // the main event!
 //
@@ -82,12 +82,10 @@ export abstract class AbstractBaseFrontend {
   // these settings are all customized for my own server setup,
   // so you will need to customize for your server:
   serverRoot = (window.location.protocol === 'https:') ?
-                'https://cokapi.com:8001/' : // my certificate for https is registered via cokapi.com, so use it for now
-                'http://104.237.139.253:3000/';
-  
-  // see ../../v4-cokapi/cokapi.js for details
-  //serverRoot = 'http://localhost:5001/'; // add by @habibieeddien
+                'https://localhost:5001/' : // my certificate for https is registered via cokapi.com, so use it for now
+                'http://localhost:5001/'; // try cokapi.com so that hopefully it works through firewalls better than directly using IP addr
 
+  // see ../../v4-cokapi/cokapi.js for details
   langSettingToJsonpEndpoint = {
     '2':    null,
     '3':    null,
@@ -104,6 +102,7 @@ export abstract class AbstractBaseFrontend {
   abstract handleUncaughtException(trace: any[]) : any; // called by executeCodeAndCreateViz
 
   constructor(params: any = {}) {
+    tracking(3, 'constructor: AbstractBaseFrontend', name_file);
     // OMG nasty wtf?!?
     // From: http://stackoverflow.com/questions/21159301/quotaexceedederror-dom-exception-22-an-attempt-was-made-to-add-something-to-st
     // Safari, in Private Browsing Mode, looks like it supports localStorage but all calls to setItem
@@ -138,6 +137,7 @@ export abstract class AbstractBaseFrontend {
 
     // register a generic AJAX error handler
     $(document).ajaxError((evt, jqxhr, settings, exception) => {
+      tracking(2, 'constructor: document.ajaxError', name_file);
       if (this.ignoreAjaxError(settings)) {
         return; // early return!
       }
@@ -169,15 +169,17 @@ export abstract class AbstractBaseFrontend {
         if (this.num414Tries === 0) {
           this.num414Tries++;
           $("#executeBtn").click();
+          tracking(3, 'constructor: AbstractBaseFrontend - executeBtn click', name_file);
         } else {
           this.num414Tries = 0;
           this.setFronendError(["Server error! Your code might be too long for this tool. Shorten your code and re-try."]);
         }
       } else {
         this.setFronendError(
-                        ["Server error! Your code might be taking too much time to run or using too much memory.",
-                         "Report a bug to habibieeddien@students.itb.ac.id by clicking the 'Generate permanent link' button",
-                         "at the bottom of this page and including a URL in your email."]);
+                        ["Server error! Your code might be taking too much time/memory. Or the server CRASHED",
+                         "due to too many people using it. Or you are behind a FIREWALL that blocks access.",
+                         "Try again later, or report a bug to philip@pgbovine.net by clicking the 'Generate",
+                         "permanent link' button at the bottom of this page and including a URL in your email."]);
       }
       this.doneExecutingCode();
     });
@@ -189,22 +191,28 @@ export abstract class AbstractBaseFrontend {
       .click(this.executeCodeFromScratch.bind(this));
   }
 
-  ignoreAjaxError(settings) {return false;} // subclasses should override
+  ignoreAjaxError(settings) {
+    tracking(4, 'ignoreAjaxError', name_file);
+    return false;
+  } // subclasses should override
 
   // empty stub so that our code doesn't crash.
   // TODO: override this with a version in codeopticon-learner.js if needed
   logEventCodeopticon(obj) { } // NOP
 
   setFronendError(lines) {
+    tracking(5, 'setFronendError', name_file);
     $("#frontendErrorOutput").html(lines.map(htmlspecialchars).join('<br/>'));
   }
 
   clearFrontendError() {
+    tracking(5, 'clearFrontendError', name_file);
     $("#frontendErrorOutput").html('');
   }
 
   // parsing the URL query string hash
   getQueryStringOptions() {
+    tracking(7, 'getQueryStringOptions', name_file);
     var ril = $.bbq.getState('rawInputLstJSON');
     var testCasesLstJSON = $.bbq.getState('testCasesJSON');
     // note that any of these can be 'undefined'
@@ -224,6 +232,7 @@ export abstract class AbstractBaseFrontend {
   }
 
   redrawConnectors() {
+    tracking(8, 'redrawConnectors', name_file);
     if (this.myVisualizer &&
         (this.appMode == 'display' ||
          this.appMode == 'visualize' /* deprecated */)) {
@@ -232,6 +241,7 @@ export abstract class AbstractBaseFrontend {
   }
 
   getBaseBackendOptionsObj() {
+    tracking(9, 'getBaseBackendOptionsObj', name_file);
     var ret = {cumulative_mode: ($('#cumulativeModeSelector').val() == 'true'),
                heap_primitives: ($('#heapPrimitivesSelector').val() == 'true'),
                show_only_outputs: false, // necessary for legacy reasons, ergh!
@@ -240,6 +250,7 @@ export abstract class AbstractBaseFrontend {
   }
 
   getBaseFrontendOptionsObj() {
+    tracking(10, 'getBaseFrontendOptionsObj', name_file);
     var ret = {// tricky: selector 'true' and 'false' values are strings!
                 disableHeapNesting: ($('#heapPrimitivesSelector').val() == 'true'),
                 textualMemoryLabels: ($('#textualMemoryLabelsSelector').val() == 'true'),
@@ -252,29 +263,38 @@ export abstract class AbstractBaseFrontend {
                 // this shouldn't lead to problems since only ONE
                 // ExecutionVisualizer will be shown at a time
                 visualizerIdOverride: '1',
-                updateOutputCallback: function() {$('#urlOutput,#embedCodeOutput').val('');},
+                updateOutputCallback: this.updateOutputCallbackFunc.bind(this),
                 startingInstruction: 0,
               };
     return ret;
   }
 
+  updateOutputCallbackFunc() {
+    tracking(11, 'updateOutputCallbackFunc', name_file);
+    $('#urlOutput,#urlOutputShortened,#embedCodeOutput').val('');
+  }
+
   executeCodeFromScratch() {
+    tracking(12, 'executeCodeFromScratch', name_file);
     this.rawInputLst = []; // reset!
     this.executeCode();
   }
 
   executeCodeWithRawInput(rawInputStr, curInstr) {
+    tracking(13, 'executeCodeWithRawInput', name_file);
     this.rawInputLst.push(rawInputStr);
     this.executeCode(curInstr);
   }
 
   startExecutingCode(startingInstruction=0) {
+    tracking(14, 'startExecutingCode', name_file);
     $('#executeBtn').html("Please wait ... executing (takes up to 10 seconds)");
     $('#executeBtn').attr('disabled', true);
     this.isExecutingCode = true;
   }
 
   doneExecutingCode() {
+    tracking(15, 'doneExecutingCode', name_file);
     $('#executeBtn').html("Visualize Execution");
     $('#executeBtn').attr('disabled', false);
     this.isExecutingCode = false;
@@ -286,8 +306,8 @@ export abstract class AbstractBaseFrontend {
                           pyState,
                           backendOptionsObj, frontendOptionsObj,
                           outputDiv) {
-    
-    if (DEBUG) console.log("opt-frontend-common >> executeCodeAndCreateViz: codeToExec = " + codeToExec + ", pyState = " + pyState + ", backendOptionsObj = " + backendOptionsObj);
+
+    tracking(16, 'executeCodeAndCreateViz', name_file);
 
     var vizCallback = (dataFromBackend) => {
       var trace = dataFromBackend.trace;
@@ -306,8 +326,10 @@ export abstract class AbstractBaseFrontend {
           this.setFronendError([trace[trace.length - 1].exception_msg]);
         } else {
           this.setFronendError(
-                          ["Unknown error. Reload the page and try again. Or report a bug to",
-                           "habibieeddien@students.itb.ac.id by clicking on the 'Generate permanent link'",
+                          ["Unknown error: The server may be too busy or down right now.",
+                           "Or you are behind a FIREWALL that blocks access to this server.",
+                           "Please reload and try again later. Or report a bug to",
+                           "philip@pgbovine.net by clicking the 'Generate permanent link'",
                            "button at the bottom and including a URL in your email."]);
         }
       } else {
@@ -359,6 +381,9 @@ export abstract class AbstractBaseFrontend {
                             pyState,
                             backendOptionsObj, frontendOptionsObj,
                             execCallback) {
+      
+      tracking(16, 'executeCodeAndCreateViz', name_file);
+
       var callbackWrapper = (dataFromBackend) => {
         execCallback(dataFromBackend); // call the main event first
 
@@ -375,7 +400,7 @@ export abstract class AbstractBaseFrontend {
       if (!backendScript) {
         this.setFronendError(
                         ["Server configuration error: No backend script",
-                         "Report a bug to habibieeddien@students.itb.ac.id by clicking on the 'Generate permanent link'",
+                         "Report a bug to philip@pgbovine.net by clicking on the 'Generate permanent link'",
                          "button at the bottom and including a URL in your email."]);
         return;
       }
@@ -449,7 +474,13 @@ export abstract class AbstractBaseFrontend {
   }
 
   setSurveyHTML() {
-    $('#surveyPane').html(survey_v9);
+    tracking(17, 'setSurveyHTML', name_file);
+    var survey_v11 = `<p style="font-size: 10pt; margin-top: 12px; margin-bottom: 15px; line-height: 150%;">
+                        <span>
+                          <span style="color: #e93f34;">Support our research and practice Python</span>
+                          by trying our new
+                          <a target="_blank" href="http://www.labinthewild.org/studies/python_tutor/">debugging skill test</a>!`;
+    $('#surveyPane').html(survey_v11);
   }
 } // END class AbstractBaseFrontend
 
@@ -466,17 +497,35 @@ const survey_v8 = '\n\
 <span style="font-size: 9pt;">If you are <b>at least 60 years old</b>, please also fill out <a href="https://docs.google.com/forms/d/1lrXsE04ghfX9wNzTVwm1Wc6gQ5I-B4uw91ACrbDhJs8/viewform" target="_blank">our survey about learning programming</a>.</span>\n\
 </p>'
 
-v9: (deployed on 2016-08-14) - only put up the "older adults" survey except generalize it to ALL ages, take down the OPT usage survey for now
-*/
+v9: (deployed on 2016-08-14, taken down 2016-12-05) - only put up the "older adults" survey except generalize it to ALL ages, take down the OPT usage survey for now
 const survey_v9 = '\n\
 <p style="font-size: 10pt; margin-top: 10px; margin-bottom: 15px; line-height: 175%;">\n\
 <span>Support our research and keep this tool free by <a href="https://docs.google.com/forms/d/1lrXsE04ghfX9wNzTVwm1Wc6gQ5I-B4uw91ACrbDhJs8/viewform" target="_blank"><b>filling out this user survey</b></a>.</span>\n\
 </p>'
 
+v10: (deployed on 2016-12-05) - survey of how native languages affects learning programming
+     (taken down on 2017-07-28)
+[see survey_v10 variable above]
+
+    // use ${this.userUUID} within the string ...
+    var survey_v10 = '\n\
+    <p style="font-size: 11pt; margin-top: 12px; margin-bottom: 15px; line-height: 150%;">\n\
+    <span><span style="color: #e93f34;">Support our research and keep this tool free</span> by filling out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSe48NsBZPvu1hrTBwc8-aSic7nPSxpsxFqpUxV5AN4LwnyJWg/viewform?entry.956368502=';
+    survey_v10 += this.userUUID;
+    survey_v10 += '" target="_blank">survey on how your native spoken language affects how you learn programming</a>.</span></p>';
+
+    $('#surveyPane').html(survey_v10);
+
+v11: labinthewild python debugging experiment, deployed on 2017-07-28
+[see survey_v11 variable above]
+
+*/
+
 // misc utilities:
 
 // From http://stackoverflow.com/a/8809472
 export function generateUUID(){
+    tracking(2, 'generateUUID()', name_file);
     var d = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = (d + Math.random()*16)%16 | 0;
@@ -488,6 +537,7 @@ export function generateUUID(){
 
 // From http://diveintohtml5.info/storage.html
 export function supports_html5_storage() {
+  tracking(4, 'supports_html5_storage()', name_file);
   try {
     return 'localStorage' in window && window['localStorage'] !== null;
   } catch (e) {

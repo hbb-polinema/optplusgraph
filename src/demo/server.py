@@ -1,3 +1,7 @@
+#
+# Run: python server.py
+#
+
 from bottle import route, run, static_file
 
 DEBUG = True
@@ -8,4 +12,4 @@ def index(filepath):
 	return static_file(filepath, root='.')
 
 if __name__ == "__main__":
-    run(host='localhost', port=80, reloader=True)
+    run(host='localhost', port=8080, reloader=True)

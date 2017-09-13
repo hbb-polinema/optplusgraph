@@ -12,7 +12,7 @@ var PORT = 1337;
 
 APP.get('/', function(req, resp){
     console.log('get success');
-    resp.sendFile('tree.html', {root: path.join(__dirname, './')});
+    resp.sendFile('index.html', {root: path.join(__dirname, './')});
 });
 
 APP.listen(PORT, function(){

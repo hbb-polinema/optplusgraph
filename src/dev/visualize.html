@@ -13,9 +13,9 @@
   <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
 
   <!-- let Webpack take care of everything. Use the [hash] feature to
-       create unique filenames for releases: ?e9c0d01b53
+       create unique filenames for releases:
        https://webpack.github.io/docs/long-term-caching.html -->
-  <script type="text/javascript" src="build/visualize.bundle.js?caf9545e89" charset="utf-8"></script>
+  <script type="text/javascript" src="build/visualize.bundle.js?013d098b92" charset="utf-8"></script>
 
 <!-- insert google-analytics.txt contents here -->
 
@@ -23,13 +23,46 @@
 
 <body>
 
+<table id="experimentalHeader">
+<tr>
+<td valign="top">
+
+<div id="ssDiv">
+  <button id="sharedSessionBtn" type="button" class="togetherjsBtn">
+  Start shared session
+  </button>
+  <div style="font-size: 7pt; margin-left: 2px; margin-top: 3px;">
+  <a href="https://www.youtube.com/watch?v=Z2TIjNArOK4" target="_blank">What are shared sessions?</a>
+  </div>
+</div>
+
+<div id="sharedSessionDisplayDiv" style="display: none;">
+  <button id="stopTogetherJSBtn" type="button" class="togetherjsBtn">
+  End shared session
+  </button>
+
+  <div style="width: 200px; font-size: 8pt; color: #666; margin-top: 5px;">
+  Your chat logs and code may be recorded, anonymized, and analyzed for research.
+  </div>
+</div>
+
+</td>
+<td valign="top">
+
+<div id="togetherjsStatus"></div>
+
+</td>
+</tr>
+</table>
+
+
 <div id="pyInputPane">
 
 <div id="codeInputWarnings">Write code in
 
   <select id="pythonVersionSelector">
     <option value="2">Python 2.7</option>
-    <option value="3">Python 3.3</option>
+    <option value="3">Python 3.6</option>
     <option value="java">Java 8</option>
     <option value="js">JavaScript ES6</option>
     <option value="ts">TypeScript 1.4</option>
@@ -48,14 +81,13 @@
 
 <p>
 <button id="executeBtn" class="bigBtn" type="button">Visualize Execution</button>
-<button style="margin-left: 20px;" id="liveModeBtn" class="bigBtn" type="button">Live Programming Mode <font color="#e93f34">(NEW!)</font></button>
+<button style="margin-left: 20px;" id="liveModeBtn" class="bigBtn" type="button">Live Programming Mode</button>
 </p>
 
 
 <div id="javaOptionsPane" style="margin-top: 20px;">
 [<i>coming soon!</i>] Java options: pass in command-line arguments and feed user input to stdin
 </div>
-
 
 <div id="optionsPane" style="margin-top: 20px; line-height: 150%;">
   <select id="cumulativeModeSelector">
