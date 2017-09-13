@@ -66,6 +66,64 @@ div.ExecutionVisualizer div#codeDisplayDiv {
 }
 */
 
+/* Style the tab @habibieeddien */
+        
+        div.tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+        /* Style the buttons inside the tab */
+        
+        div.tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+        /* Change background color of buttons on hover */
+        
+        div.tab button:hover {
+            background-color: #ddd;
+        }
+        /* Create an active/current tablink class */
+        
+        div.tab button.active {
+            background-color: #ccc;
+        }
+        /* Style the tab content */
+        
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+            -webkit-animation: fadeEffect 1s;
+            animation: fadeEffect 1s;
+            /* Fading effect takes 1 second */
+        }
+        
+        @-webkit-keyframes fadeEffect {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeEffect {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
 div.ExecutionVisualizer div#pyCodeOutputDiv {
   /*max-width: 550px;*/
   max-height: 460px;
@@ -228,7 +286,7 @@ div.ExecutionVisualizer .vizFrame {
 /* Rendering of primitive types */
 
 div.ExecutionVisualizer .nullObj {
-/*  font-size: 8pt; */
+//  font-size: 8pt;
 }
 
 div.ExecutionVisualizer .stringObj,
@@ -330,6 +388,30 @@ div.ExecutionVisualizer table.cArrayTbl td.cArrayElt {
   padding-right: 4px;
   vertical-align: bottom;
 }
+
+div.ExecutionVisualizer table.cArrayTbl td.cMultidimArrayHeader {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 1px;
+  padding-bottom: 3px;
+  font-size: 6pt;
+  color: #777;
+  text-align: left;
+  border-top: 1px solid #888;
+  border-left: 1px solid #888;
+  border-bottom: 0px solid black; /* override whatever we're nested in */
+}
+
+div.ExecutionVisualizer table.cArrayTbl td.cMultidimArrayElt {
+  border-left: 1px solid #888;
+  color: black;
+  padding-top: 1px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: bottom;
+}
+
 
 div.ExecutionVisualizer .cdataHeader {
   font-size: 6pt;
@@ -694,6 +776,12 @@ div.ExecutionVisualizer .highlight-legend {
 
 .ui-resizable-e:hover {
   border-color: #dddddd;
+}
+
+div.ExecutionVisualizer a,
+div.ExecutionVisualizer a:visited,
+div.ExecutionVisualizer a:hover {
+  color: #3D58A2;
 }
 
 div.ExecutionVisualizer div#rawUserInputDiv {
