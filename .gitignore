@@ -13,6 +13,8 @@ src/prototype/.vscode/*
 *.pyo
 *.map
 *.js.map
+*.exe
+docs/accounts_manager.md
 src/dev/node_modules/*
 src/dev/typings/*
 src/dev/backend/usercode.c
