@@ -1,5 +1,5 @@
 interface IOptFrontendSharedSessions{
-    ignoreAjaxError(settings):void;
+    ignoreAjaxError(settings):boolean;
     logEditDelta(delta):void;
     startExecutingCode(startingInstruction:number):void;
     updateAppDisplay(newAppMode):void;
@@ -10,7 +10,6 @@ interface IOptFrontendSharedSessions{
     TogetherjsReadyHandler():void;
     TogetherjsCloseHandler():void;
     startSharedSession():void;
-    appStateEq(s1, s2):void;
+    //appStateEq(s1, s2):any;
     populateTogetherJsShareUrl():void;
-    
 }

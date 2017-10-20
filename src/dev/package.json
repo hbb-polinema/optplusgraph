@@ -1,22 +1,23 @@
 {
-  "name": "v5-unity",
-  "version": "1.0.0",
-  "description": "OPT v5",
-  "main": "bundle.js",
-  "repository": "https://github.com/pgbovine/OnlinePythonTutor",
-  "license": "BSD-3-Clause",
-  "scripts": {
-    "start": "python bottle_server.py",
-    "webpack": "webpack --devtool sourcemap --progress --colors --watch",
-    "production-build": "rm -f build/* && webpack && uglifyjs build/visualize.bundle.js -o build/visualize.min.js -m && python add_cache_busting_query_strings.py"
-  },
-  "dependencies": {
-    "css-loader": "",
-    "express": "^4.15.4",
-    "on-build-webpack": "^0.1.0",
-    "script-loader": "",
-    "style-loader": "",
-    "ts-loader": "^2.3.7",
-    "url-loader": ""
-  }
+    "name": "v5-unity",
+    "version": "1.0.0",
+    "description": "OPT v5",
+    "main": "bundle.js",
+    "repository": "https://github.com/pgbovine/OnlinePythonTutor",
+    "license": "BSD-3-Clause",
+    "scripts": {
+        "start": "python bottle_server.py",
+        "webpack": "webpack --devtool sourcemap --progress --colors --watch",
+        "production-build": "rm -f build/* && webpack && uglifyjs build/visualize.bundle.js -o build/visualize.min.js -m && python add_cache_busting_query_strings.py"
+    },
+    "dependencies": {
+        "css-loader": "",
+        "express": "^4.16.1",
+        "file-loader": "^1.1.5",
+        "on-build-webpack": "^0.1.0",
+        "script-loader": "^0.7.2",
+        "style-loader": "",
+        "ts-loader": "^2.3.7",
+        "url-loader": ""
+    }
 }

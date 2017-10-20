@@ -1,9 +1,9 @@
 interface IOptFrontend{
-    compressUpdateHistoryList():void;
+    compressUpdateHistoryList():any;
     submitUpdateHistory(why):void;
     initAceEditor(height: number):void;
     setAceMode():void;
-    pyInputGetValue():void;
+    pyInputGetValue():string;
     pyInputSetValue(dat):void;
     pyInputGetScrollTop():void;
     pyInputSetScrollTop(st):void;
@@ -11,15 +11,15 @@ interface IOptFrontend{
     executeCode(forceStartingInstr:number, forceRawInputLst:any):void;
     finishSuccessfulExecution():void;
     handleUncaughtException(trace):void;
-    ignoreAjaxError(settings):void;
+    ignoreAjaxError(settings):boolean;
     initDeltaObj():void;
     snapshotCodeDiff():void;
     logEditDelta(delta):void;
     enterDisplayMode():void;
     enterEditMode():void;
     updateAppDisplay(newAppMode):void;
-    openLiveModeUrl():void;
-    getAppState():void;
+    openLiveModeUrl():boolean;
+    getAppState():any;
     getToggleState():void;
     setToggleOptions(dat):void;
     parseQueryString():void;

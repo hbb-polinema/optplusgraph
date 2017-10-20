@@ -18,18 +18,14 @@ var child_process = require('child_process');
 var express = require('express');
 var util = require('util');
 
-
 // We use this to execute since it supports utf8 and also an optional
 // timeout, but it needs the exact location of binaries because it doesn't
 // spawn a shell
 // http://nodejs.org/api/child_process.html#child_process_child_process_execfile_file_args_options_callback
 
-var TIMEOUT_SECS = 30;
-
-var MAX_BUFFER_SIZE = 10 * 1024 * 1024;
-
-var MEM_LIMIT = "512M";
-
+var TIMEOUT_SECS = 60;
+var MAX_BUFFER_SIZE = 15 * 1024 * 1024; // Byte
+var MEM_LIMIT = "1024M"; // 1 GB
 
 // bind() res and useJSONP before using
 function postExecHandler(res, useJSONP, err, stdout, stderr) {
@@ -98,7 +94,6 @@ function postExecHandler(res, useJSONP, err, stdout, stderr) {
     }
 }
 
-
 var app = express();
 
 // http://ilee.co.uk/jsonp-in-express-nodejs/
@@ -112,7 +107,6 @@ app.get('/exec_ts_jsonp', exec_js_handler.bind(null, true, true));
 
 function exec_js_handler(useJSONP /* use bind first */ , isTypescript /* use bind first */ , req, res) {
     var usrCod = req.query.user_script;
-
     var exeFile;
     var args = [];
 
@@ -140,7 +134,6 @@ function exec_js_handler(useJSONP /* use bind first */ , isTypescript /* use bin
         },
         postExecHandler.bind(null, res, useJSONP));
 }
-
 
 app.get('/exec_java', exec_java_handler.bind(null, false));
 app.get('/exec_java_jsonp', exec_java_handler.bind(null, true));
@@ -189,7 +182,6 @@ function exec_java_handler(useJSONP /* use bind first */ , req, res) {
         postExecHandler.bind(null, res, useJSONP));
 }
 
-
 app.get('/exec_ruby', exec_ruby_handler.bind(null, false));
 app.get('/exec_ruby_jsonp', exec_ruby_handler.bind(null, true));
 
@@ -219,15 +211,14 @@ function exec_ruby_handler(useJSONP /* use bind first */ , req, res) {
         postExecHandler.bind(null, res, useJSONP));
 }
 
-
 app.get('/exec_c', exec_cpp_handler.bind(null, false, false));
 app.get('/exec_c_jsonp', exec_cpp_handler.bind(null, false, true));
 app.get('/exec_cpp', exec_cpp_handler.bind(null, true, false));
 app.get('/exec_cpp_jsonp', exec_cpp_handler.bind(null, true, true));
 
 function exec_cpp_handler(useCPP /* use bind first */ , useJSONP /* use bind first */ , req, res) {
-    var usrCod = req.query.user_script;
-
+    var code = req.query.user_script;
+    console.log('\n----\nUser_Code: <length:' + code.length + '>\n');
     var exeFile;
     var args = [];
 
@@ -248,7 +239,7 @@ function exec_cpp_handler(useCPP /* use bind first */ , useJSONP /* use bind fir
     args.push('run', '--memory', MEM_LIMIT, '--rm', '--cap-drop', 'all', 'habibieeddien:c_cpp_backend', // now, it will auto-run image (commit by habibieeddien) to container and auto-remove after exec
         'python',
         '/tmp/opt-cpp-backend/run_cpp_backend.py',
-        usrCod,
+        code,
         useCPP ? 'cpp' : 'c');
 
     child_process.execFile(exeFile, args, {
@@ -263,10 +254,9 @@ function exec_cpp_handler(useCPP /* use bind first */ , useJSONP /* use bind fir
         postExecHandler.bind(null, res, useJSONP));
 }
 
-
 // https support
-var https = require('https');
-var fs = require('fs');
+//var https = require('https');
+//var fs = require('fs');
 
 // obsolete as of 2017-06-28
 /*

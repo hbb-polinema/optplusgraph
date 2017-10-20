@@ -8,10 +8,10 @@ interface IExecutionVisualizer {
     removeFromBreakpoints(executionPoints): void;
     setBreakpoint(d): void;
     unsetBreakpoint(d): void;
-    findPrevBreakpoint(): void;
-    findNextBreakpoint(): void;
-    stepForward(): void;
-    stepBack(): void;
+    findPrevBreakpoint(): any;
+    findNextBreakpoint(): any;
+    stepForward(): boolean;
+    stepBack(): boolean;
     updateOutput(smoothTransition: boolean): void;
     updateOutputFull(smoothTransition): void;
     updateOutputMini(): void;

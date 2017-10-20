@@ -3,12 +3,12 @@ interface IAbstractBaseFrontend {
     finishSuccessfulExecution(): any; // called by executeCodeAndCreateViz
     handleUncaughtException(trace: any[]): any; // called by executeCodeAndCreateViz
     ignoreAjaxError(settings): boolean;
-    setFronendError(lines): void;
+    setFrontendError(lines): void;
     clearFrontendError(): void;
-    getQueryStringOptions(): void;
+    getQueryStringOptions(): any;
     redrawConnectors(): void;
-    getBaseBackendOptionsObj(): void;
-    getBaseFrontendOptionsObj(): void;
+    getBaseBackendOptionsObj(): any;
+    getBaseFrontendOptionsObj(): any;
     updateOutputCallbackFunc(): void;
     executeCodeFromScratch(): void;
     executeCodeWithRawInput(rawInputStr, curInstr): void;

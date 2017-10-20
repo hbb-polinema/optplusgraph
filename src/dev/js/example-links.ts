@@ -363,13 +363,17 @@ export var cExamplesHtml = `<p style="margin-top: 25px; font-weight: bold;">C Ex
   <a class="exampleLink" id="cStructLink" href="#">Structs</a> |
   <a class="exampleLink" id="cNestedStructLink" href="#">Nested structs</a> |
   <a class="exampleLink" id="cArrOverflowLink" href="#">Array overflow</a> |
-  <a class="exampleLink" id="cArrParamLink" href="#">Array param</a>
+  <a class="exampleLink" id="cArrParamLink" href="#">Array param</a> |
+  <a class="exampleLink" id="cStringArraysLink" href="#">Array link</a>
   <p/>
   <a class="exampleLink" id="cStringRevLink" href="#">String reverse</a> |
   <a class="exampleLink" id="cPtrLevelsLink" href="#">Pointer levels</a> |
   <a class="exampleLink" id="cPtrChainLink" href="#">Pointer chain</a> |
   <a class="exampleLink" id="cPtrWildLink" href="#">Pointers wild</a> |
-  <a class="exampleLink" id="cTypedefLink" href="#">Typedef</a>
+  <a class="exampleLink" id="cTypedefLink" href="#">Typedef</a><hr>
+  <h4>Example Graph and Tree (by habibieeddien)</h4>
+  <a class="exampleLink" id="cBFSv1" href="#">BFS v1</a> |
+  <a class="exampleLink" id="cBFSv2" href="#">BFS v2</a>
 </p>`;
 
 export var C_EXAMPLES = {
@@ -377,7 +381,7 @@ export var C_EXAMPLES = {
   cArrParamLink: 'array-param.c',
   cNestedStructLink: 'fjalar-NestedStructTest.c',
   cPtrLevelsLink: 'fjalar-pointer-levels.c',
-  //cStringArraysLink: 'fjalar-string-arrays.c',
+  cStringArraysLink: 'fjalar-string-arrays.c',
   cGlobalsLink: 'globals.c',
   cMengThesisLink: 'meng-thesis-example.c',
   cPtrChainLink: 'pointer-chain.c',
@@ -385,6 +389,8 @@ export var C_EXAMPLES = {
   cStringRevLink: 'string-reverse-inplace.c',
   cStructLink: 'struct-basic.c',
   cTypedefLink: 'typedef-test.c',
+  cBFSv1: 'graf/BFS/bfs.v1.c',
+  cBFSv2: 'graf/BFS/bfs.v2.c'
 };
 
 

@@ -15,3 +15,18 @@ http://winmerge.org
 6. valgrind-3.11.0\coregrind\m_debuginfo\priv_tytypes.h >> Line 160-165
 7. valgrind-3.11.0\config.h >> Line 41
 8. valgrind-3.11.0\memcheck\mc_include.h >> Line 142-156
+
+
+### backend.js ###
+
+* TIMEOUT_SECS : limit masa tunggu code dieksekusi oleh valgrind, semakin banyak baris code maka semakin lama. Jika batas tunggu tercapai maka koneksi ajax antar client dan server diputus kemudian tampilkan pesan penyebab error kepada pengguna
+
+* MAX_BUFFER_SIZE : limit data I/O tampung JSON antar client dan server. Jika semakin kecil server lebih ringan, tapi baris code yang dapat dieksekusi semakin sedikit.
+
+* MEM_LIMIT : batas penggunaan RAM docker untuk eksekusi code di server. Jika semakin besar, maka akan semakin banyak baris code dapat dieksekusi.
+
+* Kesimpulan: semakin banyak variabel yang digunakan dalam code, maka akan lebih banyak membutuhkan ruang memory dan buffer size I/O serta waktu eksekusi.
+
+* child_process : https://medium.freecodecamp.org/node-js-child-processes-everything-you-need-to-know-e69498fe970a
+
+
