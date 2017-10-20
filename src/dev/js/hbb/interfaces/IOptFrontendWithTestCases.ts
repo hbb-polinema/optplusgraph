@@ -1,4 +1,4 @@
-interface IOptFrontendWithTestcases{
+interface IOptFrontendWithTestCases{
     parseQueryString():void;
     appStateAugmenter(appState):void;
     runTestCase(id, codeToExec, firstTestLine):void;
@@ -7,5 +7,5 @@ interface IOptFrontendWithTestcases{
     finishSuccessfulExecution():void;
     updateOutputCallbackFunc():void;
     experimentalPopUpSyntaxErrorSurvey():void;
-    popupRuntimeErrorSurvey():void;
+    popUpRuntimeErrorSurvey():void;
 }
