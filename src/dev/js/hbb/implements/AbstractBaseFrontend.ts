@@ -146,7 +146,7 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
                 this.setFrontendError(
                     ["Server error! Your code might be taking too much time/memory. Or the server CRASHED",
                         "due to too many people using it. Or you are behind a FIREWALL that blocks access.",
-                        "Try again later, or report a bug to philip@pgbovine.net by clicking the 'Generate",
+                        "Try again later, or report a bug to 23515043@std.stei.itb.ac.id by clicking the 'Generate",
                         "permanent link' button at the bottom of this page and including a URL in your email."]);
             }
             this.doneExecutingCode();
@@ -240,7 +240,7 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
     }
 
     startExecutingCode(startingInstruction: number): void {
-        $('#executeBtn').html("Please wait ... executing (takes up to 10 seconds)");
+        $('#executeBtn').html("Please wait ... compiling");
         $('#executeBtn').attr('disabled', true);
         this.isExecutingCode = true;
     }
@@ -270,7 +270,7 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
                         ["Unknown error: The server may be too busy or down right now.",
                             "Or you are behind a FIREWALL that blocks access to this server.",
                             "Please reload and try again later. Or report a bug to",
-                            "philip@pgbovine.net by clicking the 'Generate permanent link'",
+                            "23515043@std.stei.itb.ac.id by clicking the 'Generate permanent link'",
                             "button at the bottom and including a URL in your email."]);
                 }
             } else {
@@ -313,7 +313,7 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
         if (!backendScript) {
             this.setFrontendError(
                 ["Server configuration error: No backend script",
-                    "Report a bug to philip@pgbovine.net by clicking on the 'Generate permanent link'",
+                    "Report a bug to 23515043@std.stei.itb.ac.id by clicking on the 'Generate permanent link'",
                     "button at the bottom and including a URL in your email."]);
             return;
         }
