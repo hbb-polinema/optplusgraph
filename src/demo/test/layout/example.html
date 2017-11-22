@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+<TITLE>Layout Example</TITLE>
+<SCRIPT type="text/javascript" src="jquery.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="jquery.ui.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="jquery.layout.min-1.2.0.js"></SCRIPT>
+
+<SCRIPT type="text/javascript">
+$(document).ready(function () {
+	$('body').layout({
+		applyDefaultStyles: true,
+		resizable: true
+	});
+});
+</SCRIPT>
+
+<style>
+	.ui-layout-west{
+		width: 300px;
+	}
+</style>
+
+</HEAD>
+<BODY>
+<DIV class="ui-layout-center">Center
+	<P><A href="http://layout.jquery-dev.com/demos.html">Go to the Demos page</A></P>
+	<P>* Pane-resizing is disabled because ui.draggable.js is not linked</P>
+	<P>* Pane-animation is disabled because ui.effects.js is not linked</P>
+</DIV>
+<DIV class="ui-layout-north">North</DIV>
+<DIV class="ui-layout-south">South</DIV>
+<DIV class="ui-layout-east">East</DIV>
+<DIV class="ui-layout-resizer
+       ui-layout-resizer-west
+       ui-layout-resizer-open
+       ui-layout-resizer-west-open
+       ui-layout-resizer-drag
+       ui-layout-resizer-west-drag">West</DIV>
+</BODY>
+</HTML>
