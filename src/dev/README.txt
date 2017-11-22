@@ -1,13 +1,13 @@
 NOTE by habibieeddien | Sept 2017
 ---
 * update dependencies package.json:
-    npm update --save
+    `npm update --save`
 
 * link dependencies:
-    npm link webpack typescript tsd typings
+    `npm link webpack typescript tsd typings`
 
 * Run Backend:
-    node backend.js
+    `node backend.js`
 
 ---
 Online Python Tutor v5 "unity" -- the goal for this version is to
