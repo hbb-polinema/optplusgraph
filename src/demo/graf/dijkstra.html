@@ -93,7 +93,7 @@
             .data(dataset.edges)
             .enter()
             .append("line")
-            .attr("id", function (d, i) {
+            .attr("id", function(d, i) {
                 return 'edge' + i
             })
             .style("stroke", "black")
@@ -106,7 +106,7 @@
             .attr({
                 "r": 15
             })
-            .style("fill", function (d, i) {
+            .style("fill", function(d, i) {
                 return colors(i);
             })
             .call(force.drag)
@@ -116,10 +116,10 @@
             .enter()
             .append("text")
             .attr({
-                "x": function (d) {
+                "x": function(d) {
                     return d.x;
                 },
-                "y": function (d) {
+                "y": function(d) {
                     return d.y;
                 },
                 "class": "nodelabel",
@@ -127,7 +127,7 @@
                 "text-anchor": "middle",
                 "dy": ".4em"
             })
-            .text(function (d) {
+            .text(function(d) {
                 return d.name;
             });
 
@@ -136,7 +136,7 @@
             .enter()
             .append('path')
             .attr({
-                'd': function (d) {
+                'd': function(d) {
                     return 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y
                 },
                 'class': 'edgepath',
@@ -144,7 +144,7 @@
                 'stroke-opacity': 0,
                 'fill': 'blue',
                 'stroke': 'red',
-                'id': function (d, i) {
+                'id': function(d, i) {
                     return 'edgepath' + i
                 }
             })
@@ -157,7 +157,7 @@
             .style("pointer-events", "none")
             .attr({
                 'class': 'edgelabel',
-                'id': function (d, i) {
+                'id': function(d, i) {
                     return 'edgelabel' + i
                 },
                 'dx': 80,
@@ -167,11 +167,11 @@
             });
 
         edgelabels.append('textPath')
-            .attr('xlink:href', function (d, i) {
+            .attr('xlink:href', function(d, i) {
                 return '#edgepath' + i
             })
             .style("pointer-events", "none")
-            .text(function (d, i) {
+            .text(function(d, i) {
                 return d.weight // bobot nilai garis
             });
 
@@ -193,43 +193,43 @@
             .attr('stroke', '#ccc');
 
 
-        force.on("tick", function () {
+        force.on("tick", function() {
 
             edges.attr({
-                "x1": function (d) {
+                "x1": function(d) {
                     return d.source.x;
                 },
-                "y1": function (d) {
+                "y1": function(d) {
                     return d.source.y;
                 },
-                "x2": function (d) {
+                "x2": function(d) {
                     return d.target.x;
                 },
-                "y2": function (d) {
+                "y2": function(d) {
                     return d.target.y;
                 }
             });
 
             nodes.attr({
-                "cx": function (d) {
+                "cx": function(d) {
                     return d.x;
                 },
-                "cy": function (d) {
+                "cy": function(d) {
                     return d.y;
                 }
             });
 
-            nodelabels.attr("x", function (d) {
-                return d.x;
-            })
-                .attr("y", function (d) {
+            nodelabels.attr("x", function(d) {
+                    return d.x;
+                })
+                .attr("y", function(d) {
                     return d.y;
                 });
 
-            edgepaths.attr('d', function (d) {
+            edgepaths.attr('d', function(d) {
                 var path = 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y;
                 //console.log(d)
-                return path
+                return path;
             });
 
             edgelabels.attr('transform', function(d, i) {
@@ -242,7 +242,7 @@
                     return 'rotate(0)';
                 }
             });
-            
+
         });
     </script>
 

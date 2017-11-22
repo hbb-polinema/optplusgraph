@@ -3,6 +3,9 @@
 * https://www.dashingd3js.com/why-build-with-d3js
 * http://bl.ocks.org/sathomas/191a8a302a363ac6a4b0 --> Understanding D3.js Force Layout - 8: gravity (Button Play)
 
+* https://bl.ocks.org/mbostock/1212215 --> Force Layout with Mouseover Labels
+* http://jsfiddle.net/shawnbot/BJLe6/ --> flexible element
+
 *noted from ebook:*
 
 Heydt, Michael. 2015. D3.js By Example. Packt Publishing: Birmingham - Mumbai.
@@ -24,7 +27,7 @@ Many consider D3.js as a data visualization library. This may be correct, but D3
 
 The data in D3.js is bound to the DOM elements. Through binding, D3.js tracks a collection of objects along with their properties, and based upon rules that you specify, it modifies the DOM of the document based upon that data.
 
-The process of binding in D3.js consists ofthree stages:
+The process of binding in D3.js consists of three stages:
 
 * Enter, 
 * Update, 
