@@ -373,7 +373,9 @@ export var cExamplesHtml = `<p style="margin-top: 25px; font-weight: bold;">C Ex
   <a class="exampleLink" id="cTypedefLink" href="#">Typedef</a><hr>
   <h4>Example Graph and Tree (by habibieeddien)</h4>
   <a class="exampleLink" id="cBFSv1" href="#">BFS v1</a> |
-  <a class="exampleLink" id="cBFSv2" href="#">BFS v2</a>
+  <a class="exampleLink" id="cBFSv2" href="#">BFS v2</a> |
+  <a class="exampleLink" id="cBFSv3" href="#">BFS v3</a> |
+  <a class="exampleLink" id="cDijkstra" href="#">Dijkstra</a>
 </p>`;
 
 export var C_EXAMPLES = {
@@ -390,7 +392,9 @@ export var C_EXAMPLES = {
   cStructLink: 'struct-basic.c',
   cTypedefLink: 'typedef-test.c',
   cBFSv1: 'graf/BFS/bfs.v1.c',
-  cBFSv2: 'graf/BFS/bfs.v2.c'
+  cBFSv2: 'graf/BFS/bfs.v2.c',
+  cBFSv3: 'graf/BFS/bfs.v3.c',
+  cDijkstra: 'graf/Dijkstra/dijkstra.c'
 };
 
 
