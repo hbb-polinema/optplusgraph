@@ -61,7 +61,7 @@ function postExecHandler(res, useJSONP, err, stdout, stderr) {
                     code: '',
                     trace: [{
                         'event': 'uncaught_exception',
-                        'exception_msg': "Unknown error. The server may be down or overloaded right now.\nReport a bug to philip@pgbovine.net by clicking on the\n'Generate permanent link' button at the bottom and including a URL in your email."
+                        'exception_msg': "Unknown error. The server may be down or overloaded right now.\nReport a bug to 23515043@std.stei.itb.ac.id by clicking on the\n'Generate permanent link' button at the bottom and including a URL in your email."
                     }]
                 };
             }
@@ -83,7 +83,7 @@ function postExecHandler(res, useJSONP, err, stdout, stderr) {
                     code: '',
                     trace: [{
                         'event': 'uncaught_exception',
-                        'exception_msg': "Unknown error. The server may be down or overloaded right now.\nReport a bug to philip@pgbovine.net by clicking on the\n'Generate permanent link' button at the bottom and including a URL in your email."
+                        'exception_msg': "Unknown error. The server may be down or overloaded right now.\nReport a bug to 23515043@std.stei.itb.ac.id by clicking on the\n'Generate permanent link' button at the bottom and including a URL in your email."
                     }]
                 };
                 res.jsonp(errTrace /* return an actual object, not a string */ );
