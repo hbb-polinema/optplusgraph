@@ -356,7 +356,6 @@ export var RUBY_EXAMPLES = {
 
 
 export var cExamplesHtml = `<p style="margin-top: 25px; font-weight: bold;">C Examples</p>
-
 <p style="margin-top: 5px;">
   <a class="exampleLink" id="cMengThesisLink" href="#">Thesis</a> |
   <a class="exampleLink" id="cGlobalsLink" href="#">Globals</a> |
@@ -365,17 +364,21 @@ export var cExamplesHtml = `<p style="margin-top: 25px; font-weight: bold;">C Ex
   <a class="exampleLink" id="cArrOverflowLink" href="#">Array overflow</a> |
   <a class="exampleLink" id="cArrParamLink" href="#">Array param</a> |
   <a class="exampleLink" id="cStringArraysLink" href="#">Array link</a>
-  <p/>
+</p>
+<p>
   <a class="exampleLink" id="cStringRevLink" href="#">String reverse</a> |
   <a class="exampleLink" id="cPtrLevelsLink" href="#">Pointer levels</a> |
   <a class="exampleLink" id="cPtrChainLink" href="#">Pointer chain</a> |
   <a class="exampleLink" id="cPtrWildLink" href="#">Pointers wild</a> |
-  <a class="exampleLink" id="cTypedefLink" href="#">Typedef</a><hr>
-  <h4>Example Graph and Tree (by habibieeddien)</h4>
+  <a class="exampleLink" id="cTypedefLink" href="#">Typedef</a>
+</p>
+<p style="margin-top: 25px; font-weight: bold;">Graph Data Structure (by habibieeddien)</p>
+<p>
   <a class="exampleLink" id="cBFSv1" href="#">BFS v1</a> |
   <a class="exampleLink" id="cBFSv2" href="#">BFS v2</a> |
   <a class="exampleLink" id="cBFSv3" href="#">BFS v3</a> |
-  <a class="exampleLink" id="cDijkstra" href="#">Dijkstra</a>
+  <a class="exampleLink" id="cDijkstra" href="#">Dijkstra (weight-undirected)</a>
+  <a class="exampleLink" id="cDijkstra" href="#">Dijkstra (weight-directed)</a>  
 </p>`;
 
 export var C_EXAMPLES = {
@@ -399,7 +402,6 @@ export var C_EXAMPLES = {
 
 
 export var cppExamplesHtml = `<p style="margin-top: 25px; font-weight: bold;">C++ Examples</p>
-
 <p style="margin-top: 5px;">
   <a class="exampleLink" id="cppFirstLink" href="#">Basic</a> |
   <a class="exampleLink" id="cppPassRefLink" href="#">Pass by ref</a> |

@@ -66,8 +66,7 @@ export class ProgramOutputBox implements IProgramOutputBox {
             pyStdout.val((stdoutStr as any).trim() /* trim trailing spaces */);
             pyStdout.scrollLeft(oldLeft);
             pyStdout.scrollTop(pyStdout[0].scrollHeight); // scroll to bottom, though
-        }
-        else {
+        } else {
             this.domRoot.find('#progOutputs').hide();
         }
     }

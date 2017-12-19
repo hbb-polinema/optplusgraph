@@ -1,5 +1,5 @@
 interface IDataVisualizer {
-    openTab(button:any, tabName:any): void;
+    openTab(button:any, tabName:any): void; // add by @habibieeddien
     height(): void;
     generateHeapObjID(objID, stepNum): string;
     getRealLabel(label: string): string;

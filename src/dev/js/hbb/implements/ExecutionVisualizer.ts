@@ -239,20 +239,30 @@ export class ExecutionVisualizer implements IExecutionVisualizer {
         let myViz = this; // to prevent confusion of 'this' inside of nested functions
 
         if (this.params.verticalStack) {
-            this.domRoot.html(`<table border="0" class="visualizer">
+            /*this.domRoot.html(`<table border="0" class="visualizer">
                                     <tr><td class="vizLayoutTd" id="vizLayoutTdFirst""></td></tr>
                                     <tr><td class="vizLayoutTd" id="vizLayoutTdSecond"></td></tr>
-                                </table>`);
+                                </table>`);*/
+            // by habibieeddien: for support flexbox layout
+            this.domRoot.html(`<div class="visualizer section left col-xs-6 style-scroll">
+                                    <div class="vizLayoutTd" id="vizLayoutTdFirst""></div>
+                                </div>
+                                <div class="visualizer section right col-xs-6 style-scroll">                                    
+                                    <div class="vizLayoutTd" id="vizLayoutTdSecond"></div>
+                                </div>`);
         } else {
-            this.domRoot.html(`<table border="0" class="visualizer"><tr>
-                                    <td class="vizLayoutTd" id="vizLayoutTdFirst"></td>
-                                    <td class="vizLayoutTd" id="vizLayoutTdSecond"></td>
-                                </tr></table>`);
+            // by habibieeddien: for support flexbox layout
+            this.domRoot.html(`<div class="visualizer section left col-xs-6 style-scroll">
+                                    <div class="vizLayoutTd" id="vizLayoutTdFirst""></div>
+                                </div>
+                                <div class="visualizer section right col-xs-6 style-scroll">                                    
+                                    <div class="vizLayoutTd" id="vizLayoutTdSecond"></div>
+                                </div>`);
         }
 
         /*  create a container for a resizable slider to encompass
             both CodeDisplay and NavigationController */
-        this.domRoot.find('#vizLayoutTdFirst').append('<div id="codAndNav" style="width: 550px;"/>');
+        this.domRoot.find('#vizLayoutTdFirst').append('<div id="codAndNav" style="width: 100%;"/>');
         let base = this.domRoot.find('#vizLayoutTdFirst #codAndNav');
         let baseD3 = this.domRootD3.select('#vizLayoutTdFirst #codAndNav');
 
@@ -271,11 +281,11 @@ export class ExecutionVisualizer implements IExecutionVisualizer {
 
             /*  add an extra label to link back to the main site, so that viewers
                 on the embedded page know that they're seeing an OPT visualization */
-            base.append('<div style="font-size: 8pt; margin-bottom: 10px;">Visualized using <a href="http://pythontutor.com" target="_blank" style="color: #3D58A2;">Python Tutor</a> by <a href="http://www.pgbovine.net/" target="_blank" style="color: #3D58A2;">Philip Guo</a> (<a href="https://twitter.com/pgbovine" target="_blank" style="color: #3D58A2;">@pgbovine</a>)</div>');
+            base.append('<div style="font-size: 8pt; margin-bottom: 10px;">Visualized using <a href="http://pythontutor.com" target="_blank" style="color: #3D58A2;">Python Tutor</a></div>');
             base.find('#codeFooterDocs').hide(); // cut out extraneous docs
         } else {
             // also display credits:
-            base.append('<div style="font-size: 8pt; margin-bottom: 10px;">Visualized using <a href="http://pythontutor.com" target="_blank" style="color: #3D58A2;">Python Tutor</a> by <a href="http://www.pgbovine.net/" target="_blank" style="color: #3D58A2;">Philip Guo</a> (<a href="https://twitter.com/pgbovine" target="_blank" style="color: #3D58A2;">@pgbovine</a>)</div>');
+            base.append('<div style="font-size: 8pt; margin-bottom: 10px;">Visualized using <a href="http://pythontutor.com" target="_blank" style="color: #3D58A2;">Python Tutor</a></div>');
         }
 
         // not enough room for these extra buttons ...
@@ -525,7 +535,7 @@ export class ExecutionVisualizer implements IExecutionVisualizer {
         let totalInstrs = this.curTrace.length;
         let isFirstInstr = (this.curInstr == 0);
         let isLastInstr = (this.curInstr == (totalInstrs - 1));
-        let msg = "Step " + String(this.curInstr + 1) + " of " + String(totalInstrs - 1);
+        let msg = `Step <span class="badge">${String(this.curInstr + 1)}</span> of <span class="badge">${String(totalInstrs - 1)}</span>`;
         if (isLastInstr) {
             if (this.promptForUserInput || this.promptForMouseInput) {
                 msg = '<b><font color="' + BRIGHTRED + '">Enter user input below:</font></b>';
@@ -542,7 +552,7 @@ export class ExecutionVisualizer implements IExecutionVisualizer {
         // render error (if applicable):
         if (myViz.curLineExceptionMsg) {
             if (myViz.curLineExceptionMsg === "Unknown error") {
-                myViz.navControls.showError('Unknown error: Please email a bug report to philip@pgbovine.net');
+                myViz.navControls.showError('Unknown error: Please email a bug report to 23515043@std.stei.itb.ac.id');
             } else {
                 myViz.navControls.showError(myViz.curLineExceptionMsg);
             }

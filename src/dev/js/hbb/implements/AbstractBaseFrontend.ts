@@ -59,8 +59,8 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
     /*  these settings are all customized for my own server setup,
         so you will need to customize for your server: */
     serverRoot = (window.location.protocol === 'https:') ?
-        'https://localhost:5001/' : // my certificate for https is registered via cokapi.com, so use it for now
-        'http://localhost:5001/'; // try cokapi.com so that hopefully it works through firewalls better than directly using IP addr
+        'https://codeviz.tk:5001/' : // my certificate for https is registered via cokapi.com, so use it for now
+        'http://codeviz.tk:5001/'; // try cokapi.com so that hopefully it works through firewalls better than directly using IP addr
 
     // see ../../v4-cokapi/cokapi.js for details
     langSettingToJsonpEndpoint = {
@@ -240,13 +240,13 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
     }
 
     startExecutingCode(startingInstruction: number): void {
-        $('#executeBtn').html("Please wait ... compiling");
+        $('#executeBtn').html(`<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Please wait ... compiling`);
         $('#executeBtn').attr('disabled', true);
         this.isExecutingCode = true;
     }
 
     doneExecutingCode(): void {
-        $('#executeBtn').html("Visualize Execution");
+        $('#executeBtn').html(`<span class="glyphicon glyphicon-cloud-upload"></span>  Visualize Execution`);
         $('#executeBtn').attr('disabled', false);
         this.isExecutingCode = false;
     }

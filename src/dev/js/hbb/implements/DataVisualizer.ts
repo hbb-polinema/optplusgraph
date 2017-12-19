@@ -36,7 +36,7 @@ export class DataVisualizer implements IDataVisualizer {
         let codeVizHTML =
             `<div class="tab">
                 <button class="tablinks active" id="primitif">Primitif</button>
-                <button class="tablinks" id="abstract">Abstract</button>
+                <button class="tablinks" id="abstract">Graph Visualization</button>
             </div>
             
             <div id="dataViz" class="tabcontent" style="display:block">
@@ -58,8 +58,7 @@ export class DataVisualizer implements IDataVisualizer {
             </div>
 
             <div id="abstractViz" class="tabcontent" style="display:none">
-                <h3>Abstract Visualization</h3>
-                <p>Abstract Visualization.</p>
+                <h3>Nothing Graph Structure!</h3>
             </div>`;
 
         this.domRoot.append(codeVizHTML);

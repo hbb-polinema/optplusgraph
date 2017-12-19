@@ -31,8 +31,8 @@ export const yellowHappyFace = require('../../images/yellow-happy-face.jpg');
 export const eureka_survey = `
   <div id="eureka_survey" style="text-align: center; margin-top: 10px; margin-bottom: 15px;">
     <div style="margin-bottom: 6px;">Help us improve this tool by clicking below whenever you learn something:</div>
-    <button class="surveyBtnBig" type="button">I just cleared up a misunderstanding!</button>
-    <button class="surveyBtnBig" type="button" style="margin-left: 8px;">I just fixed a bug in my code!</button>
+    <button class="surveyBtnBig btn btn-warning btn-sm" type="button">I just cleared up a misunderstanding!</button>
+    <button class="surveyBtnBig btn btn-warning btn-sm" type="button" style="margin-left: 8px;">I just fixed a bug in my code!</button>
   </div>`;
 export const eureka_prompt = "What was your misunderstanding or error? (Press 'OK' to submit)";
 export const eureka_survey_version = 'v2';

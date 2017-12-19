@@ -96,3 +96,42 @@ does it issue any cookies.</p>
 Copyright &copy; <a href="http://www.pgbovine.net/">Philip Guo</a>.  All rights reserved.
 </p>
 `;
+
+// @habibieeddien
+export var myFooterHTML = `
+<div id="genLink">
+<p>
+  <input type="text" id="urlOutput" size="70" class="form-control"/>
+</p>
+<p class="form-inline">
+  <button id="genUrlShortenedBtn" class="btn btn-info btn-sm" type="button">Generate shortened link</button><input type="text" id="urlOutputShortened" class="form-control" style="margin-left:7px;"/>
+</p>
+
+<p>Click the button above to create a permanent link to your
+visualization. To report a bug, paste the link along with a brief error
+description in an email addressed to <a href="mailto:23515043@std.stei.itb.ac.id" target="_blank">23515043@std.stei.itb.ac.id</a></p>
+
+<div id="embedLinkDiv">
+<p>
+  <button id="genEmbedBtn" class="btn btn-info btn-sm" type="button" style="margin-bottom:7px;">Generate embed code</button> <input type="text" id="embedCodeOutput" size="70" class="form-control"/>
+</p>
+
+<p>To embed this visualization in your webpage, click the 'Generate
+embed code' button above and paste the resulting HTML code into your
+webpage. Adjust the height and width parameters and
+change the link to <b>https://</b> if needed.</p>
+</div>
+</div>
+
+<div id="info">
+<p>1. Graph Visualization Frontend.
+<a href="http://gitlab.informatika.org/" target="_blank">Frontend source code</a>.</p>
+
+<p>2. C using gcc 4.8, C11, and Valgrind Memcheck.
+<a href="https://github.com/pgbovine/opt-cpp-backend" target="_blank">Backend source code</a>.</p>
+
+<p>3. C++ using gcc 4.8, C++11, and Valgrind Memcheck.
+<a href="https://github.com/pgbovine/opt-cpp-backend" target="_blank">Backend source code</a>.</p>
+
+<p>Improved Graph Visualization support by <a href="http://habibie.tk/" target="_blank">Habibie Ed Dien</a>.
+Based on <a href="http://pythontutor.com/c.html" target="_blank">the Online Python Tutor website (pythontutor.com)</a></p></div>`;

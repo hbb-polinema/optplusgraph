@@ -483,6 +483,11 @@ export class OptFrontend extends AbstractBaseFrontend implements IOptFrontend{
             $("#pyInputPane").show();
             $("#pyOutputPane,#embedLinkDiv").hide();
 
+            // add by habibieeddien
+            $("header").removeClass("head attribute");
+            $("footer").removeClass("foot attribute");
+            $("header").addClass("initial-head");
+
             /*  Potentially controversial: when you enter edit mode, DESTROY any
                 existing visualizer object. note that this simplifies the app's
                 conceptual model but breaks the browser's expected Forward and Back button flow */
@@ -505,6 +510,13 @@ export class OptFrontend extends AbstractBaseFrontend implements IOptFrontend{
             this.appMode = 'display'; // canonicalize
             $("#pyInputPane").hide();
             $("#pyOutputPane,#embedLinkDiv").show();
+            
+            // add by habibieeddien
+            $("header").removeClass("initial-head");
+            $("header").addClass("head attribute");            
+            $(".ExecutionVisualizer").addClass("main-wrapper");
+            $("footer").addClass("foot attribute");
+
             this.doneExecutingCode();
 
             // do this AFTER making #pyOutputPane visible, or else

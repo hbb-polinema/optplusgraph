@@ -21,11 +21,11 @@ export class NavigationController implements INavigationController {
             <div id="executionSlider"/>
             <div id="executionSliderFooter"/>
                 <div id="vcrControls">
-                    <button id="jmpFirstInstr", type="button">&lt;&lt; First</button>
-                    <button id="jmpStepBack", type="button">&lt; Back</button>
-                    <span id="curInstr">Step ? of ?</span>
-                    <button id="jmpStepFwd", type="button">Forward &gt;</button>
-                    <button id="jmpLastInstr", type="button">Last &gt;&gt;</button>
+                    <button id="jmpFirstInstr" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-fast-backward"></span> First</button>
+                    <button id="jmpStepBack" class="btn btn-default btn-xs" type="button"><span class="glyphicon glyphicon-step-backward"></span> Backward</button>
+                    <button id="curInstr" type="button" class="btn btn-primary btn-sm" disabled="true">Step <span class="badge">?</span> of <span class="badge">?</span></button>
+                    <button id="jmpStepFwd" class="btn btn-default btn-xs" type="button" disabled="disabled">Forward <span class="glyphicon glyphicon-step-forward"></span></button>
+                    <button id="jmpLastInstr" class="btn btn-default btn-xs" type="button" disabled="disabled">Last <span class="glyphicon glyphicon-fast-forward"></span></button>
                 </div>
                 <div id="rawUserInputDiv">
                     <span id="userInputPromptStr"/>
@@ -71,6 +71,11 @@ export class NavigationController implements INavigationController {
 
     setVcrControls(msg: string, isFirstInstr: boolean, isLastInstr: boolean): void {
         let vcrControls = this.domRoot.find("#vcrControls");
+        if(msg === 'Program terminated'){
+            vcrControls.find("#curInstr").attr("class", "btn btn-danger btn-sm");
+        } else {
+            vcrControls.find("#curInstr").attr("class", "btn btn-primary btn-sm");
+        }
         vcrControls.find("#curInstr").html(msg);
         vcrControls.find("#jmpFirstInstr").attr("disabled", false);
         vcrControls.find("#jmpStepBack").attr("disabled", false);

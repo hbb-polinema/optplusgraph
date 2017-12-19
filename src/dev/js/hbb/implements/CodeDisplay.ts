@@ -1,10 +1,11 @@
 import { ExecutionVisualizer } from './ExecutionVisualizer';
-import {    ERROR_COLOR,
-            LIGHT_ARROW_COLOR,
-            BRIGHTRED,
-            DARK_ARROW_COLOR,
-            BREAKPOINT_COLOR
-        } from '../view/colors';
+import {
+    ERROR_COLOR,
+    LIGHT_ARROW_COLOR,
+    BRIGHTRED,
+    DARK_ARROW_COLOR,
+    BREAKPOINT_COLOR
+} from '../view/colors';
 import { SVG_ARROW_POLYGON } from '../view/polygons';
 import { SVG_ARROW_HEIGHT } from '../view/sizes';
 import { HTMLspecialChars } from '../utilities/functions';
@@ -27,15 +28,16 @@ export class CodeDisplay implements ICodeDisplay {
         this.domRootD3 = domRootD3;
         this.codToDisplay = codToDisplay;
 
-        var codeDisplayHTML =
+        let codeDisplayHTML =
             `<div id="codeDisplayDiv">
                 <div id="langDisplayDiv"></div>
                 <div id="pyCodeOutputDiv"/>
-                <div id="editCodeLinkDiv"><a id="editBtn">Edit code</a>
+                <div id="editCodeLinkDiv">
+                    <button id="editBtn" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit code</button>
                     <span id="liveModeSpan" style="display: none;">| <a id="editLiveModeBtn" href="#">Live programming</a></a>
                 </div>
                 <div id="legendDiv"/>
-                <div id="codeFooterDocs">Click a line of code to set a breakpoint; use the Back and Forward buttons to jump there.</div>
+                <div id="codeFooterDocs">Click a line of code to set a breakpoint; use the Backward and Forward buttons to jump there.</div>
             </div>`;
 
         this.domRoot.append(codeDisplayHTML);
@@ -101,13 +103,13 @@ export class CodeDisplay implements ICodeDisplay {
                 if (this.owner.params.embeddedMode) {
                     this.domRoot.find('#langDisplayDiv').html('C (gcc 4.8, C11)');
                 } else {
-                    this.domRoot.find('#langDisplayDiv').html('C (gcc 4.8, C11) <font color="#e93f34">EXPERIMENTAL!</font><br/>see <a href="https://github.com/pgbovine/opt-cpp-backend/issues" target="_blank">known bugs</a> and report to philip@pgbovine.net');
+                    this.domRoot.find('#langDisplayDiv').html('C (gcc 4.8, C11) <font color="#e93f34">EXPERIMENTAL!</font>');//<br/>see <a href="https://github.com/pgbovine/opt-cpp-backend/issues" target="_blank">known bugs</a> and report to philip@pgbovine.net');
                 }
             } else if (lang === 'cpp') {
                 if (this.owner.params.embeddedMode) {
                     this.domRoot.find('#langDisplayDiv').html('C++ (gcc 4.8, C++11)');
                 } else {
-                    this.domRoot.find('#langDisplayDiv').html('C++ (gcc 4.8, C++11) <font color="#e93f34">EXPERIMENTAL!</font><br/>see <a href="https://github.com/pgbovine/opt-cpp-backend/issues" target="_blank">known bugs</a> and report to philip@pgbovine.net');
+                    this.domRoot.find('#langDisplayDiv').html('C++ (gcc 4.8, C++11) <font color="#e93f34">EXPERIMENTAL!</font>');//<br/>see <a href="https://github.com/pgbovine/opt-cpp-backend/issues" target="_blank">known bugs</a> and report to philip@pgbovine.net');
                 }
             } else {
                 this.domRoot.find('#langDisplayDiv').hide();
@@ -121,6 +123,7 @@ export class CodeDisplay implements ICodeDisplay {
 
         // maps codeOutputLines down both table columns
         // TODO: get rid of pesky owner dependency
+        let code = [], line = [];
         let codeOutputD3 = this.domRootD3.select('#pyCodeOutputDiv')
             .append('table')
             .attr('id', 'pyCodeOutput')
@@ -150,12 +153,16 @@ export class CodeDisplay implements ICodeDisplay {
             })
             .html(function (d, i) {
                 if (i == 0) {
+                    line.push(d.lineNumber);
                     return d.lineNumber;
                 } else {
+                    line.push(d.text.trim());
+                    code.push({ line });
+                    line = [];
                     return HTMLspecialChars(d.text);
                 }
             });
-
+        //console.log("text-code: " + JSON.stringify(code));
         // create a left-most gutter td that spans ALL rows ...
         // (NB: valign="top" is CRUCIAL for this to work in IE)
         this.domRoot.find('#pyCodeOutput tr:first')
@@ -271,23 +278,29 @@ export class CodeDisplay implements ICodeDisplay {
             }
         }
 
+        // Before highlight line, back to original background-color @habibieeddien
+        this.domRootD3.selectAll('#pyCodeOutputDiv td.cod').style('background-color', 'transparent');
+
         if (myViz.prevLineNumber) {
             let pla = this.domRootD3.select('#prevLineArrow');
             let translatePrevCmd = 'translate(0, ' + (((myViz.prevLineNumber - 1) * this.codeRowHeight) + this.arrowOffsetY + prevVerticalNudge) + ')';
-            
+
             if (smoothTransition) {
                 pla.transition()
-                   .duration(200)
-                   .attr('fill', 'white')
-                   .each('end', function () {
+                    .duration(200)
+                    .attr('fill', 'white')
+                    .each('end', function () {
                         pla.attr('transform', translatePrevCmd)
-                           .attr('fill', LIGHT_ARROW_COLOR);
+                            .attr('fill', LIGHT_ARROW_COLOR);
                         gutterSVG.find('#prevLineArrow').show(); // show at the end to avoid flickering
                     });
             } else {
                 pla.attr('transform', translatePrevCmd)
                 gutterSVG.find('#prevLineArrow').show();
             }
+
+            // gray-highlight line for preveous executed @habibieeddien
+            this.domRootD3.select('#v1__cod' + myViz.prevLineNumber).style('background-color', '#F0F0EA');
 
         } else {
             gutterSVG.find('#prevLineArrow').hide();
@@ -296,16 +309,19 @@ export class CodeDisplay implements ICodeDisplay {
         if (myViz.curLineNumber) {
             let cla = this.domRootD3.select('#curLineArrow');
             let translateCurCmd = 'translate(0, ' + (((myViz.curLineNumber - 1) * this.codeRowHeight) + this.arrowOffsetY + curVerticalNudge) + ')';
-            
+
             if (smoothTransition) {
                 cla.transition()
-                   .delay(200)
-                   .duration(250)
-                   .attr('transform', translateCurCmd);
+                    .delay(200)
+                    .duration(250)
+                    .attr('transform', translateCurCmd);
             } else {
                 cla.attr('transform', translateCurCmd);
             }
             gutterSVG.find('#curLineArrow').show();
+
+            // yellow-highlight line for next execute @habibieeddien
+            this.domRootD3.select('#v1__cod' + myViz.curLineNumber).style('background-color', '#FFFF66');
 
         } else {
             gutterSVG.find('#curLineArrow').hide();

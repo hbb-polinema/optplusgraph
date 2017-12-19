@@ -9,11 +9,11 @@ import {
     JS_EXAMPLES, TS_EXAMPLES, JAVA_EXAMPLES, RUBY_EXAMPLES,
     C_EXAMPLES, CPP_EXAMPLES, PY2_EXAMPLES, PY3_EXAMPLES
 } from '../example-links';
-import { footerHtml } from '../footer-html';
+import { myFooterHTML } from '../footer-html';
 
 $(document).ready(function () {
     // initialize all HTML elements before creating optFrontend object
-    $("#exampleSnippets").append(exampleHeaderHtml);
+    //$("#exampleSnippets").append(exampleHeaderHtml);
 
     let params = {};
     let optOverride = (window as any).optOverride;
@@ -33,6 +33,9 @@ $(document).ready(function () {
             $("#exampleSnippets").append(cExamplesHtml);
         } else if (optOverride.frontendLang === 'cpp') {
             $("#exampleSnippets").append(cppExamplesHtml);
+        } else if (optOverride.frontendLang === 'c-cpp') { // add by habibieeddien for support c and cpp
+            $("#exampleSnippets").append(cExamplesHtml);
+            $("#exampleSnippets").append(cppExamplesHtml);
         }
     } else {
         $("#exampleSnippets")
@@ -44,7 +47,8 @@ $(document).ready(function () {
             .append(cExamplesHtml)
             .append(cppExamplesHtml);
     }
-    $("#footer").append(footerHtml);
+
+    $("#footer").append(myFooterHTML);
 
     let optFrontend = new OptFrontendWithTestCases(params); // MAIN EVENT from here!
     optFrontend.setSurveyHTML();
@@ -121,5 +125,13 @@ $(document).ready(function () {
         initCodeopticon(); // defined in codeopticon-learner.js
     } */
 
-    $("#liveModeBtn").click(optFrontend.openLiveModeUrl.bind(optFrontend));
+    //$("#liveModeBtn").click(optFrontend.openLiveModeUrl.bind(optFrontend)); --> useless for c/c++ (habibieeddien)
+    
+    // by habibieeddien
+    $("#genUrlBtn").click(function () {
+        $("#genLink").slideToggle(750);
+    });
+    $("#btnInfo").click(function () {
+        $("#info").slideToggle(750);
+    });
 });
