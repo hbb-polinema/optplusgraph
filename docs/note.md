@@ -81,8 +81,13 @@ Referensi yang disarankan oleh Bu Inge berdasarkan author
 ---- dari perpus STEI 26/09/2017 -----
 + Redmond, D. and Moore, P.A., Graphical User Interface Design and Evaluation (GUIDE), Prentice Hall, London, 1995
 		visualisasi merupakan suatu sarana yang menggambarkan suatu objek, bagian dari objek,
-		atau aspek dari suatu objek pada antarmuka pemakai. Berpijak dari definisi yang dikemukakan tersebut,
+		atau aspek dari suatu objek pada antarmuka pengguna. Berpijak dari definisi yang dikemukakan tersebut,
 		visualisasi akan dapat mempermudah pengguna dalam melihat suatu objek terutama untuk interpretasi
 		suatu proses.
 + Nielson, L. Visualization in Scientific and Engineering Computation
 + Metode UML (Unified Modeling Languange) dirintis pada tahun 1995 oleh Booch, Rumbaugh dan Jacobson
+
+
+
+https://id.wikihow.com/Menulis-Paragraf
+http://romisatriawahono.net/2012/06/18/kiat-menyusun-alur-latar-belakang-masalah-penelitian/

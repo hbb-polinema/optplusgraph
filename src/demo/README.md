@@ -43,7 +43,7 @@ The process of binding in D3.js consists of three stages:
 
 # Js Bin #
 
-Js Bin (http://jsbin.com/) is a website that functions as a development tool for facilitating the quick creation and sharing ofsimple JavaScript applications that run within the browser.
+Js Bin (http://jsbin.com/) is a website that functions as a development tool for facilitating the quick creation and sharing of simple JavaScript applications that run within the browser.
 
 # bl.ocks.org #
 

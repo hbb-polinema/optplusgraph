@@ -8,6 +8,9 @@ NOTE by habibieeddien | Sept 2017
 
 * Run Backend:
     `node backend.js`
+          OR
+    `sudo usermod -a -G docker $USER` (solve: permission issue docker engine daemon)
+    `sudo forever backend.js` (run forever in server production)
 
 ---
 Online Python Tutor v5 "unity" -- the goal for this version is to

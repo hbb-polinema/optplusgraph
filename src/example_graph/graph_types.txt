@@ -12,3 +12,6 @@ Dijkstra's Alogrithm : For graphs where the edge-weights are non-negative. Uses 
 Bellman-Ford Algorithm : For graphs where the edge-weights may be negative, but no negative weight cycle exists. Uses dynamic programming.
 
 http://www.codingalpha.com/difference-between-c-and-cpp/
+
+compile c: gcc file.c -o newname
+compile c++: g++ file.cpp -o newname -std=c++11
