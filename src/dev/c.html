@@ -21,7 +21,7 @@
     <!-- let Webpack take care of everything. Use the [hash] feature to
        create unique filenames for releases:
        https://webpack.github.io/docs/long-term-caching.html -->
-    <script type="text/javascript" src="build/main.bundle.js?ec0eed4def" charset="utf-8"></script>
+    <script type="text/javascript" src="build/main.bundle.js?cd7cfc9450" charset="utf-8"></script>
 
     <!-- insert google-analytics.txt contents here -->
 
@@ -34,19 +34,14 @@
             <td valign="top">
 
                 <div id="ssDiv">
-                    <button id="sharedSessionBtn" type="button" class="togetherjsBtn">
-  Start shared session
-  </button>
+                    <button id="sharedSessionBtn" type="button" class="togetherjsBtn">Start shared session</button>
                     <div style="font-size: 7pt; margin-left: 2px; margin-top: 3px;">
                         <a href="https://www.youtube.com/watch?v=Z2TIjNArOK4" target="_blank">What are shared sessions?</a>
                     </div>
                 </div>
 
                 <div id="sharedSessionDisplayDiv" style="display: none;">
-                    <button id="stopTogetherJSBtn" type="button" class="togetherjsBtn">
-  End shared session
-  </button>
-
+                    <button id="stopTogetherJSBtn" type="button" class="togetherjsBtn">End shared session</button>
                     <div style="width: 200px; font-size: 8pt; color: #666; margin-top: 5px;">
                         Your chat logs and code may be recorded, anonymized, and analyzed for research.
                     </div>
@@ -79,19 +74,15 @@
         </tr>
     </table>
 
-
     <div id="pyInputPane">
 
         <div id="codeInputWarnings">Write code in
-
             <select id="pythonVersionSelector">
-    <option value="c">C (gcc 4.8, C11) EXPERIMENTAL</option>
-  </select>
-
+                <option value="c">C (gcc 4.8, C11) EXPERIMENTAL</option>
+            </select>
         </div>
 
         <div id="someoneIsTypingDiv" style="color: #e93f34; font-weight: bold; display: none;">Someone is typing ...</div>
-
         <div id="codeInputPane"></div>
         <!-- populate with Ace code editor instance -->
         <div id="frontendErrorOutput"></div>
@@ -107,6 +98,7 @@
     </div>
 
     <div id="pyOutputPane"></div>
+    <!-- Visualization Execution -->
 
     <div id="footer"></div>
 
