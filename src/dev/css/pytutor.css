@@ -72,6 +72,136 @@ div.ExecutionVisualizer div#codeDisplayDiv {
 */
 
 
+/* Style layout @habibieeddien */
+
+.left {
+    background: #f9f9f9;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.right {
+    background: #f9f9f9;
+    padding-top: 10px;
+    padding-right: 30px;
+}
+
+.main-wrapper {
+    height: 90vh;
+    margin-top: 33px;
+}
+
+.section {
+    height: 100%;
+    width: 50%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.head {
+    top: 0px;
+    left: 0px;
+    height: 33px;
+    font-size: 10pt;
+    font-weight: bold;
+    color: azure;
+    font-family: monospace;
+}
+
+.initial-head {
+    font-size: larger;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: slategrey;
+}
+
+.foot {
+    left: 0px;
+    bottom: 0px;
+    height: 30px;
+}
+
+.attribute {
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+    background: #3498db;
+    padding: 5pt;
+}
+
+#genLink {
+    position: fixed;
+    right: 2vw;
+    bottom: 10vh;
+    display: none;
+    background-color: yellowgreen;
+    padding: 17px;
+    width: 600px;
+    z-index: 7007;
+}
+
+#info {
+    position: fixed;
+    left: 2vw;
+    top: 5vh;
+    display: none;
+    background-color: yellowgreen;
+    padding: 17px;
+    width: 300px;
+    z-index: 101;
+}
+
+
+/* Style scroll @habibieeddien */
+
+.style-scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.style-scroll::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+    background-color: #F5F5F5;
+}
+
+.style-scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #3498db;
+}
+
+
+/* Animation loading @habibieeddien */
+
+.glyphicon-refresh-animate {
+    -animation: spin 2s infinite linear;
+    -webkit-animation: spin2 2s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+
 /* Style the tab @habibieeddien */
 
 div.tab {
@@ -91,6 +221,7 @@ div.tab button {
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
+    font-weight: bold;
 }
 
 
@@ -120,6 +251,17 @@ div.tab button.active {
     /* Fading effect takes 1 second */
 }
 
+
+/* Style Node Graph */
+
+.node {
+    fill: #34495e;
+}
+
+.node.fixed {
+    fill: tomato;
+}
+
 @-webkit-keyframes fadeEffect {
     from {
         opacity: 0;
@@ -144,7 +286,8 @@ Fixed Footer @author: habibieeddien
 TODO: add @media screen
  */
 
-#navControlsDiv {
+
+/*#navControlsDiv {
     position: fixed;
     left: 0px;
     bottom: 0px;
@@ -152,15 +295,16 @@ TODO: add @media screen
     z-index: 3777;
     width: 100%;
     background: #999;
-}
+}*/
 
 
 /* Fixed Footer for IE 6 (have not tested) */
 
-* html #navControlsDiv {
+
+/** html #navControlsDiv {
     position: absolute;
     top: expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight: document.body.clientHeight)+(ignoreMe=document.documentElement.scrollTop ? document.documentElement.scrollTop: document.body.scrollTop))+'px');
-}
+}*/
 
 div.ExecutionVisualizer div#pyCodeOutputDiv {
     /*max-width: 550px;*/
@@ -295,9 +439,16 @@ div.ExecutionVisualizer #errorOutput {
 /* VCR control buttons for stepping through execution */
 
 div.ExecutionVisualizer #vcrControls {
-    margin: 15px auto;
-    /*width: 100%;*/
+    /*margin: 15px auto;
+    width: 100%;*/
     text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 33vw;
+    z-index: 100;
+    background-color: #bdc3c7;
+    padding: 7px;
+    border-radius: 5px;
 }
 
 div.ExecutionVisualizer #vcrControls button {
@@ -716,8 +867,9 @@ div.ExecutionVisualizer div#heapHeader {
 
 div.ExecutionVisualizer div#langDisplayDiv {
     text-align: center;
-    margin-top: 2pt;
-    margin-bottom: 3pt;
+    background: #bdc3c7;
+    /*margin-top: 2pt;
+    margin-bottom: 3pt;*/
 }
 
 div.ExecutionVisualizer div#langDisplayDiv,
