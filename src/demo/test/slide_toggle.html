@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $("#test").slideToggle(750);
+            });
+        });
+    </script>
+    <style>
+        #test {
+            position: fixed;
+            right: 2vw;
+            bottom: 10vh;            
+            display: none;
+            background-color: yellowgreen;
+            height: 77px;
+            padding: 7px;
+        }
+
+        .container {
+            /* fixed position a zero-height full width container */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            /* center all inline content */
+            text-align: center;
+        }
+
+        .container>div {
+            /* make the block inline */
+            display: inline-block;
+            /* reset container's center alignment */
+            text-align: left;
+            background-color: aqua;
+            padding: 7px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button>Toggle between hiding and showing the paragraphs</button>
+
+    <div id="test">This is a paragraph with little content.<br> This is another small paragraph.<br>
+        <button>test</button>
+    </div>
+
+    <div class="container">
+        <div>I will always be at the top center.</div>
+    </div>
+
+</body>
+
+</html>

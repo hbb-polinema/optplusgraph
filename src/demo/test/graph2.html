@@ -7,6 +7,17 @@
     <!-- load the d3.js library -->
     <!--script src="d3.v2.min.js"></script-->
     <script src="../d3.v3.min.js" charset="utf-8"></script>
+    <style>
+        circle {
+            fill: orange;
+            stroke: orange;
+        }
+        
+        line {
+            stroke: #000;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,8 +26,6 @@
         var w = 1000;
         var h = 600;
         var linkDistance = 200;
-
-        var colors = d3.scale.category10();
 
         var dataset = {
 
@@ -83,6 +92,27 @@
             }]
         };
 
+        var dataset2 = {
+
+            nodes: [{
+                name: "Adam"
+            }, {
+                name: "Bob"
+            }, {
+                name: "Carrie"
+            }],
+            edges: [{
+                source: 0,
+                target: 1
+            }, {
+                source: 1,
+                target: 2
+            }, {
+                source: 0,
+                target: 2
+            }]
+        };
+
 
         var svg = d3.select("body").append("svg").attr({
             "width": w,
@@ -99,33 +129,27 @@
             .gravity(0.05)
             .start();
 
-
-
-        var edges = svg.selectAll("line")
+        var edges = svg.append("g").attr("id", "gline")
+            .selectAll("line")
             .data(dataset.edges)
             .enter()
             .append("line")
             .attr("id", function(d, i) {
                 return 'edge' + i
-            })
-            .attr('marker-end', 'url(#arrowhead)')
-            .style("stroke", "#ccc")
-            .style("pointer-events", "none");
+            });
 
-        var nodes = svg.selectAll("circle")
+        var nodes = svg.append("g").attr("id", "gcircle")
+            .selectAll("circle")
             .data(dataset.nodes)
             .enter()
             .append("circle")
             .attr({
                 "r": 15
             })
-            .style("fill", function(d, i) {
-                return colors(i);
-            })
-            .call(force.drag)
+            .style("cursor", "pointer")
+            .call(force.drag);
 
-
-        var nodelabels = svg.selectAll(".nodelabel")
+        /*var nodelabels = svg.selectAll(".nodelabel")
             .data(dataset.nodes)
             .enter()
             .append("text")
@@ -194,7 +218,6 @@
                 'viewBox': '-0 -5 10 10',
                 'refX': 25,
                 'refY': 0,
-                //'markerUnits':'strokeWidth',
                 'orient': 'auto',
                 'markerWidth': 10,
                 'markerHeight': 10,
@@ -203,12 +226,12 @@
             .append('svg:path')
             .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
             .attr('fill', '#ccc')
-            .attr('stroke', '#ccc');
+            .attr('stroke', '#ccc');*/
 
 
         force.on("tick", function() {
 
-            edges.attr({
+            svg.select("#gline").selectAll("line").attr({
                 "x1": function(d) {
                     return d.source.x;
                 },
@@ -223,7 +246,7 @@
                 }
             });
 
-            nodes.attr({
+            svg.select("#gcircle").selectAll("circle").attr({
                 "cx": function(d) {
                     return d.x;
                 },
@@ -231,31 +254,82 @@
                     return d.y;
                 }
             });
+            /*
+                        nodelabels.attr("x", function(d) {
+                                return d.x;
+                            })
+                            .attr("y", function(d) {
+                                return d.y;
+                            });
 
-            nodelabels.attr("x", function(d) {
+                        edgepaths.attr('d', function(d) {
+                            var path = 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y;
+                            //console.log(d)
+                            return path
+                        });
+
+                        edgelabels.attr('transform', function(d, i) {
+                            if (d.target.x < d.source.x) {
+                                bbox = this.getBBox();
+                                rx = bbox.x + bbox.width / 2;
+                                ry = bbox.y + bbox.height / 2;
+                                return 'rotate(180 ' + rx + ' ' + ry + ')';
+                            } else {
+                                return 'rotate(0)';
+                            }
+                        });*/
+        });
+
+        function change(data) {
+
+            force.links(data.edges);
+            force.nodes(data.nodes);
+
+            var link = svg.select("#gline").selectAll("line")
+                .data(data.edges);
+
+            link.enter()
+                .append("line")
+                .style("stroke", "#fff");
+
+            link.transition()
+                .duration(1500)
+                .style("stroke", "#000");
+
+            link.exit()
+                .transition()
+                .duration(1000)
+                .style("stroke", "#fff")
+                .remove();
+
+            var circle = svg.select("#gcircle").selectAll("circle")
+                .data(data.nodes);
+
+            circle.enter()
+                .append("circle")
+                .attr("r", 0);
+
+            circle.transition()
+                .duration(1500)
+                .attr("cx", function(d) {
                     return d.x;
                 })
-                .attr("y", function(d) {
+                .attr("cy", function(d) {
                     return d.y;
-                });
+                })
+                .attr("r", 15)
+                .style("cursor", "pointer");
 
-            edgepaths.attr('d', function(d) {
-                var path = 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y;
-                //console.log(d)
-                return path
-            });
+            circle.call(force.drag);
 
-            edgelabels.attr('transform', function(d, i) {
-                if (d.target.x < d.source.x) {
-                    bbox = this.getBBox();
-                    rx = bbox.x + bbox.width / 2;
-                    ry = bbox.y + bbox.height / 2;
-                    return 'rotate(180 ' + rx + ' ' + ry + ')';
-                } else {
-                    return 'rotate(0)';
-                }
-            });
-        });
+            circle.exit()
+                .transition()
+                .duration(1000)
+                .attr("r", 0)
+                .remove();
+
+            force.start();
+        }
     </script>
 
 </body>

@@ -49,6 +49,55 @@
         }]
     };
 
+    var dataset2 = {
+        "nodes": [{
+            "name": 1
+        }, {
+            "name": 2
+        }, {
+            "name": 3
+        }, {
+            "name": 4
+        }, {
+            "name": 5
+        }, {
+            "name": 6
+        }, {
+            "name": 7
+        }, {
+            "name": 8
+        }],
+        "edges": [{
+            "source": 0,
+            "target": 1,
+            "weight": 11
+        }, {
+            "source": 1,
+            "target": 2,
+            "weight": 14
+        }, {
+            "source": 2,
+            "target": 3,
+            "weight": 13
+        }, {
+            "source": 3,
+            "target": 4,
+            "weight": 9
+        }, {
+            "source": 1,
+            "target": 5,
+            "weight": 14
+        }, {
+            "source": 2,
+            "target": 6,
+            "weight": 12
+        }, {
+            "source": 6,
+            "target": 7,
+            "weight": 7
+        }]
+    };
+
     var width = 600,
         height = 600;
     var haveWeight = false;
@@ -85,20 +134,25 @@
                 return d.source.index == i || d.target.index == i;
             });
 
-            container.append("line")
+            console.log("datum >>\n" + JSON.stringify(d));
+            container.append("g")
+                .attr("id", "gline" + ID)
+                .append("line")
                 .datum(d)
                 .attr("class", "link")
                 .attr("id", "line" + ID)
                 .style("stroke", "black");
 
             nodes.forEach(function(node) {
-                var nodeG = container.append("g")
+                console.log("nodes >>\n" + JSON.stringify(node));
+                var nodeG = container.append("g").attr("id", "gcircle" + ID)
                     .datum(node);
 
                 nodeG.append("circle")
                     .attr("r", 15)
                     .attr("id", "node" + ID)
                     .style("fill", "#34495e")
+                    .style("cursor", "pointer")
                     .call(force.drag);
                 ID++;
 
@@ -120,7 +174,8 @@
             });
 
             if (haveWeight) {
-                container.append('path')
+                container.append("g").attr("id", "gpath" + ID)
+                    .append('path')
                     .datum(d)
                     .attr({
                         'd': function(d) {
@@ -131,7 +186,8 @@
                     })
                     .style("pointer-events", "none");
 
-                var edgelabels = container.append('text')
+                var edgelabels = container.append("g").attr("id", "gedgelabel" + ID)
+                    .append('text')
                     .datum(d)
                     .style("pointer-events", "none")
                     .attr({
@@ -156,7 +212,8 @@
     });
 
     force.on("tick", function() {
-        container.selectAll(".link").attr("x1", function(d) {
+        container.selectAll(".link")
+            .attr("x1", function(d) {
                 return d.source.x;
             })
             .attr("y1", function(d) {
@@ -169,14 +226,16 @@
                 return d.target.y;
             });
 
-        container.selectAll("circle").attr("cx", function(d) {
+        container.selectAll("circle")
+            .attr("cx", function(d) {
                 return d.x;
             })
             .attr("cy", function(d) {
                 return d.y;
             });
 
-        container.selectAll(".nodelabel").attr("x", function(d) {
+        container.selectAll(".nodelabel")
+            .attr("x", function(d) {
                 return d.x;
             })
             .attr("y", function(d) {
@@ -184,36 +243,38 @@
             });
 
         if (haveWeight) {
-            container.selectAll(".edgepath").attr('d', function(d) {
-                var path = 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y;
-                return path;
-            });
+            container.selectAll(".edgepath")
+                .attr('d', function(d) {
+                    var path = 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y;
+                    return path;
+                });
 
-            container.selectAll(".edgelabel").attr('transform', function(d, i) {
-                if (d.target.x < d.source.x) {
-                    bbox = this.getBBox();
-                    rx = bbox.x + bbox.width / 2;
-                    ry = bbox.y + bbox.height / 2;
-                    return 'rotate(180 ' + rx + ' ' + ry + ')';
-                } else {
-                    return 'rotate(0)';
-                }
-            });
+            container.selectAll(".edgelabel")
+                .attr('transform', function(d, i) {
+                    if (d.target.x < d.source.x) {
+                        bbox = this.getBBox();
+                        rx = bbox.x + bbox.width / 2;
+                        ry = bbox.y + bbox.height / 2;
+                        return 'rotate(180 ' + rx + ' ' + ry + ')';
+                    } else {
+                        return 'rotate(0)';
+                    }
+                });
         }
     });
 
     var final_node = [],
         oneProcess = true;
     force.on("end", function() {
-        console.log("end - ID: " + ID);
+        console.log("end - ID: " + ID + "\nforce.nodes: " + JSON.stringify(force.nodes()));
         var IDx = 0;
         dataset.edges.forEach(function(d, i) {
             setTimeout(function() {
-
+                if (IDx == 0) console.log("compare: " + JSON.stringify(compareJSON(dataset, dataset2)));
                 animationColor(IDx);
                 //animationCircle(IDx);
 
-                console.log("IDx: " + IDx + " | cx: " + container.select("#node" + IDx).attr("cx"));
+                /*console.log("IDx: " + IDx + " | cx: " + container.select("#node" + IDx).attr("cx"));
 
                 if (oneProcess) {
                     final_node.push({
@@ -221,13 +282,15 @@
                         "cx": container.select("#node" + IDx).attr("cx")
                     });
                     if (IDx == (ID - 1)) oneProcess = false;
-                }
+                }*/
 
+                IDx++;
+                animationColor(IDx);
                 IDx++;
 
             }, 1000 * i);
 
-            setTimeout(function() {
+            /*setTimeout(function() {
 
                 animationColor(IDx);
                 //animationCircle(IDx);
@@ -252,7 +315,7 @@
                         .remove();
                 }
 
-            }, 1000 * i);
+            }, 1000 * i);*/
         });
     });
 
@@ -310,5 +373,30 @@
                 .attr("cx", cx)
                 .attr("cy", cy);
         }
+    }
+
+    function compareJSON(j1, j2) {
+        var nodes = [];
+        if (j1.nodes.length < j2.nodes.length) {
+            var i = j1.nodes.length;
+            while (i < j2.nodes.length) {
+                nodes.push(j2.nodes[i]);
+                i++;
+            }
+        }
+
+        var edges = [];
+        if (j1.edges.length < j2.edges.length) {
+            var i = j1.edges.length;
+            while (i < j2.edges.length) {
+                edges.push(j2.edges[i]);
+                i++;
+            }
+        }
+
+        return {
+            nodes,
+            edges
+        };
     }
 </script>

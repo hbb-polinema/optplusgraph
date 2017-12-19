@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>Resize Demo</title>
+    <style media="screen">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            display: flex;
+            height: 100%;
+        }
+        
+        .infoBar {
+            /*flex: 1; prevents resize!*/
+            min-width: 200px;
+            background-color: #cfc;
+            border-style: solid;
+            border-width: 1px;
+            resize: horizontal;
+            overflow: auto;
+        }
+        
+        #canvas {
+            min-width: 200px;
+            flex: 3;
+            background-color: #cfe;
+            border-style: solid;
+            border-width: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="infoBar">
+            <ul>
+                <li>Thing1</li>
+                <li>Thing2</li>
+                <li>Thing3</li>
+            </ul>
+        </div>
+        <canvas id="canvas"></canvas>
+    </div>
+</body>
+
+</html>

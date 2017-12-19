@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="../d3.v3.min.js" charset="utf-8"></script>
+
+<body>
+    <script>
+        var initial = {
+            "nodes": [{
+                "name": 1
+            }, {
+                "name": 2
+            }],
+            "edges": [{
+                "source": 0,
+                "target": 1,
+                "weight": 11
+            }]
+        };
+
+        var initial2 = {
+            "nodes": [{
+                "name": 1
+            }, {
+                "name": 2
+            }, {
+                "name": 3
+            }],
+            "edges": [{
+                "source": 0,
+                "target": 1,
+                "weight": 11
+            }, {
+                "source": 1,
+                "target": 2,
+                "weight": 7
+            }]
+        };
+
+        var dataset = {
+            "nodes": [{
+                "name": 1
+            }, {
+                "name": 2
+            }, {
+                "name": 3
+            }, {
+                "name": 4
+            }, {
+                "name": 5
+            }, {
+                "name": 6
+            }],
+            "edges": [{
+                "source": 0,
+                "target": 1,
+                "weight": 11
+            }, {
+                "source": 1,
+                "target": 2,
+                "weight": 14
+            }, {
+                "source": 2,
+                "target": 3,
+                "weight": 13
+            }, {
+                "source": 3,
+                "target": 4,
+                "weight": 9
+            }, {
+                "source": 1,
+                "target": 5,
+                "weight": 14
+            }, {
+                "source": 2,
+                "target": 5,
+                "weight": 12
+            }]
+        };
+
+        var dataset2 = {
+            "nodes": [{
+                "name": 1
+            }, {
+                "name": 2
+            }, {
+                "name": 3
+            }, {
+                "name": 4
+            }, {
+                "name": 5
+            }, {
+                "name": 6
+            }, {
+                "name": 7
+            }, {
+                "name": 8
+            }],
+            "edges": [{
+                "source": 0,
+                "target": 1,
+                "weight": 11
+            }, {
+                "source": 1,
+                "target": 2,
+                "weight": 14
+            }, {
+                "source": 2,
+                "target": 3,
+                "weight": 13
+            }, {
+                "source": 3,
+                "target": 4,
+                "weight": 9
+            }, {
+                "source": 1,
+                "target": 5,
+                "weight": 14
+            }, {
+                "source": 2,
+                "target": 5,
+                "weight": 12
+            }, {
+                "source": 6,
+                "target": 7,
+                "weight": 7
+            }, {
+                "source": 4,
+                "target": 7,
+                "weight": 4
+            }]
+        };
+
+        var dataset3 = {
+            "nodes": [{
+                "name": 1
+            }, {
+                "name": 2
+            }, {
+                "name": 3
+            }, {
+                "name": 4
+            }, {
+                "name": 5
+            }, {
+                "name": 6
+            }, {
+                "name": 7
+            }, {
+                "name": 8
+            }],
+            "edges": [{
+                "source": 0,
+                "target": 1
+            }, {
+                "source": 1,
+                "target": 2
+            }, {
+                "source": 2,
+                "target": 3
+            }, {
+                "source": 3,
+                "target": 4
+            }, {
+                "source": 1,
+                "target": 5
+            }, {
+                "source": 2,
+                "target": 6
+            }, {
+                "source": 6,
+                "target": 7
+            }, {
+                "source": 1,
+                "target": 3
+            }]
+        };
+
+        var width = 600,
+            height = 600;
+
+        var svg = d3.select("body").append("svg")
+            .attr({
+                "width": width,
+                "height": height,
+                "id": "svg1"
+            })
+            .style("background-color", "#ecf0f1");
+
+        // SVG - 2
+        var svg2 = d3.select("body").append("svg")
+            .attr({
+                "width": width,
+                "height": height,
+                "id": "svg2"
+            })
+            .style("background-color", "#ecf0f1")
+            .style("display", "none");
+
+        var force = d3.layout.force()
+            .linkStrength(0.1)
+            .charge(-7000)
+            .linkDistance(77)
+            .friction(0.5)
+            .gravity(0.5)
+            .size([width, height]);
+
+        // force - 2
+        var force2 = d3.layout.force()
+            .nodes(initial2.nodes)
+            .links(initial2.edges)
+            .linkStrength(0.1)
+            .charge(-7000)
+            .linkDistance(77)
+            .friction(0.5)
+            .gravity(0.5)
+            .size([width, height]);
+
+        var layer1 = svg.append("g").attr("id", "layerLine");
+        var layer2 = svg.append("g").attr("id", "layerCirlce");
+        var nodes = force.nodes();
+        var links = force.links();
+        var node = layer2.selectAll(".vertex");
+        var link = layer1.selectAll(".edge");
+
+        // screen - 2
+        var nodes2 = force2.nodes();
+        var links2 = force2.links();
+        var vertex = svg2.selectAll(".vertex");
+        var edge = svg2.selectAll(".edge");
+
+        var n = 0,
+            e = 0,
+            haveWeight = false;
+
+        function add_node(d) {
+            var r = true;
+
+            function create_graph() {
+                setTimeout(function() {
+                    r = add(d);
+                    if (r) {
+                        create_graph();
+                    }
+                }, 1000);
+            }
+
+            create_graph();
+        }
+
+        function diff(data) {
+            /*
+            Fungsi ini berhasil add dan remove,
+            tapi masih ada yang belum sempurna prosesnya
+            */
+            if (nodes.length < data.nodes.length) {
+                var i = nodes.length;
+                var e = links.length;
+                if (data.edges[0].weight) haveWeight = true;
+
+                function add_datum() {
+                    setTimeout(function() {
+                        if (i < data.nodes.length) {
+                            console.log('i: ', i);
+                            nodes.push(data.nodes[i]);
+                            i++;
+                            redraw();
+                            add_datum(); // call recursive
+                        } else if (e < data.edges.length) {
+                            console.log(e, '. links: ', data.edges[e]);
+                            links.push(data.edges[e]);
+                            e++;
+                            redraw();
+                            add_datum(); // call recursive
+                        }
+                    }, 500);
+                }
+                add_datum();
+
+            } else if (nodes.length > data.nodes.length) {
+                // remove process
+                // remove node: .node_name
+                // remove link: .link_index
+                function remove_datum() {
+                    setTimeout(function() {
+                        if (nodes.length > data.nodes.length) {
+                            var n = nodes.splice((nodes.length - 1), 1);
+                            var edge = links;
+
+                            links = links.filter(function(l) {
+                                return l.source.name !== n[0].name && l.target.name !== n[0].name;
+                            });
+
+                            d3.selectAll('.node_' + n[0].name).remove();
+                            for (var i = edge.length - 1; i > links.length - 1; i--) {
+                                d3.selectAll('.link_' + i).remove();
+                            }
+                            redraw();
+                            remove_datum(); // call recursive
+                        }
+                    }, 500);
+                }
+                remove_datum();
+            }
+        }
+
+        function remove_node() {
+            if (nodes.length < 1) return;
+            var d = nodes.splice((nodes.length - 1), 1);
+
+            links = links.filter(function(l) {
+                return l.source.name !== d[0].name && l.target.name !== d[0].name;
+            });
+
+            redraw();
+        }
+
+        force.on("tick", function() {
+            layer1.selectAll("line")
+                .attr("x1", function(d) {
+                    return d.source.x;
+                })
+                .attr("y1", function(d) {
+                    return d.source.y;
+                })
+                .attr("x2", function(d) {
+                    return d.target.x;
+                })
+                .attr("y2", function(d) {
+                    return d.target.y;
+                });
+
+            layer2.selectAll("circle")
+                .attr("cx", function(d) {
+                    return d.x;
+                })
+                .attr("cy", function(d) {
+                    return d.y;
+                });
+
+            svg.selectAll(".nodelabel")
+                .attr("x", function(d) {
+                    return d.x;
+                })
+                .attr("y", function(d) {
+                    return d.y;
+                });
+
+            if (haveWeight) {
+                svg.selectAll(".edgepath")
+                    .attr('d', function(d) {
+                        var path = 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y;
+                        return path;
+                    });
+
+                svg.selectAll(".edgelabel")
+                    .attr('transform', function(d, i) {
+                        if (d.target.x < d.source.x) {
+                            bbox = this.getBBox();
+                            rx = bbox.x + bbox.width / 2;
+                            ry = bbox.y + bbox.height / 2;
+                            return 'rotate(180 ' + rx + ' ' + ry + ')';
+                        } else {
+                            return 'rotate(0)';
+                        }
+                    });
+            }
+        });
+
+        force2.on("tick", function() {
+            svg2.selectAll("line")
+                .attr("x1", function(d) {
+                    return d.source.x;
+                })
+                .attr("y1", function(d) {
+                    return d.source.y;
+                })
+                .attr("x2", function(d) {
+                    return d.target.x;
+                })
+                .attr("y2", function(d) {
+                    return d.target.y;
+                });
+
+            svg2.selectAll("circle")
+                .attr("cx", function(d) {
+                    return d.x;
+                })
+                .attr("cy", function(d) {
+                    return d.y;
+                });
+
+            svg2.selectAll(".vertexlabel")
+                .attr("x", function(d) {
+                    return d.x;
+                })
+                .attr("y", function(d) {
+                    return d.y;
+                });
+
+            if (haveWeight) {
+                svg2.selectAll(".edgepath")
+                    .attr('d', function(d) {
+                        var path = 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y;
+                        return path;
+                    });
+
+                svg2.selectAll(".edge2_label")
+                    .attr('transform', function(d, i) {
+                        if (d.target.x < d.source.x) {
+                            bbox = this.getBBox();
+                            rx = bbox.x + bbox.width / 2;
+                            ry = bbox.y + bbox.height / 2;
+                            return 'rotate(180 ' + rx + ' ' + ry + ')';
+                        } else {
+                            return 'rotate(0)';
+                        }
+                    });
+            }
+        });
+
+        function redraw() {
+            link = link.data(links);
+
+            link.enter()
+                .insert("line")
+                .attr("class", function(d, i) {
+                    return "edge link link_" + i;
+                })
+                .attr("id", function(d, i) {
+                    return "line_" + i;
+                })
+                .style("stroke", "#34495e");
+
+            if (haveWeight) {
+                link.enter()
+                    .insert('path')
+                    .attr({
+                        /* 'd': function (d) {
+                            console.log('d: ' + JSON.stringify(d));
+                            return 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y;
+                        }, */
+                        'class': function(d, i) {
+                            return 'edge edgepath link_' + i;
+                        },
+                        'id': function(d, i) {
+                            return "edgepath_" + i;
+                        }
+                    })
+                    .style("pointer-events", "none");
+
+                link.enter()
+                    .insert('text')
+                    .style("pointer-events", "none")
+                    .attr({
+                        'class': function(d, i) {
+                            return 'edge edgelabel link_' + i;
+                        },
+                        'id': function(d, i) {
+                            return "edgelabel_" + i;
+                        },
+                        'dx': 60,
+                        'dy': -5,
+                        'font-size': 12,
+                        'fill': 'black'
+                    })
+                    .insert('textPath')
+                    .attr('id', function(d, i) {
+                        return 'textpath_' + i;
+                    })
+                    .attr("class", function(d, i) {
+                        return "edge link_" + i;
+                    })
+                    .attr('xlink:href', function(d, i) {
+                        return '#edgepath_' + i;
+                    })
+                    .style("pointer-events", "none")
+                    .text(function(d) {
+                        return d.weight; // bobot nilai garis
+                    });
+            }
+
+            link.exit()
+                .remove();
+
+            node = node.data(nodes);
+
+            node.enter()
+                .insert("circle")
+                .attr("r", 15)
+                .attr("id", function(d) {
+                    return "node" + d.name;
+                })
+                .attr("class", function(d) {
+                    return "vertex node_" + d.name;
+                })
+                .attr("cursor", "pointer")
+                .style("fill", "#34495e")
+                .call(force.drag);
+
+            node.enter()
+                .insert("text")
+                .attr("class", function(d) {
+                    return "vertex nodelabel node_" + d.name;
+                })
+                .attr("id", function(d) {
+                    return "nodelabel" + d.name;
+                })
+                .attr("x", function(d) {
+                    return d.x;
+                })
+                .attr("y", function(d) {
+                    return d.y;
+                })
+                .attr("text-anchor", "middle")
+                .attr("dy", ".4em")
+                .attr("stroke", "#ecf0f1")
+                .attr("fill", "#ecf0f1")
+                .text(function(d) {
+                    return d.name;
+                });
+
+            node.exit()
+                .remove();
+
+            force.start();
+        }
+
+        function redraw2() {
+            edge = edge.data(links2);
+
+            edge.enter()
+                .insert("line")
+                .attr("class", function(d, i) {
+                    return "edge link link_" + i;
+                })
+                .attr("id", function(d, i) {
+                    return "line_" + i;
+                })
+                .style("stroke", "#34495e");
+
+            if (haveWeight) {
+                edge.enter()
+                    .insert('path')
+                    .attr({
+                        /* 'd': function (d) {
+                            console.log('d: ' + JSON.stringify(d));
+                            return 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y;
+                        }, */
+                        'class': function(d, i) {
+                            return 'edge edgepath link_' + i;
+                        },
+                        'id': function(d, i) {
+                            return "edge_path_" + i;
+                        }
+                    })
+                    .style("pointer-events", "none");
+
+                edge.enter()
+                    .insert('text')
+                    .style("pointer-events", "none")
+                    .attr({
+                        'class': function(d, i) {
+                            return 'edge edge2_label link_' + i;
+                        },
+                        'id': function(d, i) {
+                            return "edge2label_" + i;
+                        },
+                        'dx': 60,
+                        'dy': -5,
+                        'font-size': 12,
+                        'fill': 'black'
+                    })
+                    .insert('textPath')
+                    .attr('id', function(d, i) {
+                        return 'text2_path_' + i;
+                    })
+                    .attr("class", function(d, i) {
+                        return "edge link_" + i;
+                    })
+                    .attr('xlink:href', function(d, i) {
+                        return '#edge_path_' + i;
+                    })
+                    .style("pointer-events", "none")
+                    .text(function(d) {
+                        return d.weight; // bobot nilai garis
+                    });
+            }
+
+            edge.exit()
+                .remove();
+
+            vertex = vertex.data(nodes2);
+
+            vertex.enter()
+                .insert("circle")
+                .attr("r", 15)
+                .attr("id", function(d) {
+                    return "node" + d.name;
+                })
+                .attr("class", function(d) {
+                    return "vertex node_" + d.name;
+                })
+                .attr("cursor", "pointer")
+                .style("fill", "#34495e")
+                .call(force2.drag);
+
+            vertex.enter()
+                .insert("text")
+                .attr("class", function(d) {
+                    return "vertex vertexlabel node_" + d.name;
+                })
+                .attr("id", function(d) {
+                    return "vertexlabel" + d.name;
+                })
+                .attr("x", function(d) {
+                    return d.x;
+                })
+                .attr("y", function(d) {
+                    return d.y;
+                })
+                .attr("text-anchor", "middle")
+                .attr("dy", ".4em")
+                .attr("stroke", "#ecf0f1")
+                .attr("fill", "#ecf0f1")
+                .text(function(d) {
+                    return d.name;
+                });
+
+            vertex.exit()
+                .remove();
+
+            force2.start();
+        }
+
+        function add(d) {
+            var repeat = false;
+            /*
+                1. jika [indeks node] pada [source] tidak ada, maka tambahkan.
+                2. jika [indeks node] pada [target] tidak ada, maka tambahkan.
+    
+                cara lain:
+                jika BEFORE > AFTER maka remove 'node'  | yg dibandingkan
+                jika BEFORE < AFTER maka add 'node'     | 'node.length'
+    
+                loop until --> different(before, after)
+                perulangan sebanyak perbedaan data
+            */
+            if (n < d.nodes.length) {
+                if (!nodes[d.edges[e].source]) {
+                    //console.log('d.nodes: ' + JSON.stringify(d.nodes[n]));
+                    nodes.push(d.nodes[n]);
+                    n++;
+                    repeat = true;
+                }
+                if (!nodes[d.edges[e].target]) {
+                    //console.log('d.nodes: ' + JSON.stringify(d.nodes[n]));
+                    nodes.push(d.nodes[n]);
+                    n++;
+                    repeat = true;
+                }
+            }
+
+            if (e < d.edges.length) {
+                links.push(d.edges[e]);
+                if (links[e].weight) haveWeight = true;
+                e++;
+                repeat = true;
+                redraw();
+            }
+
+            return repeat;
+        }
+
+        function node_diff(data1, data2) {
+            var a1 = [],
+                a2 = [];
+
+            data1.forEach(function(e, i) {
+                a1.push(e.name);
+            });
+
+            data2.forEach(function(e, i) {
+                a2.push(e.name);
+            });
+
+            var a = [],
+                diff = [];
+
+            for (var i = 0; i < a1.length; i++) {
+                a[a1[i]] = true;
+            }
+
+            for (var i = 0; i < a2.length; i++) {
+                if (a[a2[i]]) {
+                    delete a[a2[i]];
+                } else {
+                    a[a2[i]] = true;
+                }
+            }
+
+            console.log('a: ', a);
+
+            for (var k in a) {
+                diff.push({
+                    "name": k
+                });
+            }
+
+            return diff;
+        };
+
+        /*
+         * Auto resize window, but how do auto resize element <div> ?
+         */
+        function resize() {
+            width = window.innerWidth, height = window.innerHeight;
+            svg.attr("width", width).attr("height", height);
+            force.size([width, height]).resume();
+        }
+        //resize();
+        //d3.select(window).on("resize", resize);
+
+        /*
+        Ide:
+        1. Buat 2 layer berbeda ID
+        2. main hidden dan display
+        3. saat muncul, tandai node yang baru ditambahkan dengan animasi warna
+        4. bagaimana jk stepback? apa hrs ada 3 layer? before -- now -- after
+        */
+        function display(toggle) {
+            if (toggle) {
+                svg.style('display', 'none');
+                svg2.style('display', 'block');
+            } else {
+                svg.style('display', 'block');
+                svg2.style('display', 'none');
+            }
+        }
+
+        /* function edge_diff(edge1, edge2) {
+            var e = [];
+            /*
+            jika edge1.source[0] !== edge2.source[0]; --> apa yg akan dilakukan?
+            jika edge1.target[0] !== edge2.target[0]; --> apa yg akan dilakukan?
+            
+            if (edge1.length < edge2.length) {
+
+                edge1.forEach(function (d, i) { // tdk mungkin akan diproses, krn perubahan data hanya penambahan dan pengurangan
+                    if (d.source !== edge2[i].source) {
+                        console.log(d.source + ' - ' + edge2[i].source);
+                    }
+                    if (d.target !== edge2[i].target) {
+                        console.log(d.target + ' - ' + edge2[i].target);
+                    }
+                });
+
+                for (var i = edge1.length; i < edge2.length; i++) {
+                    console.log(i + ' sisa-source: ' + edge2[i].source);
+                    console.log(i + ' sisa-target: ' + edge2[i].target);
+                    e.push(edge2[i]);
+                }
+                console.log('e: ', e);
+
+            } else if (edge1.length > edge2.length) {
+                //
+            }
+        } */
+    </script>
+
+    <button onclick="add_node(dataset)">Add Dataset</button>
+    <button onclick="diff(initial)">Diff Initial</button>
+    <button onclick="diff(dataset)">Diff Dataset</button>
+    <button onclick="remove_node()">Remove</button>
+    <button onclick="display(true)">Display(true)</button>
+    <button onclick="display(false)">Display(false)</button>
+</body>
