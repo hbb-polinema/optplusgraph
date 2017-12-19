@@ -1,19 +1,13 @@
-/***********************************************************
-* Eksperimen Algoritma Dijsktra
-* 
-* http://www.c-program-example.com/2011/10/c-program-to-solve-dijkstras-algorithm.html
-***********************************************************/
+/*
+* Dijsktra (undirected weight graph)
+**/
 
 #include<stdio.h>
 #include<time.h>
 #define infinity 999
 
-int RandomNumberGenerator(const int nMin,const int nMax,const int  nNumOfNumsToGenerate){
-    int nRandonNumber = 0;    
-    for (int i = 0; i < nNumOfNumsToGenerate; i++){
-        nRandonNumber = rand()%(nMax-nMin) + nMin;
-    }
-    return nRandonNumber;
+int RandomNumberGenerator(const int nMin,const int nMax){
+    return rand()%(nMax-nMin) + nMin;
 }
 
 void dij(int n, int v, int cost[10][10], int dist[])
@@ -42,22 +36,25 @@ void dij(int n, int v, int cost[10][10], int dist[])
 int main()
 {
     srand(time(NULL));
-    int n, v, i, j, cost[10][10], dist[10];
+    int n, v, i, j, cost[10][10] = {0}, dist[10] = {0};
     
     n = 7;
     printf("\nthe number of nodes: %d \n", n);
     
-    printf("\nEnter the cost matrix:\n");
+    printf("\nthe cost matrix:\n");
     for (i = 1; i <= n; i++)
-        for (j = 1; j <= n; j++)
+        for (j = 1 + i; j <= n; j++)
         {
-            cost[i][j] = RandomNumberGenerator(1,37,1);
-            if (cost[i][j] == 0)
+            cost[i][j] = RandomNumberGenerator(0,17);
+            if (cost[i][j] == 0){
                 cost[i][j] = infinity;
+                cost[j][i] = infinity;
+            } else
+                cost[j][i] = cost[i][j];
             printf("cost[%d][%d]: %d\n",i,j,cost[i][j]);
         }
     
-    v = RandomNumberGenerator(1,7,1);
+    v = RandomNumberGenerator(1,7);
     printf("\nthe source matrix: %d \n", v);
     
     dij(n, v, cost, dist);

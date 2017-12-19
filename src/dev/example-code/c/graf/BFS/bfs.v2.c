@@ -31,11 +31,11 @@ int main()
 }
 
 int RandomNumberGenerator(const int nMin,const int nMax,const int  nNumOfNumsToGenerate){
-    int nRandonNumber = 0;    
+    int nRandomNumber = 0;    
     for (int i = 0; i < nNumOfNumsToGenerate; i++){
-        nRandonNumber = rand()%(nMax-nMin) + nMin;
+        nRandomNumber = rand()%(nMax-nMin) + nMin;
     }
-    return nRandonNumber;
+    return nRandomNumber;
 }
  
 void BF_Traversal()
@@ -115,28 +115,28 @@ void create_graph()
 {
     int count,max_edge,origin,destin,limit=0;
      
-    n = 8;
+    n = MAX;
     max_edge = n*(n-1);
     printf("Number of vertices : %d\n",n);
  
     for(count=1; count<=max_edge; count++)
     {
         printf("Edge %d : ",count);
-        origin = RandomNumberGenerator(1,7,1);
-        destin = RandomNumberGenerator(1,7,1);
+        origin = RandomNumberGenerator(1,MAX,1);
+        destin = RandomNumberGenerator(1,MAX,1);
         printf("%d - %d \n",origin,destin);
  
         if(limit == n)
             break;
  
-        if(origin>=n || destin>=n)
+        if(origin>=n || destin>=n || origin == destin)
         {
             printf("Invalid edge!\n");
             count--;
         }
         else
         {
-            adj[origin][destin] = 1;
+            adj[origin][destin] = adj[destin][origin] = 1;
             limit++;
         }
     }
