@@ -91,3 +91,71 @@ Referensi yang disarankan oleh Bu Inge berdasarkan author
 
 https://id.wikihow.com/Menulis-Paragraf
 http://romisatriawahono.net/2012/06/18/kiat-menyusun-alur-latar-belakang-masalah-penelitian/
+
+Matriks - Berbobot - tak berarah
+cirinya:
+- alamat [baris, kolom] = alamat [kolom, baris]
+- nilai > 0
+
+Matriks - Berbobot - berarah
+cirinya:
+- alamat [baris, kolom] != alamat [kolom, baris]
+- nilai > 0
+
+Matriks - tak berbobot - tak berarah
+cirinya:
+- alamat [baris, kolom] = alamat [kolom, baris]
+- nilai = 1 ada edge, nilai = 0 tidak ada edge
+
+Matriks - tak berbobot - berarah
+cirinya:
+- alamat [baris, kolom] != alamat [kolom, baris]
+- nilai = 1 ada edge, nilai = 0 tidak ada edge
+
+*note: informasikan kepada pengguna nilai yang digunakan utk tak berbobot hanya 1 atau 0
+*jika ditemukan lebih dari 1 matriks, maka tdk ada visualisasi (karena belum mendukung utk tampilkan graf lebih dari 1)
+
+
+Pointer - Berbobot - tak berarah
+
+Pointer - Berbobot - berarah
+
+Pointer - tak berbobot - tak berarah
+
+Pointer - tak berbobot - berarah
+
+2 jenis dijkstra:
+Dijkstra - berbobot - berarah
+Dijkstra - berbobot - tak-berarah
+
+--> Bagaimana cara animasikan node variabel yang sedang diakses ?
+
+https://www2.cs.arizona.edu/icon/progvis/lectures/intro.htm --> VP
+
+Sifat graf: http://web.cecs.pdx.edu/~sheard/course/Cs163/Doc/Graphs.html
+
+Eksplorasi kakas VP:
++ Jype - p
++ Vismod - p157
++ jGrasp - p169
++ JAVAVIS, Seppala's tool, OOP Anim, Javamod, Jive 
+
+
++ Coding, temukan cara animasi variabel
++ tulis draft paper
++ cari conference/publikasi
++ cari responden email students
+
++ http://computize.org
++ http://www.famo.us
++ http://handlebarsjs.com
++ http://gato.sourceforge.net
++ http://ftsrg.github.io/seviz
++ http://www.yumpu.com
++ http://www.icsharpcode.net/opensource/sd/
++ https://library.ppu.edu/en/freeresource/libgen-e-books
++ Struktur Data: https://knowshares.wordpress.com/2016/12/14/linear-vs-non-linear-datastructure/
+
+118.97.252.102:8080
+/var/lib/tomcat8/webapps/
+
