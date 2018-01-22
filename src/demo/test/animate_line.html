@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="../d3.v3.min.js" charset="utf-8"></script>
+<style>
+    svg {
+        outline: 1px solid blue;
+    }
+    
+    line {
+        stroke: red;
+        stroke-width: 5;
+        stroke-linecap: round;
+    }
+</style>
+<svg id="svg" height="425" width="425"></svg>
+
+<script>
+    var svg = d3.select(document.getElementById('svg'));
+
+    svg.append('line')
+        .attr({
+            x1: 25,
+            y1: 15,
+            x2: 25,
+            y2: 15
+        })
+        .transition()
+        .duration(1500)
+        .attr({
+            x2: 400,
+            y2: 150
+        });
+</script>

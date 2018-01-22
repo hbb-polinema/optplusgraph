@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="../d3.v3.min.js" charset="utf-8"></script>
+<style>
+    body {
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 11px;
+    }
+    
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #bcbcbc;
+        font-color: #474747;
+        shape-rendering: crispEdges;
+    }
+</style>
+
+<body>
+</body>
+<script>
+    var w = window.innerWidth,
+        h = window.innerHeight,
+        margin = {
+            top: 40,
+            right: 20,
+            bottom: 40,
+            left: 40
+        };
+
+    svg = d3.select("body")
+        .append("svg")
+        .attr({
+            width: w - 10,
+            height: h - 10
+        });
+
+    var parse = d3.time.format("%Y").parse;
+
+    var data = [{
+        year: "2008",
+        number: 3
+    }, {
+        year: "2009",
+        number: 10
+    }, {
+        year: "2010",
+        number: 17
+    }, {
+        year: "2011",
+        number: 23
+    }, {
+        year: "2012",
+        number: 34
+    }, {
+        year: "2013",
+        number: 50
+    }];
+
+    for (var i = 0; i < data.length; i++) {
+        var d = data[i];
+        d.year = parse(d.year);
+    };
+
+
+    var yearScale = d3.time.scale()
+        .domain(d3.extent(data, function(d) {
+            return d.year;
+        }))
+        .range([50, window.innerWidth - 50]);
+
+    var numberScale = d3.scale.linear()
+        .domain([0, d3.max(data, function(d) {
+            return d.number;
+        })])
+        .range([50, window.innerHeight - 50]);
+
+    var yearAxis = d3.svg.axis().scale(yearScale)
+        .tickSize(100 - window.innerHeight)
+        .orient("bottom");
+
+    svg.append("g")
+        .attr({
+            "class": "axis",
+            "transform": "translate(" + [0, window.innerHeight - 50] + ")"
+        }).call(yearAxis);
+
+    svg.append("line")
+        .attr({
+            x1: 50,
+            y1: 50,
+            x2: window.innerWidth - 50,
+            y2: 50,
+            fill: "none",
+            stroke: "#bcbcbc"
+        });
+
+    var line = d3.svg.line()
+        .x(function(d) {
+            return yearScale(d.year);
+        })
+        .y(function(d) {
+            return window.innerHeight - numberScale(d.number)
+        });
+
+    var path = svg.append("path")
+        .data([data])
+        .attr({
+            d: line,
+            fill: "none",
+            stroke: "#2980b9",
+            "stroke-width": 2
+        });
+
+    // animate path
+    var totalLength = path.node().getTotalLength();
+
+    var duration = 3333;
+
+    var segments = [0];
+    for (var i = 1; i < data.length; i++) {
+        var tmp = svg.append("path")
+            .datum([data[i - 1], data[i]])
+            .attr("d", line);
+        segments.push(segments[i - 1] + tmp.node().getTotalLength());
+        tmp.remove();
+    }
+
+    path
+        .attr("stroke-dasharray", totalLength + " " + totalLength)
+        .attr("stroke-dashoffset", totalLength)
+        .transition()
+        .duration(duration)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0);
+
+
+    var circles = svg.selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("fill", "blue");
+
+    circles
+        .transition()
+        .delay(function(d, i) {
+            return segments[i] * duration / totalLength;
+        })
+        .ease("linear")
+        .attr({
+            cx: function(d) {
+                return yearScale(d.year);
+            },
+            cy: function(d) {
+                return window.innerHeight - numberScale(d.number)
+            },
+            r: 4,
+            fill: "blue",
+            // /stroke: "#78B446",
+            "stroke-width": 4
+        });
+</script>

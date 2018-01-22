@@ -8,7 +8,7 @@
     <!--script src="d3.v2.min.js"></script-->
     <script src="../d3.v3.min.js" charset="utf-8"></script>
     <style>
-        circle {
+        /*circle {
             fill: orange;
             stroke: orange;
         }
@@ -16,7 +16,7 @@
         line {
             stroke: #000;
             pointer-events: none;
-        }
+        }*/
     </style>
 </head>
 
@@ -124,9 +124,9 @@
             .links(dataset.edges)
             .size([w, h])
             .linkDistance([linkDistance])
-            .charge([-500])
-            .theta(0.1)
-            .gravity(0.05)
+            //.charge([-500])
+            //.theta(0.1)
+            //.gravity(0.05)
             .start();
 
         var edges = svg.append("g").attr("id", "gline")
@@ -136,7 +136,8 @@
             .append("line")
             .attr("id", function(d, i) {
                 return 'edge' + i
-            });
+            })
+            .style("stroke","#000");
 
         var nodes = svg.append("g").attr("id", "gcircle")
             .selectAll("circle")
