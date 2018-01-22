@@ -377,8 +377,18 @@ export var cExamplesHtml = `<p style="margin-top: 25px; font-weight: bold;">C Ex
   <a class="exampleLink" id="cBFSv1" href="#">BFS v1</a> |
   <a class="exampleLink" id="cBFSv2" href="#">BFS v2</a> |
   <a class="exampleLink" id="cBFSv3" href="#">BFS v3</a> |
-  <a class="exampleLink" id="cDijkstra" href="#">Dijkstra (weight-undirected)</a>
-  <a class="exampleLink" id="cDijkstra" href="#">Dijkstra (weight-directed)</a>  
+  <a class="exampleLink" id="cDijkstra" href="#">Dijkstra (weighted-undirected)</a> |
+  <a class="exampleLink" id="cDijkstra2" href="#">Dijkstra Instant Value (weighted-undirected)</a>
+</p>
+<p>
+  <i>Matrix Global Variable: </i>
+  <a class="exampleLink" id="matrix01G" href="#">Matrix-01 (unweighted-undirected)</a> |
+  <a class="exampleLink" id="matrix02G" href="#">Matrix-02 (weighted-undirected)</a>
+</p>
+<p>
+  <i>Matrix Local Variable: </i>
+  <a class="exampleLink" id="matrix01L" href="#">Matrix-01 (unweighted-undirected)</a> |
+  <a class="exampleLink" id="matrix02L" href="#">Matrix-02 (weighted-undirected)</a>
 </p>`;
 
 export var C_EXAMPLES = {
@@ -397,7 +407,12 @@ export var C_EXAMPLES = {
   cBFSv1: 'graf/BFS/bfs.v1.c',
   cBFSv2: 'graf/BFS/bfs.v2.c',
   cBFSv3: 'graf/BFS/bfs.v3.c',
-  cDijkstra: 'graf/Dijkstra/dijkstra.c'
+  cDijkstra: 'graf/Dijkstra/dijkstra.c',
+  cDijkstra2: 'graf/Dijkstra/dijkstra_instant_data.c',
+  matrix01G: 'graf/matrix01G.c',
+  matrix02G: 'graf/matrix02G.c',
+  matrix01L: 'graf/matrix01L.c',
+  matrix02L: 'graf/matrix02L.c',
 };
 
 
