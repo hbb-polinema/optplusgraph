@@ -10,6 +10,7 @@ import { SVG_ARROW_POLYGON } from '../view/polygons';
 import { SVG_ARROW_HEIGHT } from '../view/sizes';
 import { HTMLspecialChars } from '../utilities/functions';
 import { Assert } from '../utilities/debugger';
+import { KEY } from './GraphViz';
 
 export class CodeDisplay implements ICodeDisplay {
     owner: ExecutionVisualizer;
@@ -17,6 +18,7 @@ export class CodeDisplay implements ICodeDisplay {
     domRootD3: any;
 
     codToDisplay: string;
+    lineCode: any;
 
     leftGutterSvgInitialized: boolean = false;
     arrowOffsetY: number;
@@ -47,8 +49,8 @@ export class CodeDisplay implements ICodeDisplay {
         }
 
         this.domRoot.find('#legendDiv')
-            .append('<svg id="prevLegendArrowSVG"/> line that has just executed')
-            .append('<p style="margin-top: 4px"><svg id="curLegendArrowSVG"/> next line to execute</p>');
+            .append('<svg id="prevLegendArrowSVG"/> <span style="background-color:#F0F0EA;"> line that has just executed  </span>')
+            .append('<p style="margin-top: 4px"><svg id="curLegendArrowSVG"/> <span style="background-color:#FFFF66;"> next line to execute </span></p>');
         this.domRootD3.select('svg#prevLegendArrowSVG')
             .append('polygon')
             .attr('points', SVG_ARROW_POLYGON)
@@ -163,6 +165,7 @@ export class CodeDisplay implements ICodeDisplay {
                 }
             });
         //console.log("text-code: " + JSON.stringify(code));
+        this.lineCode = code;
         // create a left-most gutter td that spans ALL rows ...
         // (NB: valign="top" is CRUCIAL for this to work in IE)
         this.domRoot.find('#pyCodeOutput tr:first')
@@ -282,6 +285,7 @@ export class CodeDisplay implements ICodeDisplay {
         this.domRootD3.selectAll('#pyCodeOutputDiv td.cod').style('background-color', 'transparent');
 
         if (myViz.prevLineNumber) {
+            this.animateGraphBasedOnLineCode(this.lineCode[myViz.prevLineNumber - 1].line[1]); // @habibieeddien
             let pla = this.domRootD3.select('#prevLineArrow');
             let translatePrevCmd = 'translate(0, ' + (((myViz.prevLineNumber - 1) * this.codeRowHeight) + this.arrowOffsetY + prevVerticalNudge) + ')';
 
@@ -381,7 +385,65 @@ export class CodeDisplay implements ICodeDisplay {
         // smoothly scroll code display
         if (!isOutputLineVisible(curEntry.line)) {
             scrollCodeOutputToLine(curEntry.line);
+        }        
+    }
+
+    animateGraphBasedOnLineCode(code: string): void {
+        /**
+         * Eksperimen operasi animasi antar node & edge (start: Jumat, 12Jan18)
+         * 1. cek var matrix dlu
+         * 2. kemudian pointer & relasinya
+         */        
+        //KEY.line = line;
+        let regex = new RegExp(KEY.keyname, "g");
+        let searchKey = code.match(regex);
+        let searchPrintf = code.match(/printf/g);
+
+        if (searchKey !== null && searchPrintf === null) {          
+            if (searchKey.length === 1) { // make sure only one key access
+                let term = KEY.keyname + '[';
+                let row = code.indexOf(term);
+                let x = code[row + term.length]; // get varname for 1 char length after 'matrix['. TODO: how if var more than 1 char
+                //console.log('row: ', x, '\nTERM: ', term, '\nterm.length: ', term.length);
+
+                if (x.match(/[0-9]/g) === null) { // be sure var is not number
+                    KEY.source_var = x;
+                }
+
+                term = term + x + ']['; console.log('term: ', term);
+                let col = code.indexOf(term);
+                let y = code[col + term.length];
+                //console.log('col: ', y, '\nTERM: ', term, '\nterm.length: ', term.length);
+
+                if (y.match(/[0-9]/g) === null) { // be sure var not number
+                    KEY.target_var = y;
+                }
+            }
         }
     }
 
 }
+
+/**
+ * ========pseudocode to animate node=========
+ * key = get varname matrix (key) --ok
+ * if key is exist in line_code && key only one: --ok
+ *      if "printf" is NOT found in line_code: --ok
+ *          search source(row) & target(col) varname; --ok
+ *          search value source & target; --ok
+ *          if value (source !== target): --ok
+ *              if hasRender (source & target): --ok
+ *                  select node source & animate; --ok
+ *                  select edge & animate; --> ?? // TODO: bgmn tau line yg sdg dipilih antr node src & trg ?
+ *                  select node target & animate; --ok
+ * 
+ * ---TODO: if var have more one char---
+ * search key
+ * regex = search regex 'key'+'['
+ * res = search char after regex
+ * while (r !== ']'):
+ *      r = search char ']'
+ *      res = res + r;
+ *  
+ * return ['varname']
+ */

@@ -59,8 +59,8 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
     /*  these settings are all customized for my own server setup,
         so you will need to customize for your server: */
     serverRoot = (window.location.protocol === 'https:') ?
-        'https://codeviz.tk:5001/' : // my certificate for https is registered via cokapi.com, so use it for now
-        'http://codeviz.tk:5001/'; // try cokapi.com so that hopefully it works through firewalls better than directly using IP addr
+        'https://localhost:5001/' : // my certificate for https is registered via cokapi.com, so use it for now
+        'http://localhost:5001/'; // try cokapi.com so that hopefully it works through firewalls better than directly using IP addr
 
     // see ../../v4-cokapi/cokapi.js for details
     langSettingToJsonpEndpoint = {
@@ -395,6 +395,6 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
         var survey_v11 = `<p style="font-size: 10pt; margin-top: 12px; margin-bottom: 15px; line-height: 150%;">
                         <span><span style="color: #e93f34;">Support our research and practice Python</span>
                         by trying our new <a target="_blank" href="http://www.labinthewild.org/studies/python_tutor/">debugging skill test</a>!`;
-        $('#surveyPane').html(survey_v11);
+        //$('#surveyPane').html(survey_v11); temporary disable (habibieeddien), use later for survey
     }
 }

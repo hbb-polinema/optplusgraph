@@ -5,6 +5,11 @@
 require('../../lib/jquery-3.0.0.min.js');
 require('../../lib/d3.v3.min.js');
 
+/**
+ * KEY = { keyname: "", source_var:"", target_var:"", source:"", target:"" }
+ */
+export var KEY: any = {};
+
 const enum GRAPH {
     /**
      * Matrix Global:
@@ -26,14 +31,15 @@ const enum GRAPH {
     None,
     MatrixGlobal,
     MatrixLocal,
-    PointerGlobal
+    PointerGlobal,
+    PointerLocal
 };
 
 export class GraphViz {
     divTab: any;
     dTrace: any;
-    SVG: any; FORCE: any; LAYER1: any; LAYER2: any;
-    NODES: any; LINKS: any; CIRCLE: any; LINE: any;
+    SVG: any = null; FORCE: any; LAYER1: any; LAYER2: any;
+    NODES: any; LINKS: any; CIRCLE: any; LINE: any; ANIMATELAYER: any;
     initialRender: boolean = false;
     indexNode: number; indexEdge: number;
     isCPP: boolean = false; // C or C++ mode
@@ -50,10 +56,11 @@ export class GraphViz {
      *           }]
      * }
      */
-    dataGraph: any = {};
+    dataGraph: any = {}; EDGES: any = [];
     temp_step: any = [];
     dataChangedOnStep: number;
     VIZ: GRAPH = GRAPH.None;
+    G: any = { "directed": null, "instantValue": null };
 
     readonly width: number = 444;
     readonly height: number = 444;
@@ -78,6 +85,7 @@ export class GraphViz {
         if (this.VIZ == GRAPH.None) this.model01_MatrixGlobal();     // Model-01: MatrixGlobal
         if (this.VIZ == GRAPH.None) this.model02_MatrixLocal();      // Model-02: MatrixLocal
         if (this.VIZ == GRAPH.None) this.model03_PointerGlobal();    // Model-03: PointerGlobal
+        if (this.VIZ == GRAPH.None) this.model04_PointerLocal();     // Model-04: PointerLocal
 
         this.temp_step[0] = 0;
         this.temp_step[1] = 0;
@@ -87,7 +95,9 @@ export class GraphViz {
     model01_MatrixGlobal(): void { // Model-01: matrix variable on global --> always available in first step
         // TODO: check other var for support this model process
         let C_MUL_AR_isFound = false, isDifferent = false;
-        let MATRIX: any;
+        let MATRIX: any; // for compare matrix before and after step
+        let instantValue = false;
+        let G = this.G;
 
         function get_matrix(data: any, step: number) {
             let DATA_GRAPH: any = {};
@@ -97,36 +107,82 @@ export class GraphViz {
                     C_MUL_AR_isFound = true;
                     let [row, col] = (String(val[2])).split(',');
                     let size = (Number([row]) * Number([col])) + 2; // get dimension of matrix
-                    let index = 0, temp = [];
-                    for (let i = 3; i <= size; i++) {
+                    let index = 0, temp = [], weighted = false;
+
+                    for (let i = 3; i <= size; i++) { // i = 3, in attribut JSON begin value
                         if (val[i][0] === 'C_DATA' && val[i][2] === 'int') {
+                            if (val[i][3] !== 0) instantValue = true;
+                            if (val[i][3] > 1) weighted = true; // TODO: is it right?? how if directed-weighted?
                             temp[index] = val[i][3]; // temp value
                             index++;
                         } else {
-                            console.log('something not int');
+                            console.log('something not int'); // is it possible?
                             break;
                         }
                     }
 
                     index = 0;
-                    let value: any = [];
+                    let value = [];
                     let row_length = Number([row]);
                     let col_length = Number([col]);
-                    for (let row = 0; row < row_length; row++) {
-                        value[row] = [];
-                        for (let col = 0; col < col_length; col++) {
-                            value[row][col] = temp[index];
-                            index++;
-                        }
-                    }
 
-                    MATRIX = value;
+                    // for matrix instant initial value
+                    if (instantValue) {
+                        // ambil data graf, keluar dari each
+                        G.instantValue = true;
+                        let nodes = [], edges = [], duplicate = false;
+                        for (let row = 0; row < row_length; row++) {
+                            for (let col = 0; col < col_length; col++) {
+                                if (row == col) { // source == target. So, it shouldn't same!
+                                    index++;
+                                    continue; // ignore and continue loop
+                                }
+
+                                duplicate = edges.some(function (e) { return e.source === col && e.target === row; }); // duplicate edge or not
+                                if (weighted && temp[index] > 1) {
+                                    if (!duplicate) {
+                                        edges.push({ "source": row /*origin node*/, "target": col /*destination node*/, "weight": temp[index] });
+                                        nodes.push(row, col);
+                                    }
+                                } else if (!weighted && temp[index] == 1) {
+                                    if (!duplicate) {
+                                        edges.push({ "source": row /*origin node*/, "target": col /*destination node*/ });
+                                        nodes.push(row, col);
+                                    }
+                                }
+                                index++;
+                            }
+                        }
+
+                        let get_unique_node = nodes.filter(function (item, i, ar) { return ar.indexOf(item) === i; });
+                        nodes = [];
+                        get_unique_node.forEach(e => { nodes.push({ "name": e }); });
+
+                        for (let i = 0; i < edges.length; i++) { // change `value edge` based on position `nodes.name`
+                            let position = get_unique_node.indexOf(edges[i].source);
+                            edges[i].source = position;
+                            position = get_unique_node.indexOf(edges[i].target);
+                            edges[i].target = position;
+                        }
+
+                        DATA_GRAPH = { nodes, edges };
+                        return false; // break out $.each
+                    } else {
+                        G.instantValue = false;
+                        for (let row = 0; row < row_length; row++) {
+                            value[row] = [];
+                            for (let col = 0; col < col_length; col++) {
+                                value[row][col] = temp[index];
+                                index++;
+                            }
+                        }
+                        MATRIX = value;
+                    }
 
                 } else if (val[0] === 'C_MULTIDIMENSIONAL_ARRAY' && step == 0) { // if exist one more matrix
 
                     C_MUL_AR_isFound = false;
                     console.log('Matrix is found twice!'); // not match this model
-                    // TODO: return false for this model
 
                 } else if (val[0] === 'C_MULTIDIMENSIONAL_ARRAY' && step > 0) { // compare data in second step
 
@@ -194,7 +250,10 @@ export class GraphViz {
 
             if (i == 0) {
                 this.dataGraph.step[0] = 0;
-                this.dataGraph.values[0] = MATRIX;
+                if (instantValue) {
+                    this.dataGraph.values[0] = DATA;
+                    break; // out loop for
+                } else this.dataGraph.values[0] = MATRIX;
                 index++;
             } else {
                 if (isDifferent) {
@@ -213,22 +272,22 @@ export class GraphViz {
     }
 
     model02_MatrixLocal(): void { // Model-02: matrix variable on local
-        // TODO: check local var on main func if on global not found
         let C_MUL_AR_isFound = false, isDifferent = false;
-        let MATRIX: any;
+        let MATRIX: any, Last = this.dTrace.length - 1, EDGES;
 
         function get_matrix(data: any, step: number) {
             let DATA_GRAPH: any = {};
             $.each(data, function (key, val) {
-                if (val[0] === 'C_MULTIDIMENSIONAL_ARRAY' && step == 0 && !C_MUL_AR_isFound) {
+                if (val[0] === 'C_MULTIDIMENSIONAL_ARRAY' && step == 0 && !C_MUL_AR_isFound) { // TODO: here value always zero, why?
 
-                    C_MUL_AR_isFound = true;
+                    C_MUL_AR_isFound = true; console.log('keyname ==> ' + key); KEY.keyname = key;
                     let [row, col] = (String(val[2])).split(',');
                     let size = (Number([row]) * Number([col])) + 2; // get dimension of matrix
                     let index = 0, temp = [];
+
                     for (let i = 3; i <= size; i++) {
                         if (val[i][0] === 'C_DATA' && val[i][2] === 'int') {
-                            if (typeof val[i][3] === 'number')
+                            if (typeof val[i][3] === 'number') // because some value is undefined
                                 temp[index] = val[i][3]; // temp value
                             else
                                 temp[index] = 0;
@@ -250,14 +309,12 @@ export class GraphViz {
                             index++;
                         }
                     }
-
                     MATRIX = value;
 
                 } else if (val[0] === 'C_MULTIDIMENSIONAL_ARRAY' && step == 0) {
 
                     C_MUL_AR_isFound = false;
                     console.log('Matrix is found twice!'); // not match this model
-                    // TODO: return false for this model
 
                 } else if (val[0] === 'C_MULTIDIMENSIONAL_ARRAY' && step > 0) {
 
@@ -277,6 +334,14 @@ export class GraphViz {
                         }
                     }
 
+                    let weighted = false;
+                    let isWeighted = temp.filter(function (item, i, ar) { return ar.indexOf(item) === i; });
+                    if (isWeighted.length == 2) {
+                        isWeighted[1] > 1 ? weighted = true : weighted = false;
+                    } else if (isWeighted.length > 2) {
+                        weighted = true;
+                    }
+
                     index = 0;
                     let value = [], edges = [], nodes = [];
                     let row_length = Number([row]);
@@ -289,19 +354,23 @@ export class GraphViz {
                                 isDifferent = true;
                                 if (temp[index] > 0 && temp[index] < 999) {
                                     if (check_edges(edges, row, col)) {
-                                        edges.push({ "source": row, "target": col, "weight": temp[index] });
+                                        if (weighted) edges.push({ "source": row, "target": col, "weight": temp[index] });
+                                        else edges.push({ "source": row, "target": col });
                                         nodes.push(row, col);
                                     }
                                 }
                             } else if (temp[index] > 0 && temp[index] < 999 && row != col) {
                                 if (check_edges(edges, row, col)) {
-                                    edges.push({ "source": row, "target": col, "weight": temp[index] });
+                                    if (weighted) edges.push({ "source": row, "target": col, "weight": temp[index] });
+                                    else edges.push({ "source": row, "target": col });
                                     nodes.push(row, col);
                                 }
                             }
                             index++;
                         }
                     }
+
+                    if (step === Last) EDGES = edges; // use for animate
 
                     if (isDifferent) { // there is different value on every step
                         let get_unique_node = nodes.filter(function (item, i, ar) { return ar.indexOf(item) === i; });
@@ -336,7 +405,7 @@ export class GraphViz {
          * There is 2 function needed: get_matrix, check_edges
          */
         for (let i = 0; i < this.dTrace.length; i++) {
-            DATA = get_matrix(this.dTrace[i].stack_to_render[0].encoded_locals, i);
+            DATA = get_matrix(this.dTrace[i].stack_to_render[0].encoded_locals, i); // local var
             if (!C_MUL_AR_isFound) break; // if exist one more matrix in first step, ignore it and exit
 
             if (i == 0) {
@@ -356,6 +425,7 @@ export class GraphViz {
         if (C_MUL_AR_isFound) { // if match this model
             console.log('GRAPH.MatrixLocal');
             this.VIZ = GRAPH.MatrixLocal;
+            this.EDGES = EDGES;
         }
     }
 
@@ -377,7 +447,7 @@ export class GraphViz {
             if (edges_temp.length > 1) {
                 edges_temp.forEach(e => {
                     if (e.next[3] !== '0x0' && e.next[3] !== '<UNINITIALIZED>') { // filter unknown address memory
-                        for (var i = 0; i < edges_temp.length; i++) {
+                        for (let i = 0; i < edges_temp.length; i++) {
                             if (e.next[3] === edges_temp[i].vertex[1]) {
                                 if (e.vertex[3] !== edges_temp[i].vertex[3]) {
                                     G.push({ "source": e.vertex[3], "target": edges_temp[i].vertex[3] });
@@ -448,11 +518,7 @@ export class GraphViz {
         }
     }
 
-    model04(): void { // Model-04: matrix variable on global --> contain: weight, graph-undirected
-        //
-    }
-
-    model05(): void { // Model-04: matrix variable on global --> contain: weight, graph-directed
+    model04_PointerLocal(): void { // Model-04: pointer local variable
         //
     }
 
@@ -460,20 +526,20 @@ export class GraphViz {
         if (!this.isCPP) // make sure in C/C++ mode
             return;
 
+        this.animate(curStep);
+
         let diff = false;
-        if (this.dataChangedOnStep === 0) {
+        if (this.dataChangedOnStep === 0) { // The First Step
             this.dataChangedOnStep++;
-        } else if (this.dataChangedOnStep === 1) {
-            this.temp_step[1] = this.set_data(this.dataGraph, curStep);//curStep;
+        } else if (this.dataChangedOnStep === 1) { // The Next Step, wherever jump or not
+            this.temp_step[1] = this.set_data(this.dataGraph, curStep);
             this.dataChangedOnStep++;
-        } else if (this.dataChangedOnStep > 1) {
+        } else if (this.dataChangedOnStep > 1) { // The Next Step and so on
             this.temp_step[0] = this.temp_step[1];
-            this.temp_step[1] = this.set_data(this.dataGraph, curStep);//curStep;
-            diff = this.diff_data(this.temp_step[0], this.temp_step[1]);
-            if (diff) this.equalDrawed = false;
+            this.temp_step[1] = this.set_data(this.dataGraph, curStep);
+            diff = this.diff_data(this.temp_step[0], this.temp_step[1]); // compare data before step and after
+            if (diff) this.equalDrawed = false; // if data different, draw it
         }
-        //console.log(`======step terakhir========\n${JSON.stringify(this.temp_step[0])}\n
-        //=======step sekarang========\n${JSON.stringify(this.temp_step[1])}`);
 
         let data = null;
         switch (this.VIZ) {
@@ -528,26 +594,31 @@ export class GraphViz {
     }
 
     compute_trace_data(curStep: number): void { // for development
-        let mycanvas = this.divTab; // initial to access nested in func
+        //let mycanvas = this.divTab; // initial to access nested in func
 
         function parse(data_json: any) {
             $.each(data_json, function (key, val) {
                 if (typeof val === 'object') {
-                    mycanvas.append(`<h3>"${key}"</h3>`);
+                    //mycanvas.append(`<h3>"${key}"</h3>`);
+                    console.log(`===${key}===`);
                     parse(val);
                 } else {
-                    mycanvas.append(`<hr><b>key: </b>${key} | <b>val: </b>${val}`);
+                    //mycanvas.append(`<hr><b>key: </b>${key} | <b>val: </b>${val}`);
+                    console.log(`\nkey: ${key} | val: ${val}`);
                     evaluate(val);
                 }
             });
         }
         function evaluate(input_val: any) {
             if (input_val === 'C_ARRAY') {
-                mycanvas.append(`<p style="color:red">Array</p>`);
+                //mycanvas.append(`<p style="color:red">Array</p>`);
+                console.log(`===Array===`);
             } else if (input_val === 'C_STRUCT') {
-                mycanvas.append(`<p style="color:blue">Struct</p>`);
+                //mycanvas.append(`<p style="color:blue">Struct</p>`);
+                console.log(`===Struct===`);
             } else if (input_val === 'C_MULTIDIMENSIONAL_ARRAY') {
-                mycanvas.append(`<p style="color:yellow">Multidimensi Array</p>`);
+                //mycanvas.append(`<p style="color:yellow">Multidimensi Array</p>`);
+                console.log(`===Multidimensi Array===`);
             }
         }
         parse(this.dTrace[curStep]);
@@ -720,12 +791,18 @@ export class GraphViz {
     }
 
     set_data(data: any, step: number): any {
+        if (this.G.instantValue === true) {
+            if (this.SVG === null) this.initialRender = true;
+            return data.values[0];
+        }
+
         let LengthOfStep = data.step.length;
         if (step < data.step[1]) {
             this.equalDrawed = false; this.SVG = null;
             this.divTab.html(`<h3>Nothing to render!</h3><p>Available later after step ${data.step[1]}</p>`);
         } else {
             if (this.SVG === null) this.initialRender = true;
+            if (LengthOfStep == 2) return data.values[1]; // only this condition
         }
 
         for (let i = 1; i < LengthOfStep - 1; i++) { // first step always 0, so begin second step
@@ -955,6 +1032,7 @@ export class GraphViz {
         let force = this.FORCE;
         let layer1 = this.LAYER1;
         let layer2 = this.LAYER2;
+        let animateLayer = this.ANIMATELAYER;
 
         if (this.initialRender) {
             this.FORCE = d3.layout.force()
@@ -965,6 +1043,7 @@ export class GraphViz {
                 .gravity(0.5)
                 .size([this.width, this.height]);
 
+            this.ANIMATELAYER = this.SVG.append("g").attr("id", "animateLayer"); // ??
             this.LAYER1 = this.SVG.append("g").attr("id", "layerLine");
             this.LAYER2 = this.SVG.append("g").attr("id", "layerCirlce");
             this.NODES = this.FORCE.nodes();
@@ -975,13 +1054,12 @@ export class GraphViz {
             force = this.FORCE;
             layer1 = this.LAYER1;
             layer2 = this.LAYER2;
+            animateLayer = this.ANIMATELAYER;
         }
 
         this.indexNode = this.NODES.length;
         this.indexEdge = this.LINKS.length;
-        //console.log('weight: ' + dataset.edges[0].weight);
         if (dataset.edges[0].weight) haveWeight = true;
-        //console.log('<this.NODES>\n' + JSON.stringify(this.NODES));
 
         if (this.NODES.length < dataset.nodes.length) {
             this.add_datum(dataset);
@@ -1042,6 +1120,113 @@ export class GraphViz {
                 });
             }
         });
+
+        let source: Number = 0;
+        let target: Number = 0;
+        let line: any = { "id": "_", "x1": 0, "y1": 0, "x2": 0, "y2": 0 };
+        let src_node: any = { "cx": 0, "cy": 0 };
+        let trg_node: any = { "cx": 0, "cy": 0 };
+        let DA: any = [];
+        console.log('==== START ==> ', DA);
+        /*this.EDGES.forEach(function (d, i) {
+            source = d.source; target = d.target;
+            DA.push({ source, target, line, src_node, trg_node })
+        });
+        for(let i = 0; i < this.EDGES.length; i++){
+            source = this.EDGES[i].source; target = this.EDGES[i].target;
+            line.id = "_"; line.x1 = 0; line.y1 = 0; line.x2 = 0; line.y2 = 0;
+            src_node.cx = 0; src_node.cy = 0;
+            trg_node.cx = 0; trg_node.cy = 0;
+            DA.push({ source, target, line, src_node, trg_node });
+        }*/
+        //this.dataAnimate = dataAnimate;
+        //console.log('=>dataAnimate: ', this.dataAnimate);
+        //console.log('coba lagi == 0 d ==> ', DA);
+
+        let temp = this.EDGES;
+        function animation() {
+            for (let i = 0; i < temp.length; i++) {
+                source = temp[i].source; target = temp[i].target;
+                line.id = "_"; line.x1 = 0; line.y1 = 0; line.x2 = 0; line.y2 = 0;
+
+                let node = document.getElementById('node' + source);
+                let cx = Number(node.getAttribute("cx"));
+                let cy = Number(node.getAttribute("cy"));
+                src_node.cx = cx; src_node.cy = cy;
+
+                node = document.getElementById('node' + target);
+                cx = Number(node.getAttribute("cx"));
+                cy = Number(node.getAttribute("cy"));
+                trg_node.cx = cx; trg_node.cy = cy;
+
+                DA.push({ source, target, line, src_node, trg_node });
+            }
+            let L = layer1.selectAll('line');
+            //L[0].forEach(e => console.log('==> e: ', e));
+            //console.log('coba 0 d ==> ', DA[0]);
+            for (let i = 0; i < DA.length; i++) {
+                /*let node = layer2.select('#node' + DA[i].source);
+                let cx = Number(node[0][0].getAttribute("cx"));
+                let cy = Number(node[0][0].getAttribute("cy"));
+                DA[i].src_node.cx = cx;
+                DA[i].src_node.cy = cy;
+                console.log('src_node=> ', cx, ' | ', cy);
+
+                node = layer2.select('#node' + DA[i].target);
+                cx = Number(node[0][0].getAttribute("cx"));
+                cy = Number(node[0][0].getAttribute("cy"));
+                DA[i].trg_node.cx = cx;
+                DA[i].trg_node.cy = cy;
+                console.log('trg_node=> ', cx, ' | ', cy);*/
+                //console.log(i, ' - d ==> ', DA[i]);
+
+                for (let j = 0; j < L[0].length; j++) {
+                    /*if( (dataAnimate[i].src_node.cx == Number(L[0][j].getAttribute('x1')) && 
+                        dataAnimate[i].src_node.cy == Number(L[0][j].getAttribute('y1'))) &&
+                        
+                        (dataAnimate[i].trg_node.cx == Number(L[0][j].getAttribute('x2')) && 
+                        dataAnimate[i].trg_node.cy == Number(L[0][j].getAttribute('y2')))
+                      ){
+                          dataAnimate[i].line.id = L[0][j].getAttribute('id');
+                          dataAnimate[i].line.x1 = Number(L[0][j].getAttribute('x1'));
+                          dataAnimate[i].line.x2 = Number(L[0][j].getAttribute('x2'));
+                          dataAnimate[i].line.y1 = Number(L[0][j].getAttribute('y1'));
+                          dataAnimate[i].line.y2 = Number(L[0][j].getAttribute('y2'));
+                      }*/
+                    //console.log(j, ' - ', L[0][j], ' | ', L[0][j].getAttribute('id'));
+                }
+            }
+
+            let line1 = document.getElementById('line_1');
+            let x1 = Number(line1.getAttribute('x1'));
+            let y1 = Number(line1.getAttribute('y1'));
+            let x2 = Number(line1.getAttribute('x2'));
+            let y2 = Number(line1.getAttribute('y2'));
+
+            animateLayer.append("line")
+                .style({
+                    "stroke": "red",
+                    "stroke-width": "5px"
+                })
+                .attr({
+                    x1: x1,
+                    y1: y1,
+                    x2: x1 + 10,
+                    y2: y1 + 10
+                })
+                .transition()
+                .duration(1500)
+                .attr({
+                    x2: x2,
+                    y2: y2
+                });
+
+            setTimeout(function () {
+                animateLayer.selectAll('line').remove();
+            }, 5000);
+        }
+
+        //force.on("end", animation);
     }
 
     add_datum(dataset: any): void {
@@ -1050,7 +1235,6 @@ export class GraphViz {
 
     add_node(dataset: any): void {
         if (this.indexNode < dataset.nodes.length) {
-            //console.log('this.NODES: ' + JSON.stringify(this.NODES));
             this.NODES.push(dataset.nodes[this.indexNode]);
             this.indexNode++;
             this.redraw(dataset);
@@ -1097,7 +1281,7 @@ export class GraphViz {
         }
 
         this.FORCE.stop();
-        
+
         // sticky node
         function dragstart(d) { d3.select(this).classed("fixed", d.fixed = true); }
         function dblclick(d) { d3.select(this).classed("fixed", d.fixed = false); }
@@ -1175,9 +1359,10 @@ export class GraphViz {
             .attr("class", function (d) {
                 return "node node_" + d.name;
             })
-            .attr("cursor", "move")            
+            .attr("cursor", "move")
             .on("dblclick", dblclick)
             .call(drag);
+        this.CIRCLE.append('title').text('double-click and drag to sticky');
 
         this.CIRCLE.enter()
             .insert("text")
@@ -1205,5 +1390,157 @@ export class GraphViz {
             .remove();
 
         this.FORCE.start();
+    }
+
+    animate(curStep: number): void {
+        /**
+         * TODO: Cari line antara node source & target
+         * 1. all_line = selectAll line;
+         * 2. for line in all_line:
+         *        if  line.x1 == src_node.cx && line.y1 == src_node.cy:
+         *              if line.x2 == trg_node.cx && line.y2 == trg_node.cy:
+         *                      select this line_id & animate;
+         *                      break;
+         */
+        function parse(json: any) {
+            $.each(json, function (key, val) {
+                if (typeof val === 'object') {
+                    if (key === KEY.source_var) {
+                        console.log(`==KEY.source_var==${key}==${val[3]}==`);
+                        KEY.source = val[3];
+                    }
+                    if (key === KEY.target_var) {
+                        console.log(`==KEY.target_var==${key}==${val[3]}==`);
+                        KEY.target = val[3];
+                    }
+                    parse(val);
+                }
+            });
+        }
+
+        function searchLine(src, trg) {
+            let line: any = {}; line.id = ''; line.x1 = 0; line.x2 = 0; line.x2 = 0; line.y2 = 0;
+            let link = document.getElementsByClassName('link');
+            let src_node = document.getElementById('node' + src);
+            let trg_node = document.getElementById('node' + trg);
+            let src_node_cx = Number(src_node.getAttribute('cx'));
+            let src_node_cy = Number(src_node.getAttribute('cy'));
+            let trg_node_cx = Number(trg_node.getAttribute('cx'));
+            let trg_node_cy = Number(trg_node.getAttribute('cy'));
+            console.log('src_node: ' + src_node + ' | trg_node: ' + trg_node);
+            console.log('src_node_cx: ' + src_node_cx + ' | src_node_cy: ' + src_node_cy);
+            console.log('trg_node_cx: ' + trg_node_cx + ' | trg_node_cy: ' + trg_node_cy);
+
+            for (let i = 0; i < link.length; i++) {
+                let x1 = Number(link[i].getAttribute('x1'));
+                let y1 = Number(link[i].getAttribute('y1'));
+                console.log('x1: ' + x1 + ' | y1: ' + y1);
+                let x2 = Number(link[i].getAttribute('x2'));
+                let y2 = Number(link[i].getAttribute('y2'));
+                console.log('x2: ' + x2 + ' | y2: ' + y2);
+
+                if (x1 == src_node_cx && y1 == src_node_cy) {
+                    if (x2 == trg_node_cx && y2 == trg_node_cy) {
+                        line.id = link[i].getAttribute('id');
+                        line.x1 = x1; line.y1 = y1;
+                        line.x2 = x2; line.y2 = y2;
+                        console.log('==>line: ' + JSON.stringify(line));
+                        break;
+                    }
+                } else if (x1 == trg_node_cx && y1 == trg_node_cy) {
+                    if (x2 == src_node_cx && y2 == src_node_cy) {
+                        line.id = link[i].getAttribute('id');
+                        line.x1 = x2; line.y1 = y2;
+                        line.x2 = x1; line.y2 = y1;
+                        console.log('==>line: ' + JSON.stringify(line));
+                        break;
+                    }
+                }
+
+            }
+
+            return line;
+        }
+
+        //console.log('========\n', JSON.stringify(this.dTrace[curStep - 1]), '\n=========');
+        if (KEY.source_var && KEY.target_var) {
+            switch (this.VIZ) {
+                case GRAPH.None:
+
+                    break;
+
+                case GRAPH.MatrixGlobal:
+                case GRAPH.PointerGlobal:
+
+                    break;
+
+                case GRAPH.MatrixLocal:
+                    console.log('animate - MatrixLocal');
+                    let error = false;
+                    try { // sometimes error, cause not all line have it (this attribut)
+                        parse(this.dTrace[curStep - 1].stack_to_render[1].encoded_locals); // TODO: find value only in "is_highlighted":true , how?
+                    } catch (error) {
+                        error = true;
+                        console.log('error');
+                    }
+                    if (error) parse(this.dTrace[curStep - 1].stack_to_render[0].encoded_locals);
+
+                    if ((KEY.source && KEY.target) && (KEY.source !== KEY.target)) {
+                        console.log('s: ', KEY.source, ' - t: ', KEY.target);
+                        let edge = searchLine(KEY.source, KEY.target);
+                        this.animationColor(KEY.source, KEY.target, edge);
+                        console.log('==> Edge: ' + JSON.stringify(edge));
+                    }
+                    break;
+            }
+        }
+
+        KEY.source_var = null; KEY.source = null;
+        KEY.target_var = null; KEY.target = null;
+    }
+
+    animationColor(src, trg, line): void {
+        this.LAYER2.select("#node" + src)
+            .transition()
+            .duration(750)
+            .attr("stroke", "#f1c40f")
+            .attr("stroke-width", "7px")
+            .delay(1500)
+            .transition()
+            .duration(1750)
+            .attr("stroke-width", "0px");
+
+        this.ANIMATELAYER.append("line")
+            .style({
+                "stroke": "red",
+                "stroke-width": "5px"
+            })
+            .attr({
+                x1: line.x1,
+                y1: line.y1,
+                x2: line.x1 + 10,
+                y2: line.y1 + 10
+            })
+            .transition()
+            .duration(1500)
+            .attr({
+                x2: line.x2,
+                y2: line.y2
+            });
+        
+        this.LAYER2.select("#node" + trg)
+            .transition()
+            .duration(750)
+            .attr("stroke", "#f1c40f")
+            .attr("stroke-width", "7px")
+            .delay(1500)
+            .transition()
+            .duration(1750)
+            .attr("stroke-width", "0px");
+
+        let animateLayer = this.ANIMATELAYER;
+        setTimeout(function () {
+            animateLayer.selectAll('line').remove();
+        }, 3000);
     }
 }

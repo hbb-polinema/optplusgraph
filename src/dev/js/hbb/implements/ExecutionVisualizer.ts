@@ -12,7 +12,7 @@ export class ExecutionVisualizer implements IExecutionVisualizer {
     static DEFAULT_EMBEDDED_CODE_DIV_WIDTH = 350;
     static DEFAULT_EMBEDDED_CODE_DIV_HEIGHT = 400;
 
-    GV: GraphViz;
+    GV: GraphViz; // by habibieeddien
     params: any = {};
     curInputCode: string;
     curTrace: any[];
@@ -317,7 +317,7 @@ export class ExecutionVisualizer implements IExecutionVisualizer {
 
         this.outputBox = new ProgramOutputBox(this, this.domRoot.find('#vizLayoutTdSecond'), this.params.embeddedMode ? '45px' : null);
         this.dataViz = new DataVisualizer(this, this.domRoot.find('#vizLayoutTdSecond'), this.domRootD3.select('#vizLayoutTdSecond'));
-        this.GV = new GraphViz(this.dataViz.domRoot.find("#abstractViz"), this.curTrace, this.dataViz.isCppMode());
+        this.GV = new GraphViz(this.dataViz.domRoot.find("#abstractViz"), this.curTrace, this.dataViz.isCppMode()); // by habibieeddien
 
         myViz.navControls.showError(this.instrLimitReachedWarningMsg);
         myViz.navControls.setupSlider(this.curTrace.length - 1);
@@ -509,7 +509,7 @@ export class ExecutionVisualizer implements IExecutionVisualizer {
         }
         this.outputBox.renderOutput(this.curTrace[this.curInstr].stdout);
         this.try_hook("end_updateOutput", { myViz: this });
-        this.GV.render(this.curInstr);
+        this.GV.render(this.curInstr); // by habibieeddien
     }
 
     updateOutputFull(smoothTransition: any): void {
