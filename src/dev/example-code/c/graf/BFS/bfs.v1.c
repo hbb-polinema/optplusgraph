@@ -12,12 +12,8 @@ int a[7][7],
     f = 0,
     r = -1;
 
-int RandomNumberGenerator(const int nMin,const int nMax,const int  nNumOfNumsToGenerate){
-    int nRandomNumber = 0;    
-    for (int i = 0; i < nNumOfNumsToGenerate; i++){
-        nRandomNumber = rand()%(nMax-nMin) + nMin;
-    }
-    return nRandomNumber;
+int RandomNumberGenerator(const int nMin,const int nMax){
+    return rand()%(nMax-nMin) + nMin;
 }
 
 void bfs(int v)
@@ -51,12 +47,12 @@ int main()
     printf("\ngraph data in matrix form:\n");
     for (i = 1; i <= n; i++)
         for (j = 1 + i; j <= n; j++){
-            temp = RandomNumberGenerator(1,10,1);
+            temp = RandomNumberGenerator(1,10);
             if (temp % 2 == 0) a[i][j] = a[j][i] = 0;
             else a[i][j] = a[j][i] = 1;
             printf("a[%d][%d]: %d\n", i, j, a[i][j]);
         }
-    printf("\nthe starting vertex: 2");
+    printf("\nthe starting vertex: 3");
     v = 3;
 
     bfs(v);
