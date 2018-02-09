@@ -1,7 +1,8 @@
-import { GraphViz } from './GraphViz';
+import { GraphVisualizer } from './GraphVisualizer';
 import { Assert } from '../utilities/debugger';
 import { CodeDisplay } from './CodeDisplay';
 import { BRIGHTRED } from '../view/colors';
+import { DEFAULT_EMBEDDED_CODE_DIV_WIDTH, DEFAULT_EMBEDDED_CODE_DIV_HEIGHT } from '../view/sizes';
 import { HTMLspecialChars } from '../utilities/functions';
 import { NavigationController } from './NavigationController';
 import { ProgramOutputBox } from './ProgramOutputBox';
@@ -9,10 +10,8 @@ import { DataVisualizer } from './DataVisualizer';
 
 export class ExecutionVisualizer implements IExecutionVisualizer {
     static curVisualizerID = 1;
-    static DEFAULT_EMBEDDED_CODE_DIV_WIDTH = 350;
-    static DEFAULT_EMBEDDED_CODE_DIV_HEIGHT = 400;
 
-    GV: GraphViz; // by habibieeddien
+    GV: GraphVisualizer; // by habibieeddien
     params: any = {};
     curInputCode: string;
     curTrace: any[];
@@ -272,20 +271,21 @@ export class ExecutionVisualizer implements IExecutionVisualizer {
         if (this.params.embeddedMode) {
             // don't override if they've already been set!
             if (this.params.codeDivWidth === undefined) {
-                this.params.codeDivWidth = ExecutionVisualizer.DEFAULT_EMBEDDED_CODE_DIV_WIDTH;
+                this.params.codeDivWidth = DEFAULT_EMBEDDED_CODE_DIV_WIDTH;
             }
 
             if (this.params.codeDivHeight === undefined) {
-                this.params.codeDivHeight = ExecutionVisualizer.DEFAULT_EMBEDDED_CODE_DIV_HEIGHT;
+                this.params.codeDivHeight = DEFAULT_EMBEDDED_CODE_DIV_HEIGHT;
             }
 
             /*  add an extra label to link back to the main site, so that viewers
                 on the embedded page know that they're seeing an OPT visualization */
-            base.append('<div style="font-size: 8pt; margin-bottom: 10px;">Visualized using <a href="http://pythontutor.com" target="_blank" style="color: #3D58A2;">Python Tutor</a></div>');
+            //base.append('<div style="font-size: 8pt; margin-bottom: 10px;">Visualized using <a href="http://pythontutor.com" target="_blank" style="color: #3D58A2;">Python Tutor</a></div>');
             base.find('#codeFooterDocs').hide(); // cut out extraneous docs
         } else {
             // also display credits:
-            base.append('<div style="font-size: 8pt; margin-bottom: 10px;">Visualized using <a href="http://pythontutor.com" target="_blank" style="color: #3D58A2;">Python Tutor</a></div>');
+            //base.append('<div style="font-size: 8pt; margin-bottom: 10px;">Visualized using <a href="http://pythontutor.com" target="_blank" style="color: #3D58A2;">Python Tutor</a></div>');
+            // @habibieeddien: this credits info move to 'Info Button'
         }
 
         // not enough room for these extra buttons ...
@@ -317,7 +317,7 @@ export class ExecutionVisualizer implements IExecutionVisualizer {
 
         this.outputBox = new ProgramOutputBox(this, this.domRoot.find('#vizLayoutTdSecond'), this.params.embeddedMode ? '45px' : null);
         this.dataViz = new DataVisualizer(this, this.domRoot.find('#vizLayoutTdSecond'), this.domRootD3.select('#vizLayoutTdSecond'));
-        this.GV = new GraphViz(this.dataViz.domRoot.find("#abstractViz"), this.curTrace, this.dataViz.isCppMode()); // by habibieeddien
+        this.GV = new GraphVisualizer(this.dataViz.domRoot.find("#abstractViz"), this.curTrace, this.dataViz.isCppMode()); // by habibieeddien
 
         myViz.navControls.showError(this.instrLimitReachedWarningMsg);
         myViz.navControls.setupSlider(this.curTrace.length - 1);

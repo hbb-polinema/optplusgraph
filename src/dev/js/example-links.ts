@@ -376,14 +376,16 @@ export var cExamplesHtml = `<p style="margin-top: 25px; font-weight: bold;">C Ex
 <p>
   <a class="exampleLink" id="cBFSv1" href="#">BFS v1</a> |
   <a class="exampleLink" id="cBFSv2" href="#">BFS v2</a> |
-  <a class="exampleLink" id="cBFSv3" href="#">BFS v3</a> |
+  <a class="exampleLink" id="cBFSv3" href="#">BFS v3 (Pointer)</a> |
   <a class="exampleLink" id="cDijkstra" href="#">Dijkstra (weighted-undirected)</a> |
-  <a class="exampleLink" id="cDijkstra2" href="#">Dijkstra Instant Value (weighted-undirected)</a>
+  <a class="exampleLink" id="cDijkstra2" href="#">Dijkstra Instant Value (weighted-undirected)</a> |
+  <a class="exampleLink" id="cBellmanFord" href="#">Bellman Ford</a>
 </p>
 <p>
   <i>Matrix Global Variable: </i>
   <a class="exampleLink" id="matrix01G" href="#">Matrix-01 (unweighted-undirected)</a> |
-  <a class="exampleLink" id="matrix02G" href="#">Matrix-02 (weighted-undirected)</a>
+  <a class="exampleLink" id="matrix02G" href="#">Matrix-02 (weighted-undirected)</a> |
+  <a class="exampleLink" id="matrix03G" href="#">Matrix-03 (weighted-directed)</a>
 </p>
 <p>
   <i>Matrix Local Variable: </i>
@@ -411,8 +413,10 @@ export var C_EXAMPLES = {
   cDijkstra2: 'graf/Dijkstra/dijkstra_instant_data.c',
   matrix01G: 'graf/matrix01G.c',
   matrix02G: 'graf/matrix02G.c',
+  matrix03G: 'graf/matrix03G.c',
   matrix01L: 'graf/matrix01L.c',
   matrix02L: 'graf/matrix02L.c',
+  cBellmanFord: 'graf/BellmanFord.c'
 };
 
 
@@ -425,6 +429,11 @@ export var cppExamplesHtml = `<p style="margin-top: 25px; font-weight: bold;">C+
   <a class="exampleLink" id="cppDateLink" href="#">Date class</a> |
   <a class="exampleLink" id="cppInheritLink" href="#">Inheritance</a> |
   <a class="exampleLink" id="cppVirtualLink" href="#">Virtual method</a>
+</p>
+<p>
+  <a class="exampleLink" id="cppBFS" href="#">BFS</a> |
+  <a class="exampleLink" id="cppDijkstra" href="#">Dijkstra</a> |
+  <a class="exampleLink" id="cppTest" href="#">Test</a>
 </p>`;
 
 export var CPP_EXAMPLES = {
@@ -435,4 +444,7 @@ export var CPP_EXAMPLES = {
   cppInheritLink: 'cpp-inheritance.cpp',
   cppPassRefLink: 'cpp-pass-by-ref.cpp',
   cppVirtualLink: 'cpp-virtual-method.cpp',
+  cppBFS: 'graf/bfs.cpp',
+  cppDijkstra: 'graf/dijkstra.cpp',
+  cppTest: 'graf/test.cpp',
 };

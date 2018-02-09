@@ -133,5 +133,5 @@ change the link to <b>https://</b> if needed.</p>
 <p>3. C++ using gcc 4.8, C++11, and Valgrind Memcheck.
 <a href="https://github.com/pgbovine/opt-cpp-backend" target="_blank">Backend source code</a>.</p>
 
-<p>Improved Graph Visualization support by <a href="http://habibie.tk/" target="_blank">Habibie Ed Dien</a>.
+<p>Graph Visualization feature by <a href="http://habibie.tk/" target="_blank">Habibie Ed Dien</a>.
 Based on <a href="http://pythontutor.com/c.html" target="_blank">the Online Python Tutor website (pythontutor.com)</a></p></div>`;

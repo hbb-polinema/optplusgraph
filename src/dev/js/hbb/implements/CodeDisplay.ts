@@ -10,7 +10,7 @@ import { SVG_ARROW_POLYGON } from '../view/polygons';
 import { SVG_ARROW_HEIGHT } from '../view/sizes';
 import { HTMLspecialChars } from '../utilities/functions';
 import { Assert } from '../utilities/debugger';
-import { KEY } from './GraphViz';
+import { KEY } from './GraphVisualizer';
 
 export class CodeDisplay implements ICodeDisplay {
     owner: ExecutionVisualizer;
@@ -393,11 +393,10 @@ export class CodeDisplay implements ICodeDisplay {
          * Eksperimen operasi animasi antar node & edge (start: Jumat, 12Jan18)
          * 1. cek var matrix dlu
          * 2. kemudian pointer & relasinya
-         */        
-        //KEY.line = line;
+         */
         let regex = new RegExp(KEY.keyname, "g");
         let searchKey = code.match(regex);
-        let searchPrintf = code.match(/printf/g);
+        let searchPrintf = code.match(/printf/g); // TODO: think again, why not visualize if jump to line code with 'printf' ?
 
         if (searchKey !== null && searchPrintf === null) {          
             if (searchKey.length === 1) { // make sure only one key access

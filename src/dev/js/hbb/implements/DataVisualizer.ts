@@ -35,8 +35,9 @@ export class DataVisualizer implements IDataVisualizer {
 
         let codeVizHTML =
             `<div class="tab">
-                <button class="tablinks active" id="primitif">Primitif</button>
-                <button class="tablinks" id="abstract">Graph Visualization</button>
+                <button class="tablinks active" id="primitif"><span class="glyphicon glyphicon-list-alt" style="line-height:0.1pt;"></span> Primitif Visualization</button>
+                <button class="tablinks" id="abstract"><span class="glyphicon glyphicon-eye-open" style="line-height:0.1pt;"></span> Graph Visualization</button>
+                <button class="tablinks" id="stdout"><span class="glyphicon glyphicon-print" style="line-height:0.1pt;"></span> Print Output</button>
             </div>
             
             <div id="dataViz" class="tabcontent" style="display:block">
@@ -59,6 +60,13 @@ export class DataVisualizer implements IDataVisualizer {
 
             <div id="abstractViz" class="tabcontent" style="display:none">
                 <h3>Nothing Graph Structure!</h3>
+            </div>
+            
+            <div id="stdOut" class="tabcontent" style="display:none">
+                <div id="progOutputs">
+                    <div id="printOutputDocs">Print output (drag lower right corner to resize)</div>\n
+                    <textarea id="pyStdout" cols="40" rows="5" wrap="off" readonly></textarea>
+                </div>
             </div>`;
 
         this.domRoot.append(codeVizHTML);
@@ -66,6 +74,7 @@ export class DataVisualizer implements IDataVisualizer {
         // @habibieeddien
         this.domRoot.find("#primitif").click(() => { this.openTab('primitif', 'dataViz'); });
         this.domRoot.find("#abstract").click(() => { this.openTab('abstract', 'abstractViz'); });
+        this.domRoot.find("#stdout").click(() => { this.openTab('stdout', 'stdOut'); });
 
         // create a persistent globals frame
         // (note that we need to keep #globals_area separate from #stack for d3 to work its magic)

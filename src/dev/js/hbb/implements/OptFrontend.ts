@@ -12,10 +12,10 @@ require('../../../css/opt-testcases.css');
 
 import { Assert } from '../utilities/debugger';
 import { AbstractBaseFrontend } from './AbstractBaseFrontend';
-import { ExecutionVisualizer } from './ExecutionVisualizer';
 import { sanitizeURL, supports_HTML5_storage } from '../utilities/functions';
 import { CODE_SNAPSHOT_DEBOUNCE_MS, SUBMIT_UPDATE_HISTORY_INTERVAL_MS } from '../view/sizes';
 import { CPP_BLANK_TEMPLATE, JAVA_BLANK_TEMPLATE } from '../view/html';
+import { DEFAULT_EMBEDDED_CODE_DIV_WIDTH, DEFAULT_EMBEDDED_CODE_DIV_HEIGHT } from '../view/sizes';
 
 export class OptFrontend extends AbstractBaseFrontend implements IOptFrontend{
     originFrontendJsFile: string = 'opt-frontend.js';
@@ -30,10 +30,10 @@ export class OptFrontend extends AbstractBaseFrontend implements IOptFrontend{
             Assert(mod == 'display');
             let myArgs = this.getAppState();
             delete myArgs.mode;
-            (myArgs as any).codeDivWidth = ExecutionVisualizer.DEFAULT_EMBEDDED_CODE_DIV_WIDTH;
-            (myArgs as any).codeDivHeight = ExecutionVisualizer.DEFAULT_EMBEDDED_CODE_DIV_HEIGHT;
+            (myArgs as any).codeDivWidth = DEFAULT_EMBEDDED_CODE_DIV_WIDTH;
+            (myArgs as any).codeDivHeight = DEFAULT_EMBEDDED_CODE_DIV_HEIGHT;
 
-            let domain = "http://pythontutor.com/"; // for deployment
+            let domain = "http://codeviz.tk/"; // for deployment
             let embedUrlStr = $.param.fragment(domain + "iframe-embed.html", myArgs, 2 /* clobber all */);
             embedUrlStr = sanitizeURL(embedUrlStr);
             let iframeStr = '<iframe width="800" height="500" frameborder="0" src="' + embedUrlStr + '"> </iframe>';

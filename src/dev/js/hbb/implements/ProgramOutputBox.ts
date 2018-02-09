@@ -11,13 +11,13 @@ export class ProgramOutputBox implements IProgramOutputBox {
         this.owner = owner;
         this.domRoot = domRoot;
 
-        let outputsHTML =
+        /*let outputsHTML =
             `<div id="progOutputs">
                 <div id="printOutputDocs">Print output (drag lower right corner to resize)</div>\n
                 <textarea id="pyStdout" cols="40" rows="5" wrap="off" readonly></textarea>
             </div>`;
 
-        this.domRoot.append(outputsHTML);
+        this.domRoot.append(outputsHTML);*/
 
         // go backwards from the end ... sometimes the final entry doesn't
         // have an stdout
@@ -44,7 +44,7 @@ export class ProgramOutputBox implements IProgramOutputBox {
         }
 
         // do this only after adding outputsHTML to the DOM
-        this.domRoot.find('#pyStdout').width('350px')
+        this.domRoot.find('#pyStdout').width('100%') // 350px
             .height(stdoutHeight)
             .resizable();
     }
