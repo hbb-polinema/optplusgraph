@@ -35,7 +35,7 @@ const enum GRAPH {
     PointerLocal
 };
 
-export class GraphViz {
+export class GraphVisualizer {
     divTab: any;
     dTrace: any;
     SVG: any = null; FORCE: any; LAYER1: any; LAYER2: any;
@@ -45,7 +45,7 @@ export class GraphViz {
     isCPP: boolean = false; // C or C++ mode
     equalDrawed: boolean = false;
     /**
-     * data_graph = {
+     * dataGraph = {
      * "step" : [3,4,5,8,10],
      * "values" : [{ 
      *              nodes: [{ name: 1 }, { name: 2 }],
@@ -56,8 +56,8 @@ export class GraphViz {
      *           }]
      * }
      */
-    dataGraph: any = {}; EDGES: any = [];
-    temp_step: any = [];
+    dataGraph: any = {};
+    tempStep: any = [];
     dataChangedOnStep: number;
     VIZ: GRAPH = GRAPH.None;
     G: any = { "directed": null, "instantValue": null };
@@ -70,10 +70,10 @@ export class GraphViz {
         this.dTrace = dataTrace;
         this.isCPP = isCppMode;
 
-        this.check_model_graph(isCppMode);
+        this.checkModelGraph(isCppMode);
     }
 
-    check_model_graph(isCppMode: boolean): void {
+    checkModelGraph(isCppMode: boolean): void {
         if (!isCppMode) {
             this.divTab.html('<p>Sorry! For now, Only support for C or C++</p>');
             return;
@@ -87,15 +87,15 @@ export class GraphViz {
         if (this.VIZ == GRAPH.None) this.model03_PointerGlobal();    // Model-03: PointerGlobal
         if (this.VIZ == GRAPH.None) this.model04_PointerLocal();     // Model-04: PointerLocal
 
-        this.temp_step[0] = 0;
-        this.temp_step[1] = 0;
+        this.tempStep[0] = 0;
+        this.tempStep[1] = 0;
         this.dataChangedOnStep = 0;
     }
 
     model01_MatrixGlobal(): void { // Model-01: matrix variable on global --> always available in first step
         // TODO: check other var for support this model process
         let C_MUL_AR_isFound = false, isDifferent = false;
-        let MATRIX: any; // for compare matrix before and after step
+        let MATRIX_BFR: any; // for compare matrix before and after step
         let instantValue = false;
         let G = this.G;
 
@@ -104,7 +104,7 @@ export class GraphViz {
             $.each(data, function (key, val) {
                 if (val[0] === 'C_MULTIDIMENSIONAL_ARRAY' && step == 0 && !C_MUL_AR_isFound) { // found only 1 matrix for this model
 
-                    C_MUL_AR_isFound = true;
+                    C_MUL_AR_isFound = true; KEY.keyname = key;
                     let [row, col] = (String(val[2])).split(',');
                     let size = (Number([row]) * Number([col])) + 2; // get dimension of matrix
                     let index = 0, temp = [], weighted = false;
@@ -126,10 +126,25 @@ export class GraphViz {
                     let row_length = Number([row]);
                     let col_length = Number([col]);
 
+                    for (let row = 0; row < row_length; row++) {
+                        value[row] = [];
+                        for (let col = 0; col < col_length; col++) {
+                            value[row][col] = temp[index];
+                            index++;
+                        }
+                    }
+                    // directed or undirected
+                    for (let row = 0; row < row_length; row++) {
+                        for (let col = 0; col < col_length; col++) {
+                            if (row == col) continue;// source == target. So, it shouldn't same! // ignore and continue loop
+                            if (value[row][col] !== value[col][row]) G.directed = true;
+                        }
+                    }
+
                     // for matrix instant initial value
                     if (instantValue) {
                         // ambil data graf, keluar dari each
-                        G.instantValue = true;
+                        G.instantValue = true; index = 0;
                         let nodes = [], edges = [], duplicate = false;
                         for (let row = 0; row < row_length; row++) {
                             for (let col = 0; col < col_length; col++) {
@@ -139,7 +154,7 @@ export class GraphViz {
                                 }
 
                                 duplicate = edges.some(function (e) { return e.source === col && e.target === row; }); // duplicate edge or not
-                                if (weighted && temp[index] > 1) {
+                                if (weighted && temp[index] > 0) {
                                     if (!duplicate) {
                                         edges.push({ "source": row /*origin node*/, "target": col /*destination node*/, "weight": temp[index] });
                                         nodes.push(row, col);
@@ -169,14 +184,7 @@ export class GraphViz {
                         return false; // break out $.each
                     } else {
                         G.instantValue = false;
-                        for (let row = 0; row < row_length; row++) {
-                            value[row] = [];
-                            for (let col = 0; col < col_length; col++) {
-                                value[row][col] = temp[index];
-                                index++;
-                            }
-                        }
-                        MATRIX = value;
+                        MATRIX_BFR = value;
                     }
 
                 } else if (val[0] === 'C_MULTIDIMENSIONAL_ARRAY' && step == 0) { // if exist one more matrix
@@ -188,13 +196,14 @@ export class GraphViz {
 
                     let [row, col] = (String(val[2])).split(',');
                     let size = (Number([row]) * Number([col])) + 2; // get dimension of matrix
-                    let index = 0, temp = [];
+                    let index = 0, temp = [], weighted = false;
                     for (let i = 3; i <= size; i++) {
                         if (val[i][0] === 'C_DATA' && val[i][2] === 'int') {
                             temp[index] = val[i][3]; // temp value
+                            if (temp[index] > 1) weighted = true;
                             index++;
                         } else {
-                            console.log('something not int');
+                            console.log('something not int'); // TODO: required to be re-tested
                             break;
                         }
                     }
@@ -207,15 +216,35 @@ export class GraphViz {
                         value[row] = [];
                         for (let col = 0; col < col_length; col++) {
                             value[row][col] = temp[index];
-                            if (MATRIX[row][col] != temp[index] && temp[index] == 1 && row != col) {
-                                isDifferent = true;
-                                edges.push({ "source": row /*origin node*/, "target": col /*destination node*/ });
-                                nodes.push(row, col);
-                            } else if (temp[index] == 1 && row != col) { // node before stay drawed
-                                edges.push({ "source": row, "target": col });
-                                nodes.push(row, col);
+                            if (weighted) {
+                                if (MATRIX_BFR[row][col] != temp[index] && temp[index] > 0 && row != col) {
+                                    isDifferent = true;
+                                    edges.push({ "source": row /*origin node*/, "target": col /*destination node*/, "weight": temp[index] });
+                                    nodes.push(row, col);
+                                } else if (temp[index] > 0 && row != col) { // node before stay drawed
+                                    edges.push({ "source": row, "target": col, "weight": temp[index] });
+                                    nodes.push(row, col);
+                                }
+                            } else {
+                                if (MATRIX_BFR[row][col] != temp[index] && temp[index] == 1 && row != col) {
+                                    isDifferent = true;
+                                    edges.push({ "source": row /*origin node*/, "target": col /*destination node*/ });
+                                    nodes.push(row, col);
+                                } else if (temp[index] == 1 && row != col) { // node before stay drawed
+                                    edges.push({ "source": row, "target": col });
+                                    nodes.push(row, col);
+                                }
                             }
+
                             index++;
+                        }
+                    }
+
+                    // directed or undirected
+                    for (let row = 0; row < row_length; row++) {
+                        for (let col = 0; col < col_length; col++) {
+                            if (row == col) continue;// source == target. So, it shouldn't same! // ignore and continue loop
+                            if (value[row][col] !== value[col][row]) G.directed = true;
                         }
                     }
 
@@ -230,7 +259,7 @@ export class GraphViz {
                             edges[i].target = position;
                         }
 
-                        MATRIX = value;
+                        MATRIX_BFR = value;
                         DATA_GRAPH = { nodes, edges };
                     }
                 }
@@ -253,7 +282,7 @@ export class GraphViz {
                 if (instantValue) {
                     this.dataGraph.values[0] = DATA;
                     break; // out loop for
-                } else this.dataGraph.values[0] = MATRIX;
+                } else this.dataGraph.values[0] = MATRIX_BFR;
                 index++;
             } else {
                 if (isDifferent) {
@@ -268,19 +297,20 @@ export class GraphViz {
         if (C_MUL_AR_isFound) { // if match this model
             console.log('GRAPH.MatrixGlobal');
             this.VIZ = GRAPH.MatrixGlobal;
+            this.G = G;
         }
     }
 
     model02_MatrixLocal(): void { // Model-02: matrix variable on local
         let C_MUL_AR_isFound = false, isDifferent = false;
-        let MATRIX: any, Last = this.dTrace.length - 1, EDGES;
+        let MATRIX: any;
 
         function get_matrix(data: any, step: number) {
             let DATA_GRAPH: any = {};
             $.each(data, function (key, val) {
                 if (val[0] === 'C_MULTIDIMENSIONAL_ARRAY' && step == 0 && !C_MUL_AR_isFound) { // TODO: here value always zero, why?
 
-                    C_MUL_AR_isFound = true; console.log('keyname ==> ' + key); KEY.keyname = key;
+                    C_MUL_AR_isFound = true; KEY.keyname = key;
                     let [row, col] = (String(val[2])).split(',');
                     let size = (Number([row]) * Number([col])) + 2; // get dimension of matrix
                     let index = 0, temp = [];
@@ -293,7 +323,7 @@ export class GraphViz {
                                 temp[index] = 0;
                             index++;
                         } else {
-                            console.log('something not int');
+                            console.log('something not int'); // TODO: required to be re-tested
                             break;
                         }
                     }
@@ -370,8 +400,6 @@ export class GraphViz {
                         }
                     }
 
-                    if (step === Last) EDGES = edges; // use for animate
-
                     if (isDifferent) { // there is different value on every step
                         let get_unique_node = nodes.filter(function (item, i, ar) { return ar.indexOf(item) === i; });
                         nodes = [];
@@ -425,65 +453,138 @@ export class GraphViz {
         if (C_MUL_AR_isFound) { // if match this model
             console.log('GRAPH.MatrixLocal');
             this.VIZ = GRAPH.MatrixLocal;
-            this.EDGES = EDGES;
         }
     }
 
     model03_PointerGlobal(): void { // Model-03: struct, pointer, array
-        // TODO: check STRUCT --> node/pointer --> relation/link/edge
-        let C_STRUCT = false;
-        let edges_temp = [], nodes = [];
+        /**
+         * TODO: check STRUCT --> node/pointer --> relation/link/edge
+         * - what about weighted or unweighted?
+         * - directed or undirected can check: if available[(src,trg) && (trg,src)]
+         * - filter duplicate nodes (DONE), edges (DONE)
+         * - is there pointer global or local ?
+         * - what about lib c++ list, vector, arrayList, class, procedure/function ?
+         */
 
-        function get_heap(data_json: any) {
-            $.each(data_json, function (key, val) {
-                if (typeof key === 'string') {
-                    if (key.match(/0x/g) !== null) { // get address memory pointer
-                        get_edge(val);
+        let C_STRUCT = false, G = this.G;
+        let edges_temp = [], nodes = [];
+        let dataHeap = [];
+        let EDGES = [], targetNodes = [];
+
+        function parseHeap(dataJSON: any) {
+            let rootLengthPacket = [], subRootLengthPacket = [];
+            $.each(dataJSON, function (key, val) {
+                dataHeap.push(val); // contain data graph pointer
+
+                if (Array.isArray(val) && val[0] === "C_ARRAY") {
+                    rootLengthPacket.push(val.length);
+                    if (Array.isArray(val[2])) {
+                        subRootLengthPacket.push(val[2].length);
                     }
                 }
             });
 
-            let G = [];
-            if (edges_temp.length > 1) {
-                edges_temp.forEach(e => {
-                    if (e.next[3] !== '0x0' && e.next[3] !== '<UNINITIALIZED>') { // filter unknown address memory
-                        for (let i = 0; i < edges_temp.length; i++) {
-                            if (e.next[3] === edges_temp[i].vertex[1]) {
-                                if (e.vertex[3] !== edges_temp[i].vertex[3]) {
-                                    G.push({ "source": e.vertex[3], "target": edges_temp[i].vertex[3] });
-                                    nodes.push(e.vertex[3], edges_temp[i].vertex[3]);
-                                }
+            let root = rootLengthPacket.filter(function (item, i, ar) { return ar.indexOf(item) === i; });
+            let subRoot = subRootLengthPacket.filter(function (item, i, ar) { return ar.indexOf(item) === i; });
+
+            let modusRoot = getModus(root, rootLengthPacket); // get most data show up, TODO: how if nothing? every value just 1
+            let modusSubRoot = getModus(subRoot, subRootLengthPacket);
+            let adj = [], struct = [], foundAdjList = false;
+
+            for (let i = 0; i < dataHeap.length; i++) { // get data graph. TODO: very much for loop, need improve!
+                if (dataHeap[i].length === modusRoot && dataHeap[i][2].length === modusSubRoot) {
+                    if (dataHeap[i][2][0] === "C_STRUCT") {
+                        struct.push(dataHeap[i][2]);
+                        KEY.keyname = dataHeap[i][2][2];
+                    }
+                }
+
+                if (dataHeap[i][0] === "C_ARRAY" && !foundAdjList) {
+                    for (let j = 2; j < dataHeap[i].length; j++) {
+                        if (dataHeap[i][j][2] === "pointer") {
+                            adj.push(dataHeap[i][j]);
+                            foundAdjList = true; // TODO: possible have one more adjList?
+                        }
+                    }
+                }
+            }
+
+            let src_nodes = [];
+            for (let src = 0; src < adj.length; src++) {
+                if (adj[src][3] !== "0x0" && adj[src][3] !== "<UNINITIALIZED>") {
+                    getTargetNodes(adj[src][3], struct);
+                    if (targetNodes.length > 0) {
+                        for (let i = 0; i < targetNodes.length; i++) {
+                            if (isDuplicate(EDGES, src, targetNodes[i])) { // filter duplicate edges
+                                EDGES.push({ "source": src, "target": targetNodes[i] }); // TODO: before push, check ordering edges in dataGraph. cause break rendering
+                                nodes.push(src, targetNodes[i]);
                             }
                         }
                     }
-                });
+                    targetNodes = [];
+                }
             }
+            getUniqueNode();
+            //console.log(EDGES);
+            return EDGES;
+        }
 
+        function getUniqueNode() {
             let get_unique_node = nodes.filter(function (item, i, ar) { return ar.indexOf(item) === i; });
             nodes = [];
+            get_unique_node.sort();
             get_unique_node.forEach(e => { nodes.push({ "name": e }); });
-            for (let i = 0; i < G.length; i++) { // change `value edge` based on position `nodes.name`
-                let position = get_unique_node.indexOf(G[i].source);
-                G[i].source = position;
-                position = get_unique_node.indexOf(G[i].target);
-                G[i].target = position;
+            for (let i = 0; i < EDGES.length; i++) { // change `value edge` based on position `nodes.name`
+                let position = get_unique_node.indexOf(EDGES[i].source);
+                EDGES[i].source = position;
+                position = get_unique_node.indexOf(EDGES[i].target);
+                EDGES[i].target = position;
             }
-            edges_temp = []; // reset to empty array
-            return G;
         }
 
-        function get_edge(data: any) {
-            $.each(data, function (key, val) {
-                if (val[0] === 'C_STRUCT' && val.length == 5) { // if struct only have 2 member var, TODO: How about if more var?
-                    if (val[3][1][0] === 'C_DATA' && val[4][1][0] === 'C_DATA') {
-                        if (val[3][1][2] === 'int' && val[4][1][2] === 'pointer')
-                            edges_temp.push({ "vertex": val[3][1], "next": val[4][1] });
+        function isDuplicate(e, src, trg) {
+            if (e.some(function (d) { return d.source === trg && d.target === src; })) {
+                //console.log('undirected');
+                return false;
+            } else if (e.some(function (d) { return d.source === src && d.target === trg; })) {
+                //console.log('directed');
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function getTargetNodes(src, struct) {
+            for (let trg = 0; trg < struct.length; trg++) {
+                if (src === struct[trg][1]) {
+                    targetNodes.push(struct[trg][3][1][3]);
+                    if (struct[trg][4][1][3] !== "0x0" && struct[trg][4][1][3] !== "<UNINITIALIZED>") {
+                        getTargetNodes(struct[trg][4][1][3], struct);
                     }
                 }
-            });
+            }
         }
 
-        function is_different(arr1, arr2) { // compare two data array to eliminate duplicate data every step
+        function getModus(data1: any, data2: any) {
+            let modus = 0, higherVal = 0, rootData = 0;
+            for (let i = 0; i < data1.length; i++) {
+                for (let j = 0; j < data2.length; j++) {
+                    if (data1[i] == data2[j]) {
+                        modus++;
+                    }
+                }
+
+                if (modus > higherVal) {
+                    higherVal = modus;
+                    rootData = data1[i];
+                }
+                modus = 0; // reset
+            }
+
+            return rootData;
+        }
+
+        function arrayDiff(arr1, arr2) { // compare two data array to eliminate duplicate data every step
             if (arr1.length !== arr2.length)
                 return true;
             for (let i = arr1.length; i--;) {
@@ -493,26 +594,61 @@ export class GraphViz {
             return false;
         }
 
-        let index = 1;
+        let index = 1, edges = [], edgesOlder = [];
         this.dataGraph.step[0] = 0;
         this.dataGraph.values[0] = { "nodes": "first", "edges": "first" };
+
+        function pushOrderEdges() {
+            let newEdges = [];
+            console.log('1] edgesOlder: ' + JSON.stringify(edgesOlder));
+            if (edgesOlder.length < edges.length) {
+                for (let i = 0; i < edges.length; i++) {
+                    for (let j = 0; j < edgesOlder.length; j++) {
+                        if (edges[i].source !== edgesOlder[j].source && edges[i].target !== edgesOlder[j].target) {
+                            newEdges.push(edges[i]);
+                            console.log('newEdges: ' + JSON.stringify(newEdges));
+                        }
+                    }
+                }
+            } else if (edgesOlder.length > edges.length) {
+                //newEdges.pop();
+                console.log('pop');
+            }
+            
+            let x = edgesOlder.concat(newEdges);
+            edgesOlder = x;
+            console.log('2] edgesOlder: ' + JSON.stringify(edgesOlder));
+            //return x;
+        }
         /**
          * This is main execution/process data
-         * There is 3 function needed: get_heap, get_edge, is_different
+         * There is 6 function needed: parseHeap, getUniqueNode, isDuplicate, getTargetNodes, getModus, arrayDiff
          */
         for (let i = 1; i < this.dTrace.length; i++) {
-            let edges = get_heap(this.dTrace[i].heap);
+            //edges = getHeap(this.dTrace[i].heap);
+            /**
+             * TODO: for ordering edges issue ---
+             * if edgeOlder.length < edgeNew.length:
+             *      if edgeOlder[i].source != edgeNew[i].source && edgeOlder[i].target != edgeNew[i].target:
+             *              diffEdge.push(edgeNew[i]);
+             * else if edgeOlder.length > edgeNew.length:
+             *      its removed
+             */
+            edges = parseHeap(this.dTrace[i].heap);
             if (Object.keys(this.dTrace[i].heap).length > 1 && edges.length > 0) { // check heap is not empty                
-                if (index > 0 && is_different(this.dataGraph.values[index - 1].edges, edges)) {
+                if (arrayDiff(this.dataGraph.values[index - 1].edges, edges)) {
+                    index == 1 ? edgesOlder = edges : pushOrderEdges();
                     this.dataGraph.step[index] = i;
                     this.dataGraph.values[index] = { nodes, edges };
+                    console.log(i + ' | ' + JSON.stringify(this.dataGraph.values[index]));
                     index++; C_STRUCT = true;
                 }
             }
-            nodes = []; // reset to empty array
+            nodes = []; edges = []; EDGES = [];// reset to empty array            
+            dataHeap = [];
         }
 
-        if (C_STRUCT) { // if match this model
+        if (C_STRUCT) { // if match this model | TODO: pointer always in struct ?
             console.log('GRAPH.PointerGlobal');
             this.VIZ = GRAPH.PointerGlobal;
         }
@@ -520,6 +656,19 @@ export class GraphViz {
 
     model04_PointerLocal(): void { // Model-04: pointer local variable
         //
+    }
+
+    infoBar(): void {
+        this.SVG.append("text")
+            .attr({
+                "id": "infoBar",
+                "x": 11,
+                "y": 11,
+                "text-anchor": "start",
+            })
+            .style("font-size", "10pt")
+            .style("fill", "#34495e")
+            .text(`var: `);
     }
 
     render(curStep: number): void {
@@ -532,17 +681,17 @@ export class GraphViz {
         if (this.dataChangedOnStep === 0) { // The First Step
             this.dataChangedOnStep++;
         } else if (this.dataChangedOnStep === 1) { // The Next Step, wherever jump or not
-            this.temp_step[1] = this.set_data(this.dataGraph, curStep);
+            this.tempStep[1] = this.getDatum(this.dataGraph, curStep);
             this.dataChangedOnStep++;
         } else if (this.dataChangedOnStep > 1) { // The Next Step and so on
-            this.temp_step[0] = this.temp_step[1];
-            this.temp_step[1] = this.set_data(this.dataGraph, curStep);
-            diff = this.diff_data(this.temp_step[0], this.temp_step[1]); // compare data before step and after
+            this.tempStep[0] = this.tempStep[1];
+            this.tempStep[1] = this.getDatum(this.dataGraph, curStep);
+            diff = this.diffData(this.tempStep[0], this.tempStep[1]); // compare data before step and after
             if (diff) this.equalDrawed = false; // if data different, draw it
         }
 
         let data = null;
-        switch (this.VIZ) {
+        switch (this.VIZ) { // helper for model
             case GRAPH.None:
                 this.divTab.html('<h3>Nothing Graph Structure!</h3>');
                 break;
@@ -550,28 +699,47 @@ export class GraphViz {
             case GRAPH.MatrixGlobal:
             case GRAPH.PointerGlobal:
                 if (this.equalDrawed && this.SVG) return;
-                data = this.set_data(this.dataGraph, curStep);
+                data = this.getDatum(this.dataGraph, curStep);
                 if (this.initialRender) {
                     this.divTab.html('<div id="graph"></div>');
                     //this.canvas.append('<br>' + JSON.stringify(this.dTrace[curStep], undefined, 4));
                     //this.compute_trace_data(curStep);
                     this.SVG = d3.select("#graph").append("svg")
                         .attr({
-                            "width": this.width,
+                            "width": this.width, // TODO: flexible width in div element, how?
                             "height": this.height
                         }).style("background-color", "#ecf0f1");
+
+                    this.SVG.append("text")
+                        .attr({
+                            "id": "statusBar",
+                            "x": this.width - 11,
+                            "y": this.height - 11,
+                            "text-anchor": "end",
+                        })
+                        .style("font-size", "10pt")
+                        .style("fill", "#34495e")
+                        .text(`Node: - item | Edge: - link`);
+
+                    this.infoBar();
+                    if (KEY.keyname) d3.select("#infoBar").text(`var: ${KEY.keyname}`);
                 }
 
                 if (data) {
-                    //this.draw_graph(data);
-                    //this.drawGraph(data);
                     this.drawGraph2(data);
+                    let weightText = "unweighted";
+                    try {
+                        if (data.edges[0].weight) weightText = "weighted";
+                    } catch (error) {
+                        weightText = "unweighted"; // ?? - sometime can't catch here
+                    }
+                    d3.select("#statusBar").text(`Node: ${data.nodes.length} item | Edge: ${data.edges.length} link | ${weightText} | ${this.G.directed ? "directed" : "undirected"}`); // TODO: undirected --> access G.directed
                 }
                 break;
 
             case GRAPH.MatrixLocal:
                 if (this.equalDrawed && this.SVG) return;
-                data = this.set_data(this.dataGraph, curStep);
+                data = this.getDatum(this.dataGraph, curStep);
                 if (this.initialRender) {
                     this.divTab.html('<div id="graph"></div>');
                     //this.canvas.append('<br>' + JSON.stringify(this.dTrace[curStep], undefined, 4));
@@ -581,13 +749,31 @@ export class GraphViz {
                             "width": this.width,
                             "height": this.height
                         }).style("background-color", "#ecf0f1");
+
+                    this.SVG.append("text")
+                        .attr({
+                            "id": "statusBar",
+                            "x": this.width - 11,
+                            "y": this.height - 11,
+                            "text-anchor": "end",
+                        })
+                        .style("font-size", "10pt")
+                        .style("fill", "#34495e")
+                        .text(`Node: - item | Edge: - link`);
+
+                    this.infoBar();
+                    if (KEY.keyname) d3.select("#infoBar").text(`var: ${KEY.keyname}`);
                 }
 
                 if (data) {
-                    //console.log('========data=======\n' + JSON.stringify(data));
-                    //this.draw_graph(data);
-                    //this.drawGraph(data);
                     this.drawGraph2(data);
+                    let weightText = "unweighted";
+                    try {
+                        if (data.edges[0].weight) weightText = "weighted";
+                    } catch (error) {
+                        weightText = "unweighted"; // ?? - sometime can't catch here
+                    }
+                    d3.select("#statusBar").text(`Node: ${data.nodes.length} item | Edge: ${data.edges.length} link | ${weightText} | undirected`); // TODO: undirected --> access G.directed
                 }
                 break;
         }
@@ -790,7 +976,7 @@ export class GraphViz {
         });
     }
 
-    set_data(data: any, step: number): any {
+    getDatum(data: any, step: number): any {
         if (this.G.instantValue === true) {
             if (this.SVG === null) this.initialRender = true;
             return data.values[0];
@@ -818,7 +1004,7 @@ export class GraphViz {
         return false;
     }
 
-    diff_data(data1: any, data2: any): boolean {
+    diffData(data1: any, data2: any): boolean {
         if (!Array.isArray(data1.nodes) || !Array.isArray(data2.nodes))
             return false;
         if (data1.nodes.length !== data2.nodes.length)
@@ -1043,8 +1229,25 @@ export class GraphViz {
                 .gravity(0.5)
                 .size([this.width, this.height]);
 
-            this.ANIMATELAYER = this.SVG.append("g").attr("id", "animateLayer"); // ??
+            this.ANIMATELAYER = this.SVG.append("g").attr("id", "animateLayer");
             this.LAYER1 = this.SVG.append("g").attr("id", "layerLine");
+
+            this.LAYER1.append('defs').append('marker') // arrowhead
+                .attr({
+                    'id': 'arrowhead',
+                    'viewBox': '-0 -5 10 10',
+                    'refX': 25,
+                    'refY': 0,
+                    'orient': 'auto',
+                    'markerWidth': 9,
+                    'markerHeight': 9,
+                    'xoverflow': 'visible'
+                })
+                .append('svg:path')
+                .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
+                .attr('fill', '#34495e')
+                .attr('stroke', '#34495e');
+
             this.LAYER2 = this.SVG.append("g").attr("id", "layerCirlce");
             this.NODES = this.FORCE.nodes();
             this.LINKS = this.FORCE.links();
@@ -1059,16 +1262,20 @@ export class GraphViz {
 
         this.indexNode = this.NODES.length;
         this.indexEdge = this.LINKS.length;
-        if (dataset.edges[0].weight) haveWeight = true;
+        try {
+            if (dataset.edges[0].weight) haveWeight = true;
+        } catch (error) {
+            haveWeight = false;
+        }
 
         if (this.NODES.length < dataset.nodes.length) {
-            this.add_datum(dataset);
+            this.addDatum(dataset);
         } else if (this.NODES.length > dataset.nodes.length) {
-            this.remove_datum(dataset);
+            this.removeDatum(dataset);
         } else if (this.LINKS.length < dataset.edges.length) {
-            this.add_datum(dataset);
+            this.addDatum(dataset);
         } else if (this.LINKS.length > dataset.edges.length) {
-            this.remove_datum(dataset);
+            this.removeDatum(dataset);
         }
 
         force.on("tick", function () {
@@ -1120,138 +1327,31 @@ export class GraphViz {
                 });
             }
         });
-
-        let source: Number = 0;
-        let target: Number = 0;
-        let line: any = { "id": "_", "x1": 0, "y1": 0, "x2": 0, "y2": 0 };
-        let src_node: any = { "cx": 0, "cy": 0 };
-        let trg_node: any = { "cx": 0, "cy": 0 };
-        let DA: any = [];
-        console.log('==== START ==> ', DA);
-        /*this.EDGES.forEach(function (d, i) {
-            source = d.source; target = d.target;
-            DA.push({ source, target, line, src_node, trg_node })
-        });
-        for(let i = 0; i < this.EDGES.length; i++){
-            source = this.EDGES[i].source; target = this.EDGES[i].target;
-            line.id = "_"; line.x1 = 0; line.y1 = 0; line.x2 = 0; line.y2 = 0;
-            src_node.cx = 0; src_node.cy = 0;
-            trg_node.cx = 0; trg_node.cy = 0;
-            DA.push({ source, target, line, src_node, trg_node });
-        }*/
-        //this.dataAnimate = dataAnimate;
-        //console.log('=>dataAnimate: ', this.dataAnimate);
-        //console.log('coba lagi == 0 d ==> ', DA);
-
-        let temp = this.EDGES;
-        function animation() {
-            for (let i = 0; i < temp.length; i++) {
-                source = temp[i].source; target = temp[i].target;
-                line.id = "_"; line.x1 = 0; line.y1 = 0; line.x2 = 0; line.y2 = 0;
-
-                let node = document.getElementById('node' + source);
-                let cx = Number(node.getAttribute("cx"));
-                let cy = Number(node.getAttribute("cy"));
-                src_node.cx = cx; src_node.cy = cy;
-
-                node = document.getElementById('node' + target);
-                cx = Number(node.getAttribute("cx"));
-                cy = Number(node.getAttribute("cy"));
-                trg_node.cx = cx; trg_node.cy = cy;
-
-                DA.push({ source, target, line, src_node, trg_node });
-            }
-            let L = layer1.selectAll('line');
-            //L[0].forEach(e => console.log('==> e: ', e));
-            //console.log('coba 0 d ==> ', DA[0]);
-            for (let i = 0; i < DA.length; i++) {
-                /*let node = layer2.select('#node' + DA[i].source);
-                let cx = Number(node[0][0].getAttribute("cx"));
-                let cy = Number(node[0][0].getAttribute("cy"));
-                DA[i].src_node.cx = cx;
-                DA[i].src_node.cy = cy;
-                console.log('src_node=> ', cx, ' | ', cy);
-
-                node = layer2.select('#node' + DA[i].target);
-                cx = Number(node[0][0].getAttribute("cx"));
-                cy = Number(node[0][0].getAttribute("cy"));
-                DA[i].trg_node.cx = cx;
-                DA[i].trg_node.cy = cy;
-                console.log('trg_node=> ', cx, ' | ', cy);*/
-                //console.log(i, ' - d ==> ', DA[i]);
-
-                for (let j = 0; j < L[0].length; j++) {
-                    /*if( (dataAnimate[i].src_node.cx == Number(L[0][j].getAttribute('x1')) && 
-                        dataAnimate[i].src_node.cy == Number(L[0][j].getAttribute('y1'))) &&
-                        
-                        (dataAnimate[i].trg_node.cx == Number(L[0][j].getAttribute('x2')) && 
-                        dataAnimate[i].trg_node.cy == Number(L[0][j].getAttribute('y2')))
-                      ){
-                          dataAnimate[i].line.id = L[0][j].getAttribute('id');
-                          dataAnimate[i].line.x1 = Number(L[0][j].getAttribute('x1'));
-                          dataAnimate[i].line.x2 = Number(L[0][j].getAttribute('x2'));
-                          dataAnimate[i].line.y1 = Number(L[0][j].getAttribute('y1'));
-                          dataAnimate[i].line.y2 = Number(L[0][j].getAttribute('y2'));
-                      }*/
-                    //console.log(j, ' - ', L[0][j], ' | ', L[0][j].getAttribute('id'));
-                }
-            }
-
-            let line1 = document.getElementById('line_1');
-            let x1 = Number(line1.getAttribute('x1'));
-            let y1 = Number(line1.getAttribute('y1'));
-            let x2 = Number(line1.getAttribute('x2'));
-            let y2 = Number(line1.getAttribute('y2'));
-
-            animateLayer.append("line")
-                .style({
-                    "stroke": "red",
-                    "stroke-width": "5px"
-                })
-                .attr({
-                    x1: x1,
-                    y1: y1,
-                    x2: x1 + 10,
-                    y2: y1 + 10
-                })
-                .transition()
-                .duration(1500)
-                .attr({
-                    x2: x2,
-                    y2: y2
-                });
-
-            setTimeout(function () {
-                animateLayer.selectAll('line').remove();
-            }, 5000);
-        }
-
-        //force.on("end", animation);
     }
 
-    add_datum(dataset: any): void {
-        setTimeout(this.add_node(dataset), 750);
+    addDatum(dataset: any): void {
+        setTimeout(this.addNode(dataset), 750);
     }
 
-    add_node(dataset: any): void {
+    addNode(dataset: any): void {
         if (this.indexNode < dataset.nodes.length) {
             this.NODES.push(dataset.nodes[this.indexNode]);
             this.indexNode++;
             this.redraw(dataset);
-            this.add_datum(dataset); // call recursive
+            this.addDatum(dataset); // call recursive
         } else if (this.indexEdge < dataset.edges.length) {
             this.LINKS.push(dataset.edges[this.indexEdge]);
             this.indexEdge++;
             this.redraw(dataset);
-            this.add_datum(dataset); // call recursive
+            this.addDatum(dataset); // call recursive
         }
     }
 
-    remove_datum(dataset: any): void {
-        setTimeout(this.remove_node(dataset), 750);
+    removeDatum(dataset: any): void {
+        setTimeout(this.removeNode(dataset), 750);
     }
 
-    remove_node(dataset: any): void {
+    removeNode(dataset: any): void {
         if (this.NODES.length > dataset.nodes.length) {
             let n = this.NODES.splice((this.NODES.length - 1), 1);
             let edge = this.LINKS;
@@ -1265,13 +1365,13 @@ export class GraphViz {
                 this.LAYER1.selectAll('.link_' + i).remove();
             }
             this.redraw(dataset);
-            this.remove_datum(dataset); // call recursive
+            this.removeDatum(dataset); // call recursive
         } else if (this.LINKS.length > dataset.edges.length) {
             let edge = this.LINKS.length - 1;
             this.LINKS.pop();
             this.LAYER1.selectAll('.link_' + edge).remove();
             this.redraw(dataset);
-            this.remove_datum(dataset); // call recursive
+            this.removeDatum(dataset); // call recursive
         }
     }
 
@@ -1297,6 +1397,10 @@ export class GraphViz {
                 return "line_" + i;
             })
             .style("stroke", "#34495e");
+
+        if (this.G.directed) {
+            this.LINE.attr('marker-end', 'url(#arrowhead)');
+        }
 
         if (dataset.edges[0].weight) {
             this.LINE.enter()
@@ -1362,6 +1466,7 @@ export class GraphViz {
             .attr("cursor", "move")
             .on("dblclick", dblclick)
             .call(drag);
+
         this.CIRCLE.append('title').text('double-click and drag to sticky');
 
         this.CIRCLE.enter()
@@ -1420,7 +1525,7 @@ export class GraphViz {
 
         function searchLine(src, trg) {
             let line: any = {}; line.id = ''; line.x1 = 0; line.x2 = 0; line.x2 = 0; line.y2 = 0;
-            let link = document.getElementsByClassName('link');
+            let link = document.getElementsByClassName('link'); // TODO: how if no link between node_src and node_trg ?
             let src_node = document.getElementById('node' + src);
             let trg_node = document.getElementById('node' + trg);
             let src_node_cx = Number(src_node.getAttribute('cx'));
@@ -1462,7 +1567,7 @@ export class GraphViz {
             return line;
         }
 
-        //console.log('========\n', JSON.stringify(this.dTrace[curStep - 1]), '\n=========');
+        let error = false;
         if (KEY.source_var && KEY.target_var) {
             switch (this.VIZ) {
                 case GRAPH.None:
@@ -1471,25 +1576,48 @@ export class GraphViz {
 
                 case GRAPH.MatrixGlobal:
                 case GRAPH.PointerGlobal:
+                    console.log('animate - MatrixGlobal');
 
+                    parse(this.dTrace[curStep - 1].globals);
+
+                    console.log('s: ', KEY.source, ' - t: ', KEY.target);
+                    if (KEY.source == null || KEY.target == null) { // find in local, maybe in function/procedure
+                        try { // sometimes error, cause not all line have it (this attribut)
+                            parse(this.dTrace[curStep - 1].stack_to_render[1].encoded_locals);
+                        } catch (e) {
+                            error = true;
+                            console.log('error');
+                        }
+                        if (error) parse(this.dTrace[curStep - 1].stack_to_render[0].encoded_locals);
+                    }
+
+                    if (KEY.source !== null && KEY.target !== null) {
+                        if (KEY.source !== KEY.target) {
+                            let edge = searchLine(KEY.source, KEY.target);
+                            this.animationColor(KEY.source, KEY.target, edge);
+                            console.log('==> Edge: ' + JSON.stringify(edge));
+                        }
+                    }
                     break;
 
                 case GRAPH.MatrixLocal:
                     console.log('animate - MatrixLocal');
-                    let error = false;
+
                     try { // sometimes error, cause not all line have it (this attribut)
-                        parse(this.dTrace[curStep - 1].stack_to_render[1].encoded_locals); // TODO: find value only in "is_highlighted":true , how?
-                    } catch (error) {
+                        parse(this.dTrace[curStep - 1].stack_to_render[1].encoded_locals);
+                    } catch (e) {
                         error = true;
                         console.log('error');
                     }
                     if (error) parse(this.dTrace[curStep - 1].stack_to_render[0].encoded_locals);
 
-                    if ((KEY.source && KEY.target) && (KEY.source !== KEY.target)) {
-                        console.log('s: ', KEY.source, ' - t: ', KEY.target);
-                        let edge = searchLine(KEY.source, KEY.target);
-                        this.animationColor(KEY.source, KEY.target, edge);
-                        console.log('==> Edge: ' + JSON.stringify(edge));
+                    console.log(error, ' | s: ', KEY.source, ' - t: ', KEY.target, '\nKEY: ', JSON.stringify(KEY));
+                    if (KEY.source !== null && KEY.target !== null) {
+                        if (KEY.source !== KEY.target) {
+                            let edge = searchLine(KEY.source, KEY.target);
+                            this.animationColor(KEY.source, KEY.target, edge);
+                            console.log('==> Edge: ' + JSON.stringify(edge));
+                        }
                     }
                     break;
             }
@@ -1499,10 +1627,10 @@ export class GraphViz {
         KEY.target_var = null; KEY.target = null;
     }
 
-    animationColor(src, trg, line): void {
+    animationColor(src, trg, line): void { // TODO: add corner info label --> visual variabel graf and what doing
         this.LAYER2.select("#node" + src)
             .transition()
-            .duration(750)
+            .duration(250)
             .attr("stroke", "#f1c40f")
             .attr("stroke-width", "7px")
             .delay(1500)
@@ -1510,24 +1638,27 @@ export class GraphViz {
             .duration(1750)
             .attr("stroke-width", "0px");
 
-        this.ANIMATELAYER.append("line")
-            .style({
-                "stroke": "red",
-                "stroke-width": "5px"
-            })
-            .attr({
-                x1: line.x1,
-                y1: line.y1,
-                x2: line.x1 + 10,
-                y2: line.y1 + 10
-            })
-            .transition()
-            .duration(1500)
-            .attr({
-                x2: line.x2,
-                y2: line.y2
-            });
-        
+        if (line.id !== "") {
+            console.log('===>append line');
+            this.ANIMATELAYER.append("line")
+                .style({
+                    "stroke": "red",
+                    "stroke-width": "5px"
+                })
+                .attr({
+                    x1: line.x1,
+                    y1: line.y1,
+                    x2: line.x1 + 10,
+                    y2: line.y1 + 10
+                })
+                .transition()
+                .duration(1500)
+                .attr({
+                    x2: line.x2,
+                    y2: line.y2
+                });
+        }
+
         this.LAYER2.select("#node" + trg)
             .transition()
             .duration(750)
@@ -1538,9 +1669,12 @@ export class GraphViz {
             .duration(1750)
             .attr("stroke-width", "0px");
 
-        let animateLayer = this.ANIMATELAYER;
-        setTimeout(function () {
-            animateLayer.selectAll('line').remove();
-        }, 3000);
+        if (line.id !== "") {
+            console.log('===>remove line');
+            let animateLayer = this.ANIMATELAYER;
+            setTimeout(function () {
+                animateLayer.selectAll('line').remove();
+            }, 3000);
+        }
     }
 }
