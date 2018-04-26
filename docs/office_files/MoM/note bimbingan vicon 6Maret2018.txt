@@ -1,0 +1,58 @@
+- bab 5 >> pengujian dan evaluasi ?
+- buat narasi lain yang sesuai, jangan menyebutkan kembali dari judul bab/subbab
+- apa tujuan pengujian ? memastikan kakas sesuai yg dirancang. apakah butuh pengujian ? knp?
+- tidak layak menjadi subbab, tapi lebih ke poin\bullet
+- memahami eksekusi kode program yang mengandung struktur data graf
+- appropriate desain interaksi sesuai dengan graf
+- metode atau teknik untuk visualisasi graf
+- fokus mana? desain interaksi atau visualisasi ?
+- rumusan masalah harus diperbaiki
+
+UI & UX --> adl dua hal berbeda, fokus yg mana?
+
+- visualisasi graf yang cocok
+- apa yang dimaksud dengan 'paham' pd judul
+
+analisis & desain ?
+- visualisasi dibahas terlebih dahulu
+- fitur-fitur visualisasi
+- mengeksekusi kode program yg mengandung struktur data graf
+
+istilah berikut adalah hal yg berbeda:
+- visualisasi
+- desain interaksi
+- UI
+- UX
+
+fokus dan perbaiki pada Bab 3 & 5
+ide2, metode/teknik untuk visualisasi akan dibahas di sini
+
+Bab 4 --> implementasi jgn disentuh dlu
+
+
+-------catatan pribadi---------
+Fokus pada analisis visualisasi <=====> desain interaksi?
+
+- kode graf program -- apa maknanya
+- graf kode program -- ??
+- kode program graf -- ??
+
+rumusan masalah: (masalahnya apa?)
+- visualisasi apa yang sesuai untuk eksekusi graf kode program sehingga dapat dipahami oleh peserta didik ?
+- Apakah dengan visualisasi graf dapat meningkatkan pemahaman eksekusi graf kode program ?
+- Apa yang dimaksud dengan memahami eksekusi graf kode program ? (p.27 - stasko-keynote.pdf)
+- bagaimana metode untuk mendeteksi graf di dalam kode program sehingga dapat divisualisasi ?
+
+tujuan visualisasi:
+The purpose of these simulations is to help the beginner learn to reason about program execution, a skill whose development has been identified as a major challenge in introductory programming education. VPS promotes effective learning by seeking to cognitively engage the learner with a visualization.
+
+TUP-based evaluation (Bednarik et al., 2004) Development of the TUP Model - Evaluating Educational Software
+
+The authors concentrate on effectiveness of (algorithm) visualizations i.e. how well one performs with 
+the visualization tool compared to others who do not use the tool; we see the domain of visualization studies 
+as extending beyond the effectiveness.
+
+
+grand theory ==> computational thinking
+midle theory ==> visualization
+micro theory ==> interaction design
