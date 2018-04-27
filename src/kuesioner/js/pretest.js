@@ -416,18 +416,17 @@ function showFormLastPemStrukData(e) {
 }
 
 var formPretest = document.getElementById('formPreTest');
-formPretest.innerHTML = '';
+/*formPretest.innerHTML = '';
 for (var i = 0; i < pretest.length; i++) {
     formPretest.innerHTML += pretest[i].html;
-}
+}*/
 
 /**
  * 
  * @param {*pertanyaan saat ini} currentQuestion 
  * @param {*jawaban dari pertanyaan saat ini untuk diproses pada pertanyaan berikutnya} answer 
  */
-function preTest(currentQuestion, answer, nextBtn) {
-    var nextQuestion = 0;
+function preTest(currentQuestion, nextQuestion, answer, nextBtn) {
 
     switch (currentQuestion) {
         case 1:

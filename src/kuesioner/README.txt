@@ -57,3 +57,13 @@ http://plmd.me
 
 Mafnific Popup
 http://dimsemenov.com/plugins/magnific-popup/
+
+
+Pseudocode Kuesioner:
+show question1 & nextBtn
+if nextBtn == clicked:
+    check answer currentQuestion;
+    basedOn answer, set nextQuestion;
+    move to nextQuestion;
+    show question2;
+
