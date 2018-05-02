@@ -399,7 +399,11 @@
 			height = window.innerHeight;
 
 		if (width < 800 || height < 600) {
-			alert('Pastikan browser fullscreen dan\nresolusi perangkat Anda minimal 800 x 600 pixels');
+			alert('Maaf, Anda tidak dapat melanjutkan mengisi kuesioner ini!\n\n' +
+				'Pastikan browser fullscreen dan\n' +
+				'resolusi perangkat Anda minimal 800 x 600 pixels\n\n' +
+				'Resolusi perangkat Anda saat ini:\n' +
+				`${width} x ${height} pixels`);
 		}
 	};
 
@@ -444,15 +448,6 @@ function checkResolution() {
 			'Resolusi perangkat Anda saat ini:\n' +
 			`${width} x ${height} pixels`);
 	}
-
-	clickDataPribadi();
-}
-
-function clickDataPribadi() {
-	var dataSection = document.getElementById('fh5co-contact');
-	dataSection.innerHTML = `<h1>Data Pribadi</h1>`;
-
-	return false;
 }
 
 function showProdi() {
