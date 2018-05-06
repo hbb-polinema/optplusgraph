@@ -450,13 +450,15 @@ function checkResolution() {
 	}
 }
 
-function showProdi() {
-	var pendidikan = document.getElementById('pendidikan').value;
+function showProdi(val) {
+	var pendidikan = val.value;
 
-	if (pendidikan === 'd' || pendidikan === 's1' || pendidikan === 's2' || pendidikan === 's3') {
+	if (pendidikan == 'd' || pendidikan == 's1' || pendidikan == 's2') {
 		document.getElementById('jurusan').style.display = 'block';
+		document.getElementById('asal-kampus').style.display = 'block';
 	} else {
 		document.getElementById('jurusan').style.display = 'none';
+		document.getElementById('asal-kampus').style.display = 'none';
 	}
 }
 

@@ -67,3 +67,18 @@ if nextBtn == clicked:
     move to nextQuestion;
     show question2;
 
+
+
+Privasi Anda sebagai responden di kuesioner ini adalah hal yang sangat penting bagi kami.
+
+Di kuesioner ini kami menganggap bahwa privasi dari informasi pribadi Anda adalah hal yang penting. Dan inilah keterangan mengenai informasi apa saja yang kami terima dan kami kumpulkan pada saat Anda mengisi kuesioner ini dan bagaimana kami menyimpan serta menjaga informasi tersebut. Kami tegaskan bahwa kami tidak akan pernah memberikan informasi tersebut kepada pihak ketiga.
+
+#Tentang file log#
+
+Seperti kebanyakan situs lain, kami mengumpulkan dan menggunakan data yang terdapat pada file log. Informasi yang terdapat pada file log termasuk alamat IP (Internet Protocol) Anda, ISP (Internet Service Provider), browser yang Anda gunakan, waktu pada saat Anda berkunjung dan halaman mana saja yang Anda buka selama berkunjung di situs ini.
+
+#Tentang cookies#
+
+Situs kami menggunakan cookies untuk menaruh informasi, seperti informasi preferensi pribadi Anda pada saat mengunjungi situs kami. Ini juga mungkin termasuk untuk menampilkan jendela pop up untuk kunjungan pertama Anda, atau juga untuk menyimpan informasi login Anda di situs kami.
+
+Kuesioner ini tidak menampilkan iklan seperti pada situs lainnya. Kami berusaha agar Anda fokus untuk menjawab pertanyaan-pertanyaan dalam kuesioner online ini.

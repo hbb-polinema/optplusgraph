@@ -1,83 +1,5 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-<!--<![endif]-->
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Kuesioner &mdash; Proyek Tesis 2018</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Kuesioner Proyek Tesis Habibie Ed Dien ITB 2018" />
-    <meta name="keywords" content="tesis, kuesioner, responden, itb, 2018, visualisasi, program, eksekusi, kode" />
-    <meta name="author" content="FREEHTML5.CO" />
-
-    <!-- 
-	//////////////////////////////////////////////////////
-
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FREEHTML5.CO
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	 -->
-
-    <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:description" content="" />
-    <meta name="twitter:title" content="" />
-    <meta name="twitter:image" content="" />
-    <meta name="twitter:url" content="" />
-    <meta name="twitter:card" content="" />
-
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="shortcut icon" href="favicon.ico">
-
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
-
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="css/animate.css">
-    <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" href="css/icomoon.css">
-    <!-- Simple Line Icons -->
-    <link rel="stylesheet" href="css/simple-line-icons.css">
-    <!-- Magnific Popup -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <!-- Bootstrap  -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-
-    <!-- 
-	Default Theme Style 
-	You can change the style.css (default color purple) to one of these styles
-	
-	1. pink.css
-	2. blue.css
-	3. turquoise.css
-	4. orange.css
-	5. lightblue.css
-	6. brown.css
-	7. green.css
-
-	-->
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- Modernizr JS -->
-    <script src="js/modernizr-2.6.2.min.js"></script>
-    <!-- FOR IE9 below -->
-    <!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-    <![endif]-->
-
+<?php require_once('header.php'); ?>
+<body>
     <style>
         /* Mark input boxes that gets an error on validation: */
 
@@ -132,10 +54,6 @@
             background-color: #4CAF50;
         }
     </style>
-
-</head>
-
-<body>
     <header role="banner" id="fh5co-header" class="navbar-fixed-top">
         <div class="container">
             <!-- <div class="row"> -->
@@ -206,7 +124,7 @@
                                 <br>yang telah Anda ketahui sebelumnya.
                                 <br>Mohon kejujuran dan konsentrasi Anda.</h3>
                             <p>Baca lebih lanjut tentang
-                                <a href="#" target="_blank">Kebijakan Privasi</a>.</p>
+                                <a data-toggle="modal" data-target="#kebijakan">Kebijakan Privasi</a>.</p>
                         </div>
                     </div>
                 </div>
@@ -222,7 +140,7 @@
                             </h4>
                         </div>
                         <!-- One "tab" for each step in the form: -->
-                        <div id="formPreTest">
+                        <div id="DivFormPreTest">
                             <div id="p0" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
                                     <p style="margin-bottom: 7pt;">Kapan terakhir Anda membuat kode program atau memprogram ?</p>
@@ -407,73 +325,14 @@
             <div style="height:77px;"></div>
             <div class="col-md-12 text-center">
                 <p style="font-size:11pt;">
-                    <b>Info!</b> Jumlah pertanyaan akan bertambah atau berkurang menyesuaikan
-                    <br>jawaban yang Anda pilih, karena dibutuhkannya analisis data yang berkorelasi.</p>
+                    <span class="badge badge-info">Info</span> Jumlah pertanyaan akan bertambah atau berkurang menyesuaikan
+                    <br>jawaban yang Anda pilih, karena dibutuhkan analisis data yang berkorelasi.</p>
             </div>
         </div>
 
     </section>
 
     <div style="height:133px;"></div>
+    <script src="js/pretest.js?v=1"></script>
 
-    <footer id="footer" role="contentinfo">
-        <a href="#" class="gotop js-gotop">
-            <i class="icon-arrow-up2"></i>
-        </a>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <p>Hak Cipta Dilindungi Undang-Undang &copy; 2018.
-                        <br>
-                        <a href="#" target="_blank">Kebijakan Privasi</a> | Template by
-                        <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a>
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <ul class="social social-circle">
-                        <li>
-                            <a href="https://www.twitter.com/habibieeddien" target="_blank">
-                                <i class="icon-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/habibieeddien" target="_blank">
-                                <i class="icon-facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://habibie.tk/">
-                                <i class="icon-globe" target="_blank"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
-    <!-- jQuery Easing -->
-    <script src="js/jquery.easing.1.3.js"></script>
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Waypoints -->
-    <script src="js/jquery.waypoints.min.js"></script>
-    <!-- Stellar Parallax -->
-    <script src="js/jquery.stellar.min.js"></script>
-    <!-- Counter -->
-    <script src="js/jquery.countTo.js"></script>
-    <!-- Magnific Popup -->
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/magnific-popup-options.js"></script>
-
-    <!-- Main JS (Do not remove) -->
-    <script src="js/main.js?v=2"></script>
-    <script src="js/pretest.js?v=5"></script>
-
-</body>
-
-</html>
+<?php require_once('footer.php'); ?>
