@@ -56,6 +56,8 @@ $(document).ready(function () {
 
     // canned examples
     $(".exampleLink").click(function () {
+        $("body").scrollTop();
+        $("#loadingScreen").css("display","block"); // Show! loading screen. Progress is beginning... (habibieeddien)
         let myId = $(this).attr('id');
         let exFile;
         let lang;
@@ -115,6 +117,9 @@ $(document).ready(function () {
                         undefined
                 });
             }
+            
+            $("#loadingScreen").css("display","none"); // Hide! loading screen, progress has completed. (habibieeddien)
+
         }, 'text' /* data type - set to text or else jQuery tries to EXECUTE the JS example code */);
         return false; // prevent an HTML 'a' element click from going to a link
     });
@@ -133,5 +138,5 @@ $(document).ready(function () {
     });
     $("#btnInfo").click(function () {
         $("#info").slideToggle(750);
-    });
+    });    
 });
