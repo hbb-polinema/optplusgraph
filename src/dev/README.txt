@@ -7,11 +7,13 @@ NOTE by habibieeddien | Sept 2017
     `npm link webpack typescript tsd typings`
 
 * Run Backend:
+    `docker pull habibie/valgrind_backend`
     `node backend.js`
           OR
     `sudo usermod -a -G docker $USER` (solve: permission issue docker engine daemon)
-    `sudo forever backend.js` (run forever in server production)
-
+    `sudo forever start -l forever.log -o out.log -e err.log backend.js` (run forever in server production)
+    `sudo ufw allow 3000` (solve: blocking port issue by firewall)
+    `sudo ufw status` (check status all port listening/allowed)
 ---
 Online Python Tutor v5 "unity" -- the goal for this version is to
 significantly clean up, modernize, and modularize the OPT codebase to
