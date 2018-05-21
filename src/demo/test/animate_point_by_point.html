@@ -15,6 +15,26 @@
         font-color: #474747;
         shape-rendering: crispEdges;
     }
+    
+    .tooltip-container {
+        position: absolute;
+        pointer-events: none;
+        padding: 2px 4px 2px 6px;
+        background-color: #eee;
+        border: solid 1px #aaa;
+        z-index: 100;
+    }
+    
+    .tooltip-title {
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 1em;
+    }
+    
+    .tooltip-content {
+        font-size: 11px;
+    }
 </style>
 
 <body>
@@ -29,12 +49,21 @@
             left: 40
         };
 
-    svg = d3.select("body")
+    var svg = d3.select("body")
         .append("svg")
         .attr({
             width: w - 10,
             height: h - 10
         });
+
+    svg.append("text")
+        .attr("x", (w / 2))
+        .attr("y", (margin.top / 2))
+        .attr("dy", ".35em")
+        .attr("text-anchor", "middle")
+        .style("font-size", "16pt")
+        .style("text-decoration", "underline")
+        .text("Value vs Date Graph");
 
     var parse = d3.time.format("%Y").parse;
 
@@ -160,4 +189,35 @@
             // /stroke: "#78B446",
             "stroke-width": 4
         });
+
+    // Initialize the tooltip
+    var width = 77;
+    var init = function(selection) {
+        selection.each(function(data) {
+            // Create and configure the tooltip container
+            d3.select(this)
+                .attr('class', 'tooltip-container')
+                .style('width', width + 'px');
+            // Tooltip Title
+            d3.select(this).append('p')
+                .attr('class', 'tooltip-title')
+                .text(title(data));
+            // Tooltip Content
+            d3.select(this).append('p')
+                .attr('class', 'tooltip-content')
+                .text(content(data));
+        });
+    };
+
+    // Move the tooltip to follow the pointer
+    var move = function() {
+        // Select the tooltip and move it following the pointer
+        d3.select('body').select('div.tooltip-container')
+            .style('left', (d3.event.pageX + offset.x) + 'px')
+            .style('top', (d3.event.pageY + offset.y) + 'px');
+    };
+    // Remove the tooltip
+    var remove = function() {
+        d3.select('div.tooltip-container').remove();
+    };
 </script>
