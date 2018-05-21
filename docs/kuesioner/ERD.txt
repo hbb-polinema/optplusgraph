@@ -1,0 +1,27 @@
+pertanyaan
+----------
+id_pertanyaan
+isi_pertanyaan
+kategori_pertanyaan {pretest,simulasi,postest}
+
+
+responden
+---------
+id_responden
+tgl_waktu
+nama_responden
+gender_responden
+umur_responden
+pendidikan_responden
+email_responden
+ponsel_reponden
+perangkat_responden { device_id, ip, location, resolution, user_agent }
+
+jawaban
+-------
+id_jawaban
+isi_jawaban
+alur_pertanyaan
+id_responden
+id_pertanyaan
+waktu_penyelesaian
