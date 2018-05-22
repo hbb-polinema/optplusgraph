@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var WebpackOnBuildPlugin = require('on-build-webpack');
 var exec = require('child_process').exec;
+var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 module.exports = {
     plugins: [
@@ -13,6 +14,8 @@ module.exports = {
             jQuery: "jquery",
             $: "jquery"
         }),
+
+        new LiveReloadPlugin(), // https://www.npmjs.com/package/webpack-livereload-plugin
 
         // run a micro frontend regression test after every webpack build
         // to sanity-check
@@ -53,7 +56,7 @@ module.exports = {
     },
 
     entry: {
-        'main':"./js/hbb/Main.ts",
+        'main': "./js/hbb/Main.ts",
         //'visualize': "./js/visualize.ts",
         //'opt-live': "./js/opt-live.ts",
         //'iframe-embed': "./js/iframe-embed.ts",
