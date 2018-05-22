@@ -11,7 +11,7 @@ export class ProgramOutputBox implements IProgramOutputBox {
         this.owner = owner;
         this.domRoot = domRoot;
 
-        /*let outputsHTML =
+        /*let outputsHTML =   // move to DataVisualizer --> tab Print Output
             `<div id="progOutputs">
                 <div id="printOutputDocs">Print output (drag lower right corner to resize)</div>\n
                 <textarea id="pyStdout" cols="40" rows="5" wrap="off" readonly></textarea>
