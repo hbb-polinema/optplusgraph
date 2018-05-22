@@ -120,7 +120,8 @@ button.surveyBtnBig {
     margin-left: 3px;
 }
 
-#experimentalHeader {}
+
+/*#experimentalHeader {}*/
 
 #surveyHeader {
     margin-left: 100px;
@@ -273,4 +274,20 @@ textarea.bubbleInputText {
     -webkit-background-clip: padding-box;
     -moz-background-clip: padding;
     background-clip: padding-box;
+}
+
+#loadingScreen {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-left: 37%;
+    padding-top: 23%;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    font-size: 16pt;
+    font-weight: bolder;
 }
