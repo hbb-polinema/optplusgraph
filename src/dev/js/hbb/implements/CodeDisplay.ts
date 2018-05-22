@@ -38,8 +38,8 @@ export class CodeDisplay implements ICodeDisplay {
                     <button id="editBtn" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit code</button>
                     <span id="liveModeSpan" style="display: none;">| <a id="editLiveModeBtn" href="#">Live programming</a></a>
                 </div>
-                <div id="legendDiv"/>
-                <div id="codeFooterDocs">Click a line of code to set a breakpoint; use the Backward and Forward buttons to jump there.</div>
+                <!--div id="legendDiv"/-->
+                <!--div id="codeFooterDocs">Click a line of code to set a breakpoint; use the Backward and Forward buttons to jump there.</div-->
             </div>`;
 
         this.domRoot.append(codeDisplayHTML);
@@ -48,9 +48,9 @@ export class CodeDisplay implements ICodeDisplay {
             this.domRoot.find('#editCodeLinkDiv').css('font-size', '10pt');
         }
 
-        this.domRoot.find('#legendDiv')
+        /*this.domRoot.find('#legendDiv')
             .append('<svg id="prevLegendArrowSVG"/> <span style="background-color:#F0F0EA;"> line that has just executed  </span>')
-            .append('<p style="margin-top: 4px"><svg id="curLegendArrowSVG"/> <span style="background-color:#FFFF66;"> next line to execute </span></p>');
+            .append('<p style="margin-top: 4px"><svg id="curLegendArrowSVG"/> <span style="background-color:#FFFF66;"> next line to execute </span></p>');*/
         this.domRootD3.select('svg#prevLegendArrowSVG')
             .append('polygon')
             .attr('points', SVG_ARROW_POLYGON)
@@ -181,6 +181,7 @@ export class CodeDisplay implements ICodeDisplay {
         this.domRootD3.select('svg#leftCodeGutterSVG')
             .append('polygon')
             .attr('id', 'curLineArrow')
+            .attr('data-intro', 'This is next execute')
             .attr('points', SVG_ARROW_POLYGON)
             .attr('fill', DARK_ARROW_COLOR);
 
@@ -323,6 +324,7 @@ export class CodeDisplay implements ICodeDisplay {
                 cla.attr('transform', translateCurCmd);
             }
             gutterSVG.find('#curLineArrow').show();
+            //introJs().start();
 
             // yellow-highlight line for next execute @habibieeddien
             this.domRootD3.select('#v1__cod' + myViz.curLineNumber).style('background-color', '#FFFF66');
@@ -385,7 +387,7 @@ export class CodeDisplay implements ICodeDisplay {
         // smoothly scroll code display
         if (!isOutputLineVisible(curEntry.line)) {
             scrollCodeOutputToLine(curEntry.line);
-        }        
+        }
     }
 
     animateGraphBasedOnLineCode(code: string): void {
@@ -398,7 +400,7 @@ export class CodeDisplay implements ICodeDisplay {
         let searchKey = code.match(regex);
         let searchPrintf = code.match(/printf/g); // TODO: think again, why not visualize if jump to line code with 'printf' ?
 
-        if (searchKey !== null && searchPrintf === null) {          
+        if (searchKey !== null && searchPrintf === null) {
             if (searchKey.length === 1) { // make sure only one key access
                 let term = KEY.keyname + '[';
                 let row = code.indexOf(term);
@@ -409,7 +411,7 @@ export class CodeDisplay implements ICodeDisplay {
                     KEY.source_var = x;
                 }
 
-                term = term + x + ']['; console.log('term: ', term);
+                term = term + x + ']['; console.log('term: ', term); // TODO: how if character in variable more than one like [node] ? not always like [i] or [j]
                 let col = code.indexOf(term);
                 let y = code[col + term.length];
                 //console.log('col: ', y, '\nTERM: ', term, '\nterm.length: ', term.length);
