@@ -39,9 +39,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    e.g., http://meyerweb.com/eric/tools/css/reset/
 */
 
-div.ExecutionVisualizer {
-    /* none for now */
-}
+
+/*div.ExecutionVisualizer {
+    /* none for now
+}*/
 
 div.ExecutionVisualizer table.visualizer {
     font-family: verdana, arial, helvetica, sans-serif;
@@ -60,9 +61,11 @@ div.ExecutionVisualizer td#heap_td {
     /* don't make fonts in the heap so big! */
 }
 
+
+/*
 div.ExecutionVisualizer #dataViz {
-    /*margin-left: 25px;*/
-}
+    /*margin-left: 25px;
+}*/
 
 
 /*
@@ -159,6 +162,7 @@ div.ExecutionVisualizer div#codeDisplayDiv {
 
 .style-scroll::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     background-color: #F5F5F5;
 }
@@ -172,6 +176,7 @@ div.ExecutionVisualizer div#codeDisplayDiv {
 .style-scroll::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: #3498db;
 }
 
@@ -181,15 +186,7 @@ div.ExecutionVisualizer div#codeDisplayDiv {
 .glyphicon-refresh-animate {
     -animation: spin 2s infinite linear;
     -webkit-animation: spin2 2s infinite linear;
-}
-
-@-webkit-keyframes spin2 {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(360deg);
-    }
+    animation: spin2 2s infinite linear;
 }
 
 @keyframes spin {
@@ -201,6 +198,15 @@ div.ExecutionVisualizer div#codeDisplayDiv {
     }
 }
 
+@keyframes spin2 {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
 
 /* Style the tab @habibieeddien */
 
@@ -208,6 +214,7 @@ div.tab {
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
+    line-height: 1pt;
 }
 
 
@@ -216,7 +223,7 @@ div.tab {
 div.tab button {
     background-color: inherit;
     float: left;
-    border: none;
+    border: 0.1px solid #ccc;
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
@@ -235,7 +242,8 @@ div.tab button:hover {
 /* Create an active/current tablink class */
 
 div.tab button.active {
-    background-color: #ccc;
+    background-color: #3498db;
+    color: whitesmoke;
 }
 
 
@@ -249,6 +257,10 @@ div.tab button.active {
     -webkit-animation: fadeEffect 1s;
     animation: fadeEffect 1s;
     /* Fading effect takes 1 second */
+}
+
+#abstractViz {
+    background-color: rgb(236, 240, 241);
 }
 
 
@@ -314,6 +326,7 @@ div.ExecutionVisualizer div#pyCodeOutputDiv {
     /*margin-bottom: 4px;*/
     margin-left: auto;
     margin-right: auto;
+    border: 1.5px solid #3498db;
 }
 
 div.ExecutionVisualizer table#pyCodeOutput {
@@ -378,11 +391,12 @@ div.ExecutionVisualizer table#pyCodeOutput .cod {
     /* necessary or else doesn't work properly in IE */
 }
 
-div.ExecutionVisualizer div#progOutputs {
+
+/*div.ExecutionVisualizer div#progOutputs {
     margin-left: 13px;
-    /* line up with heap visualizations */
+    line up with heap visualizations
     margin-bottom: 3px;
-}
+}*/
 
 div.ExecutionVisualizer div#legendDiv {
     padding: 0px;
@@ -444,7 +458,8 @@ div.ExecutionVisualizer #vcrControls {
     text-align: center;
     position: fixed;
     bottom: 0;
-    left: 33vw;
+    margin-left: -220px;
+    left: 50%;
     z-index: 100;
     background-color: #bdc3c7;
     padding: 7px;
@@ -464,12 +479,13 @@ div.ExecutionVisualizer #vcrControls #curInstr {
 div.ExecutionVisualizer #pyStdout {
     border: 1px solid #999999;
     font-size: 10pt;
-    padding: 3px;
+    /*padding: 3px;*/
     font-family: Andale mono, monospace;
     overflow: auto;
     /* to look pretty on IE */
     /* make sure textarea doesn't grow and stretch */
     resize: none;
+    width: 100%;
 }
 
 div.ExecutionVisualizer .vizFrame {
@@ -810,7 +826,8 @@ div.ExecutionVisualizer td.stackFrameValue {
     padding-bottom: 3px;
 }
 
-div.ExecutionVisualizer .stackFrameVarTable tr {}
+
+/*div.ExecutionVisualizer .stackFrameVarTable tr {}*/
 
 div.ExecutionVisualizer .stackFrameVarTable {
     text-align: right;
@@ -885,6 +902,7 @@ div.ExecutionVisualizer #executionSlider {
     margin-bottom: 5px;
     /* DON'T center this, since we need breakpoints in executionSliderFooter to be well aligned */
     width: 98%;
+    border: 1.5px solid #3498db;
 }
 
 div.ExecutionVisualizer #executionSliderCaption {
@@ -915,7 +933,8 @@ div.ExecutionVisualizer #codeFooterDocs {
 /* darken slider handle a bit */
 
 div.ExecutionVisualizer .ui-slider .ui-slider-handle {
-    border: 1px solid #999;
+    border: 5px solid #3498db;
+    background: #3498db;
 }
 
 
@@ -1032,7 +1051,8 @@ div.ExecutionVisualizer .pycrazy-highlight-prev-and-cur {
     background-color: #bbb;
 }
 
-#optTabularView tbody.stepTableTbody {}
+
+/*#optTabularView tbody.stepTableTbody {}*/
 
 #optTabularView td.stepTableTd {
     padding: 3px 10px;
