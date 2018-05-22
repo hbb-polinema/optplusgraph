@@ -247,7 +247,7 @@ export class ExecutionVisualizer implements IExecutionVisualizer {
                                     <div class="vizLayoutTd" id="vizLayoutTdFirst""></div>
                                 </div>
                                 <div class="visualizer section right col-xs-6 style-scroll">                                    
-                                    <div class="vizLayoutTd" id="vizLayoutTdSecond"></div>
+                                    <div class="vizLayoutTd row" id="vizLayoutTdSecond"></div>
                                 </div>`);
         } else {
             // by habibieeddien: for support flexbox layout
@@ -255,7 +255,7 @@ export class ExecutionVisualizer implements IExecutionVisualizer {
                                     <div class="vizLayoutTd" id="vizLayoutTdFirst""></div>
                                 </div>
                                 <div class="visualizer section right col-xs-6 style-scroll">                                    
-                                    <div class="vizLayoutTd" id="vizLayoutTdSecond"></div>
+                                    <div class="vizLayoutTd row" id="vizLayoutTdSecond"></div>
                                 </div>`);
         }
 
