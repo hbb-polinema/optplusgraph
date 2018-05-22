@@ -62,7 +62,7 @@ export class GraphVisualizer {
     VIZ: GRAPH = GRAPH.None;
     G: any = { "directed": null, "instantValue": null };
 
-    readonly width: number = 444;
+    width: number = 444;
     readonly height: number = 444;
 
     constructor(content, dataTrace, isCppMode) {
@@ -594,53 +594,93 @@ export class GraphVisualizer {
             return false;
         }
 
-        let index = 1, edges = [], edgesOlder = [];
+        let index = 1, edges = [];
         this.dataGraph.step[0] = 0;
         this.dataGraph.values[0] = { "nodes": "first", "edges": "first" };
 
-        function pushOrderEdges() {
+        function isDuplicateBeforePush(e, src, trg) {
+            for (let i = 0; i < e.length; i++) {
+                if (e[i].source === src && e[i].target === trg)
+                    return true;
+            }
+            return false;
+        }
+
+        function pushOrderEdges(edgesOlder, edgesNew) {
             let newEdges = [];
-            console.log('1] edgesOlder: ' + JSON.stringify(edgesOlder));
-            if (edgesOlder.length < edges.length) {
-                for (let i = 0; i < edges.length; i++) {
-                    for (let j = 0; j < edgesOlder.length; j++) {
-                        if (edges[i].source !== edgesOlder[j].source && edges[i].target !== edgesOlder[j].target) {
-                            newEdges.push(edges[i]);
-                            console.log('newEdges: ' + JSON.stringify(newEdges));
+            //console.log('pushOrderEdges======\nedgesNow: ' + JSON.stringify(e));
+            let lengthE = edgesNew.length;
+            if (edgesOlder.length < edgesNew.length) {
+                for (let i = 0; i < edgesOlder.length; i++) { // TODO: need improve, very much for loop
+                    for (let j = 0; j < lengthE; j++) {
+                        if (edgesNew[j].source === edgesOlder[i].source && edgesNew[j].target === edgesOlder[i].target) {
+                            edgesNew.splice(j, 1);
+                            lengthE = edgesNew.length;
                         }
                     }
                 }
-            } else if (edgesOlder.length > edges.length) {
+                for (let i = 0; i < edgesOlder.length; i++) {
+                    for (let j = 0; j < edgesNew.length; j++) {
+                        if (edgesNew[j].source !== edgesOlder[i].source || edgesNew[j].target !== edgesOlder[i].target) {
+                            if (!isDuplicateBeforePush(newEdges, edgesNew[j].source, edgesNew[j].target)) newEdges.push(edgesNew[j]);
+                        }
+                    }
+                }
+            } else if (edgesOlder.length > edgesNew.length) { //TODO: how if removed node ?
                 //newEdges.pop();
                 console.log('pop');
             }
-            
-            let x = edgesOlder.concat(newEdges);
-            edgesOlder = x;
-            console.log('2] edgesOlder: ' + JSON.stringify(edgesOlder));
-            //return x;
+
+            //console.log('edgesOlder: ' + JSON.stringify(edgesOlder));
+            //console.log('newEdges: ' + JSON.stringify(newEdges));
+
+            return newEdges.length > 0 ? edgesOlder.concat(newEdges) : edgesOlder;
         }
+
+        function pushOrderNodes(nodesOlder, nodesNew){
+            //console.debug('nodesOlder: ' + JSON.stringify(nodesOlder));
+            //console.debug('nodesNew: ' + JSON.stringify(nodesNew));
+            let lengthN = nodesNew.length;
+            if(nodesOlder.length < nodesNew.length){
+                for(let i = 0; i < nodesOlder.length; i++){
+                    for(let j = 0; j < lengthN; j++){
+                        if(nodesNew[j].name === nodesOlder[i].name){
+                            nodesNew.splice(j, 1);
+                            lengthN = nodesNew.length;
+                            break;
+                        }
+                    }
+                }
+            } else if (nodesOlder.length > nodesNew.length){
+                // TODO: removed nodes process
+            }
+
+            //console.debug('=======> nodesNew: ' + JSON.stringify(nodesNew));
+            return nodesNew.length > 0 ? nodesOlder.concat(nodesNew) : nodesOlder;
+        }
+
         /**
          * This is main execution/process data
          * There is 6 function needed: parseHeap, getUniqueNode, isDuplicate, getTargetNodes, getModus, arrayDiff
          */
         for (let i = 1; i < this.dTrace.length; i++) {
-            //edges = getHeap(this.dTrace[i].heap);
-            /**
-             * TODO: for ordering edges issue ---
-             * if edgeOlder.length < edgeNew.length:
-             *      if edgeOlder[i].source != edgeNew[i].source && edgeOlder[i].target != edgeNew[i].target:
-             *              diffEdge.push(edgeNew[i]);
-             * else if edgeOlder.length > edgeNew.length:
-             *      its removed
-             */
             edges = parseHeap(this.dTrace[i].heap);
             if (Object.keys(this.dTrace[i].heap).length > 1 && edges.length > 0) { // check heap is not empty                
+                let tempEdges = [];//, tempNodes = [];
+                if (index >= 2) {
+                    console.log('Edges on Index: ' + JSON.stringify(edges));
+                    tempEdges = pushOrderEdges(this.dataGraph.values[index - 1].edges, edges);
+                    edges = tempEdges;
+                    //tempNodes = pushOrderNodes(this.dataGraph.values[index - 1].nodes, nodes);
+                    //nodes = tempNodes;
+                }
+
                 if (arrayDiff(this.dataGraph.values[index - 1].edges, edges)) {
-                    index == 1 ? edgesOlder = edges : pushOrderEdges();
+                    console.error('Edges: ' + JSON.stringify(edges));
                     this.dataGraph.step[index] = i;
                     this.dataGraph.values[index] = { nodes, edges };
-                    console.log(i + ' | ' + JSON.stringify(this.dataGraph.values[index]));
+                    console.error(i + ' | ' + JSON.stringify(this.dataGraph.values[index]));
+                    console.log('============================');
                     index++; C_STRUCT = true;
                 }
             }
@@ -655,7 +695,11 @@ export class GraphVisualizer {
     }
 
     model04_PointerLocal(): void { // Model-04: pointer local variable
-        //
+        // belum menemukan contoh graf kode program dg model ini
+    }
+
+    model05_Matrix2Dimension(): void {
+        // [ [src,trg], [src,trg], ... ] model seperti ini gmn jk berbobot?
     }
 
     infoBar(): void {
@@ -675,7 +719,7 @@ export class GraphVisualizer {
         if (!this.isCPP) // make sure in C/C++ mode
             return;
 
-        this.animate(curStep);
+        if (this.SVG !== null) this.animate(curStep);
 
         let diff = false;
         if (this.dataChangedOnStep === 0) { // The First Step
@@ -704,9 +748,10 @@ export class GraphVisualizer {
                     this.divTab.html('<div id="graph"></div>');
                     //this.canvas.append('<br>' + JSON.stringify(this.dTrace[curStep], undefined, 4));
                     //this.compute_trace_data(curStep);
+                    this.width = $("#graph").outerWidth(true);
                     this.SVG = d3.select("#graph").append("svg")
                         .attr({
-                            "width": this.width, // TODO: flexible width in div element, how?
+                            "width": this.width,
                             "height": this.height
                         }).style("background-color", "#ecf0f1");
 
@@ -744,6 +789,7 @@ export class GraphVisualizer {
                     this.divTab.html('<div id="graph"></div>');
                     //this.canvas.append('<br>' + JSON.stringify(this.dTrace[curStep], undefined, 4));
                     //this.compute_trace_data(curStep);
+                    this.width = $("#graph").outerWidth(true);
                     this.SVG = d3.select("#graph").append("svg")
                         .attr({
                             "width": this.width,
@@ -1528,10 +1574,17 @@ export class GraphVisualizer {
             let link = document.getElementsByClassName('link'); // TODO: how if no link between node_src and node_trg ?
             let src_node = document.getElementById('node' + src);
             let trg_node = document.getElementById('node' + trg);
-            let src_node_cx = Number(src_node.getAttribute('cx'));
-            let src_node_cy = Number(src_node.getAttribute('cy'));
-            let trg_node_cx = Number(trg_node.getAttribute('cx'));
-            let trg_node_cy = Number(trg_node.getAttribute('cy'));
+            let cx1, cy1, cx2, cy2, src_node_cx, src_node_cy, trg_node_cx, trg_node_cy;
+            try {
+                cx1 = src_node.getAttribute('cx'); cx2 = trg_node.getAttribute('cx');
+                cy1 = src_node.getAttribute('cy'); cy2 = trg_node.getAttribute('cy');
+            } catch (error) {
+                return;
+            }
+            if (cx1) src_node_cx = Number(cx1);
+            if (cy1) src_node_cy = Number(cy1);
+            if (cx2) trg_node_cx = Number(cx2);
+            if (cy2) trg_node_cy = Number(cy2);
             console.log('src_node: ' + src_node + ' | trg_node: ' + trg_node);
             console.log('src_node_cx: ' + src_node_cx + ' | src_node_cy: ' + src_node_cy);
             console.log('trg_node_cx: ' + trg_node_cx + ' | trg_node_cy: ' + trg_node_cy);
@@ -1567,7 +1620,7 @@ export class GraphVisualizer {
             return line;
         }
 
-        let error = false;
+        //let error = false;
         if (KEY.source_var && KEY.target_var) {
             switch (this.VIZ) {
                 case GRAPH.None:
@@ -1585,16 +1638,16 @@ export class GraphVisualizer {
                         try { // sometimes error, cause not all line have it (this attribut)
                             parse(this.dTrace[curStep - 1].stack_to_render[1].encoded_locals);
                         } catch (e) {
-                            error = true;
+                            //error = true;
+                            parse(this.dTrace[curStep - 1].stack_to_render[0].encoded_locals);
                             console.log('error');
                         }
-                        if (error) parse(this.dTrace[curStep - 1].stack_to_render[0].encoded_locals);
                     }
 
                     if (KEY.source !== null && KEY.target !== null) {
                         if (KEY.source !== KEY.target) {
                             let edge = searchLine(KEY.source, KEY.target);
-                            this.animationColor(KEY.source, KEY.target, edge);
+                            if (edge) this.animationColor(KEY.source, KEY.target, edge);
                             console.log('==> Edge: ' + JSON.stringify(edge));
                         }
                     }
@@ -1606,16 +1659,16 @@ export class GraphVisualizer {
                     try { // sometimes error, cause not all line have it (this attribut)
                         parse(this.dTrace[curStep - 1].stack_to_render[1].encoded_locals);
                     } catch (e) {
-                        error = true;
+                        //error = true;
+                        parse(this.dTrace[curStep - 1].stack_to_render[0].encoded_locals);
                         console.log('error');
                     }
-                    if (error) parse(this.dTrace[curStep - 1].stack_to_render[0].encoded_locals);
 
-                    console.log(error, ' | s: ', KEY.source, ' - t: ', KEY.target, '\nKEY: ', JSON.stringify(KEY));
+                    console.log('s: ', KEY.source, ' - t: ', KEY.target, '\nKEY: ', JSON.stringify(KEY));
                     if (KEY.source !== null && KEY.target !== null) {
                         if (KEY.source !== KEY.target) {
                             let edge = searchLine(KEY.source, KEY.target);
-                            this.animationColor(KEY.source, KEY.target, edge);
+                            if (edge) this.animationColor(KEY.source, KEY.target, edge);
                             console.log('==> Edge: ' + JSON.stringify(edge));
                         }
                     }
@@ -1628,6 +1681,8 @@ export class GraphVisualizer {
     }
 
     animationColor(src, trg, line): void { // TODO: add corner info label --> visual variabel graf and what doing
+        d3.select("#infoBar").text(`var: ${KEY.keyname}\nAnimating in progress\n${src} -> ${trg}`);
+
         this.LAYER2.select("#node" + src)
             .transition()
             .duration(250)
