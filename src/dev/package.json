@@ -1,9 +1,9 @@
 {
     "name": "v5-unity",
     "version": "1.0.0",
-    "description": "OPT v5",
+    "description": "CodeViz v1",
     "main": "bundle.js",
-    "repository": "https://github.com/pgbovine/OnlinePythonTutor",
+    "repository": "http://gitlab.informatika.org/habibieeddien/TESIS.git",
     "license": "BSD-3-Clause",
     "scripts": {
         "start": "python bottle_server.py",
@@ -18,6 +18,10 @@
         "script-loader": "^0.7.2",
         "style-loader": "",
         "ts-loader": "^2.3.7",
-        "url-loader": ""
+        "url-loader": "",
+        "webpack": "^3.10.0"
+    },
+    "devDependencies": {
+        "webpack-livereload-plugin": "^1.0.0"
     }
 }
