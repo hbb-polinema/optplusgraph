@@ -59,8 +59,8 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
     /*  these settings are all customized for my own server setup,
         so you will need to customize for your server: */
     serverRoot = (window.location.protocol === 'https:') ?
-        'https://localhost:5001/' : // my certificate for https is registered via cokapi.com, so use it for now
-        'http://localhost:5001/'; // try cokapi.com so that hopefully it works through firewalls better than directly using IP addr
+        'https://localhost:5001/' :
+        'http://localhost:5001/';
 
     // see ../../v4-cokapi/cokapi.js for details
     langSettingToJsonpEndpoint = {
@@ -146,7 +146,7 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
                 this.setFrontendError(
                     ["Server error! Your code might be taking too much time/memory. Or the server CRASHED",
                         "due to too many people using it. Or you are behind a FIREWALL that blocks access.",
-                        "Try again later, or report a bug to 23515043@std.stei.itb.ac.id by clicking the 'Generate",
+                        "Try again later, or report a bug to habibieeddien@students.itb.ac.id by clicking the 'Generate",
                         "permanent link' button at the bottom of this page and including a URL in your email."]);
             }
             this.doneExecutingCode();
@@ -270,7 +270,7 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
                         ["Unknown error: The server may be too busy or down right now.",
                             "Or you are behind a FIREWALL that blocks access to this server.",
                             "Please reload and try again later. Or report a bug to",
-                            "23515043@std.stei.itb.ac.id by clicking the 'Generate permanent link'",
+                            "habibieeddien@students.itb.ac.id by clicking the 'Generate permanent link'",
                             "button at the bottom and including a URL in your email."]);
                 }
             } else {
@@ -313,7 +313,7 @@ export abstract class AbstractBaseFrontend implements IAbstractBaseFrontend {
         if (!backendScript) {
             this.setFrontendError(
                 ["Server configuration error: No backend script",
-                    "Report a bug to 23515043@std.stei.itb.ac.id by clicking on the 'Generate permanent link'",
+                    "Report a bug to habibieeddien@students.itb.ac.id by clicking on the 'Generate permanent link'",
                     "button at the bottom and including a URL in your email."]);
             return;
         }
