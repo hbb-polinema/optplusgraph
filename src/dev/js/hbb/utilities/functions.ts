@@ -133,9 +133,11 @@ export function SyntaxErrorSurveyBubble(parentViz, domID) {
 
     this.qtipHidden = false; // is there a qtip object present but hidden? (TODO: kinda confusing)
 }
+
 SyntaxErrorSurveyBubble.prototype.destroyQTip = function () {
     $(this.hashID).qtip('destroy');
 }
+
 SyntaxErrorSurveyBubble.prototype.redrawCodelineBubble = function () {
     if (this.parentViz.isOutputLineVisibleForBubbles(this.domID)) {
         if (this.qtipHidden) {
@@ -149,9 +151,11 @@ SyntaxErrorSurveyBubble.prototype.redrawCodelineBubble = function () {
         this.qtipHidden = true;
     }
 }
+
 SyntaxErrorSurveyBubble.prototype.qTipContentID = function () {
     return '#qtip-' + this.domID + '-content';
 }
+
 SyntaxErrorSurveyBubble.prototype.qTipID = function () {
     return '#qtip-' + this.domID;
 }
