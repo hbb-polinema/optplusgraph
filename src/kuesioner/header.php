@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!$_SESSION['isSetSession']){    
+    $_SESSION['isSetSession'] = true;
+}
+?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -13,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Kuesioner Proyek Tesis Habibie Ed Dien ITB 2018" />
     <meta name="keywords" content="tesis, kuesioner, responden, itb, 2018, visualisasi, program, eksekusi, kode" />
-    <meta name="author" content="FREEHTML5.CO" />
+    <meta name="author" content="Habibie Ed Dien" />
 
     <!-- 
 	//////////////////////////////////////////////////////

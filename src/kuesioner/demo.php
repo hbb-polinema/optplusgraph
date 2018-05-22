@@ -57,12 +57,12 @@
                     <div class="form-group row">
                         <div class="col-md-6 col-sm-6 to-animate">
                             <center>
-                                <input class="btn btn-primary btn-lg" value="Kakas OPT" type="button" onclick="checkResolution();" style="width: 100%;">
+                                <input class="btn btn-primary btn-lg" value="Kakas OPT" type="button" onclick="simulasiOPT();" style="width: 100%;">
                             </center>
                         </div>
                         <div class="col-md-6 col-sm-6 to-animate">
                             <center>
-                                <input class="btn btn-primary btn-lg" value="Kakas CodeViz" type="button" onclick="checkResolution();" style="width: 100%;">
+                                <input class="btn btn-primary btn-lg" value="Kakas CodeViz" type="button" onclick="simulasiCodeViz();" style="width: 100%;">
                             </center>
                         </div>
                     </div>

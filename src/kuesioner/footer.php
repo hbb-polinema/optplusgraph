@@ -48,28 +48,28 @@
             </div>
             <div class="modal-body">
                 <p>Privasi Anda sebagai responden di kuesioner ini adalah 
-                    hal yang sangat penting bagi kami.</p>
-                <p>Di kuesioner ini kami menganggap bahwa privasi dari informasi 
+                    hal yang sangat penting bagi penulis.</p>
+                <p>Di kuesioner ini penulis menganggap bahwa privasi dari informasi 
                     pribadi Anda adalah hal yang penting. Dan inilah keterangan 
-                    mengenai informasi apa saja yang kami terima dan kami kumpulkan 
-                    pada saat Anda mengisi kuesioner ini dan bagaimana kami menyimpan 
-                    serta menjaga informasi tersebut. Kami tegaskan bahwa kami tidak 
+                    mengenai informasi apa saja yang penulis terima dan penulis kumpulkan 
+                    pada saat Anda mengisi kuesioner ini dan bagaimana penulis menyimpan 
+                    serta menjaga informasi tersebut. penulis tegaskan bahwa penulis tidak 
                     akan pernah memberikan informasi tersebut kepada pihak ketiga.</p>
                 <p><b>Tentang file log</b></p>
-                <p>Seperti kebanyakan situs lain, kami mengumpulkan dan menggunakan 
+                <p>Seperti kebanyakan situs lain, penulis mengumpulkan dan menggunakan 
                     data yang terdapat pada file log. Informasi yang terdapat pada 
                     file log termasuk alamat IP (Internet Protocol) Anda, 
                     ISP (Internet Service Provider), browser yang Anda gunakan, 
                     waktu pada saat Anda berkunjung dan halaman mana saja yang Anda 
                     buka selama berkunjung di situs ini.</p>
                 <p><b>Tentang cookies</b></p>
-                <p>Situs kami menggunakan cookies untuk menaruh informasi, 
-                    seperti informasi preferensi pribadi Anda pada saat mengunjungi situs kami. 
+                <p>Situs ini menggunakan cookies untuk menaruh informasi, 
+                    seperti informasi preferensi pribadi Anda pada saat mengunjungi situs. 
                     Ini juga mungkin termasuk untuk menampilkan jendela pop up untuk 
                     kunjungan pertama Anda, atau juga untuk menyimpan informasi 
-                    login Anda di situs kami.</p>
+                    login Anda di situs ini.</p>
                 <p>Kuesioner ini tidak menampilkan iklan seperti pada situs lainnya. 
-                    Kami berusaha agar Anda fokus untuk menjawab pertanyaan-pertanyaan 
+                    penulis berusaha agar Anda fokus untuk menjawab pertanyaan-pertanyaan 
                     dalam kuesioner online ini.</p>
             </div>
             <div class="modal-footer">
@@ -87,21 +87,30 @@
                 <h4 class="modal-title">Syarat dan Ketentuan</h4>
             </div>
             <div class="modal-body">
-                <p>Privasi Anda sebagai responden di kuesioner ini adalah 
-                    hal yang sangat penting bagi kami.</p>
-                <p>Di kuesioner ini kami menganggap bahwa privasi dari informasi 
-                    pribadi Anda adalah hal yang penting. Dan inilah keterangan 
-                    mengenai informasi apa saja yang kami terima dan kami kumpulkan 
-                    pada saat Anda mengisi kuesioner ini dan bagaimana kami menyimpan 
-                    serta menjaga informasi tersebut. Kami tegaskan bahwa kami tidak 
-                    akan pernah memberikan informasi tersebut kepada pihak ketiga.</p>
-                <p><b>Tentang file log</b></p>
-                <p>Seperti kebanyakan situs lain, kami mengumpulkan dan menggunakan 
-                    data yang terdapat pada file log. Informasi yang terdapat pada 
-                    file log termasuk alamat IP (Internet Protocol) Anda, 
-                    ISP (Internet Service Provider), browser yang Anda gunakan, 
-                    waktu pada saat Anda berkunjung dan halaman mana saja yang Anda 
-                    buka selama berkunjung di situs ini.</p>
+                <p>Berikut adalah syarat dan ketentuan untuk responden dalam mengisi kuesioner ini.</p>
+                <p><b>Syarat dan Ketentuan Umum</b></p>
+                <p><ul>
+                    <li>Penulis berhak merubah atau memodifikasi 
+                    syarat dan ketentuan tanpa pemberitahuan terlebih dahulu.</li>
+                    <li>Seluruh kegiatan kuesioner ini dilaksanakan secara mandiri 
+                        oleh Habibie Ed Dien selaku penulis/peneliti.</li>
+                    <li>Hadiah tidak dapat dialihkan, ditukar barang lain, atau diganti dengan uang.</li>
+                    <li>Dengan mengisi kuesioner ini, responden memberikan izin kepada penulis/peneliti 
+                        untuk menggunakan (termasuk mempublikasikan) hasil kuesioner untuk kepentingan riset.</li>
+                    </ul>
+                </p>
+                <p><b>Hadiah Langsung</b></p>
+                <p>Tata cara/mekanisme survei
+                    <ul>
+                        <li>a. Kuesioner online ini berlaku untuk umum.</li>
+                        <li>b. Responden yang berhak mengisi kuesioner ini adalah :
+                            <ul>
+                                <li>1. Responden minimal memiliki kemampuan dasar dalam pemrograman C/C++</li>
+                                <li>2. Responden minimal pernah membaca tentang teori graf</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </p>
                 <p><b>Tentang cookies</b></p>
                 <p>Situs kami menggunakan cookies untuk menaruh informasi, 
                     seperti informasi preferensi pribadi Anda pada saat mengunjungi situs kami. 

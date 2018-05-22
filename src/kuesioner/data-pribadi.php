@@ -51,7 +51,7 @@
 
             <div class="row">
                 <div class="col-md-6 col-sm-6 to-animate">
-                    <form id="formPersonal" accept-charset="utf-8" method="POST" action="#" name="formPersonal">
+                    <form id="formPersonal" accept-charset="utf-8" name="formPersonal">
 
                         <div class="form-group">
                             <label for="nama" class="sr-only">Nama</label>
@@ -121,7 +121,7 @@
                         <div class="form-group">
                             <label for="pernyataan" class="sr-only">Pernyataan</label>
                             <div class="form-control row" style="height:100%; margin-left:0;">
-                                <div style="padding:0;margin-top:23pt;" class="col-md-1"><input id="pernyataan" name="pernyataan" type="checkbox" required style="display:block;width:100%;height:23px;"></div>
+                                <div style="padding:0;margin-top:23pt;" class="col-md-1"><input id="pernyataan" name="pernyataan" type="checkbox" value="setuju" style="display:block;width:100%;height:23px;" required></div>
                                 <div class="col-md-11" style="padding:0;">Saya menyatakan data ini yang sebenarnya dan tidak ada paksaan dari siapa pun. Saya mengisi
                                     kuesioner ini dengan jujur dan tidak berbuat curang/menipu dengan cara apapun.</div>
                             </div>
@@ -129,7 +129,7 @@
 
                         <div class="form-group">
                             <center>
-                                <input class="btn btn-primary btn-lg" value="Simpan &amp; Lanjutkan" type="submit" onsubmit="checkResolution();" style="width: 100%;">
+                                <input class="btn btn-primary btn-lg" value="Simpan &amp; Lanjutkan" type="button" onclick="checkResolution(2);" style="width: 100%;">
                             </center>
                         </div>
 

@@ -49,9 +49,9 @@
 
             <div class="row">
                 <div class="col-md-6 col-sm-6 to-animate">
-                    <p>Perkenalkan saya Habibie Ed Dien, mahasiswa Magister Informatika dari Institut Teknologi Bandung. Saya sedang melakukan penelitian tentang <a href="#" target="_blank">Graf</a> dan <a href="#" target="_blank">Visualisasi Eksekusi Kode Program</a>.
+                    <p>Perkenalkan saya Habibie Ed Dien, mahasiswa Magister Informatika dari Institut Teknologi Bandung. Saya sedang melakukan penelitian tentang <a href="https://id.wikipedia.org/wiki/Graf_(matematika)" target="_blank">Graf</a> dan <a href="https://en.wikipedia.org/wiki/Software_visualization" target="_blank">Visualisasi Eksekusi Kode Program</a>.
                         Mohon bantuan rekan-rekan untuk ikut berkontribusi melalui kuesioner ini sekitar 10 - 15 menit untuk menjawabnya.</p>
-                    <p>Setiap responden yang berhasil menyelesaikan kuesioner ini, akan mendapatkan <b>pulsa telepon seluler senilai Rp. 25.000,- (dua puluh lima ribu rupiah) langsung tanpa diundi</b>.</p>
+                    <p>Setiap responden yang berhasil menyelesaikan kuesioner ini, akan mendapatkan <b>pulsa telepon seluler senilai Rp. 15.000,- (lima belas ribu rupiah) langsung tanpa diundi</b>.</p>
                     <p>Syarat dan ketentuan responden yang dibutuhkan:</p>
                     <p>
                         <ul>
@@ -59,14 +59,14 @@
                             <li>Pernah belajar teori graf</li>
                         </ul>
                     </p>
-                    <form id="formKodeUnik" accept-charset="utf-8" method="POST" action="#" name="formKodeUnik">
+                    <form id="formKodeUnik" accept-charset="utf-8" name="formKodeUnik">
                         <div class="form-group">
                             <label for="kode" class="sr-only">Kode Unik</label>
-                            <input id="kode" maxlength="7" class="form-control" placeholder="Kode Unik" type="text" required>
+                            <input id="kode" maxlength="5" class="form-control" placeholder="Kode Unik" type="text" required>
                         </div>
                         <div class="form-group">
                             <center>
-                                <input class="btn btn-primary btn-lg" value="Mulai Survei" type="submit" onsubmit="checkResolution();" style="width: 100%;">
+                                <input class="btn btn-primary btn-lg" value="Mulai Survei" type="button" onclick="checkResolution(1);" style="width: 100%;">
                             </center>
                         </div>
                     </form>
