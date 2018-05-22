@@ -1,0 +1,62 @@
+{
+    "0x5402040": ["C_ARRAY", "0x5402040", ["C_STRUCT", "0x5402040", "Graph", ["numVertices", ["C_DATA", "0x5402040", "int", 6]],
+        ["adjLists", ["C_DATA", "0x5402048", "pointer", "0x54020A0"]],
+        ["visited", ["C_DATA", "0x5402050", "pointer", "0x5402110"]]
+    ]],
+    "0x54020A0": ["C_ARRAY", "0x54020A0", ["C_DATA", "0x54020A0", "pointer", "0x5402210"],
+        ["C_DATA", "0x54020A8", "pointer", "0x54023F0"],
+        ["C_DATA", "0x54020B0", "pointer", "0x5402490"],
+        ["C_DATA", "0x54020B8", "pointer", "0x5402530"],
+        ["C_DATA", "0x54020C0", "pointer", "0x5402580"],
+        ["C_DATA", "0x54020C8", "pointer", "0x0"]
+    ],
+    "0x5402110": ["C_ARRAY", "0x5402110", ["C_DATA", "0x5402110", "int", 1],
+        ["C_DATA", "0x5402114", "int", 1],
+        ["C_DATA", "0x5402118", "int", 1],
+        ["C_DATA", "0x540211C", "int", 1],
+        ["C_DATA", "0x5402120", "int", 1],
+        ["C_DATA", "0x5402124", "int", 0]
+    ],
+    "0x5402170": ["C_ARRAY", "0x5402170", ["C_STRUCT", "0x5402170", "node", ["vertex", ["C_DATA", "0x5402170", "int", 1]],
+        ["next", ["C_DATA", "0x5402178", "pointer", "0x0"]]
+    ]],
+    "0x54021C0": ["C_ARRAY", "0x54021C0", ["C_STRUCT", "0x54021C0", "node", ["vertex", ["C_DATA", "0x54021C0", "int", 0]],
+        ["next", ["C_DATA", "0x54021C8", "pointer", "0x0"]]
+    ]],
+    "0x5402210": ["C_ARRAY", "0x5402210", ["C_STRUCT", "0x5402210", "node", ["vertex", ["C_DATA", "0x5402210", "int", 2]],
+        ["next", ["C_DATA", "0x5402218", "pointer", "0x5402170"]]
+    ]],
+    "0x5402260": ["C_ARRAY", "0x5402260", ["C_STRUCT", "0x5402260", "node", ["vertex", ["C_DATA", "0x5402260", "int", 0]],
+        ["next", ["C_DATA", "0x5402268", "pointer", "0x0"]]
+    ]],
+    "0x54022B0": ["C_ARRAY", "0x54022B0", ["C_STRUCT", "0x54022B0", "node", ["vertex", ["C_DATA", "0x54022B0", "int", 2]],
+        ["next", ["C_DATA", "0x54022B8", "pointer", "0x54021C0"]]
+    ]],
+    "0x5402300": ["C_ARRAY", "0x5402300", ["C_STRUCT", "0x5402300", "node", ["vertex", ["C_DATA", "0x5402300", "int", 1]],
+        ["next", ["C_DATA", "0x5402308", "pointer", "0x5402260"]]
+    ]],
+    "0x5402350": ["C_ARRAY", "0x5402350", ["C_STRUCT", "0x5402350", "node", ["vertex", ["C_DATA", "0x5402350", "int", 4]],
+        ["next", ["C_DATA", "0x5402358", "pointer", "0x54022B0"]]
+    ]],
+    "0x54023A0": ["C_ARRAY", "0x54023A0", ["C_STRUCT", "0x54023A0", "node", ["vertex", ["C_DATA", "0x54023A0", "int", 1]],
+        ["next", ["C_DATA", "0x54023A8", "pointer", "0x0"]]
+    ]],
+    "0x54023F0": ["C_ARRAY", "0x54023F0", ["C_STRUCT", "0x54023F0", "node", ["vertex", ["C_DATA", "0x54023F0", "int", 3]],
+        ["next", ["C_DATA", "0x54023F8", "pointer", "0x5402350"]]
+    ]],
+    "0x5402440": ["C_ARRAY", "0x5402440", ["C_STRUCT", "0x5402440", "node", ["vertex", ["C_DATA", "0x5402440", "int", 1]],
+        ["next", ["C_DATA", "0x5402448", "pointer", "0x0"]]
+    ]],
+    "0x5402490": ["C_ARRAY", "0x5402490", ["C_STRUCT", "0x5402490", "node", ["vertex", ["C_DATA", "0x5402490", "int", 4]],
+        ["next", ["C_DATA", "0x5402498", "pointer", "0x5402300"]]
+    ]],
+    "0x54024E0": ["C_ARRAY", "0x54024E0", ["C_STRUCT", "0x54024E0", "node", ["vertex", ["C_DATA", "0x54024E0", "int", 2]],
+        ["next", ["C_DATA", "0x54024E8", "pointer", "0x54023A0"]]
+    ]],
+    "0x5402530": ["C_ARRAY", "0x5402530", ["C_STRUCT", "0x5402530", "node", ["vertex", ["C_DATA", "0x5402530", "int", 4]],
+        ["next", ["C_DATA", "0x5402538", "pointer", "0x5402440"]]
+    ]],
+    "0x5402580": ["C_ARRAY", "0x5402580", ["C_STRUCT", "0x5402580", "node", ["vertex", ["C_DATA", "0x5402580", "int", 3]],
+        ["next", ["C_DATA", "0x5402588", "pointer", "0x54024E0"]]
+    ]]
+}
