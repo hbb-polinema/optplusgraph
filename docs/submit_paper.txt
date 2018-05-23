@@ -1,0 +1,9 @@
+?http://conferences.cis.umac.mo/icde2019/?
+
+Judul:
+OPT+Graph: Web-Based Program Visualization for Understanding Code Graph Execution
+
+Abstrak:
+Tujuan penelitian ini adalah menghasilkan kakas visualisasi sebagai pendekatan untuk memahami eksekusi graf kode program. Penelitian ini adalah pengembangan kakas dari pythontutor.com (OPT). Metode pengukuran kinerja yang digunakan adalah evaluasi visualisasi. Tekniknya menggunakan kuesioner online dengan empat tahap, yaitu tahap pertama mengisi biodata responden, tahap kedua menyelesaikan pretes, tahap ketiga simulasi menggunakan kakas OPT dan kakas hasil pengembangan. Tahap terakhir responden menyelesaikan post-tes. Subyek penelitian ini adalah mahasiswa informatika sarjana (S1) dan pascasarjana (S2) di Institut Teknologi Bandung. Penelitian ini menghasilkan: 1) Pendekatan visualisasi dapat menjadi sarana yang efektif dan efisien untuk memahami eksekusi graf kode program; 2) Usability adalah aspek penting dalam pengembangan kakas visualisasi; 3) ...
+
+Kata kunci: kakas visualisasi, memahami, eksekusi graf kode program
