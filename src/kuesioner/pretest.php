@@ -143,56 +143,39 @@
                         <div id="DivFormPreTest">
                             <div id="p0" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Kapan terakhir Anda membuat kode program atau memprogram ?</p>
-                                    <select id="answerP0" name="answerP0" class="form-control" onchange="clearInvalid(0);">
-                                        <option value="" selected disabled>Silahkan Pilih</option>
-                                        <option value="today">Hari ini</option>
-                                        <option value="yesterday">Kemarin</option>
-                                        <option value="2past">2 hari yang lalu</option>
-                                        <option value="3past">lebih dari 3 hari yang lalu</option>
-                                        <option value="no">Belum pernah memprogram</option>
-                                    </select>
+                                    <p style="margin-bottom: 7pt;">Apa yang dimaksud dengan graf ?</p>
+                                    <input type="radio" name="gender" value="male"> Graf adalah objek dasar pelajaran dalam teori graf<br>
+                                    <input type="radio" name="gender" value="female"> Graf adalah himpunan dari objek-objek yang dinamakan titik<br>
+                                    <input type="radio" name="gender" value="other"> Graf adalah ...<br>
+                                    <input type="radio" name="gender" value="other"> Graf adalah ...<br>
+                                    <input type="radio" name="gender" value="other"> Graf adalah ...<br>
                                 </div>
                             </div>
                             <div id="p1" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p1title" style="margin-bottom: 7pt;">Bahasa Pemrograman apa yang terakhir kali Anda gunakan ?</p>
-                                    <select id="answerP1" name="answerP1" class="form-control" onchange="clearInvalid(1);">
-                                        <option value="" selected disabled>Pilih Bahasa Pemrograman</option>
-                                        <option value="ada">Ada</option>
-                                        <option value="cpp">C/C++</option>
-                                        <option value="go">Go Lang</option>
-                                        <option value="java">Java</option>
-                                        <option value="js">JavaScript</option>
-                                        <option value="py">Python</option>
-                                        <option value="rb">Ruby</option>
-                                        <option value="no">Lainnya</option>
-                                    </select>
+                                    <p id="p1title" style="margin-bottom: 7pt;">Apa yang dimaksud dengan simpul (node) pada graf ?</p>
+                                    <input type="radio" name="gender" value="male"> Graf adalah objek dasar pelajaran dalam teori graf<br>
+                                    <input type="radio" name="gender" value="female"> Graf adalah himpunan dari objek-objek yang dinamakan titik<br>
+                                    <input type="radio" name="gender" value="other"> Graf adalah ...<br>
+                                    <input type="radio" name="gender" value="other"> Graf adalah ...<br>
+                                    <input type="radio" name="gender" value="other"> Graf adalah ...<br>
                                 </div>
                             </div>
                             <div id="p2" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p2title" style="margin-bottom: 7pt;">Menurut penilaian Anda, secara keseluruhan berapa tingkat kemahiran Anda dalam memprogram menggunakan bahasa {{bahasa yang dipilih}} ?</p>
+                                    <p id="p2title" style="margin-bottom: 7pt;">Apa yang dimaksud dengan sisi (edge) pada graf ?</p>
                                     <div class="row">
-                                        <div class="col-md-12 col-xs-12 rating">
-                                            <input id="answerP2-five" name="answerP2" type="radio" value="5" class="radio-btn hide"/>
-                                            <label for="answerP2-five">☆</label>
-                                            <input id="answerP2-four" name="answerP2" type="radio" value="4" class="radio-btn hide"/>
-                                            <label for="answerP2-four">☆</label>
-                                            <input id="answerP2-three" name="answerP2" type="radio" value="3" class="radio-btn hide"/>
-                                            <label for="answerP2-three">☆</label>
-                                            <input id="answerP2-two" name="answerP2" type="radio" value="2" class="radio-btn hide"/>
-                                            <label for="answerP2-two">☆</label>
-                                            <input id="answerP2-one" name="answerP2" type="radio" value="1" class="radio-btn hide"/>
-                                            <label for="answerP2-one">☆</label>
-                                            <div class="clear"></div>
-                                        </div>
+                                    <input type="radio" name="gender" value="male"> Graf adalah objek dasar pelajaran dalam teori graf<br>
+                                    <input type="radio" name="gender" value="female"> Graf adalah himpunan dari objek-objek yang dinamakan titik<br>
+                                    <input type="radio" name="gender" value="other"> Graf adalah ...<br>
+                                    <input type="radio" name="gender" value="other"> Graf adalah ...<br>
+                                    <input type="radio" name="gender" value="other"> Graf adalah ...<br>
                                     </div>
                                 </div>
                             </div>
                             <div id="p3" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p3title" style="margin-bottom: 7pt;">Menurut penilaian Anda, secara keseluruhan berapa tingkat kemahiran Anda dalam memprogram menggunakan bahasa C/C++ ?</p>
+                                    <p id="p3title" style="margin-bottom: 7pt;">Apa yang dimaksud dengan derajat (degree) pada graf ?</p>
                                     <div class="row">
                                         <div class="col-md-12 col-xs-12 rating">
                                             <input id="answerP3-five" name="answerP3" type="radio" value="5" class="radio-btn hide"/>
@@ -212,18 +195,7 @@
                             </div>
                             <div id="p4" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Apakah Anda pernah belajar Pemrograman Struktur Data ? (seperti penggunaan <i>Array</i>, <i>Struct</i>, atau <i>Pointer</i>).</p>
-                                    <select id="answerP4" name="answerP4" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="y">Ya, Pernah</option>
-                                        <option value="t">Tidak Pernah</option>
-                                        <option value="n">Lupa/Tidak Tahu</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="p5" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Kapan terakhir Anda membuat kode program struktur data ?</p>
+                                    <p style="margin-bottom: 7pt;">Ada berapa simpul pada graf berikut ?</p>
                                     <select id="answerP5" name="answerP5" class="form-control">
                                         <option value="" selected disabled>Silahkan Pilih</option>                
                                         <option value="today">Hari ini</option>                
@@ -234,26 +206,15 @@
                                     </select>
                                 </div>
                             </div>
-                            <div id="p6" class="tab form-group">
+                            <div id="p5" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p6title" style="margin-bottom: 7pt;">Kode program tentang apa yang Anda buat ?</p>
+                                    <p id="p6title" style="margin-bottom: 7pt;">Ada berapa sisi pada graf berikut ?</p>
                                     <textarea id="answerP6" class="form-control" name="answerP6"></textarea>
                                 </div>
                             </div>
-                            <div id="p7" class="tab form-group">
+                            <div id="p6" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Apakah Anda pernah belajar <b>teori</b> tentang Struktur Data Graf ?</p>
-                                    <select id="answerP7" name="answerP7" class="form-control" onchange="checkAnswerP7(this);">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="y">Ya, Pernah</option>
-                                        <option value="t">Tidak Pernah</option>
-                                        <option value="n">Lupa/Tidak Tahu</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="p8" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Kapan terakhir Anda belajar teori tentang Struktur Data Graf ?</p>
+                                    <p style="margin-bottom: 7pt;">Berapa derajat pada simpul nomor 2 yang dimiliki oleh graf berikut ?</p>
                                     <select id="answerP8" name="answerP8" class="form-control">                
                                         <option value="" selected disabled>Silahkan Pilih</option>                
                                         <option value="today">Hari ini</option>                
@@ -263,48 +224,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div id="p9" class="tab form-group">
+                            <div id="p7" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Teori Graf apa saja yang pernah Anda pelajari ?</p>
-                                    <textarea id="answerP9" class="form-control" name="answerP9"></textarea>
-                                </div>
-                            </div>
-                            <div id="p10" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Di antara semua teori tersebut, mana yang paling Anda <b>paham</b> ?</p>
+                                    <p style="margin-bottom: 7pt;">Apakah Anda familiar dengan bahasa pemrograman C ?</p>
                                     <textarea id="answerP10" class="form-control" name="answerP10"></textarea>
-                                </div>
-                            </div>
-                            <div id="p11" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Di antara semua teori tersebut, mana yang paling Anda <b>tidak paham</b> ?</p>
-                                    <textarea id="answerP11" class="form-control" name="p11"></textarea>
-                                </div>
-                            </div>
-                            <div id="p12" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Menurut penilaian Anda, berapa tingkat pemahaman Anda tentang teori graf secara keseluruhan ?</p>
-                                    <div class="row">
-                                        <div class="col-md-12 col-xs-12 rating">
-                                            <input id="answerP12-five" name="answerP12" type="radio" value="5" class="radio-btn hide" onclick="checkAnswerP12(this);"/>
-                                            <label for="answerP12-five">☆</label>
-                                            <input id="answerP12-four" name="answerP12" type="radio" value="4" class="radio-btn hide" onclick="checkAnswerP12(this);"/>
-                                            <label for="answerP12-four">☆</label>
-                                            <input id="answerP12-three" name="answerP12" type="radio" value="3" class="radio-btn hide" onclick="checkAnswerP12(this);"/>
-                                            <label for="answerP12-three">☆</label>
-                                            <input id="answerP12-two" name="answerP12" type="radio" value="2" class="radio-btn hide" onclick="checkAnswerP12(this);"/>
-                                            <label for="answerP12-two">☆</label>
-                                            <input id="answerP12-one" name="answerP12" type="radio" value="1" class="radio-btn hide" onclick="checkAnswerP12(this);"/>
-                                            <label for="answerP12-one">☆</label>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="p13" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Mohon jelaskan dengan rinci mengapa Anda merasa kurang dalam memahami teori graf? Bagian mana yang menjadi kesulitan?</p>
-                                    <textarea id="answerP13" class="form-control" name="answerP13"></textarea>
                                 </div>
                             </div>
                         </div>
