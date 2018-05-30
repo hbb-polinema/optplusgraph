@@ -110,172 +110,71 @@
                     <form accept-charset="utf-8" method="POST" action="#" name="formPostTest" id="formPostTest">
                         
                         <div style="text-align:center;margin-top:40px;">
-                            <h4>Sisa Pertanyaan:
-                                <b id="sisaPertanyaan">12</b>
+                            <h4>Sisa Soal:
+                                <b id="sisaSoal">4</b>
                             </h4>
                         </div>
 
                         <!-- One "tab" for each step in the form: -->
                         <div id="DivFormPostTest">
                             
-                            <div id="p0" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Apa yang telah Anda pelajari dari aplikasi {{opt/codeviz}} ?</p>
-                                    <textarea id="answerP0" class="form-control" name="answerP0"></textarea>
-                                </div>
-                            </div>
-                            
                             <div id="p1" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p1title" style="margin-bottom: 7pt;">Apakah {{opt/codeviz}} memiliki fitur visualisasi graf ?</p>
+                                    <p style="margin-bottom: 7pt;">Berapa total simpul dalam graf kode program ini ?</p>
                                     <select id="answerP1" name="answerP1" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="y">Ya</option>
-                                        <option value="t">Tidak</option>
-                                        <option value="n">Tidak Tahu</option>
+                                        <option value="" selected disabled>Pilih Jawaban Anda</option>                
+                                        <option value="a">5</option>                
+                                        <option value="b">7</option>                
+                                        <option value="c">8</option>                
+                                        <option value="d">9</option>    
+                                        <option value="e">10</option>        
                                     </select>
+                                    <!--TODO: tampilkan graf kode program di sini-->
                                 </div>
                             </div>
                             
                             <div id="p2" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p2title" style="margin-bottom: 7pt;">Menurut Anda, pada nomor berapa aplikasi {{opt/codeviz}} memiliki fitur visualisasi graf ?</p>
+                                    <p id="p2title" style="margin-bottom: 7pt;">Berapa derajat (<i>degree</i>) yang dimiliki oleh simpul 3 pada graf kode program berikut ini ?</p>
                                     <select id="answerP2" name="answerP2" class="form-control">
                                         <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="1">Nomor 1</option>
-                                        <option value="2">Nomor 2</option>
-                                        <option value="3">Nomor 3</option>
-                                        <option value="4">Nomor 4</option>
-                                        <option value="5">Nomor 5</option>
+                                        <option value="a">5</option>                
+                                        <option value="b">7</option>                
+                                        <option value="c">8</option>                
+                                        <option value="d">9</option>    
+                                        <option value="e">10</option>
                                     </select>
-                                    <!--TODO: tampilkan gambar schot di sini-->
+                                    <!--TODO: tampilkan graf kode program di sini-->
                                 </div>
                             </div>
                             
                             <div id="p3" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p3title" style="margin-bottom: 7pt;">Menurut penilaian Anda, berapa rating fitur visualisasi graf yang dimiliki {{opt/codeviz}} ?</p>
-                                    <div class="row">
-                                        <div class="col-md-12 col-xs-12 rating">
-                                            <input id="answerP3-five" name="answerP3" type="radio" value="5" class="radio-btn hide"/>
-                                            <label for="answerP3-five">☆</label>
-                                            <input id="answerP3-four" name="answerP3" type="radio" value="4" class="radio-btn hide"/>
-                                            <label for="answerP3-four">☆</label>
-                                            <input id="answerP3-three" name="answerP3" type="radio" value="3" class="radio-btn hide"/>
-                                            <label for="answerP3-three">☆</label>
-                                            <input id="answerP3-two" name="answerP3" type="radio" value="2" class="radio-btn hide"/>
-                                            <label for="answerP3-two">☆</label>
-                                            <input id="answerP3-one" name="answerP3" type="radio" value="1" class="radio-btn hide"/>
-                                            <label for="answerP3-one">☆</label>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </div>
+                                    <p id="p3title" style="margin-bottom: 7pt;">Berapa total biaya (<i>cost</i>) yang diperlukan dari simpul 1 hingga simpul 5 pada graf kode program berikut ini ?</p>
+                                    <select id="answerP3" name="answerP3" class="form-control">
+                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
+                                        <option value="a">15</option>                
+                                        <option value="b">17</option>                
+                                        <option value="c">18</option>                
+                                        <option value="d">19</option>    
+                                        <option value="e">20</option>
+                                    </select>
+                                    <!--TODO: tampilkan graf kode program di sini-->
                                 </div>
                             </div>
 
                             <div id="p4" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p4title" style="margin-bottom: 7pt;">Apakah Anda pernah menggunakan aplikasi {{opt/codeviz}} sebelumnya ?</p>
+                                    <p id="p4title" style="margin-bottom: 7pt;">Berapa jumlah sisi (<i>edge</i>) yang dimiliki oleh graf kode program berikut ini ?</p>
                                     <select id="answerP4" name="answerP4" class="form-control">
                                         <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="y">Ya, Pernah</option>
-                                        <option value="t">Tidak Pernah</option>
-                                        <option value="n">Lupa/Tidak Tahu</option>
+                                        <option value="a">5</option>                
+                                        <option value="b">7</option>                
+                                        <option value="c">8</option>                
+                                        <option value="d">9</option>    
+                                        <option value="e">10</option>
                                     </select>
-                                </div>
-                            </div>
-                            
-                            <div id="p5" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Dari mana Anda mengetahui aplikasi {{opt/codeviz}}</p>
-                                    <select id="answerP5" name="answerP5" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="b">Browsing Internet</option>
-                                        <option value="s">Seminar Jurnal/Paper</option>
-                                        <option value="t">Teman</option>
-                                        <option value="p">Pengajar/Dosen</option>
-                                        <option value="l">Lainnya</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div id="p6" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Apakah Anda pernah menggunakan aplikasi sejenis {{opt/codeviz}} ?</p>
-                                    <select id="answerP6" name="answerP6" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="y">Ya, Pernah</option>
-                                        <option value="t">Tidak Pernah</option>
-                                        <option value="n">Lupa/Tidak Tahu</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div id="p7" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p id="p7title" style="margin-bottom: 7pt;">lalu, nama aplikasinya apa ?</p>
-                                    <textarea id="answerP7" class="form-control" name="answerP7"></textarea>
-                                </div>
-                            </div>
-                            
-                            <div id="p8" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Kapan terkahir kali Anda menggunakan aplikasi tersebut ?</p>
-                                    <select id="answerP8" name="answerP0" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih</option>
-                                        <option value="today">Hari ini</option>
-                                        <option value="yesterday">Kemarin</option>
-                                        <option value="2past">2 hari yang lalu</option>
-                                        <option value="3past">lebih dari 3 hari yang lalu</option>
-                                        <option value="no">Belum pernah memprogram</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div id="p9" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Menurut penilaian Anda, apakah aplikasi {{opt/codeviz}} mudah untuk digunakan ?</p>
-                                    <div class="row">
-                                        <div class="col-md-12 col-xs-12 rating">
-                                            <input id="answerP9-five" name="answerP9" type="radio" value="5" class="radio-btn hide"/>
-                                            <label for="answerP9-five">☆</label>
-                                            <input id="answerP9-four" name="answerP9" type="radio" value="4" class="radio-btn hide"/>
-                                            <label for="answerP9-four">☆</label>
-                                            <input id="answerP9-three" name="answerP9" type="radio" value="3" class="radio-btn hide"/>
-                                            <label for="answerP9-three">☆</label>
-                                            <input id="answerP9-two" name="answerP9" type="radio" value="2" class="radio-btn hide"/>
-                                            <label for="answerP9-two">☆</label>
-                                            <input id="answerP9-one" name="answerP9" type="radio" value="1" class="radio-btn hide"/>
-                                            <label for="answerP9-one">☆</label>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="p10" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Apakah visualisasi membantu Anda dalam memahami eksekusi kode program ?</p>
-                                    <select id="answerP10" name="answerP10" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="y">Ya, Sangat Membantu</option>
-                                        <option value="t">Tidak Berguna</option>
-                                        <option value="n">Tidak Tahu</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div id="p11" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Apa yang membuat Anda terbantu dengan adanya visualisasi ? Mohon jelaskan!</p>
-                                    <textarea id="answerP11" class="form-control" name="answerP11"></textarea>
-                                </div>
-                            </div>
-                            
-                            <div id="p12" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Mengapa visualisasi tidak membantu Anda ?</p>
-                                    <textarea id="answerP12" class="form-control" name="answerP10"></textarea>
+                                    <!--TODO: tampilkan graf kode program di sini-->
                                 </div>
                             </div>
 
@@ -283,7 +182,7 @@
 
                         <div style="overflow:auto;">
                             <div style="float:right;">
-                                <input id="nextBtn" class="btn btn-primary btn-lg" value="Lanjut" type="button" onclick="postTest(0)">
+                                <input id="nextBtn" class="btn btn-primary btn-lg" value="Lanjut" type="button" onclick="postTest(1)">
                             </div>
                         </div>
                     </form>
@@ -296,6 +195,6 @@
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/post-test.js?v=1"></script>
+    <script src="js/post-test.js?v=3"></script>
 
 <?php require_once('footer.php'); ?>

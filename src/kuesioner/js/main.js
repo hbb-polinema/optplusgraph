@@ -547,17 +547,3 @@ function showProdi(val) {
         document.getElementById('asal-kampus').style.display = 'none';
     }
 }
-
-function simulasiOPT() {
-    var opt = window.open(
-        "http://codeviz.tk/opt/",
-        "_blank",
-        "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=yes");
-}
-
-function simulasiCodeViz() {
-    var codeviz = window.open(
-        "http://codeviz.tk/codeviz/",
-        "_blank",
-        "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=yes");
-}
