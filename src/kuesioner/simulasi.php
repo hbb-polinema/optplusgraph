@@ -34,29 +34,6 @@
                 opacity: 1;
             }
         }
-
-        /* Make circles that indicate the steps of the form: */
-
-        .step {
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbbbbb;
-            border: none;
-            border-radius: 50%;
-            display: inline-block;
-            opacity: 0.5;
-        }
-
-        .step.active {
-            opacity: 1;
-        }
-
-        /* Mark the steps that are finished and valid: */
-
-        .step.finish {
-            background-color: #4CAF50;
-        }
     </style>
     
     <header role="banner" id="fh5co-header" class="navbar-fixed-top">
@@ -139,7 +116,7 @@
                                 <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Core Test</span></p>
                                 <p><b>Sesi 2</b> - Waktu Penyelesaian: 4 Menit</p>
                                 <p>Anda ditugaskan untuk menyelesaikan 4 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas CodeViz</b>.</p>
-                                <p><input class="btn btn-primary btn-lg" value="Mulai - Sesi 2" type="button" onclick="simulasiOPT();"></p>
+                                <p><input class="btn btn-primary btn-lg" value="Mulai - Sesi 2" type="button" onclick="simulasiCodeViz();"></p>
                             </div>
                         </div>
                         <div style="overflow:auto;">

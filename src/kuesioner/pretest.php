@@ -34,29 +34,6 @@
                 opacity: 1;
             }
         }
-
-        /* Make circles that indicate the steps of the form: */
-
-        .step {
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbbbbb;
-            border: none;
-            border-radius: 50%;
-            display: inline-block;
-            opacity: 0.5;
-        }
-
-        .step.active {
-            opacity: 1;
-        }
-
-        /* Mark the steps that are finished and valid: */
-
-        .step.finish {
-            background-color: #4CAF50;
-        }
     </style>
     <header role="banner" id="fh5co-header" class="navbar-fixed-top">
         <div class="container">
@@ -149,11 +126,11 @@
                                 <div class="form-control" style="height: 100%">
                                     <p style="margin-bottom: 7pt;">Apa yang dimaksud dengan graf ?</p>
                                     <div class="row">
-                                        <input id="answerP1-a" type="radio" name="answerP1" value="a" onclick="clearInvalid(1)"> Graf adalah objek dasar pelajaran dalam teori graf<br>
-                                        <input id="answerP1-b" type="radio" name="answerP1" value="b" onclick="clearInvalid(1)"> Graf adalah himpunan dari objek-objek yang dinamakan titik<br>
-                                        <input id="answerP1-c" type="radio" name="answerP1" value="c" onclick="clearInvalid(1)"> Graf adalah ...<br>
-                                        <input id="answerP1-d" type="radio" name="answerP1" value="d" onclick="clearInvalid(1)"> Graf adalah ...<br>
-                                        <input id="answerP1-e" type="radio" name="answerP1" value="e" onclick="clearInvalid(1)"> Graf adalah ...<br>
+                                        <input id="answerP1-a" type="radio" name="answerP1" value="a" onclick="clearInvalid(1)"> Graf adalah objek dasar pelajaran dalam teori graf.<br>
+                                        <input id="answerP1-b" type="radio" name="answerP1" value="b" onclick="clearInvalid(1)"> Graf adalah himpunan dari objek-objek yang dinamakan titik, simpul, atau sudut dihubungkan oleh penghubung yang dinamakan garis atau sisi.<br>
+                                        <input id="answerP1-c" type="radio" name="answerP1" value="c" onclick="clearInvalid(1)"> Graf adalah gambar kurva (garis atau sisi) yang membentuk bangun datar berupa persegi panjang.<br>
+                                        <input id="answerP1-d" type="radio" name="answerP1" value="d" onclick="clearInvalid(1)"> Graf adalah gambar grafik untuk kepentingan visualisasi data.<br>
+                                        <input id="answerP1-e" type="radio" name="answerP1" value="e" onclick="clearInvalid(1)"> Graf adalah objek dasar yang terdiri dari bangun datar dan garis.<br>
                                     </div>
                                 </div>
                             </div>
@@ -161,11 +138,11 @@
                                 <div class="form-control" style="height: 100%">
                                     <p id="p2title" style="margin-bottom: 7pt;">Apa yang dimaksud dengan simpul (node) pada graf ?</p>
                                     <div class="row">
-                                        <input id="answerP2-a" type="radio" name="answerP2" value="a"> Simpul (node) adalah ...<br>
-                                        <input id="answerP2-b" type="radio" name="answerP2" value="b"> Simpul (node) adalah ...<br>
-                                        <input id="answerP2-c" type="radio" name="answerP2" value="c"> Simpul (node) adalah ...<br>
-                                        <input id="answerP2-d" type="radio" name="answerP2" value="d"> Simpul (node) adalah ...<br>
-                                        <input id="answerP2-e" type="radio" name="answerP2" value="e"> Simpul (node) adalah ...<br>
+                                        <input id="answerP2-a" type="radio" name="answerP2" value="a"> Simpul (node) adalah graf ganda.<br>
+                                        <input id="answerP2-b" type="radio" name="answerP2" value="b"> Simpul (node) adalah graf tidak sederhana.<br>
+                                        <input id="answerP2-c" type="radio" name="answerP2" value="c"> Simpul (node) adalah graf semu.<br>
+                                        <input id="answerP2-d" type="radio" name="answerP2" value="d"> Simpul (node) adalah sisi yang menghubungkan pasangan titik yang sama.<br>
+                                        <input id="answerP2-e" type="radio" name="answerP2" value="e"> Simpul (node) adalah himpunan titik.<br>
                                     </div>
                                 </div>
                             </div>
@@ -173,11 +150,11 @@
                                 <div class="form-control" style="height: 100%">
                                     <p id="p3title" style="margin-bottom: 7pt;">Apa yang dimaksud dengan sisi (edge) pada graf ?</p>
                                     <div class="row">
-                                        <input id="answerP3-a" type="radio" name="answerP3" value="a"> Sisi (edge) adalah ...<br>
-                                        <input id="answerP3-b" type="radio" name="answerP3" value="b"> Sisi (edge) adalah ...<br>
-                                        <input id="answerP3-c" type="radio" name="answerP3" value="c"> Sisi (edge) adalah ...<br>
-                                        <input id="answerP3-d" type="radio" name="answerP3" value="d"> Sisi (edge) adalah ...<br>
-                                        <input id="answerP3-e" type="radio" name="answerP3" value="e"> Sisi (edge) adalah ...<br>
+                                        <input id="answerP3-a" type="radio" name="answerP3" value="a"> Sisi (edge) adalah bagian penting graf.<br>
+                                        <input id="answerP3-b" type="radio" name="answerP3" value="b"> Sisi (edge) adalah himpunan graf.<br>
+                                        <input id="answerP3-c" type="radio" name="answerP3" value="c"> Sisi (edge) adalah jembatan.<br>
+                                        <input id="answerP3-d" type="radio" name="answerP3" value="d"> Sisi (edge) adalah sisi yang membentuk persegi.<br>
+                                        <input id="answerP3-e" type="radio" name="answerP3" value="e"> Sisi (edge) adalah garis yang menghubungkan dua simpul atau lebih.<br>
                                     </div>
                                 </div>
                             </div>
@@ -185,11 +162,11 @@
                                 <div class="form-control" style="height: 100%">
                                     <p id="p4title" style="margin-bottom: 7pt;">Apa yang dimaksud dengan derajat (degree) pada graf ?</p>
                                     <div class="row">
-                                        <input id="answerP4-a" type="radio" name="answerP4" value="a"> Derajat (degree) adalah ...<br>
-                                        <input id="answerP4-b" type="radio" name="answerP4" value="b"> Derajat (degree) adalah ...<br>
-                                        <input id="answerP4-c" type="radio" name="answerP4" value="c"> Derajat (degree) adalah ...<br>
-                                        <input id="answerP4-d" type="radio" name="answerP4" value="d"> Derajat (degree) adalah ...<br>
-                                        <input id="answerP4-e" type="radio" name="answerP4" value="e"> Derajat (degree) adalah ...<br>
+                                        <input id="answerP4-a" type="radio" name="answerP4" value="a"> Derajat (degree) adalah ukuran (size) graf.<br>
+                                        <input id="answerP4-b" type="radio" name="answerP4" value="b"> Derajat (degree) adalah bentuk sudut dari beberapa sisi.<br>
+                                        <input id="answerP4-c" type="radio" name="answerP4" value="c"> Derajat (degree) adalah banyaknya sisi yang bersisian dengan suatu simpul.<br>
+                                        <input id="answerP4-d" type="radio" name="answerP4" value="d"> Derajat (degree) adalah banyaknya simpul yang terhubung.<br>
+                                        <input id="answerP4-e" type="radio" name="answerP4" value="e"> Derajat (degree) adalah sisi genap dan sisi ganjil.<br>
                                     </div>
                                 </div>
                             </div>
