@@ -5,7 +5,6 @@ src/demo/node_modules/*
 src/prototype/node_modules/*
 src/prototype/typings/*
 src/prototype/.vscode/*
-*.vsd
 *.~vsd
 *.out
 *.out_py3
