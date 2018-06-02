@@ -36,15 +36,40 @@ function nextForm(n) {
     showTab(currentTab);
 }
 
-/**
- * 
- * @param {tab saat ini} currentTab
- */
-function simulasi(currentTab) {
+function updateTahap(tahap) {
+    $.ajax({
+        type: "POST",
+        url: "ajax_request/simulasi.php",
+        data: "tahap=" + tahap,
+        cache: false,
+        success: function(result) {
+            if (result == 'sukses') {
+                console.log('sukses simpan jawaban ke DB');
+            } else {
+                console.log(result);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log('Terjadi koneksi galat: ' + status);
+        }
+    });
+}
+
+
+function simulasiNextBtn(nextStep, cond) {
     var valid = true;
     var nextBtn = document.getElementById('nextBtn');
 
-    if (valid) nextForm(1);
+    if (valid) {
+        nextForm(1);
+
+        if (currentTab == cond) {
+            // FINISH go to post-test
+            alert('Jawaban Simulasi Berhasil Disimpan!');
+            updateTahap(nextStep);
+            window.location.href = nextStep;
+        }
+    }
 
     return valid;
 }

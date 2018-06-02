@@ -56,8 +56,43 @@ function validateForm() {
     return valid; // return the valid status
 }
 
-function submitPostTest() {
-    document.getElementById("formPostTest").submit();
+function saveToDB(jwb, id_soal) {
+    console.log(id_soal + ' jwb: ' + jwb);
+    $.ajax({
+        type: "POST",
+        url: "ajax_request/post-test.php",
+        data: "id_soal=" + id_soal + "&jwb=" + jwb,
+        cache: false,
+        success: function(result) {
+            if (result == 'sukses') {
+                console.log('sukses simpan jawaban ke DB');
+            } else {
+                console.log(result);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log('Terjadi koneksi galat: ' + status);
+        }
+    });
+}
+
+function updateTahap(tahap) {
+    $.ajax({
+        type: "POST",
+        url: "ajax_request/simulasi.php",
+        data: "tahap=" + tahap,
+        cache: false,
+        success: function(result) {
+            if (result == 'sukses') {
+                console.log('sukses pindah tahap');
+            } else {
+                console.log(result);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log('Terjadi koneksi galat: ' + status);
+        }
+    });
 }
 
 /**
@@ -72,7 +107,7 @@ function postTest(currentQuestion) {
     switch (currentQuestion) {
         case 1:
             if (document.getElementById('answerP1').value != '') {
-                // valid = true
+                saveToDB(document.getElementById('answerP1').value, 27);
             } else {
                 document.getElementById('p1').className += ' invalid';
                 valid = false;
@@ -86,7 +121,7 @@ function postTest(currentQuestion) {
             break;
         case 2:
             if (document.getElementById('answerP2').value != '') {
-                // valid = true
+                saveToDB(document.getElementById('answerP2').value, 28);
             } else {
                 document.getElementById('p2').className += ' invalid';
                 valid = false;
@@ -100,7 +135,7 @@ function postTest(currentQuestion) {
             break;
         case 3:
             if (document.getElementById('answerP3').value != '') {
-                // valid = true
+                saveToDB(document.getElementById('answerP3').value, 29);
             } else {
                 document.getElementById('p3').className += ' invalid';
                 valid = false;
@@ -114,7 +149,7 @@ function postTest(currentQuestion) {
             break;
         case 4:
             if (document.getElementById('answerP4').value != '') {
-                // valid = true
+                saveToDB(document.getElementById('answerP4').value, 30);
             } else {
                 document.getElementById('p4').className += ' invalid';
                 valid = false;
@@ -129,7 +164,10 @@ function postTest(currentQuestion) {
             break;
         case 5:
             if (document.getElementById('answerP5').value != '') {
-                // valid = true
+                saveToDB(document.getElementById('answerP5').value, 31);
+                if (document.getElementById('answerP5a').value != '') {
+                    saveToDB(document.getElementById('answerP5a').value, 31);
+                }
             } else {
                 document.getElementById('p5').className += ' invalid';
                 valid = false;
@@ -137,8 +175,11 @@ function postTest(currentQuestion) {
 
             // go to SUBMIT
             if (valid) {
-                // FINISH Post-Test
-                submitPostTest();
+                // FINISH Post-Test, next to simulasi2
+                alert('Post-tes 1 Berhasil disimpan!');
+                saveToDB('finish', 0);
+                //updateTahap('simulasi2.php');
+                window.location.href = 'simulasi2.php';
             }
             break;
     }

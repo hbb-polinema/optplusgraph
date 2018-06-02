@@ -344,7 +344,7 @@ int main()
     return 0;
 }</code></pre>
                                 <p>Silakan paste jawaban kode program Anda di bawah ini.</p>
-                                <textarea style="width:100%;height:111px;"></textarea>
+                                <textarea id="answerP4" style="width:100%;height:111px;"></textarea>
                                 <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
                             </div>
                         </div>
@@ -391,7 +391,7 @@ int main()
 
                         <div style="overflow:auto;">
                             <div style="float:center;">
-                                <center><input id="nextBtn" class="btn btn-primary btn-lg" value="Soal Berikutnya" type="button" onclick="simulasi(1)"></center>
+                                <center><input id="nextBtn" class="btn btn-primary btn-lg" value="Soal Berikutnya" type="button" onclick="simulasi1sesi2NextBtn(1)"></center>
                             </div>
                         </div>
                     </div>
@@ -427,6 +427,7 @@ int main()
 
     <div style="height:133px;"></div>
     <script src="js/simulasi.js?v=3"></script>
+    <script src="js/simulasi1sesi2.js?v=1"></script>
     <script src="js/prism.js?v=1" type="text/javascript"></script>
 
     <?php require_once('footer.php'); ?>

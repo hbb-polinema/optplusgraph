@@ -56,7 +56,9 @@ function validateForm() {
 }
 
 function submitPretest() {
-    document.getElementById("formPreTest").submit();
+    //document.getElementById("formPreTest").submit();
+    window.location.href = 'simulasi.php';
+    alert('Jawaban Pretest Berhasil Disimpan!');
 }
 
 function clearInvalid(i) {
@@ -133,15 +135,15 @@ function preTest(currentQuestion) {
             break;
         case 2:
             if (document.getElementById('answerP2-a').checked) {
-                // valid = true
+                saveToDB("a", 2);
             } else if (document.getElementById('answerP2-b').checked) {
-                // valid = true
+                saveToDB("b", 2);
             } else if (document.getElementById('answerP2-c').checked) {
-                // valid = true
+                saveToDB("c", 2);
             } else if (document.getElementById('answerP2-d').checked) {
-                // valid = true
+                saveToDB("d", 2);
             } else if (document.getElementById('answerP2-e').checked) {
-                // valid = true
+                saveToDB("e", 2);
             } else {
                 document.getElementById('p2').className += ' invalid';
                 valid = false;
@@ -155,15 +157,15 @@ function preTest(currentQuestion) {
             break;
         case 3:
             if (document.getElementById('answerP3-a').checked) {
-                // valid = true
+                saveToDB("a", 3);
             } else if (document.getElementById('answerP3-b').checked) {
-                // valid = true
+                saveToDB("b", 3);
             } else if (document.getElementById('answerP3-c').checked) {
-                // valid = true
+                saveToDB("c", 3);
             } else if (document.getElementById('answerP3-d').checked) {
-                // valid = true
+                saveToDB("d", 3);
             } else if (document.getElementById('answerP3-e').checked) {
-                // valid = true
+                saveToDB("e", 3);
             } else {
                 document.getElementById('p3').className += ' invalid';
                 valid = false;
@@ -177,15 +179,15 @@ function preTest(currentQuestion) {
             break;
         case 4:
             if (document.getElementById('answerP4-a').checked) {
-                // valid = true
+                saveToDB("a", 4);
             } else if (document.getElementById('answerP4-b').checked) {
-                // valid = true
+                saveToDB("b", 4);
             } else if (document.getElementById('answerP4-c').checked) {
-                // valid = true
+                saveToDB("c", 4);
             } else if (document.getElementById('answerP4-d').checked) {
-                // valid = true
+                saveToDB("d", 4);
             } else if (document.getElementById('answerP4-e').checked) {
-                // valid = true
+                saveToDB("e", 4);
             } else {
                 document.getElementById('p4').className += ' invalid';
                 valid = false;
@@ -199,7 +201,7 @@ function preTest(currentQuestion) {
             break;
         case 5:
             if (document.getElementById('answerP5').value != '') {
-                // valid = true
+                saveToDB(document.getElementById('answerP5').value, 5);
             } else {
                 document.getElementById('p5').className += ' invalid';
                 valid = false;
@@ -213,7 +215,7 @@ function preTest(currentQuestion) {
             break;
         case 6:
             if (document.getElementById('answerP6').value != '') {
-                // valid = true
+                saveToDB(document.getElementById('answerP6').value, 6);
             } else {
                 document.getElementById('p6').className += ' invalid';
                 valid = false;
@@ -227,7 +229,7 @@ function preTest(currentQuestion) {
             break;
         case 7:
             if (document.getElementById('answerP7').value != '') {
-                // valid = true
+                saveToDB(document.getElementById('answerP7').value, 7);
             } else {
                 document.getElementById('p7').className += ' invalid';
                 valid = false;
@@ -242,7 +244,13 @@ function preTest(currentQuestion) {
             break;
         case 8:
             if (document.getElementById('answerP8').value != '') {
-                // valid = true
+                saveToDB(document.getElementById('answerP8').value, 8);
+                if (document.getElementById('pC').value != '') {
+                    saveToDB(document.getElementById('pC').value, 81);
+                }
+                if (document.getElementById('lastpC').value != '') {
+                    saveToDB(document.getElementById('lastpC').value, 82);
+                }
             } else {
                 document.getElementById('p8').className += ' invalid';
                 valid = false;
@@ -250,6 +258,7 @@ function preTest(currentQuestion) {
 
             // go to SUBMIT
             if (valid) {
+                saveToDB('finish', 0);
                 // FINISH Pre-test
                 submitPretest();
             }

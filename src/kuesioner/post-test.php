@@ -363,8 +363,8 @@ int main()
                                         <option value="d">8</option>    
                                         <option value="e">9</option>
                                     </select><br>
-                                    <p>Silakan paste jawaban kode program Anda di bawah ini.</p>
-                                    <textarea style="width:100%;height:111px;"></textarea>
+                                    <p>Sebutkan pada baris berapa saja ...</p>
+                                    <textarea id="answerP5a" style="width:100%;height:111px;"></textarea>
 <pre><code class="language-c">
 #include "stdio.h"
 
@@ -410,7 +410,7 @@ int main()
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/post-test.js?v=4"></script>
+    <script src="js/post-test.js?v=5"></script>
     <script src="js/prism.js?v=1" type="text/javascript"></script>
 
 <?php require_once('footer.php'); ?>

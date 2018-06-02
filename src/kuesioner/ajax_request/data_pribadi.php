@@ -60,7 +60,6 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
             WHERE kode_unik = '.$kode_unik.' AND email_responden = '.$email);
 
             if ($insert){
-                $_SESSION['tahap'] = "pretest.php";
                 $_DB->query("UPDATE `responden` SET `tahap_sekarang` = 'pretest.php' WHERE `kode_unik` = ".$kode_unik); 
                 echo 'sukses';
             } else 

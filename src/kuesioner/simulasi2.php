@@ -152,7 +152,7 @@ if(isset($_SESSION['kode'])){
                         
                         <div style="overflow:auto;">
                             <div style="float:center;">
-                                <center><input id="nextBtn" class="btn btn-primary btn-lg" value="Soal Berikutnya" type="button" onclick="simulasi(1)"></center>
+                                <center><input id="nextBtn" class="btn btn-primary btn-lg" value="Soal Berikutnya" type="button" onclick="simulasiNextBtn('post-test2.php',3);"></center>
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,7 @@ if(isset($_SESSION['kode'])){
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/simulasi.js?v=4"></script>
+    <script src="js/simulasi.js?v=1"></script>
 
     <?php require_once('footer.php'); ?>
 

@@ -239,11 +239,11 @@ if(isset($_SESSION['kode'])){
                                     <p style="margin-bottom: 7pt;">Berapa derajat pada simpul nomor 2 yang dimiliki oleh graf berikut ?</p>
                                     <select id="answerP7" name="answerP7" class="form-control">
                                         <option value="" selected disabled>Silahkan Pilih</option>                
-                                        <option value="a">6</option>                
-                                        <option value="b">7</option>                
-                                        <option value="c">8</option>                
-                                        <option value="d">9</option>    
-                                        <option value="e">10</option>        
+                                        <option value="a">4</option>                
+                                        <option value="b">5</option>                
+                                        <option value="c">6</option>                
+                                        <option value="d">7</option>    
+                                        <option value="e">8</option>        
                                     </select>
                                     <p style="margin:30px;">
                                         <center><img src="images/pretest-p7.jpg"></center>
@@ -299,18 +299,9 @@ if(isset($_SESSION['kode'])){
 
         </div>
 
-        <!--div class="row">
-            <div style="height:77px;"></div>
-            <div class="col-md-12 text-center">
-                <p style="font-size:11pt;">
-                    <span class="badge badge-info">Info</span> Jumlah pertanyaan akan bertambah atau berkurang menyesuaikan
-                    <br>jawaban yang Anda pilih, karena dibutuhkan analisis data yang berkorelasi.</p>
-            </div>
-        </div-->
-
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/pretest.js?v=4"></script>
+    <script src="js/pretest.js?v=5"></script>
 
     <?php require_once('footer.php'); ?>

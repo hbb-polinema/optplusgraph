@@ -8,7 +8,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
     $select = $_DB->select('SELECT id_responden,kode_unik FROM responden WHERE kode_unik = '.$kode_unik);
 
     if($select){
-        $q = $_POST['q'];
+        $q = $_POST['id_soal'];
         $jwb = $_DB->validate_data($_POST['jwb']);
         $id_responden = $select[0]['id_responden'];
 
@@ -26,7 +26,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
                                             `id_pertanyaan`)
                     
                     VALUES                  (".$jwb.", 
-                                            'pretest', 
+                                            'simulasi1sesi2', 
                                             NULL, 
                                             ".$id_responden.", 
                                             ".$q.");");
@@ -34,7 +34,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
         else echo 'gagal-'.$q.'-'.$jwb.'-'.$id_responden;
 
     } else {
-        echo 'PRE1 - Terjadi Kesalahan!';
+        echo 'Sim1S2 - Terjadi Kesalahan!';
     }
 } else {
     echo '101 - Terjadi Kesalahan';
