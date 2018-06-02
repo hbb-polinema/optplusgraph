@@ -49,16 +49,60 @@ function simulasi(currentTab) {
     return valid;
 }
 
+var _MainDomain = "http://localhost"; // http://codeviz.tk/
+
 function simulasiOPT() {
     var opt = window.open(
-        "http://localhost/opt/", // http://codeviz.tk/opt/
+        _MainDomain + "/opt/", // http://codeviz.tk/opt/
         "_blank",
         "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=yes");
 }
 
 function simulasiCodeViz() {
     var codeviz = window.open(
-        "http://localhost/codeviz/", // http://codeviz.tk/codeviz/
+        _MainDomain + "/codeviz/", // http://codeviz.tk/codeviz/
         "_blank",
         "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=yes");
+}
+
+function Latihan1() {
+    var latihan1 = window.open(
+        _MainDomain + ":3000/latihan1.php", // http://codeviz.tk/survei/latihan1.php
+        "_blank",
+        "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=no");
+}
+
+function Latihan2() {
+    var latihan2 = window.open(
+        _MainDomain + ":3000/latihan2.php", // http://codeviz.tk/survei/latihan2.php
+        "_blank",
+        "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=no");
+}
+
+function simulasi1sesi1() {
+    var S1se1 = window.open(
+        _MainDomain + ":3000/simulasi1sesi1.php", // http://codeviz.tk/survei/simulasi1sesi1.php
+        "_blank",
+        "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=no");
+}
+
+function simulasi1sesi2() {
+    var S1se2 = window.open(
+        _MainDomain + ":3000/simulasi1sesi2.php", // http://codeviz.tk/survei/simulasi1sesi2.php
+        "_blank",
+        "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=no");
+}
+
+function simulasi2sesi1() {
+    var S2se1 = window.open(
+        _MainDomain + ":3000/simulasi2sesi1.php", // http://codeviz.tk/survei/simulasi2sesi1.php
+        "_blank",
+        "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=no");
+}
+
+function simulasi2sesi2() {
+    var S2se2 = window.open(
+        _MainDomain + ":3000/simulasi2sesi2.php", // http://codeviz.tk/survei/simulasi2sesi2.php
+        "_blank",
+        "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=no");
 }

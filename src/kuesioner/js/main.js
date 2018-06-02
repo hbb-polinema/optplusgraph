@@ -526,6 +526,7 @@ function checkResolution(step) {
             'resolusi perangkat Anda minimal 800 x 600 pixels\n\n' +
             'Resolusi perangkat Anda saat ini:\n' +
             `${width} x ${height} pixels`);
+        return;
     }
 
     // cek input kode unik

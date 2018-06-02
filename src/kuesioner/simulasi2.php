@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+if(isset($_SESSION['kode'])){
+    require_once('db/db.php');
+    $kode_unik = $_SESSION['kode'];
+    $_DB = new DB();
+    $select = $_DB->select('SELECT nama_responden, tahap_sekarang FROM responden WHERE kode_unik = '.$kode_unik);
+    if($select){
+        if($select[0]['tahap_sekarang'] == "simulasi2.php"){
+            # Ok, right place!
+        } else {
+            header("Location: ".$select[0]['tahap_sekarang']);
+            exit;            
+        }
+    } else {
+        header("Location: index.php");
+        exit;
+    }
+} else {
+    header("Location: index.php");
+    exit;
+}
+?>
 <?php require_once('header.php'); ?>
 
 <body>
@@ -12,6 +36,12 @@
 
         .tab {
             display: none;
+            box-sizing: border-box;
+            -webkit-animation: fadeEffect 1.5s;
+            animation: fadeEffect 1.5s;
+        }
+
+        .tab2 {
             box-sizing: border-box;
             -webkit-animation: fadeEffect 1.5s;
             animation: fadeEffect 1.5s;
@@ -33,29 +63,6 @@
             to {
                 opacity: 1;
             }
-        }
-
-        /* Make circles that indicate the steps of the form: */
-
-        .step {
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbbbbb;
-            border: none;
-            border-radius: 50%;
-            display: inline-block;
-            opacity: 0.5;
-        }
-
-        .step.active {
-            opacity: 1;
-        }
-
-        /* Mark the steps that are finished and valid: */
-
-        .step.finish {
-            background-color: #4CAF50;
         }
     </style>
     
@@ -110,23 +117,39 @@
                 <div class="col-md-6 col-sm-6 to-animate">
                     
                     <div id="DivFormSimulasi">
+                        <div id="p0" class="tab form-group">
+                            <div class="form-control" style="height: 100%">
+                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Pendahuluan</span></p>
+                                <p>Sebelum memulai tes inti, sebaiknya perhatikan pada gambar diagram tahapan kuesioner berikut ini.</p>
+                                <p style="margin:30px;"><center><img src="images/diagram_kuesioner.png"></center></p>
+                                <p>Anda telah melewati Tahap 1, Tahap 2, dan sebagian di Tahap 3 dan Tahap 4.<br>
+                                    <br>Anda telah melewati <b>Simulasi 1</b>, yaitu <b>Latihan soal</b>, <b>Tes OPT</b>, <b>Tes CodeViz</b>, dan <b>Post-tes</b>.<br>
+                                    <br>Selanjutnya Anda akan melewati <b>Simulasi 2</b>, yaitu <b>Tes CodeViz</b>, <b>Tes OPT</b>, dan <b>Post-tes</b>.</br>
+                                    <br>Perbedaannya adalah Anda ditugaskan untuk menyelesaikan soal menggunakan <b>kakas CodeViz</b> terlebih dahulu kemudian menggunakan <b>kakas OPT</b>.</br>
+                                </p>
+
+                                <p>Anda siap untuk mulai <b>Tes CodeViz</b> ? Silakan klik tombol di bawah ini.</p>
+                            </div>
+                        </div>                        
+                        <div id="p1" class="tab form-group" style="background-color: #e67e22;">
+                            <div class="form-control" style="height: 100%;color: whitesmoke;">
+                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Core Test</span></p>
+                                <p><b>Sesi 1</b> - Waktu Penyelesaian Maksimal: 25 Menit</p>
+                                <p>Anda ditugaskan untuk menyelesaikan 5 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas CodeViz</b>.</p>
+                                <p>Apa itu <a data-toggle="modal" data-target="#kakasCodeViz"><b>Kakas CodeViz</b></a> ? klik <a data-toggle="modal" data-target="#kakasCodeViz">di sini</a> untuk membaca deskripsinya.</p>
+                                <p><input class="btn btn-primary btn-lg" value="Mulai - Sesi 1" type="button" onclick="simulasi2sesi1();"></p>
+                            </div>
+                        </div>
+                        <div id="p2" class="tab form-group" style="background-color: #7f8c8d;">
+                            <div class="form-control" style="height: 100%;color: whitesmoke;">
+                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Core Test</span></p>
+                                <p><b>Sesi 2</b> - Waktu Penyelesaian Maksimal: 25 Menit</p>
+                                <p>Anda ditugaskan untuk menyelesaikan 5 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas OPT</b>.</p>
+                                <p>Apa itu <a data-toggle="modal" data-target="#kakasOPT"><b>Kakas OPT</b></a> ? klik <a data-toggle="modal" data-target="#kakasOPT">di sini</a> untuk membaca deskripsinya.</p>
+                                <p><input class="btn btn-primary btn-lg" value="Mulai - Sesi 2" type="button" onclick="simulasi2sesi2();"></p>
+                            </div>
+                        </div>
                         
-                        <div id="p3" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Core Test</span></p>
-                                <p><b>Sesi 1</b> - Waktu Penyelesaian: 4 Menit</p>
-                                <p>Anda ditugaskan untuk menyelesaikan 4 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas CodeViz</b>.</p>
-                                <p><input class="btn btn-primary btn-lg" value="Mulai - Sesi 1" type="button" onclick="simulasiCodeViz();"></p>
-                            </div>
-                        </div>
-                        <div id="p4" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Core Test</span></p>
-                                <p><b>Sesi 2</b> - Waktu Penyelesaian: 4 Menit</p>
-                                <p>Anda ditugaskan untuk menyelesaikan 4 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas OPT</b>.</p>
-                                <p><input class="btn btn-primary btn-lg" value="Mulai - Sesi 2" type="button" onclick="simulasiOPT();"></p>
-                            </div>
-                        </div>
                         <div style="overflow:auto;">
                             <div style="float:center;">
                                 <center><input id="nextBtn" class="btn btn-primary btn-lg" value="Soal Berikutnya" type="button" onclick="simulasi(1)"></center>
@@ -164,6 +187,98 @@
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/simulasi.js?v=3"></script>
+    <script src="js/simulasi.js?v=4"></script>
 
     <?php require_once('footer.php'); ?>
+
+<div id="kakasOPT" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <Button type="button" class="close" data-dismiss="modal">&times;</Button>
+                <h4 class="modal-title">Kakas OnlinePythonTutor (OPT)</h4>
+            </div>
+            <div class="modal-body">
+                <p>Kakas ini disebut kakas visualisasi program.</p>
+                <p>Visualisasi Program adalah kakas yang dapat membantu memvisualisasikan
+                    data-data dalam memori komputer ketika melakukan eksekusi kode program.
+                    Diharapkan dengan kakas ini dapat membantu dalam mempelajari kode program.</p>
+                <p><b>OPT</b></p>
+                <p>Tampilan awal kakas OPT dapat dilihat pada gambar berikut ini.</p>
+                <p><img src="images/homescreen-opt.png" style="width:100%;" /></p>
+                <p>Anda hanya akan menggunakan fitur nomor 2 dan 3. Fitur pada nomor 2 digunakan
+                    untuk meng-input kode program dan fitur nomor 3 adalah tombol untuk eksekusi.
+                    Ketika proses eksekusi visualisasi berhasil, maka Anda akan melihat tampilan
+                    seperti pada gambar berikut ini.
+                </p>
+                <p><img src="images/visualisasi-opt.png" style="width:100%;"/></p>
+                <p>Anda dapat mengedit kode program dengan klik <b>'Edit code'</b>.<br>
+                    Tombol <b>'Forward'</b> untuk melihat visualisasi per baris kode program.<br>
+                    Tombol <b>'Back'</b> untuk melihat visualisasi sebelumnya.<br>
+                    Tombol <b>'Last'</b> untuk melihat visualisasi di akhir kode program.<br>
+                    Tombol <b>'First'</b> untuk melihat visualisasi di awal kode program.<br>
+                    Untuk membuat breakpoint, cukup klik pada nomor baris kode program.<br>
+                    Untuk menghapus breakpoint, cukup klik pada nomor baris yang sebelumnya telah ditandai sebagai breakpoint.<br>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="kakasCodeViz" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <Button type="button" class="close" data-dismiss="modal">&times;</Button>
+                <h4 class="modal-title">Kakas CodeViz (Code Visualization)</h4>
+            </div>
+            <div class="modal-body">
+                <p>Kakas ini disebut kakas visualisasi program.</p>
+                <p>Visualisasi Program adalah kakas yang dapat membantu memvisualisasikan
+                    data-data dalam memori komputer ketika melakukan eksekusi kode program.
+                    Diharapkan dengan kakas ini dapat membantu dalam mempelajari kode program.
+                    Kelebihan kakas CodeViz dibanding OPT adalah kakas ini mampu mendeteksi
+                    representasi graf dalam data memori komputer sehingga dapat memvisualisasikan
+                    graf.</p>
+                <p><b>CodeViz</b></p>
+                <p>Tampilan awal kakas CodeViz dapat dilihat pada gambar berikut ini.</p>
+                <p><img src="images/homescreen-codeviz.png" style="width:100%;" /></p>
+                <p>Seperti halnya kakas OPT, pada kakas CodeViz ini Anda hanya menggunakan <b>Code Editor</b>
+                    untuk input kode program. Kemudian klik <b>'Visualize Execution'</b> untuk melihat hasil visualisasi.
+                </p>
+                <p><img src="images/gambarIV.14-codeviz.png" style="width:100%;"/></p>
+                <p>Pada Gambar IV.14 terlihat tiga bagian penting, yaitu <b>(a) Navigasi kontrol</b>,
+                <b>(b) Slider</b>, dan <b>(c) Panel visualisasi</b>.<br>
+                    Pada Navigasi kontrol, terdiri dari 4 <i>button</i> yang dapat digunakan, yaitu:<br>
+                    Tombol <b>'Forward'</b> untuk melihat visualisasi per baris kode program.<br>
+                    Tombol <b>'Back'</b> untuk melihat visualisasi sebelumnya.<br>
+                    Tombol <b>'Last'</b> untuk melihat visualisasi di akhir kode program.<br>
+                    Tombol <b>'First'</b> untuk melihat visualisasi di awal kode program.<br>
+                    Untuk membuat breakpoint, cukup klik pada nomor baris kode program.<br>
+                    Untuk menghapus breakpoint, cukup klik pada nomor baris yang sebelumnya telah ditandai sebagai breakpoint.<br>
+                    <br>
+                    Pada <b>Slider</b>, Anda dapat menggeser proses langkah visualisasi dengan melompat pada
+                    langkah tertentu yang diinginkan.<br>
+                    Pada <b>Panel Visualisasi</b>, terdapat 3 bagian tab yaitu Primitif Visualization yang isinya sama dengan milik kakas OPT.
+                    Panel kedua <b>Graph Visualization</b> adalah fitur utama dalam kakas CodeViz ini untuk menampilkan visualisasi graf.
+                    Kemudian panel terakhir <b>Print Output</b> adalah untuk melihat hasil code <i>printf</i>.<br>
+                    Pada code sebelah kiri, terlihat baris berwarna kuning dengan anak panah berwarna merah. Ini mengindikasikan baris kode program
+                    yang akan dieksekusi selanjutnya. Untuk baris berwarna <i>gray</i> dengan anak panah berwarna hijau mengindikasikan baris kode program yang saat ini sedang divisualisasikan.
+                </p>
+                <p><img src="images/gambarIV.15-codeviz.png" style="width:100%;"/></p>
+                <p>Pada Gambar IV.15 terlihat visualisasi graf.<br>
+                    Anda dapat <b>drag and drop</b> simpul (node) untuk menyesuaikan visual graf.<br>
+                    Simpul yang berwarna <i>orange</i>, akan menempel pada posisi yang Anda inginkan.
+                    Untuk mengembalikan (release) seperti semula (simpul berwarna biru dongker), cukup <b>double-click</b> pada
+                    simpul yang berwarna <i>orange</i> tadi.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>

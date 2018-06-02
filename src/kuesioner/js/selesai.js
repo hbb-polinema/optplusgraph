@@ -1,5 +1,5 @@
 /**
- * Fungsi untuk tab pertanyaan pretest
+ * Fungsi untuk tab pertanyaan
  * author: Habibie Ed Dien (habibie.tk@gmail.com)
  */
 
@@ -79,31 +79,11 @@ function bahasaPem(val) {
     }
 }
 
-function saveToDB(val, q) {
-    console.log(q + ' jwb: ' + val);
-    $.ajax({
-        type: "POST",
-        url: "ajax_request/pretest.php",
-        data: "q=" + q + "&jwb=" + val,
-        cache: false,
-        success: function(result) {
-            if (result == 'sukses') {
-                console.log('sukses simpan jawaban ke DB');
-            } else {
-                console.log(result);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log('Terjadi koneksi galat: ' + status);
-        }
-    });
-}
-
 /**
  * 
- * @param {*pertanyaan saat ini} currentQuestion
+ * @param {pertanyaan saat ini} currentQuestion
  */
-function preTest(currentQuestion) {
+function selesai(currentQuestion) {
     var valid = true;
     var nextBtn = document.getElementById('nextBtn');
     var sisaPertanyaan = document.getElementById("sisaPertanyaan");
@@ -111,15 +91,15 @@ function preTest(currentQuestion) {
     switch (currentQuestion) {
         case 1:
             if (document.getElementById('answerP1-a').checked) {
-                saveToDB("a", 1);
+                // valid = true
             } else if (document.getElementById('answerP1-b').checked) {
-                saveToDB("b", 1);
+                // valid = true
             } else if (document.getElementById('answerP1-c').checked) {
-                saveToDB("c", 1);
+                // valid = true
             } else if (document.getElementById('answerP1-d').checked) {
-                saveToDB("d", 1);
+                // valid = true
             } else if (document.getElementById('answerP1-e').checked) {
-                saveToDB("e", 1);
+                // valid = true
             } else {
                 document.getElementById('p1').className += ' invalid';
                 valid = false;

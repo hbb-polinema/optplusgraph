@@ -52,13 +52,7 @@
                     <p>Perkenalkan saya Habibie Ed Dien, mahasiswa Magister Informatika dari Institut Teknologi Bandung. Saya sedang melakukan penelitian tentang <a href="https://id.wikipedia.org/wiki/Graf_(matematika)" target="_blank">Graf</a> dan <a href="https://en.wikipedia.org/wiki/Software_visualization" target="_blank">Visualisasi Eksekusi Kode Program</a>.
                         Mohon bantuan rekan-rekan untuk ikut berkontribusi melalui kuesioner ini sekitar 10 - 15 menit untuk menjawabnya.</p>
                     <p>Setiap responden yang berhasil menyelesaikan kuesioner ini, akan mendapatkan <b>pulsa telepon seluler senilai Rp. 25.000,- (dua puluh lima ribu rupiah) langsung tanpa diundi</b>.</p>
-                    <p>Syarat dan ketentuan responden yang dibutuhkan:</p>
-                    <p>
-                        <ul>
-                            <li>Memiliki kemampuan dasar pemrograman C/C++</li>
-                            <li>Pernah belajar teori graf</li>
-                        </ul>
-                    </p>
+                    
                     <form id="formKodeUnik" accept-charset="utf-8" name="formKodeUnik">
                         <div class="form-group">
                             <label for="kode" class="sr-only">Kode Unik</label>

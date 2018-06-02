@@ -81,7 +81,7 @@ function postTest(currentQuestion) {
             // go to p2
             if (valid) {
                 nextBtn.setAttribute('onclick', 'postTest(2)');
-                sisaSoal.textContent = '3';
+                sisaSoal.textContent = '4';
             }
             break;
         case 2:
@@ -95,7 +95,7 @@ function postTest(currentQuestion) {
             // go to p3
             if (valid) {
                 nextBtn.setAttribute('onclick', 'postTest(3)');
-                sisaSoal.textContent = '2';
+                sisaSoal.textContent = '3';
             }
             break;
         case 3:
@@ -106,11 +106,10 @@ function postTest(currentQuestion) {
                 valid = false;
             }
 
-            // go to p3
+            // go to p4
             if (valid) {
-                nextBtn.value = 'Simpan';
                 nextBtn.setAttribute('onclick', 'postTest(4)');
-                sisaSoal.textContent = '1';
+                sisaSoal.textContent = '2';
             }
             break;
         case 4:
@@ -118,6 +117,21 @@ function postTest(currentQuestion) {
                 // valid = true
             } else {
                 document.getElementById('p4').className += ' invalid';
+                valid = false;
+            }
+
+            // go to p3
+            if (valid) {
+                nextBtn.value = 'Simpan';
+                nextBtn.setAttribute('onclick', 'postTest(5)');
+                sisaSoal.textContent = '1';
+            }
+            break;
+        case 5:
+            if (document.getElementById('answerP5').value != '') {
+                // valid = true
+            } else {
+                document.getElementById('p5').className += ' invalid';
                 valid = false;
             }
 

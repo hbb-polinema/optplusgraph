@@ -59,9 +59,11 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
                 perangkat_responden = \''.$perangkat.'\'
             WHERE kode_unik = '.$kode_unik.' AND email_responden = '.$email);
 
-            if ($insert) 
+            if ($insert){
+                $_SESSION['tahap'] = "pretest.php";
+                $_DB->query("UPDATE `responden` SET `tahap_sekarang` = 'pretest.php' WHERE `kode_unik` = ".$kode_unik); 
                 echo 'sukses';
-            else 
+            } else 
                 echo '98 - Terjadi Kesalahan';
         } else {
             echo '99 - Email Anda tidak cocok';

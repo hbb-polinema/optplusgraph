@@ -7,7 +7,7 @@ if(isset($_SESSION['kode'])){
     $_DB = new DB();
     $select = $_DB->select('SELECT nama_responden, tahap_sekarang FROM responden WHERE kode_unik = '.$kode_unik);
     if($select){
-        if($select[0]['tahap_sekarang'] == "post-test.php"){
+        if($select[0]['tahap_sekarang'] == "post-test2.php"){
             # Ok, right place!
         } else {
             header("Location: ".$select[0]['tahap_sekarang']);
@@ -118,7 +118,7 @@ if(isset($_SESSION['kode'])){
         <div class="container">
             <div class="row">
                 <div class="col-md-6 section-heading text-center">
-                    <h2 class="to-animate">Post Test</h2>
+                    <h2 class="to-animate">Post Test 2</h2>
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 subtext to-animate">
                             <h3>Tes ini untuk menilai hasil kinerja Anda<br>dari simulasi yang telah dilakukan.<br>Mohon kejujuran dan konsentrasi Anda.</h3>
@@ -148,148 +148,14 @@ if(isset($_SESSION['kode'])){
                             
                             <div id="p1" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Berapa total simpul dalam graf kode program di bawah ini ?</p>
+                                    <p style="margin-bottom: 7pt;">Berapa derajat (degree) yang dimiliki oleh simpul 3 pada graf kode program berikut ini ?</p>
                                     <select id="answerP1" name="answerP1" class="form-control">
                                         <option value="" selected disabled>Pilih Jawaban Anda</option>                
-                                        <option value="a">7</option>                
-                                        <option value="b">1</option>                
-                                        <option value="c">antara 1 dan 7</option>                
-                                        <option value="d">antara 0 dan 10</option>    
-                                        <option value="e">tidak dapat ditentukan</option>        
-                                    </select>
-<pre><code class="language-c">
-#include "stdio.h"
-#include "time.h"
-#define infinity 999
-
-int G[10][10], X[10], n, c = 0;
-
-void Z()
-{
-    int i, j;
-    n = M(1, 7);    
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n; j++)
-        {
-            G[i][j] = M(0, 9);
-            if (G[i][j] == 0)
-            {
-                G[i][j] = infinity;
-                G[j][i] = infinity;
-            }
-            else
-            {
-                G[j][i] = G[i][j];
-            }
-        }
-        X[i] = 0;
-    }
-
-    for (i = 0; i < n; i++)
-    {
-        printf("\n");
-        for (j = 0; j < n; j++)
-            printf("\t%d", G[i][j]);
-    }
-}
-
-void F(int s)
-{
-    int i, n;
-    X[s] = 1;
-    printf("%d--->", s + 1);
-    n = xyz(s);
-    if (n == 999)
-    {
-        n = 0;
-        printf("%d", n + 1);
-        c += G[s][n];
-        return;
-    }
-    F(n);
-}
-
-int M(const int x, const int y){
-    return rand() % (y - x) + x;
-}
-
-int xyz(int c)
-{
-    int i, nc = 999;
-    int min = 999, kmin;
-    for (i = 0; i < n; i++)
-    {
-        if ((G[c][i] != 0) && (X[i] == 0))
-            if (G[c][i] + G[i][c] < min)
-            {
-                min = G[i][0] + G[c][i];
-                kmin = G[c][i];
-                nc = i;
-            }
-    }
-    if (min != 999)
-        c += kmin;
-    return nc;
-}
-
-int main()
-{
-    srand(time(NULL));
-    Z();
-    printf("\n");
-    F(0);
-    printf("\nMinimun cost: %d\n ", c);
-    return 0;
-}</code></pre>
-                                </div>
-                            </div>
-                            
-                            <div id="p2" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p id="p2title" style="margin-bottom: 7pt;">Berapa derajat (<i>degree</i>) yang dimiliki oleh simpul 3 pada graf kode program berikut ini ?</p>
-                                    <select id="answerP2" name="answerP2" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="a">1</option>                
-                                        <option value="b">2</option>                
-                                        <option value="c">3</option>                
-                                        <option value="d">4</option>    
-                                        <option value="e">tidak diketahui</option>
-                                    </select>
-<pre><code class="language-c">
-#include "stdio.h"
-
-int main()
-{
-    int row = 5, col = 5;
-    int i, j,
-    G[5][5] = {     { 0, 6, 3, 1, 3},
-                    { 6, 0, 9, 9, 9},
-                    { 3, 9, 0, 8, 8},
-                    { 1, 9, 8, 0, 7},
-                    { 1, 9, 8, 7, 0}
-                 };
-
-    printf("\nthe matrix:\n");
-    for (i = 0; i < row; i++)
-        for (j = 0; j < col; j++)
-            printf("G[%d][%d]: %d\n",i,j,G[i][j]);
-
-    return 0;
-}</code></pre>
-                                </div>
-                            </div>
-                            
-                            <div id="p3" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p id="p3title" style="margin-bottom: 7pt;">Berapa jumlah minimum biaya (<i>cost</i>) yang diperlukan dari simpul 1 hingga simpul 4 dari graf kode program berikut ini ?</p>
-                                    <select id="answerP3" name="answerP3" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="a">7</option>                
-                                        <option value="b">9</option>                
-                                        <option value="c">11</option>                
-                                        <option value="d">10</option>    
-                                        <option value="e">12</option>
+                                        <option value="a">3</option>                
+                                        <option value="b">4</option>                
+                                        <option value="c">5</option>                
+                                        <option value="d">6</option>    
+                                        <option value="e">7</option>        
                                     </select>
 <pre><code class="language-c">
 #include "stdio.h"
@@ -300,52 +166,169 @@ cost[5][5];
 
 int main()
 {
-    printf("\nthe matrix:\n")
-    cost[0][1] = 2
+    printf("\nthe matrix:\n");
+    cost[0][1] = 2;
     cost[0][2] = 3;
     cost[0][3] = 1;
     cost[1][2] = 7;
     cost[1][3] = 9;
     cost[2][3] = 8;
     cost[2][4] = 4;
-    cost[2][1] = 7;
    
-    for (i = 0; i < row; i++)
-        for (j = 0; j <= col; j++)
+    for (i = 0; i < baris; i++)
+        for (j = 0; j < kolom; j++)
             printf("cost[%d][%d]: %d\n",i,j,cost[i][j]);
 
-    return 0
+    return 0;
+}</code></pre>
+                                </div>
+                            </div>
+                            
+                            <div id="p2" class="tab form-group">
+                                <div class="form-control" style="height: 100%">
+                                    <p id="p2title" style="margin-bottom: 7pt;">Apakah tujuan fungsi Z dibuat pada graf kode program berikut ini ?</p>
+                                    <select id="answerP2" name="answerP2" class="form-control">
+                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
+                                        <option value="a">untuk menghitung nilai random</option>                
+                                        <option value="b">untuk menghitung nilai bobot pada sisi graf</option>                
+                                        <option value="c">untuk menghitung jarak antar simpul (node)</option>                
+                                        <option value="d">untuk menghitung sisi simpul dari dan ke simpul lain</option>    
+                                        <option value="e">tidak diketahui</option>
+                                    </select>
+<pre><code class="language-c">
+#include "stdio.h"
+
+int Z(int graf[4][4], int m, int n){
+  printf("\nHitung sisi simpul %d ke %d\n", m, n);
+  return graf[n][m];
+}
+
+int main(){
+  int row = 4, col = 4, sisi;
+  int i, j,
+  graf[4][4] = {  { 0, 2, 3, 1},
+                  { 2, 0, 7, 9},
+                  { 3, 7, 0, 8},
+                  { 1, 9, 8, 0}
+               };    
+  printf("\nGraf:\n");
+  for (i = 0; i < row; i++)
+    for (j = 0; j < col; j++){
+      printf("graf[%d][%d]: %d\n",i,j,graf[i][j]);
+      sisi = Z(graf, i, j);
+    }
+  return 0;
+}</code></pre>
+                                </div>
+                            </div>
+                            
+                            <div id="p3" class="tab form-group">
+                                <div class="form-control" style="height: 100%">
+                                    <p id="p3title" style="margin-bottom: 7pt;">Berapa jumlah sisi (edge) yang dimiliki oleh graf kode program berikut ini jika tanpa simpul 5 ?</p>
+                                    <select id="answerP3" name="answerP3" class="form-control">
+                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
+                                        <option value="a">1</option>                
+                                        <option value="b">6</option>                
+                                        <option value="c">5</option>                
+                                        <option value="d">7</option>    
+                                        <option value="e">0</option>
+                                    </select>
+<pre><code class="language-c">
+#include "stdio.h"
+
+int main(){
+  int x = 6, y = 6;
+  int i, j,
+  graf[6][6] = {  { 0, 0, 0, 0, 0, 0},
+                  { 0, 0, 11, 7, 5, 9},
+                  { 0, 11, 0, 8, 4, 13},
+                  { 0, 7, 8, 0, 2, 1},
+                  { 0, 5, 3, 2, 0, 13},
+                  { 0, 9, 3, 1, 13, 0}
+               };    
+  printf("\nGraf:\n");
+  for (i = 0; i < x; i++)
+    for (j = 0; j < y; j++){
+      printf("graf[%d][%d]: %d\n",i,j,graf[i][j]);
+    }
+  return 0;
 }</code></pre>
                                 </div>
                             </div>
 
                             <div id="p4" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p4title" style="margin-bottom: 7pt;">Berapa jumlah sisi (<i>edge</i>) yang dimiliki oleh graf kode program berikut ini ?</p>
+                                    <p id="p4title" style="margin-bottom: 7pt;">Berapa jumlah simpul dari graf kode program berikut ini ?</p>
                                     <select id="answerP4" name="answerP4" class="form-control">
                                         <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="a">1</option>                
-                                        <option value="b">2</option>                
-                                        <option value="c">3</option>                
-                                        <option value="d">4</option>    
-                                        <option value="e">5</option>
+                                        <option value="a">6</option>                
+                                        <option value="b">7</option>                
+                                        <option value="c">8</option>                
+                                        <option value="d">9</option>    
+                                        <option value="e">13</option>
                                     </select>
 <pre><code class="language-c">
 #include "stdio.h"
+#define Z 999
 
-int row = 3, col = 3;
-int i, j,
-G[3][3] = {  { 0, 2, 3},
-             { 2, 0, 7},
-             { 3, 7, 0},
-          };
+void A(int n, int v, int cost[7][7], int dist[10]){
+    int i, u, count, w, F[10], min;
+
+    for (i = 1; i <= n; i++){
+        F[i] = 0;
+        dist[i] = cost[v][i];
+    }
+    
+    count = 2;
+    
+    while (count <= n){
+        min = 99;
+        for (w = 1; w <= n; w++){
+            if (dist[w] < min && !F[w]){
+                min = dist[w];
+                u = w;
+            }
+        }
+        
+        F[u] = 1;
+        count++;
+
+        for (w = 1; w <= n; w++){
+            if ((dist[u] + cost[u][w] < dist[w]) && !F[w]){
+                dist[w] = dist[u] + cost[u][w];
+            }
+        }
+    }
+}
 
 int main()
 {
-    printf("\nGraf:\n");
-    for (i = 0; i < row; i++)
-        for (j = 0; j < col; j++)
-            printf("G[%d][%d]: %d\n",i,j,G[i][j]);
+    int n, v, i, dist[10] = {0};
+    
+    n = 6;
+    printf("\nthe number of nodes: %d \n", n);
+    
+    printf("\nthe cost matrix:\n");
+    int graf[7][7] = {  { 0, 0, 0, 0, 0, 0, 0},
+                        { 0, Z, 5, Z, Z, Z, 8},
+                        { 0, 5, Z, 7, Z, 2, Z},
+                        { 0, Z, 7, Z, 9, Z, Z},
+                        { 0, Z, Z, 9, Z, 4, Z},
+                        { 0, Z, 2, Z, 4, Z, Z},
+                        { 0, 8, Z, Z, Z, Z, Z} 
+                    };
+    
+    v = 2;
+    printf("\nthe source matrix: %d \n", v);
+    
+    A(n, v, graf, dist);
+    
+    printf("\nShortest path:\n");
+    for (i = 1; i <= n; i++){
+        if (i != v){
+            printf("%d->%d,graf=%d\n", v, i, dist[i]);
+        }
+    }
 
     return 0;
 }</code></pre>
@@ -354,41 +337,79 @@ int main()
 
                             <div id="p5" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p5title" style="margin-bottom: 7pt;">Ada berapa kesalahan sintaks pada kode program berikut ini?</p>
+                                    <p id="p5title" style="margin-bottom: 7pt;">Ada berapa kesalahan sintaks pada kode program berikut ini ? Sebutkan di bagian mana saja!</p>
                                     <select id="answerP5" name="answerP5" class="form-control">
                                         <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="a">5</option>                
-                                        <option value="b">6</option>                
-                                        <option value="c">7</option>                
-                                        <option value="d">8</option>    
-                                        <option value="e">9</option>
+                                        <option value="a">1</option>                
+                                        <option value="b">3</option>                
+                                        <option value="c">5</option>                
+                                        <option value="d">9</option>    
+                                        <option value="e">0</option>
                                     </select><br>
-                                    <p>Silakan paste jawaban kode program Anda di bawah ini.</p>
-                                    <textarea style="width:100%;height:111px;"></textarea>
 <pre><code class="language-c">
 #include "stdio.h"
+#define Z 999
 
-int baris = 5, kolom = 5;
-int i, j,
-cost[5][5];
+void A(int n, int v, int cost[7][7], int dist[10]){
+    int i, u, count, w, F[10], min;
+
+    for (i = 1; i <= n; i++){
+        F[i] = 0;
+        dist[i] = cost[v][i];
+    }
+    
+    count = 2;
+    
+    while (count <= n){
+        min = 99;
+        for (w = 1; w <= n; w++){
+            if (dist[w] < min && !F[w]){
+                min = dist[w];
+                u = w;
+            }
+        }
+        
+        F[u] = 1;
+        count++;
+
+        for (w = 1; w <= n; w++){
+            if ((dist[u] + cost[u][w] < dist[w]) && !F[w]){
+                dist[w] = dist[u] + cost[u][w];
+            }
+        }
+    }
+}
 
 int main()
 {
-    printf("\nthe matrix:\n")
-    cost[0][1] = 2
-    cost[0][2] = 3;
-    cost[0][3] = 1;
-    cost[1][2] = 7;
-    cost[1][3] = 9;
-    cost[2][3] = 8;
-    cost[2][4] = 4;
-    cost[2][1] = 7;
-   
-    for (i = 0; i < row; i++)
-        for (j = 0; j <= col; j++)
-            printf("cost[%d][%d]: %d\n",i,j,cost[i][j]);
+    int n, v, i, dist[10] = {0};
+    
+    n = 6;
+    printf("\nthe number of nodes: %d \n", n);
+    
+    printf("\nthe cost matrix:\n");
+    int graf[7][7] = {  { 0, 0, 0, 0, 0, 0, 0},
+                        { 0, Z, 5, Z, Z, Z, 8},
+                        { 0, 5, Z, 7, Z, 2, Z},
+                        { 0, Z, 7, Z, 9, Z, Z},
+                        { 0, Z, Z, 9, Z, 4, Z},
+                        { 0, Z, 2, Z, 4, Z, Z},
+                        { 0, 8, Z, Z, Z, Z, Z} 
+                    };
+    
+    v = 2;
+    printf("\nthe source matrix: %d \n", v);
+    
+    A(n, v, graf, dist);
+    
+    printf("\nShortest path:\n");
+    for (i = 1; i <= n; i++){
+        if (i != v){
+            printf("%d->%d,graf=%d\n", v, i, dist[i]);
+        }
+    }
 
-    return 0
+    return 0;
 }</code></pre>
                                 </div>
                             </div>

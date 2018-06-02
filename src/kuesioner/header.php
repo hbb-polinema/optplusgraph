@@ -76,7 +76,7 @@ if(!$_SESSION['isSetSession']){
 	7. green.css
 
 	-->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=1">
 
     <!-- Modernizr JS -->
     <script src="js/modernizr-2.6.2.min.js"></script>

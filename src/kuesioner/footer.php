@@ -99,27 +99,31 @@
                         untuk menggunakan (termasuk mempublikasikan) hasil kuesioner untuk kepentingan riset.</li>
                     </ul>
                 </p>
-                <p><b>Hadiah Langsung</b></p>
-                <p>Tata cara/mekanisme survei
+                <p><b>Tata cara/mekanisme survei</b></p>
+                <p>
                     <ul>
-                        <li>a. Kuesioner online ini berlaku untuk umum.</li>
-                        <li>b. Responden yang berhak mengisi kuesioner ini adalah :
+                        <li>Kuesioner online ini berlaku untuk umum.</li>
+                        <li>Responden yang berhak mengisi kuesioner ini adalah :
                             <ul>
-                                <li>1. Responden minimal memiliki kemampuan dasar dalam pemrograman C/C++</li>
-                                <li>2. Responden minimal pernah membaca tentang teori graf</li>
+                                <li>Responden minimal memiliki kemampuan dasar dalam pemrograman C/C++</li>
+                                <li>Responden minimal pernah membaca tentang teori graf</li>
                             </ul>
                         </li>
                     </ul>
                 </p>
-                <p><b>Tentang cookies</b></p>
-                <p>Situs kami menggunakan cookies untuk menaruh informasi, 
-                    seperti informasi preferensi pribadi Anda pada saat mengunjungi situs kami. 
-                    Ini juga mungkin termasuk untuk menampilkan jendela pop up untuk 
-                    kunjungan pertama Anda, atau juga untuk menyimpan informasi 
-                    login Anda di situs kami.</p>
-                <p>Kuesioner ini tidak menampilkan iklan seperti pada situs lainnya. 
-                    Kami berusaha agar Anda fokus untuk menjawab pertanyaan-pertanyaan 
-                    dalam kuesioner online ini.</p>
+                <p><b>Hadiah</b></p>
+                <p>Hadiah sebagai insentif atas kerja sama Anda dalam mengisi kuesioner ini.
+                    Hadiah dibagi menjadi 2 bagian, yaitu hadiah langsung dan hadiah bagi responden terbaik.
+                </p>
+                <p>Hadiah langsung berupa pulsa telepon seluler dengan maksimal senilai Rp. 25.000,-
+                    (dua puluh lima ribu rupiah).
+                </p>
+                <p>Hadiah bagi responden terbaik adalah FREE Domain .id yang dapat di order langsung
+                    melalui http://...
+                </p>
+                <p>Spesifikasi hadiah yang dapat diberikan adalah sebagai berikut:
+                    
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>

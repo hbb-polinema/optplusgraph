@@ -1,3 +1,28 @@
+<?php
+session_start();
+
+if(isset($_SESSION['kode'])){
+    require_once('db/db.php');
+    $kode_unik = $_SESSION['kode'];
+    $_DB = new DB();
+    $select = $_DB->select('SELECT tahap_sekarang FROM responden WHERE kode_unik = '.$kode_unik);
+    if($select){
+        if($select[0]['tahap_sekarang'] == "data-pribadi.php"){
+            # Ok, right place!
+        } else {
+            header("Location: ".$select[0]['tahap_sekarang']);
+            exit;            
+        }
+    } else {
+        header("Location: index.php");
+        exit;
+    }
+} else {
+    header("Location: index.php");
+    exit;
+}
+?>
+
 <?php require_once('header.php'); ?>
 <body>
     <header role="banner" id="fh5co-header" class="navbar-fixed-top">

@@ -1,27 +1,3 @@
-<?php
-session_start();
-
-if(isset($_SESSION['kode'])){
-    require_once('db/db.php');
-    $kode_unik = $_SESSION['kode'];
-    $_DB = new DB();
-    $select = $_DB->select('SELECT nama_responden, tahap_sekarang FROM responden WHERE kode_unik = '.$kode_unik);
-    if($select){
-        if($select[0]['tahap_sekarang'] == "simulasi.php"){
-            # Ok, right place!
-        } else {
-            header("Location: ".$select[0]['tahap_sekarang']);
-            exit;            
-        }
-    } else {
-        header("Location: index.php");
-        exit;
-    }
-} else {
-    header("Location: index.php");
-    exit;
-}
-?>
 <?php require_once('header.php'); ?>
 
 <body>
@@ -65,7 +41,9 @@ if(isset($_SESSION['kode'])){
             }
         }
     </style>
-    
+
+    <link href="css/prism.css?v=1" rel="stylesheet" type="text/css">
+
     <header role="banner" id="fh5co-header" class="navbar-fixed-top">
         <div class="container">
             
@@ -76,23 +54,8 @@ if(isset($_SESSION['kode'])){
                     <div class="navbar-brand" style="font-size:12pt">
                         <ul class="social social-circle" style="width: auto;">
                             <li class="icon-head"></li>
-                        </ul> Anda sebagai Responden
+                        </ul> Latihan 2
                     </div>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" data-nav-section="beranda"><span>Beranda</span></a></li>
-                        <li class="icon-arrow-circle-right" style="margin-top:17px;"></li>
-                        <li><a href="#" data-nav-section="data-pribadi"><span>Data Pribadi</span></a></li>
-                        <li class="icon-arrow-circle-right" style="margin-top:17px;"></li>
-                        <li><a href="#" data-nav-section="pretest"><span>Pre Test</span></a></li>
-                        <li class="icon-arrow-circle-right" style="margin-top:17px;"></li>
-                        <li class="active"><a href="#" data-nav-section="simulasi"><span>Simulasi</span></a></li>
-                        <li class="icon-arrow-circle-right" style="margin-top:17px;color:lightseagreen;"></li>
-                        <li><a href="#" data-nav-section="post-test"><span>Post Test</span></a></li>
-                        <li class="icon-arrow-circle-right" style="margin-top:17px;"></li>
-                        <li><a href="#" data-nav-section="selesai"><span>Selesai</span></a></li>
-                    </ul>
                 </div>
             </nav>
             
@@ -104,10 +67,10 @@ if(isset($_SESSION['kode'])){
         <div class="container">
             <div class="row">
                 <div class="col-md-6 section-heading text-center">
-                    <h2 class="to-animate">Simulasi</h2>
+                    <h2 class="to-animate">Latihan 2</h2>
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                            <h3>Ada 2 kakas (<i>tool</i>) yang memiliki fitur berbeda.<br>Anda ditugaskan untuk menyelesaikan soal menggunakan kedua kakas tersebut berdasarkan skenario yang telah dirancang dalam kuesioner ini.</h3>
+                            <h3>Anda ditugaskan untuk menyelesaikan 4 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasCodeViz"><b>kakas CodeViz</b></a>.</h3>
                         </div>
                     </div>
                 </div>
@@ -117,54 +80,111 @@ if(isset($_SESSION['kode'])){
                 <div class="col-md-6 col-sm-6 to-animate">
                     
                     <div id="DivFormSimulasi">
-                        <div id="p0" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Pendahuluan</span></p>
-                                <p>Sebelum memulai tes inti, sebaiknya perhatikan pada gambar diagram tahapan kuesioner berikut ini.</p>
-                                <p style="margin:30px;"><center><img src="images/diagram_kuesioner.png"></center></p>
-                                <p>Anda telah melewati Tahap 1 dan Tahap 2. Selanjutnya Anda akan melalui Tahap 3 dan Tahap 4.<br>
-                                    <br>Latihan Soal terdiri dari Latihan 1 dan Latihan 2.<br>
-                                    <b>Latihan 1</b> - Anda ditugaskan untuk menyelesaikan soal kode program sederhana dengan bantuan kakas OPT. (4 soal)</br>
-                                    <b>Latihan 2</b> - Anda ditugaskan untuk menyelesaikan soal kode program sederhana dengan bantuan kakas CodeViz. (4 soal)</br>
-                                </p>
-
-                                <p>Anda siap untuk latihan soal ? Silakan klik tombol di bawah ini.</p>
-                            </div>
-                        </div>
                         <div id="p1" class="tab form-group">
                             <div class="form-control" style="height: 100%">
                                 <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
-                                <p><b>Latihan 1</b></p>
-                                <p>Anda ditugaskan untuk menyelesaikan 4 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasOPT"><b>kakas OPT</b></a>.</p>
-                                <p>Apa itu <a data-toggle="modal" data-target="#kakasOPT"><b>Kakas OPT</b></a> ? klik <a data-toggle="modal" data-target="#kakasOPT">di sini</a> untuk membaca deskripsinya.</p>
-                                <p><input class="btn btn-primary btn-lg" value="Mulai - Latihan 1" type="button" onclick="Latihan1();"></p>
+                                <p><b>Soal 1</b></p>
+                                <p>Silakan perbaiki kesalahan sintaks pada kode program berikut ini!</p>
+                                <p>Output yang diharapkan:</p>
+<pre><code>z: 493</code></pre>                                
+                                </br>
+<pre><code class="language-c">
+Int main(){
+    int x = 17;
+    int y = 29;
+    int z = y * x;
+    printf(z);
+    return 0;
+}</code></pre>
+                                <p>Silakan paste jawaban kode program Anda di bawah ini.</p>
+                                <textarea style="width:100%;height:111px;"></textarea>
+                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
                             </div>
                         </div>
                         <div id="p2" class="tab form-group">
                             <div class="form-control" style="height: 100%">
                                 <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
-                                <p><b>Latihan 2</b></p>
-                                <p>Anda ditugaskan untuk menyelesaikan 4 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasCodeViz"><b>kakas CodeViz</b></a>.</p>
-                                <p>Apa itu <a data-toggle="modal" data-target="#kakasCodeViz"><b>Kakas CodeViz</b></a> ? klik <a data-toggle="modal" data-target="#kakasCodeViz">di sini</a> untuk membaca deskripsinya.</p>
-                                <p><input class="btn btn-primary btn-lg" value="Mulai - Latihan 2" type="button" onclick="Latihan2();"></p>
+                                <p><b>Soal 2</b></p>
+                                <p>Prosedur xyz  berguna untuk ...</p>
+                                <select id="answerP2" name="answerP2" class="form-control">
+                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
+                                        <option value="a">mencetak hasil</option>                
+                                        <option value="b">Operasi perkalian m dan n, kemudian mencetaknya</option>                
+                                        <option value="c">Operasi penjumlahan</option>                
+                                        <option value="d">Operasi print</option>    
+                                        <option value="e">tidak berguna</option>        
+                                </select></br>
+<pre><code class="language-c">
+void xyz(int a, int b){
+  int z = a*b;
+  printf("z = %d", z);
+}
+
+int main(){
+  int m = 33;
+  int n = 99;
+  xyz(m,n);
+  return 0;
+}</code></pre>
+                                <p>Silakan <i>paste</i> jawaban kode program Anda di bawah ini.</p>
+                                <textarea style="width:100%;height:111px;"></textarea>
+                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
                             </div>
                         </div>
-                        <div id="p3" class="tab form-group" style="background-color: #7f8c8d;">
-                            <div class="form-control" style="height: 100%;color: whitesmoke;">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Core Test</span></p>
-                                <p><b>Sesi 1</b> - Waktu Penyelesaian Maksimal: 25 Menit</p>
-                                <p>Anda ditugaskan untuk menyelesaikan 5 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas OPT</b>.</p>
-                                <p>Apa itu <a data-toggle="modal" data-target="#kakasOPT"><b>Kakas OPT</b></a> ? klik <a data-toggle="modal" data-target="#kakasOPT">di sini</a> untuk membaca deskripsinya.</p>
-                                <p><input class="btn btn-primary btn-lg" value="Mulai - Sesi 1" type="button" onclick="simulasi1sesi1();"></p>
+                        <div id="p3" class="tab form-group">
+                            <div class="form-control" style="height: 100%">
+                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
+                                <p><b>Soal 3</b></p>
+                                <p>Dari kode program berikut ini, berapa nilai M[2][3] pada baris ke-4 ?</p>
+                                <select id="answerP3" name="answerP3" class="form-control">
+                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
+                                        <option value="a">29</option>                
+                                        <option value="b">0</option>                
+                                        <option value="c">1</option>                
+                                        <option value="d">5</option>    
+                                        <option value="e">null</option>        
+                                </select></br>
+<pre><code class="language-c">
+int main(){
+  int M[5][5] = {0};
+  int y = 29;
+  int z = y * M[2][3];
+  return 0;
+}</code></pre>
+                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
                             </div>
                         </div>
-                        <div id="p4" class="tab form-group" style="background-color: #e67e22;">
-                            <div class="form-control" style="height: 100%;color: whitesmoke;">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Core Test</span></p>
-                                <p><b>Sesi 2</b> - Waktu Penyelesaian Maksimal: 25 Menit</p>
-                                <p>Anda ditugaskan untuk menyelesaikan 5 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas CodeViz</b>.</p>
-                                <p>Apa itu <a data-toggle="modal" data-target="#kakasCodeViz"><b>Kakas CodeViz</b></a> ? klik <a data-toggle="modal" data-target="#kakasCodeViz">di sini</a> untuk membaca deskripsinya.</p>
-                                <p><input class="btn btn-primary btn-lg" value="Mulai - Sesi 2" type="button" onclick="simulasi1sesi2();"></p>
+                        <div id="p4" class="tab form-group">
+                            <div class="form-control" style="height: 100%">
+                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
+                                <p><b>Soal 4</b></p>
+                                <p>Apa kegunaan kode program berikut ini ?</p>
+                                <select id="answerP4" name="answerP4" class="form-control">
+                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
+                                        <option value="a">Menghitung nilai array</option>                
+                                        <option value="b">Menghitung luas persegi</option>                
+                                        <option value="c">Menentukan nilai ganjil atau genap</option>                
+                                        <option value="d">Menghitung panjang array</option>    
+                                        <option value="e">Tidak dapat didefinisikan</option>        
+                                </select></br>
+<pre><code class="language-c">
+int main(){
+  int x[5], y, i;
+  x[0] = 9;
+  x[1] = 11;
+  x[2] = 17;
+  x[3] = 19;
+  x[4] = 20;
+
+  for(i = 0; i < 5; i++){
+    y = x[i] % 2;
+    if (y == 0) printf("%d adalah ganjil\n", x[i]);
+    else printf("%d adalah genap\n", x[i]);
+  }
+
+  return 0;
+}</code></pre>
+                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
                             </div>
                         </div>
                         <div style="overflow:auto;">
@@ -204,46 +224,10 @@ if(isset($_SESSION['kode'])){
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/simulasi.js?v=4"></script>
+    <script src="js/simulasi.js?v=3"></script>
+    <script src="js/prism.js?v=1" type="text/javascript"></script>
 
     <?php require_once('footer.php'); ?>
-
-<div id="kakasOPT" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <Button type="button" class="close" data-dismiss="modal">&times;</Button>
-                <h4 class="modal-title">Kakas OnlinePythonTutor (OPT)</h4>
-            </div>
-            <div class="modal-body">
-                <p>Kakas ini disebut kakas visualisasi program.</p>
-                <p>Visualisasi Program adalah kakas yang dapat membantu memvisualisasikan
-                    data-data dalam memori komputer ketika melakukan eksekusi kode program.
-                    Diharapkan dengan kakas ini dapat membantu dalam mempelajari kode program.</p>
-                <p><b>OPT</b></p>
-                <p>Tampilan awal kakas OPT dapat dilihat pada gambar berikut ini.</p>
-                <p><img src="images/homescreen-opt.png" style="width:100%;" /></p>
-                <p>Anda hanya akan menggunakan fitur nomor 2 dan 3. Fitur pada nomor 2 digunakan
-                    untuk meng-input kode program dan fitur nomor 3 adalah tombol untuk eksekusi.
-                    Ketika proses eksekusi visualisasi berhasil, maka Anda akan melihat tampilan
-                    seperti pada gambar berikut ini.
-                </p>
-                <p><img src="images/visualisasi-opt.png" style="width:100%;"/></p>
-                <p>Anda dapat mengedit kode program dengan klik <b>'Edit code'</b>.<br>
-                    Tombol <b>'Forward'</b> untuk melihat visualisasi per baris kode program.<br>
-                    Tombol <b>'Back'</b> untuk melihat visualisasi sebelumnya.<br>
-                    Tombol <b>'Last'</b> untuk melihat visualisasi di akhir kode program.<br>
-                    Tombol <b>'First'</b> untuk melihat visualisasi di awal kode program.<br>
-                    Untuk membuat breakpoint, cukup klik pada nomor baris kode program.<br>
-                    Untuk menghapus breakpoint, cukup klik pada nomor baris yang sebelumnya telah ditandai sebagai breakpoint.<br>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div id="kakasCodeViz" class="modal fade" role="dialog">
     <div class="modal-dialog">
