@@ -50,13 +50,14 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6 to-animate">
                     <p>Perkenalkan saya Habibie Ed Dien, mahasiswa Magister Informatika dari Institut Teknologi Bandung. Saya sedang melakukan penelitian tentang <a href="https://id.wikipedia.org/wiki/Graf_(matematika)" target="_blank">Graf</a> dan <a href="https://en.wikipedia.org/wiki/Software_visualization" target="_blank">Visualisasi Eksekusi Kode Program</a>.
-                        Mohon bantuan rekan-rekan untuk ikut berkontribusi melalui kuesioner ini sekitar 10 - 15 menit untuk menjawabnya.</p>
-                    <p>Setiap responden yang berhasil menyelesaikan kuesioner ini, akan mendapatkan <b>pulsa telepon seluler senilai Rp. 25.000,- (dua puluh lima ribu rupiah) langsung tanpa diundi</b>.</p>
+                        Mohon bantuan rekan-rekan untuk ikut berkontribusi melalui kuesioner ini sekitar 15 - 30 menit untuk menjawabnya.</p>
+                    <p>Setiap responden yang berhasil menyelesaikan kuesioner ini, akan mendapatkan <b>pulsa telepon seluler senilai Rp. 25.000,- (dua puluh lima ribu rupiah) langsung tanpa diundi</b> <span><a data-toggle="modal" data-target="#skb">(syarat dan ketentuan berlaku)</a></span>.</p>
                     
                     <form id="formKodeUnik" accept-charset="utf-8" name="formKodeUnik">
                         <div class="form-group">
                             <label for="kode" class="sr-only">Kode Unik</label>
                             <input id="kode" maxlength="5" class="form-control" placeholder="Kode Unik" type="text" required>
+                            <span style="font-size:9pt;">*Silakan hubungi penulis untuk request Kode Unik</span>
                         </div>
                         <div class="form-group">
                             <center>

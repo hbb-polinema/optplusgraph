@@ -70,150 +70,45 @@
                     <h2 class="to-animate">Latihan 2</h2>
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                            <h3>Anda ditugaskan untuk menyelesaikan 4 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasCodeViz"><b>kakas CodeViz</b></a>.</h3>
+                            <h3>Anda ditugaskan untuk menyelesaikan 1 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasCodeViz"><b>kakas CodeViz</b></a>.</h3>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-sm-6 to-animate">
+                <div class="col-md-12 col-sm-12 to-animate">
                     
                     <div id="DivFormSimulasi">
                         <div id="p1" class="tab form-group">
                             <div class="form-control" style="height: 100%">
                                 <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
-                                <p><b>Soal 1</b></p>
                                 <p>Silakan perbaiki kesalahan sintaks pada kode program berikut ini!</p>
-                                <p>Output yang diharapkan:</p>
-<pre><code>z: 493</code></pre>                                
-                                </br>
-<pre><code class="language-c">
-Int main(){
-    int x = 17;
-    int y = 29;
-    int z = y * x;
-    printf(z);
-    return 0;
-}</code></pre>
-                                <p>Silakan paste jawaban kode program Anda di bawah ini.</p>
-                                <textarea id="answerP1" style="width:100%;height:111px;"></textarea>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
+                                <p>Berapa nilai M[2][3] ?</p>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <select id="answerP1" name="answerP1" class="form-control" onchange="checkAnswer(this);">
+                                            <option value="" selected disabled>Silahkan Pilih</option>                
+                                            <option value="a">29</option>                
+                                            <option value="b">5</option>                
+                                            <option value="c">1</option>                
+                                            <option value="d">0</option>    
+                                            <option value="e">null</option>        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <div style="overflow:auto;">
+                                            <div style="float:center;">
+                                                <center><input id="nextBtn" class="btn btn-primary btn-lg" style="display:none;" value="Simpan" type="button" onclick="latihan2NextBtn(1)"></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="CODEVIZ" width="100%" height="600" frameborder="0" src="http://localhost/codeviz/#code=int%20main%28%29%7B%0A%20%20int%20M%5B5%5D%5B5%5D%20%3D%20%7B0%7D%3B%0A%20%20int%20y%20%3D%2029%3B%0A%20%20Int%20z%20%3D%20y%20*%20M%5B2%5D%5B3%5D%0A%20%20retun%200%3B%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
                             </div>
                         </div>
-                        <div id="p2" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
-                                <p><b>Soal 2</b></p>
-                                <p>Prosedur xyz  berguna untuk ...</p>
-                                <select id="answerP2" name="answerP2" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">mencetak hasil</option>                
-                                        <option value="b">Operasi perkalian m dan n, kemudian mencetaknya</option>                
-                                        <option value="c">Operasi penjumlahan</option>                
-                                        <option value="d">Operasi print</option>    
-                                        <option value="e">tidak berguna</option>        
-                                </select></br>
-<pre><code class="language-c">
-void xyz(int a, int b){
-  int z = a*b;
-  printf("z = %d", z);
-}
 
-int main(){
-  int m = 33;
-  int n = 99;
-  xyz(m,n);
-  return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
-                            </div>
-                        </div>
-                        <div id="p3" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
-                                <p><b>Soal 3</b></p>
-                                <p>Dari kode program berikut ini, berapa nilai M[2][3] pada baris ke-4 ?</p>
-                                <select id="answerP3" name="answerP3" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">29</option>                
-                                        <option value="b">0</option>                
-                                        <option value="c">1</option>                
-                                        <option value="d">5</option>    
-                                        <option value="e">null</option>        
-                                </select></br>
-<pre><code class="language-c">
-int main(){
-  int M[5][5] = {0};
-  int y = 29;
-  int z = y * M[2][3];
-  return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
-                            </div>
-                        </div>
-                        <div id="p4" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
-                                <p><b>Soal 4</b></p>
-                                <p>Apa kegunaan kode program berikut ini ?</p>
-                                <select id="answerP4" name="answerP4" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">Menghitung nilai array</option>                
-                                        <option value="b">Menghitung luas persegi</option>                
-                                        <option value="c">Menentukan nilai ganjil atau genap</option>                
-                                        <option value="d">Menghitung panjang array</option>    
-                                        <option value="e">Tidak dapat didefinisikan</option>        
-                                </select></br>
-<pre><code class="language-c">
-int main(){
-  int x[5], y, i;
-  x[0] = 9;
-  x[1] = 11;
-  x[2] = 17;
-  x[3] = 19;
-  x[4] = 20;
-
-  for(i = 0; i < 5; i++){
-    y = x[i] % 2;
-    if (y == 0) printf("%d adalah ganjil\n", x[i]);
-    else printf("%d adalah genap\n", x[i]);
-  }
-
-  return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
-                            </div>
-                        </div>
-                        <div style="overflow:auto;">
-                            <div style="float:center;">
-                                <center><input id="nextBtn" class="btn btn-primary btn-lg" value="Soal Berikutnya" type="button" onclick="latihan2NextBtn(1)"></center>
-                            </div>
-                        </div>
                     </div>
-
-                </div>
-
-                <div class="col-md-6 col-sm-6 to-animate">
-                    <div class="fh5co-block to-animate" style="background-color: tomato;color: white;padding: 41px 41px;margin-bottom: 33pt;">
-                        <div class="overlay-darker"></div>
-                        <div class="overlay"></div>
-                        <div class="fh5co-text">
-                            <h2><span class="fh5co-intro-icon icon-gift"></span> Hadiah Utama Domain .ID</h2>
-                            <p>Bagi responden terbaik berdasarkan kelengkapan kuesioner dan poin yang bisa dikumpulkan.</p>
-                            <h5 style="margin-bottom:0px;">Baca syarat dan ketentuannya <a data-toggle="modal" data-target="#skb">di sini</a></h5>
-                        </div>
-                    </div>
-
-                    <h3>Informasi Kontak</h3>
-                    <ul class="fh5co-contact-info">
-                        <li class="fh5co-contact-address ">
-                            <i class="icon-home"></i> Institut Teknologi Bandung<br>Jalan Ganesha Nomor 10, <br>Kota Bandung
-                        </li>
-                        <li><i class="icon-phone"></i> 0811-3200-670</li>
-                        <li><i class="icon-envelope"></i>habibieeddien@students.itb.ac.id</li>
-                        <li><i class="icon-globe"></i> <a href="http://www.itb.ac.id/" target="_blank">ITB.ac.id</a></li>
-                    </ul>
                 </div>
 
             </div>
@@ -222,11 +117,9 @@ int main(){
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/simulasi.js?v=3"></script>
-    <script src="js/latihan2.js?v=1"></script>
-    <script src="js/prism.js?v=1" type="text/javascript"></script>
-
     <?php require_once('footer.php'); ?>
+    <script src="js/simulasi.js?v=3"></script>
+    <script src="js/latihan2.js?v=2"></script>
 
 <div id="kakasCodeViz" class="modal fade" role="dialog">
     <div class="modal-dialog">

@@ -124,8 +124,8 @@ if(isset($_SESSION['kode'])){
                                 <p style="margin:30px;"><center><img src="images/diagram_kuesioner.png"></center></p>
                                 <p>Anda telah melewati Tahap 1 dan Tahap 2. Selanjutnya Anda akan melalui Tahap 3 dan Tahap 4.<br>
                                     <br>Latihan Soal terdiri dari Latihan 1 dan Latihan 2.<br>
-                                    <b>Latihan 1</b> - Anda ditugaskan untuk menyelesaikan soal kode program sederhana dengan bantuan kakas OPT. (4 soal)</br>
-                                    <b>Latihan 2</b> - Anda ditugaskan untuk menyelesaikan soal kode program sederhana dengan bantuan kakas CodeViz. (4 soal)</br>
+                                    <b>Latihan 1</b> - Anda ditugaskan untuk menyelesaikan soal kode program sederhana dengan bantuan kakas OPT. (1 soal)</br>
+                                    <b>Latihan 2</b> - Anda ditugaskan untuk menyelesaikan soal kode program sederhana dengan bantuan kakas CodeViz. (1 soal)</br>
                                 </p>
 
                                 <p>Anda siap untuk latihan soal ? Silakan klik tombol di bawah ini.</p>
@@ -135,7 +135,7 @@ if(isset($_SESSION['kode'])){
                             <div class="form-control" style="height: 100%">
                                 <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
                                 <p><b>Latihan 1</b></p>
-                                <p>Anda ditugaskan untuk menyelesaikan 4 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasOPT"><b>kakas OPT</b></a>.</p>
+                                <p>Anda ditugaskan untuk menyelesaikan 1 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasOPT"><b>kakas OPT</b></a>.</p>
                                 <p>Apa itu <a data-toggle="modal" data-target="#kakasOPT"><b>Kakas OPT</b></a> ? klik <a data-toggle="modal" data-target="#kakasOPT">di sini</a> untuk membaca deskripsinya.</p>
                                 <p><input class="btn btn-primary btn-lg" value="Mulai - Latihan 1" type="button" onclick="Latihan1();"></p>
                             </div>
@@ -144,7 +144,7 @@ if(isset($_SESSION['kode'])){
                             <div class="form-control" style="height: 100%">
                                 <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
                                 <p><b>Latihan 2</b></p>
-                                <p>Anda ditugaskan untuk menyelesaikan 4 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasCodeViz"><b>kakas CodeViz</b></a>.</p>
+                                <p>Anda ditugaskan untuk menyelesaikan 1 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasCodeViz"><b>kakas CodeViz</b></a>.</p>
                                 <p>Apa itu <a data-toggle="modal" data-target="#kakasCodeViz"><b>Kakas CodeViz</b></a> ? klik <a data-toggle="modal" data-target="#kakasCodeViz">di sini</a> untuk membaca deskripsinya.</p>
                                 <p><input class="btn btn-primary btn-lg" value="Mulai - Latihan 2" type="button" onclick="Latihan2();"></p>
                             </div>
@@ -152,19 +152,19 @@ if(isset($_SESSION['kode'])){
                         <div id="p3" class="tab form-group" style="background-color: #7f8c8d;">
                             <div class="form-control" style="height: 100%;color: whitesmoke;">
                                 <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Core Test</span></p>
-                                <p><b>Sesi 1</b> - Waktu Penyelesaian Maksimal: 25 Menit</p>
-                                <p>Anda ditugaskan untuk menyelesaikan 5 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas OPT</b>.</p>
+                                <p><b>Sesi 1</b> - Waktu Penyelesaian Maksimal: 15 Menit</p>
+                                <p>Anda ditugaskan untuk menyelesaikan 3 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas OPT</b>.</p>
                                 <p>Apa itu <a data-toggle="modal" data-target="#kakasOPT"><b>Kakas OPT</b></a> ? klik <a data-toggle="modal" data-target="#kakasOPT">di sini</a> untuk membaca deskripsinya.</p>
-                                <p><input class="btn btn-primary btn-lg" value="Mulai - Sesi 1" type="button" onclick="simulasi1sesi1();"></p>
+                                <p id="s1s1"><input class="btn btn-primary btn-lg" value="Mulai - Sesi 1" type="button" onclick="simulasi1sesi1();"></p>
                             </div>
                         </div>
                         <div id="p4" class="tab form-group" style="background-color: #e67e22;">
                             <div class="form-control" style="height: 100%;color: whitesmoke;">
                                 <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Core Test</span></p>
-                                <p><b>Sesi 2</b> - Waktu Penyelesaian Maksimal: 25 Menit</p>
-                                <p>Anda ditugaskan untuk menyelesaikan 5 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas CodeViz</b>.</p>
+                                <p><b>Sesi 2</b> - Waktu Penyelesaian Maksimal: 15 Menit</p>
+                                <p>Anda ditugaskan untuk menyelesaikan 3 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas CodeViz</b>.</p>
                                 <p>Apa itu <a data-toggle="modal" data-target="#kakasCodeViz"><b>Kakas CodeViz</b></a> ? klik <a data-toggle="modal" data-target="#kakasCodeViz">di sini</a> untuk membaca deskripsinya.</p>
-                                <p><input class="btn btn-primary btn-lg" value="Mulai - Sesi 2" type="button" onclick="simulasi1sesi2();"></p>
+                                <p id="s1s2"><input class="btn btn-primary btn-lg" value="Mulai - Sesi 2" type="button" onclick="simulasi1sesi2();"></p>
                             </div>
                         </div>
                         <div style="overflow:auto;">
@@ -204,9 +204,9 @@ if(isset($_SESSION['kode'])){
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/simulasi.js?v=5"></script>
 
     <?php require_once('footer.php'); ?>
+    <script src="js/simulasi.js?v=5"></script>
 
 <div id="kakasOPT" class="modal fade" role="dialog">
     <div class="modal-dialog">

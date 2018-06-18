@@ -11,9 +11,10 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
         $q = $_POST['id_soal'];
         $jwb = $_DB->validate_data($_POST['jwb']);
         $id_responden = $select[0]['id_responden'];
+        $time = $_POST['time'];
 
         if( strpos($jwb, 'finish') ){
-            $update = $_DB->query("UPDATE `responden` SET `tahap_sekarang` = 'simulasi.php' WHERE `kode_unik` = ".$kode_unik);
+            $update = $_DB->query("UPDATE `responden` SET `tahap_sekarang` = 'simulasi2.php' WHERE `kode_unik` = ".$kode_unik);
             if($update) echo 'sukses';
             return;
         }
@@ -27,7 +28,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
                     
                     VALUES                  (".$jwb.", 
                                             'simulasi2sesi1', 
-                                            NULL, 
+                                            '".$time."', 
                                             ".$id_responden.", 
                                             ".$q.");");
         if($insert) echo 'sukses';

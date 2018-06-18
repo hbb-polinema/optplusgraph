@@ -1,3 +1,19 @@
+/*var code = ace.edit("editor-c");
+code.setOptions({
+    mode: "ace/mode/c_cpp",
+    wrap: true,
+    readOnly: true,
+    useSoftTabs: true,
+    minLines: 17,
+    maxLines: 333,
+    newLineMode: "unix",
+    tabSize: 4,
+    useWorker: false,
+    foldStyle: "manual",
+    showPrintMargin: false,
+    behavioursEnabled: false
+});*/
+
 function saveToDB(jwb, id_soal) {
     console.log(id_soal + ' jwb: ' + jwb);
     $.ajax({
@@ -26,51 +42,21 @@ function latihan1NextBtn(currentQuestion) {
     var valid = true;
     var nextBtn = document.getElementById('nextBtn');
 
+    var iframe = document.getElementById("OPT");
+    var viz = iframe.contentWindow.document.getElementsById("vizLayoutTdSecond");
+
     switch (currentQuestion) {
         case 1:
             if (document.getElementById('answerP1').value != '') {
-                saveToDB(document.getElementById('answerP1').value, 9);
+                if (viz != null) {
+                    saveToDB(document.getElementById('answerP1').value, 49);
+                } else {
+                    valid = false;
+                    console.log('viz: ' + viz);
+                    alert("Silakan gunakan kakas OPT terlebih dahulu untuk menjawab soal!");
+                }
             } else {
                 document.getElementById('p1').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p2
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'latihan1NextBtn(2)');
-            }
-            break;
-        case 2:
-            if (document.getElementById('answerP2').value != '') {
-                saveToDB(document.getElementById('answerP2').value, 10);
-            } else {
-                document.getElementById('p2').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p3
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'latihan1NextBtn(3)');
-            }
-            break;
-        case 3:
-            if (document.getElementById('answerP3').value != '') {
-                saveToDB(document.getElementById('answerP3').value, 11);
-            } else {
-                document.getElementById('p3').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p4
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'latihan1NextBtn(4)');
-            }
-            break;
-        case 4:
-            if (document.getElementById('answerP4').value != '') {
-                saveToDB(document.getElementById('answerP4').value, 12);
-            } else {
-                document.getElementById('p4').className += ' invalid';
                 valid = false;
             }
 
@@ -87,4 +73,12 @@ function latihan1NextBtn(currentQuestion) {
     if (valid) nextForm(1);
 
     return valid;
+}
+
+function checkAnswer(val) {
+    var answer = val.value;
+
+    if (answer != '') {
+        document.getElementById('nextBtn').style.display = 'block';
+    }
 }

@@ -11,6 +11,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
         $q = $_POST['id_soal'];
         $jwb = $_DB->validate_data($_POST['jwb']);
         $id_responden = $select[0]['id_responden'];
+        $time = $_POST['time'];
 
         if( strpos($jwb, 'finish') ){
             $update = $_DB->query("UPDATE `responden` SET `tahap_sekarang` = 'simulasi.php' WHERE `kode_unik` = ".$kode_unik);
@@ -26,8 +27,8 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
                                             `id_pertanyaan`)
                     
                     VALUES                  (".$jwb.", 
-                                            'simulasi1sesi1', 
-                                            NULL, 
+                                            'simulasi1OPT', 
+                                            '".$time."', 
                                             ".$id_responden.", 
                                             ".$q.");");
         if($insert) echo 'sukses';

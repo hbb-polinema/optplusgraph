@@ -65,7 +65,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
             } else 
                 echo '98 - Terjadi Kesalahan';
         } else {
-            echo '99 - Email Anda tidak cocok';
+            echo '99 - Terjadi Kesalahan: Email tidak terdaftar!';
         }
 
     } else {

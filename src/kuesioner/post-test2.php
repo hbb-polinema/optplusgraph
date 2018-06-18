@@ -90,7 +90,7 @@ if(isset($_SESSION['kode'])){
                     <div class="navbar-brand" style="font-size:12pt">
                         <ul class="social social-circle" style="width: auto;">
                             <li class="icon-head"></li>
-                        </ul> Anda sebagai Responden
+                        </ul> Anda sebagai Responden | <p id="timer">Sisa Waktu: 25 menit 0 detik</p>
                     </div>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
@@ -135,7 +135,7 @@ if(isset($_SESSION['kode'])){
                 <div class="col-md-2 col-sm-2"></div>
                 <div class="col-md-8 col-sm-8 to-animate">
                     
-                    <form accept-charset="utf-8" method="POST" action="#" name="formPostTest" id="formPostTest">
+                    <form accept-charset="utf-8" method="POST" action="#" name="formPostTest2" id="formPostTest2">
                         
                         <div style="text-align:center;margin-top:40px;">
                             <h4>Sisa Soal:
@@ -337,7 +337,7 @@ int main()
 
                             <div id="p5" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p5title" style="margin-bottom: 7pt;">Ada berapa kesalahan sintaks pada kode program berikut ini ? Sebutkan di bagian mana saja!</p>
+                                    <p id="p5title" style="margin-bottom: 7pt;">Ada berapa kesalahan sintaks pada kode program berikut ini ?</p>
                                     <select id="answerP5" name="answerP5" class="form-control">
                                         <option value="" selected disabled>Pilih Jawaban Anda</option>
                                         <option value="a">1</option>                
@@ -346,6 +346,8 @@ int main()
                                         <option value="d">9</option>    
                                         <option value="e">0</option>
                                     </select><br>
+                                    <p>Sebutkan di bagian mana saja!</p>
+                                    <textarea id="answerP5a" style="width:100%;height:111px;"></textarea>
 <pre><code class="language-c">
 #include "stdio.h"
 #define Z 999
@@ -418,7 +420,7 @@ int main()
 
                         <div style="overflow:auto;">
                             <div style="float:right;">
-                                <input id="nextBtn" class="btn btn-primary btn-lg" value="Lanjut" type="button" onclick="postTest(1)">
+                                <input id="nextBtn" class="btn btn-primary btn-lg" value="Lanjut" type="button" onclick="postTest2(1)">
                             </div>
                         </div>
                     </form>
@@ -431,7 +433,7 @@ int main()
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/post-test.js?v=4"></script>
-    <script src="js/prism.js?v=1" type="text/javascript"></script>
-
+    
 <?php require_once('footer.php'); ?>
+<script src="js/post-test2.js?v=3"></script>
+<script src="js/prism.js?v=1" type="text/javascript"></script>

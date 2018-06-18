@@ -1,6 +1,6 @@
 <?php require_once('header.php'); ?>
 
-<body>
+<body onunload="_DESTROY_OPT()">
     <style>
         /* Mark input boxes that gets an error on validation: */
 
@@ -54,7 +54,7 @@
                     <div class="navbar-brand" style="font-size:12pt">
                         <ul class="social social-circle" style="width: auto;">
                             <li class="icon-head"></li>
-                        </ul> Simulasi 2 - Sesi 2
+                        </ul> Simulasi 2 - Sesi 2 <p class="timer-simulasi" id="timer">Sisa Waktu: 25 menit 0 detik</p>
                     </div>
                 </div>
             </nav>
@@ -202,7 +202,7 @@ int main(){
     return 0;
 }</code></pre>
                                 <p>Silakan paste jawaban kode program Anda di bawah ini.</p>
-                                <textarea style="width:100%;height:111px;"></textarea>
+                                <textarea id="answerP2" style="width:100%;height:111px;"></textarea>
                                 <p><input class="btn btn-primary btn-lg" value="Buka Kakas OPT" type="button" onclick="simulasiOPT();"></p>
                             </div>
                         </div>
@@ -397,14 +397,14 @@ int main()
     return 0;
 }</code></pre>
                                 <p>Silakan paste jawaban kode program Anda di bawah ini.</p>
-                                <textarea style="width:100%;height:111px;"></textarea>
+                                <textarea id="answerP5" style="width:100%;height:111px;"></textarea>
                                 <p><input class="btn btn-primary btn-lg" value="Buka Kakas OPT" type="button" onclick="simulasiOPT();"></p>
                             </div>
                         </div>
 
                         <div style="overflow:auto;">
                             <div style="float:center;">
-                                <center><input id="nextBtn" class="btn btn-primary btn-lg" value="Soal Berikutnya" type="button" onclick="simulasi(1)"></center>
+                                <center><input id="nextBtn" class="btn btn-primary btn-lg" value="Soal Berikutnya" type="button" onclick="simulasi2sesi2NextBtn(1)"></center>
                             </div>
                         </div>
                     </div>
@@ -439,10 +439,11 @@ int main()
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/simulasi.js?v=3"></script>
-    <script src="js/prism.js?v=1" type="text/javascript"></script>
-
+    
     <?php require_once('footer.php'); ?>
+    <script src="js/simulasi.js?v=5"></script>
+    <script src="js/simulasi2sesi2.js?v=2"></script>
+    <script src="js/prism.js?v=1" type="text/javascript"></script>
 
 <div id="kakasOPT" class="modal fade" role="dialog">
     <div class="modal-dialog">

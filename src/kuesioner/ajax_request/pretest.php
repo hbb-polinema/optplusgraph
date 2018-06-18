@@ -26,7 +26,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
                                             `id_pertanyaan`)
                     
                     VALUES                  (".$jwb.", 
-                                            'pretest', 
+                                            'pre', 
                                             NULL, 
                                             ".$id_responden.", 
                                             ".$q.");");

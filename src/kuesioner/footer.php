@@ -3,7 +3,7 @@
         <div class="container">
             <div class="">
                 <div class="col-md-12 text-center">
-                    <p>Hak Cipta Dilindungi Undang-Undang &copy; 2018<br><a data-toggle="modal" data-target="#kebijakan">Kebijakan Privasi</a> | Template by <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a></p>
+                    <p>Hak Cipta Dilindungi Undang-Undang &copy; 2018<br><a data-toggle="modal" data-target="#kebijakan">Kebijakan Privasi</a> | <a data-toggle="modal" data-target="#skb">Syarat & Ketentuan</a> | Template by <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a></p>
                 </div>
             </div>
             <div class="row">
@@ -35,7 +35,7 @@
     <script src="js/magnific-popup-options.js"></script>
 
     <!-- Main JS (Do not remove) -->
-    <script src="js/main.js?v=2"></script>
+    <script src="js/main.js?v=11"></script>
 
 </body>
 
@@ -118,11 +118,40 @@
                 <p>Hadiah langsung berupa pulsa telepon seluler dengan maksimal senilai Rp. 25.000,-
                     (dua puluh lima ribu rupiah).
                 </p>
-                <p>Hadiah bagi responden terbaik adalah FREE Domain .id yang dapat di order langsung
-                    melalui http://...
+                <p>Hadiah bagi responden terbaik adalah FREE Domain .id yang dapat di cek langsung
+                    melalui <a href="https://pandi.id/en/register/" target="_blank">pandi.id</a>
                 </p>
                 <p>Spesifikasi hadiah yang dapat diberikan adalah sebagai berikut:
-                    
+                    <table style="font-size:10pt;">
+                    <tr>
+                        <td><b>Jumlah Jawaban Yang Benar dari total soal (30 = 2 skenario x (5 OPT + 5 CodeViz + 5 Post-Tes))</b></td>
+                        <td><b>Pulsa Yang akan Diperoleh + Akurasi jumlah jawaban benar sebagai poin untuk hadiah domain</b></td>
+                    </tr>
+                    <tr>
+                        <td>25 - 30</td>
+                        <td>25K</td>
+                    </tr>
+                    <tr>
+                        <td>20 - 24</td>
+                        <td>20K</td>
+                    </tr>
+                    <tr>
+                        <td>15 - 19</td>
+                        <td>15K</td>
+                    </tr>
+                    <tr>
+                        <td>10 - 14</td>
+                        <td>10K</td>
+                    </tr>
+                    <tr>
+                        <td>1 - 9</td>
+                        <td>5K</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>Tidak dapat pulsa - Tidak ada Poin</td>
+                    </tr>
+                    </table>
                 </p>
             </div>
             <div class="modal-footer">

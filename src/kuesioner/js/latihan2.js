@@ -29,48 +29,9 @@ function latihan2NextBtn(currentQuestion) {
     switch (currentQuestion) {
         case 1:
             if (document.getElementById('answerP1').value != '') {
-                saveToDB(document.getElementById('answerP1').value, 13);
+                saveToDB(document.getElementById('answerP1').value, 50);
             } else {
                 document.getElementById('p1').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p2
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'latihan2NextBtn(2)');
-            }
-            break;
-        case 2:
-            if (document.getElementById('answerP2').value != '') {
-                saveToDB(document.getElementById('answerP2').value, 14);
-            } else {
-                document.getElementById('p2').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p3
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'latihan2NextBtn(3)');
-            }
-            break;
-        case 3:
-            if (document.getElementById('answerP3').value != '') {
-                saveToDB(document.getElementById('answerP3').value, 15);
-            } else {
-                document.getElementById('p3').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p4
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'latihan2NextBtn(4)');
-            }
-            break;
-        case 4:
-            if (document.getElementById('answerP4').value != '') {
-                saveToDB(document.getElementById('answerP4').value, 16);
-            } else {
-                document.getElementById('p4').className += ' invalid';
                 valid = false;
             }
 
@@ -87,4 +48,12 @@ function latihan2NextBtn(currentQuestion) {
     if (valid) nextForm(1);
 
     return valid;
+}
+
+function checkAnswer(val) {
+    var answer = val.value;
+
+    if (answer != '') {
+        document.getElementById('nextBtn').style.display = 'block';
+    }
 }

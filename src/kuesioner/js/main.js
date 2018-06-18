@@ -513,6 +513,8 @@ function dataPribadi() {
                 alert('Terjadi koneksi galat: ' + status);
             }
         });
+    } else {
+        alert('Mohon isi data dengan lengkap terlebih dahulu!');
     }
 }
 
@@ -547,4 +549,37 @@ function showProdi(val) {
         document.getElementById('jurusan').style.display = 'none';
         document.getElementById('asal-kampus').style.display = 'none';
     }
+}
+
+var _MIN, _SEC;
+
+function timer(menit, detik, divTimer) {
+    _MIN = menit;
+    _SEC = detik;
+    divTimer.innerHTML = 'Sisa Waktu: ' + _MIN + ' menit ' + _SEC + ' detik';
+
+    function countTimer() {
+        setTimeout(countTimer, 1000);
+        if (_MIN == 0 && _SEC >= 0) {
+            if (_MIN == 0 && _SEC == 0) {
+                divTimer.innerHTML = '<span style="color:red">Sisa Waktu: 0 menit 0 detik</span>';
+            } else
+                divTimer.innerHTML = '<span style="color:red">Sisa Waktu: ' + _MIN + ' menit ' + _SEC + ' detik</span>';
+        } else {
+            divTimer.innerHTML = '<span style="color:#27ae60">Sisa Waktu: ' + _MIN + ' menit ' + _SEC + ' detik</span>';
+        }
+
+        if (_MIN >= 0 && _SEC > 0) _SEC--;
+        if (_SEC <= 0) {
+            if (_MIN > 0) {
+                _SEC = 59;
+                _MIN--;
+            }
+            if (_MIN <= 0) {
+                clearTimeout(countTimer);
+                setTimeout('console.log(`timeout`)', 1);
+            }
+        }
+    }
+    countTimer();
 }

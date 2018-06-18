@@ -40,9 +40,14 @@
                 opacity: 1;
             }
         }
-    </style>
 
-    <link href="css/prism.css?v=1" rel="stylesheet" type="text/css">
+        #editor-c {
+            width: 100%;
+            margin-bottom: 17px;
+            font-size: 12pt;
+            border: 1px solid #ddd;
+        }
+    </style>
 
     <header role="banner" id="fh5co-header" class="navbar-fixed-top">
         <div class="container">
@@ -70,147 +75,46 @@
                     <h2 class="to-animate">Latihan 1</h2>
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                            <h3>Anda ditugaskan untuk menyelesaikan 4 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasOPT"><b>kakas OPT</b></a>.</h3>
+                            <h3>Anda ditugaskan untuk menyelesaikan 1 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasOPT"><b>kakas OPT</b></a>.</h3>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-sm-6 to-animate">
+                <div class="col-md-12 col-sm-12 to-animate">
                     
                     <div id="DivFormSimulasi">
                         <div id="p1" class="tab form-group">
                             <div class="form-control" style="height: 100%">
                                 <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
-                                <p><b>Soal 1</b></p>
-                                <p>Dari kode program berikut, ketika variabel x di print bernilai ...</p>
-                                <select id="answerP1" name="answerP1" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih</option>                
-                                        <option value="a">41</option>                
-                                        <option value="b">10</option>                
-                                        <option value="c">0</option>                
-                                        <option value="d">31</option>    
-                                        <option value="e">62</option>        
-                                </select></br>
-<pre><code class="language-c">
-int main(){
-    int x = 10;
-    int y = 31;
-    int z = 0;
-
-    x = y;
-    y = x;
-    x = x + y;
-
-    printf("x = %d", x);
-
-    return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas OPT" type="button" onclick="simulasiOPT();"></p>
+                                <p>Silakan perbaiki kesalahan sintaks pada kode program berikut ini !</p>
+                                <p>Berapa nilai L yang dicetak ?</p>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <select id="answerP1" name="answerP1" class="form-control" onchange="checkAnswer(this);">
+                                            <option value="" selected disabled>Silahkan Pilih</option>                
+                                            <option value="a">4928</option>                
+                                            <option value="b">4892</option>                
+                                            <option value="c">4298</option>                
+                                            <option value="d">4829</option>    
+                                            <option value="e">Tidak ada jawaban</option>        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <div style="overflow:auto;">
+                                            <div style="float:center;">
+                                                <center><input id="nextBtn" class="btn btn-primary btn-lg" style="display:none;" value="Simpan" type="button" onclick="latihan1NextBtn(1)"></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="OPT" width="100%" height="600" frameborder="0" src="http://localhost/opt/#code=int%20x%28r%29%7B%0A%20%20%20%20return%203.14*r*r%3B%0A%7D%0A%0Aint%20main%28%29%7B%0A%20%20%20%20int%20L%3B%0A%0A%20%20%20%20L%20%3D%20x%2837%29%3B%0A%20%20%20%20print%28%22L%20%3D%20%25d%22,%20L%29%3B%0A%0A%20%20%20%20return%200%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
                             </div>
                         </div>
-                        <div id="p2" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
-                                <p><b>Soal 2</b></p>
-                                <p>Silakan perbaiki kesalahan sintaks pada kode program berikut ini!</p>
-<pre><code class="language-c">
-Int main(){
-    int graf = [7][7];
-    int graf[7][8] = 0;
-
-    printf("graf", graf);
-    return 0;
-}</code></pre>
-                                <p>Silakan paste jawaban kode program Anda di bawah ini.</p>
-                                <textarea id="answerP2" style="width:100%;height:111px;"></textarea>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas OPT" type="button" onclick="simulasiOPT();"></p>
-                            </div>
-                        </div>
-                        <div id="p3" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
-                                <p><b>Soal 3</b></p>
-                                <p>Apa nama algoritma yang paling cocok untuk kode program berikut ini ?</p>
-                                <select id="answerP3" name="answerP3" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">menghitung luas</option>                
-                                        <option value="b">menghitung luas segitiga</option>                
-                                        <option value="c">menghitung luas persegi panjang</option>                
-                                        <option value="d">menghitung luas lingkaran</option>    
-                                        <option value="e">tidak dapat ditentukan</option>        
-                                </select></br>
-<pre><code class="language-c">
-int main(){
-    int p = 7;
-    int l = 9;
-
-    int L = p * l;
-
-    return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas OPT" type="button" onclick="simulasiOPT();"></p>
-                            </div>
-                        </div>
-                        <div id="p4" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Latihan | Warming Up</span></p>
-                                <p><b>Soal 4</b></p>
-                                <p>Fungsi X berguna untuk ...</p>
-                                <select id="answerP4" name="answerP4" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">menghitung perkalian</option>                
-                                        <option value="b">menghitung luas lingkaran</option>                
-                                        <option value="c">menghitung luas persegi</option>                
-                                        <option value="d">menghitung nilai phi</option>    
-                                        <option value="e">tidak berfungsi / error</option>        
-                                </select></br>
-<pre><code class="language-c">
-int x(int r){
-    return 3.14*r*r;
-}
-
-int main(){
-    int L;
-
-    L = x(7);
-    printf(‘L = %d’, L);
-
-    return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas OPT" type="button" onclick="simulasiOPT();"></p>
-                            </div>
-                        </div>
-                        <div style="overflow:auto;">
-                            <div style="float:center;">
-                                <center><input id="nextBtn" class="btn btn-primary btn-lg" value="Soal Berikutnya" type="button" onclick="latihan1NextBtn(1)"></center>
-                            </div>
-                        </div>
+                        
                     </div>
 
-                </div>
-
-                <div class="col-md-6 col-sm-6 to-animate">
-                    <div class="fh5co-block to-animate" style="background-color: tomato;color: white;padding: 41px 41px;margin-bottom: 33pt;">
-                        <div class="overlay-darker"></div>
-                        <div class="overlay"></div>
-                        <div class="fh5co-text">
-                            <h2><span class="fh5co-intro-icon icon-gift"></span> Hadiah Utama Domain .ID</h2>
-                            <p>Bagi responden terbaik berdasarkan kelengkapan kuesioner dan poin yang bisa dikumpulkan.</p>
-                            <h5 style="margin-bottom:0px;">Baca syarat dan ketentuannya <a data-toggle="modal" data-target="#skb">di sini</a></h5>
-                        </div>
-                    </div>
-
-                    <h3>Informasi Kontak</h3>
-                    <ul class="fh5co-contact-info">
-                        <li class="fh5co-contact-address ">
-                            <i class="icon-home"></i> Institut Teknologi Bandung<br>Jalan Ganesha Nomor 10, <br>Kota Bandung
-                        </li>
-                        <li><i class="icon-phone"></i> 0811-3200-670</li>
-                        <li><i class="icon-envelope"></i>habibieeddien@students.itb.ac.id</li>
-                        <li><i class="icon-globe"></i> <a href="http://www.itb.ac.id/" target="_blank">ITB.ac.id</a></li>
-                    </ul>
                 </div>
 
             </div>
@@ -219,12 +123,10 @@ int main(){
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/simulasi.js?v=3"></script>
-    <script src="js/latihan1.js?v=3"></script>
-    <script src="js/prism.js?v=1" type="text/javascript"></script>
-
     <?php require_once('footer.php'); ?>
-
+    <script src="js/simulasi.js?v=6"></script>
+    <script src="js/latihan1.js?v=6"></script>
+    
 <div id="kakasOPT" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">

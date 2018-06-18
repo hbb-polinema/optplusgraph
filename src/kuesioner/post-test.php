@@ -90,7 +90,7 @@ if(isset($_SESSION['kode'])){
                     <div class="navbar-brand" style="font-size:12pt">
                         <ul class="social social-circle" style="width: auto;">
                             <li class="icon-head"></li>
-                        </ul> Anda sebagai Responden
+                        </ul> Anda sebagai Responden | <p id="timer">Sisa Waktu: 25 menit 0 detik</p>
                     </div>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
@@ -410,7 +410,8 @@ int main()
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/post-test.js?v=5"></script>
-    <script src="js/prism.js?v=1" type="text/javascript"></script>
 
 <?php require_once('footer.php'); ?>
+
+<script src="js/post-test.js?v=6"></script>
+<script src="js/prism.js?v=1" type="text/javascript"></script>

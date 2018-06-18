@@ -1682,3 +1682,10 @@ h6 {
     left: 0;
     color: #FFD700;
 }
+
+.timer-simulasi {
+    /*created by habibieeddien*/
+    top: 11px;
+    right: 111px;
+    position: fixed;
+}

@@ -130,20 +130,20 @@ function preTest(currentQuestion) {
             // go to p2
             if (valid) {
                 nextBtn.setAttribute('onclick', 'preTest(2)');
-                sisaPertanyaan.textContent = '7';
+                sisaPertanyaan.textContent = '3';
             }
             break;
         case 2:
             if (document.getElementById('answerP2-a').checked) {
-                saveToDB("a", 2);
+                saveToDB("a", 47);
             } else if (document.getElementById('answerP2-b').checked) {
-                saveToDB("b", 2);
+                saveToDB("b", 47);
             } else if (document.getElementById('answerP2-c').checked) {
-                saveToDB("c", 2);
+                saveToDB("c", 47);
             } else if (document.getElementById('answerP2-d').checked) {
-                saveToDB("d", 2);
+                saveToDB("d", 47);
             } else if (document.getElementById('answerP2-e').checked) {
-                saveToDB("e", 2);
+                saveToDB("e", 47);
             } else {
                 document.getElementById('p2').className += ' invalid';
                 valid = false;
@@ -152,20 +152,12 @@ function preTest(currentQuestion) {
             // go to p3
             if (valid) {
                 nextBtn.setAttribute('onclick', 'preTest(3)');
-                sisaPertanyaan.textContent = '6';
+                sisaPertanyaan.textContent = '2';
             }
             break;
         case 3:
-            if (document.getElementById('answerP3-a').checked) {
-                saveToDB("a", 3);
-            } else if (document.getElementById('answerP3-b').checked) {
-                saveToDB("b", 3);
-            } else if (document.getElementById('answerP3-c').checked) {
-                saveToDB("c", 3);
-            } else if (document.getElementById('answerP3-d').checked) {
-                saveToDB("d", 3);
-            } else if (document.getElementById('answerP3-e').checked) {
-                saveToDB("e", 3);
+            if (document.getElementById('answerP3').value != '') {
+                saveToDB(document.getElementById('answerP3').value, 48);
             } else {
                 document.getElementById('p3').className += ' invalid';
                 valid = false;
@@ -173,78 +165,14 @@ function preTest(currentQuestion) {
 
             // go to p4
             if (valid) {
-                nextBtn.setAttribute('onclick', 'preTest(4)');
-                sisaPertanyaan.textContent = '5';
-            }
-            break;
-        case 4:
-            if (document.getElementById('answerP4-a').checked) {
-                saveToDB("a", 4);
-            } else if (document.getElementById('answerP4-b').checked) {
-                saveToDB("b", 4);
-            } else if (document.getElementById('answerP4-c').checked) {
-                saveToDB("c", 4);
-            } else if (document.getElementById('answerP4-d').checked) {
-                saveToDB("d", 4);
-            } else if (document.getElementById('answerP4-e').checked) {
-                saveToDB("e", 4);
-            } else {
-                document.getElementById('p4').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p5
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'preTest(5)');
-                sisaPertanyaan.textContent = '4';
-            }
-            break;
-        case 5:
-            if (document.getElementById('answerP5').value != '') {
-                saveToDB(document.getElementById('answerP5').value, 5);
-            } else {
-                document.getElementById('p5').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p6
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'preTest(6)');
-                sisaPertanyaan.textContent = '3';
-            }
-            break;
-        case 6:
-            if (document.getElementById('answerP6').value != '') {
-                saveToDB(document.getElementById('answerP6').value, 6);
-            } else {
-                document.getElementById('p6').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p7
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'preTest(7)');
-                sisaPertanyaan.textContent = '2';
-            }
-            break;
-        case 7:
-            if (document.getElementById('answerP7').value != '') {
-                saveToDB(document.getElementById('answerP7').value, 7);
-            } else {
-                document.getElementById('p7').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p8
-            if (valid) {
                 nextBtn.value = 'Simpan';
-                nextBtn.setAttribute('onclick', 'preTest(8)');
+                nextBtn.setAttribute('onclick', 'preTest(4)');
                 sisaPertanyaan.textContent = '1';
             }
             break;
-        case 8:
-            if (document.getElementById('answerP8').value != '') {
-                saveToDB(document.getElementById('answerP8').value, 8);
+        case 4:
+            if (document.getElementById('answerP4').value != '') {
+                saveToDB(document.getElementById('answerP4').value, 8);
                 if (document.getElementById('pC').value != '') {
                     saveToDB(document.getElementById('pC').value, 81);
                 }
@@ -252,7 +180,7 @@ function preTest(currentQuestion) {
                     saveToDB(document.getElementById('lastpC').value, 82);
                 }
             } else {
-                document.getElementById('p8').className += ' invalid';
+                document.getElementById('p4').className += ' invalid';
                 valid = false;
             }
 
@@ -269,3 +197,9 @@ function preTest(currentQuestion) {
 
     return valid;
 }
+
+/**
+ * soal pretest yang sudah dijawab dan tersimpan dalam DB, tidak dapat diakses lagi (tidak bisa dijawab lagi).
+ * TODO: SELECT id_responden FROM responden WHERE kode_unik = $_SESSION['kode_unik']
+ * SELECT 
+ */

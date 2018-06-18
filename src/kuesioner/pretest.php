@@ -146,7 +146,7 @@ if(isset($_SESSION['kode'])){
                     <form accept-charset="utf-8" method="POST" action="#" name="formPreTest" id="formPreTest">
                         <div style="text-align:center;margin-top:40px;">
                             <h4>Sisa Soal:
-                                <b id="sisaPertanyaan">8</b>
+                                <b id="sisaPertanyaan">4</b>
                             </h4>
                         </div>
                         <!-- One "tab" for each step in the form: -->
@@ -167,93 +167,36 @@ if(isset($_SESSION['kode'])){
                             </div>
                             <div id="p2" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p2title" style="margin-bottom: 7pt;">Apa yang dimaksud dengan simpul (node) pada graf ?</p>
+                                    <p id="p2title" style="margin-bottom: 7pt;">Hitunglah komponen berikut ini berdasarkan pada gambar di bawah ini:</p>
+                                    <p>Simpul = ... buah<br>Sisi = ... buah<br>Derajat pada simpul X = ... buah</p>
                                     <div class="row">
-                                        <input id="answerP2-a" type="radio" name="answerP2" value="a"> Simpul (node) adalah graf ganda.<br>
-                                        <input id="answerP2-b" type="radio" name="answerP2" value="b"> Simpul (node) adalah graf tidak sederhana.<br>
-                                        <input id="answerP2-c" type="radio" name="answerP2" value="c"> Simpul (node) adalah graf semu.<br>
-                                        <input id="answerP2-d" type="radio" name="answerP2" value="d"> Simpul (node) adalah sisi yang menghubungkan pasangan titik yang sama.<br>
-                                        <input id="answerP2-e" type="radio" name="answerP2" value="e"> Simpul (node) adalah himpunan titik.<br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <input id="answerP2-a" type="radio" name="answerP2" value="a"> 3, 11, dan 5<br>
+                                            <input id="answerP2-b" type="radio" name="answerP2" value="b"> 5, 6, dan 5<br>
+                                            <input id="answerP2-c" type="radio" name="answerP2" value="c"> 9, 18, dan 6<br>
+                                            <input id="answerP2-d" type="radio" name="answerP2" value="d"> 9, 14, dan 5<br>
+                                            <input id="answerP2-e" type="radio" name="answerP2" value="e"> 10, 14, dan 5<br>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <center><img src="images/pretest-p5.jpg" style="width: 100%;height: 100%;"></center>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div id="p3" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p3title" style="margin-bottom: 7pt;">Apa yang dimaksud dengan sisi (edge) pada graf ?</p>
-                                    <div class="row">
-                                        <input id="answerP3-a" type="radio" name="answerP3" value="a"> Sisi (edge) adalah bagian penting graf.<br>
-                                        <input id="answerP3-b" type="radio" name="answerP3" value="b"> Sisi (edge) adalah himpunan graf.<br>
-                                        <input id="answerP3-c" type="radio" name="answerP3" value="c"> Sisi (edge) adalah jembatan.
-                                        <br>
-                                        <input id="answerP3-d" type="radio" name="answerP3" value="d"> Sisi (edge) adalah sisi yang membentuk persegi.<br>
-                                        <input id="answerP3-e" type="radio" name="answerP3" value="e"> Sisi (edge) adalah garis yang menghubungkan dua simpul atau lebih.<br>
-                                    </div>
+                                    <p id="p3title" style="margin-bottom: 7pt;">Apakah Anda familiar dengan teori graf ?</p>
+                                    <select id="answerP3" name="answerP3" class="form-control" required>
+                                        <option value="" selected disabled>Silahkan Pilih</option>                
+                                        <option value="y">Ya</option>                
+                                        <option value="t">Tidak</option>       
+                                    </select>
                                 </div>
                             </div>
                             <div id="p4" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p id="p4title" style="margin-bottom: 7pt;">Apa yang dimaksud dengan derajat (degree) pada graf ?</p>
-                                    <div class="row">
-                                        <input id="answerP4-a" type="radio" name="answerP4" value="a"> Derajat (degree) adalah ukuran (size) graf.<br>
-                                        <input id="answerP4-b" type="radio" name="answerP4" value="b"> Derajat (degree) adalah bentuk sudut dari beberapa sisi.<br>
-                                        <input id="answerP4-c" type="radio" name="answerP4" value="c"> Derajat (degree) adalah banyaknya sisi yang bersisian dengan suatu simpul.<br>
-                                        <input id="answerP4-d" type="radio" name="answerP4" value="d"> Derajat (degree) adalah banyaknya simpul yang terhubung.<br>
-                                        <input id="answerP4-e" type="radio" name="answerP4" value="e"> Derajat (degree) adalah sisi genap dan sisi ganjil.<br>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="p5" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Ada berapa simpul pada gambar graf berikut ini ?</p>
-                                    <select id="answerP5" name="answerP5" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih</option>                
-                                        <option value="a">5</option>                
-                                        <option value="b">7</option>                
-                                        <option value="c">8</option>                
-                                        <option value="d">9</option>    
-                                        <option value="e">10</option>        
-                                    </select>
-                                    <p style="margin:30px;">
-                                        <center><img src="images/pretest-p5.jpg"></center>
-                                    </p>
-                                </div>
-                            </div>
-                            <div id="p6" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p id="p6title" style="margin-bottom: 7pt;">Ada berapa sisi pada gambar graf berikut ini ?</p>
-                                    <select id="answerP6" name="answerP6" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih</option>                
-                                        <option value="a">5</option>                
-                                        <option value="b">7</option>                
-                                        <option value="c">8</option>                
-                                        <option value="d">9</option>    
-                                        <option value="e">10</option>        
-                                    </select>
-                                    <p style="margin:30px;">
-                                        <center><img src="images/pretest-p6.jpg" style="width:100%;"></center>
-                                    </p>
-                                </div>
-                            </div>
-                            <div id="p7" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Berapa derajat pada simpul nomor 2 yang dimiliki oleh graf berikut ?</p>
-                                    <select id="answerP7" name="answerP7" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih</option>                
-                                        <option value="a">4</option>                
-                                        <option value="b">5</option>                
-                                        <option value="c">6</option>                
-                                        <option value="d">7</option>    
-                                        <option value="e">8</option>        
-                                    </select>
-                                    <p style="margin:30px;">
-                                        <center><img src="images/pretest-p7.jpg"></center>
-                                    </p>
-                                </div>
-                            </div>
-                            <div id="p8" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
                                     <p style="margin-bottom: 7pt;">Apakah Anda familiar dengan bahasa pemrograman C ?</p>
-                                    <select id="answerP8" name="answerP8" class="form-control" required onchange="bahasaPem(this);">
+                                    <select id="answerP4" name="answerP4" class="form-control" required onchange="bahasaPem(this);">
                                         <option value="" selected disabled>Silahkan Pilih</option>                
                                         <option value="y">Ya</option>                
                                         <option value="t">Tidak</option>       
@@ -262,7 +205,7 @@ if(isset($_SESSION['kode'])){
                             </div>
                             <div id="programC" style="display:none;" class="tab2 form-group">
                                 <div class="form-control">
-                                    <p style="margin-bottom: 7pt;">Apakah Anda pernah memprogram graf dengan bahasa pemrograman C ?</p>
+                                    <p style="margin-bottom: 7pt;">Apakah Anda pernah memprogram struktur data graf dengan bahasa pemrograman C ?</p>
                                     <select name="pC" id="pC" class="form-control" required onchange="bahasaPem(this);">
                                         <option value="" selected disabled>Silahkan Pilih</option>
                                         <option value="a">Ya Pernah</option>
@@ -302,6 +245,6 @@ if(isset($_SESSION['kode'])){
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/pretest.js?v=5"></script>
+    <script src="js/pretest.js?v=7"></script>
 
     <?php require_once('footer.php'); ?>

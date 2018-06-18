@@ -108,14 +108,22 @@
                         <div class="col-md-8 col-md-offset-2 subtext to-animate">
                             <h3>Terima kasih telah meluangkan waktu dan
                                 usaha Anda.</h3>
+                            <p>Kontribusi Anda sangat berarti bagi penelitian ini.
+                            Oleh karena itu, sebagai reward/penghargaan penulis ingin
+                            memberikan hadiah berupa pulsa dan FREE Domain .id<br>
+                            Pemberian Hadiah akan diinformasikan melalui email atau nomor telepon
+                            yang telah terdaftar.</p>
+                            <p>Jika Anda ingin menambah poin untuk berpeluang sebagai pemenang Responden
+                            Terbaik untuk FREE Domain .ID, dapat mengisi 3 pertanyaan opini <a>di sini</a>.</p>
                             <p>Baca lebih lanjut tentang
-                                <a data-toggle="modal" data-target="#kebijakan">Kebijakan Privasi</a>.</p>
+                                <a data-toggle="modal" data-target="#kebijakan">Kebijakan Privasi</a> |
+                                <a data-toggle="modal" data-target="#skb">Syarat & Ketentuan</a>.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+            <!--div class="row">
                 <div class="col-md-2 col-sm-2"></div>
                 <div class="col-md-8 col-sm-8 to-animate">
                     <form accept-charset="utf-8" method="POST" action="#" name="formPreTest" id="formPreTest">
@@ -124,7 +132,7 @@
                                 <b id="sisaPertanyaan">3</b>
                             </h4>
                         </div>
-                        <!-- One "tab" for each step in the form: -->
+                        
                         <div id="DivFormPreTest">
                             <div id="p1" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
@@ -176,13 +184,13 @@
                     </form>
                 </div>
                 <div class="col-md-2 col-sm-2"></div>
-            </div>
+            </div-->
 
         </div>
 
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/selesai.js?v=1"></script>
+    <!--script src="js/selesai.js?v=1"></script-->
 
     <?php require_once('footer.php'); ?>

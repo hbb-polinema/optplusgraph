@@ -11,6 +11,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
         $q = $_POST['id_soal'];
         $jwb = $_DB->validate_data($_POST['jwb']);
         $id_responden = $select[0]['id_responden'];
+        $time = $_POST['time'];
 
         if( strpos($jwb, 'finish') ){
             $update = $_DB->query("UPDATE `responden` SET `tahap_sekarang` = 'simulasi2.php' WHERE `kode_unik` = ".$kode_unik);
@@ -27,14 +28,14 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
                     
                     VALUES                  (".$jwb.", 
                                             'post-test1', 
-                                            NULL, 
+                                            '".$time."',
                                             ".$id_responden.", 
                                             ".$q.");");
         if($insert) echo 'sukses';
         else echo 'gagal-'.$q.'-'.$jwb.'-'.$id_responden;
 
     } else {
-        echo 'Lat1 - Terjadi Kesalahan!';
+        echo 'Post-test1 - Terjadi Kesalahan!';
     }
 } else {
     echo '101 - Terjadi Kesalahan';

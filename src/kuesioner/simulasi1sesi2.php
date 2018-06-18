@@ -1,6 +1,6 @@
 <?php require_once('header.php'); ?>
 
-<body>
+<body onunload="_DESTROY_CODEVIZ()">
     <style>
         /* Mark input boxes that gets an error on validation: */
 
@@ -54,7 +54,7 @@
                     <div class="navbar-brand" style="font-size:12pt">
                         <ul class="social social-circle" style="width: auto;">
                             <li class="icon-head"></li>
-                        </ul> Simulasi 1 - Sesi 2
+                        </ul> Simulasi 1 - Sesi 2 <p class="timer-simulasi" id="timer">Sisa Waktu: 25 menit 0 detik</p>
                     </div>
                 </div>
             </nav>
@@ -426,11 +426,11 @@ int main()
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/simulasi.js?v=3"></script>
-    <script src="js/simulasi1sesi2.js?v=1"></script>
-    <script src="js/prism.js?v=1" type="text/javascript"></script>
 
     <?php require_once('footer.php'); ?>
+    <script src="js/simulasi.js?v=6"></script>
+    <script src="js/simulasi1sesi2.js?v=4"></script>
+    <script src="js/prism.js?v=1" type="text/javascript"></script>
 
 <div id="kakasCodeViz" class="modal fade" role="dialog">
     <div class="modal-dialog">

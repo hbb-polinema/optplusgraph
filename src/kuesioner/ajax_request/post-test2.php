@@ -27,7 +27,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
                                             `id_pertanyaan`)
                     
                     VALUES                  (".$jwb.", 
-                                            'simulasi2sesi2', 
+                                            'post-test2', 
                                             '".$time."',
                                             ".$id_responden.", 
                                             ".$q.");");
@@ -35,7 +35,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
         else echo 'gagal-'.$q.'-'.$jwb.'-'.$id_responden;
 
     } else {
-        echo 'Sim2S2 - Terjadi Kesalahan!';
+        echo 'Post-test2 - Terjadi Kesalahan!';
     }
 } else {
     echo '101 - Terjadi Kesalahan';

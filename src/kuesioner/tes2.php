@@ -83,7 +83,7 @@
                     if (menit <= 0) {
                         clearInterval(Timer);
                         /** Variable yang digunakan untuk submit secara otomatis di Form */
-                        setTimeout('document.quiz.submit()', 1);
+                        setTimeout('document.quiz.submit()', 1);                        
                     }
                 }
             }

@@ -2,7 +2,6 @@ $(document).ready(function() {
     var divTimer = document.getElementById("timer");
     timer(25, 0, divTimer);
 });
-
 /**
  * Fungsi untuk tab pertanyaan post-test
  * author: Habibie Ed Dien (habibie.tk@gmail.com)
@@ -35,7 +34,7 @@ function nextForm(n) {
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
         // ... the form gets submitted:
-        document.getElementById("formPostTest").submit();
+        document.getElementById("formPostTest2").submit();
         return false;
     }
     // Otherwise, display the correct tab:
@@ -66,7 +65,7 @@ function saveToDB(jwb, id_soal) {
     console.log(id_soal + ' jwb: ' + jwb + '-' + time);
     $.ajax({
         type: "POST",
-        url: "ajax_request/post-test.php",
+        url: "ajax_request/post-test2.php",
         data: "id_soal=" + id_soal + "&jwb=" + jwb + "&time=" + time,
         cache: false,
         success: function(result) {
@@ -105,7 +104,7 @@ function updateTahap(tahap) {
  * 
  * @param {soal saat ini} currentQuestion
  */
-function postTest(currentQuestion) {
+function postTest2(currentQuestion) {
     var valid = true;
     var nextBtn = document.getElementById('nextBtn');
     var sisaSoal = document.getElementById("sisaSoal");
@@ -113,7 +112,7 @@ function postTest(currentQuestion) {
     switch (currentQuestion) {
         case 1:
             if (document.getElementById('answerP1').value != '') {
-                saveToDB(document.getElementById('answerP1').value, 27);
+                saveToDB(document.getElementById('answerP1').value, 42);
             } else {
                 document.getElementById('p1').className += ' invalid';
                 valid = false;
@@ -121,13 +120,13 @@ function postTest(currentQuestion) {
 
             // go to p2
             if (valid) {
-                nextBtn.setAttribute('onclick', 'postTest(2)');
+                nextBtn.setAttribute('onclick', 'postTest2(2)');
                 sisaSoal.textContent = '4';
             }
             break;
         case 2:
             if (document.getElementById('answerP2').value != '') {
-                saveToDB(document.getElementById('answerP2').value, 28);
+                saveToDB(document.getElementById('answerP2').value, 43);
             } else {
                 document.getElementById('p2').className += ' invalid';
                 valid = false;
@@ -135,13 +134,13 @@ function postTest(currentQuestion) {
 
             // go to p3
             if (valid) {
-                nextBtn.setAttribute('onclick', 'postTest(3)');
+                nextBtn.setAttribute('onclick', 'postTest2(3)');
                 sisaSoal.textContent = '3';
             }
             break;
         case 3:
             if (document.getElementById('answerP3').value != '') {
-                saveToDB(document.getElementById('answerP3').value, 29);
+                saveToDB(document.getElementById('answerP3').value, 44);
             } else {
                 document.getElementById('p3').className += ' invalid';
                 valid = false;
@@ -149,30 +148,30 @@ function postTest(currentQuestion) {
 
             // go to p4
             if (valid) {
-                nextBtn.setAttribute('onclick', 'postTest(4)');
+                nextBtn.setAttribute('onclick', 'postTest2(4)');
                 sisaSoal.textContent = '2';
             }
             break;
         case 4:
             if (document.getElementById('answerP4').value != '') {
-                saveToDB(document.getElementById('answerP4').value, 30);
+                saveToDB(document.getElementById('answerP4').value, 45);
             } else {
                 document.getElementById('p4').className += ' invalid';
                 valid = false;
             }
 
-            // go to p3
+            // go to p5
             if (valid) {
                 nextBtn.value = 'Simpan';
-                nextBtn.setAttribute('onclick', 'postTest(5)');
+                nextBtn.setAttribute('onclick', 'postTest2(5)');
                 sisaSoal.textContent = '1';
             }
             break;
         case 5:
             if (document.getElementById('answerP5').value != '') {
-                saveToDB(document.getElementById('answerP5').value, 31);
+                saveToDB(document.getElementById('answerP5').value, 46);
                 if (document.getElementById('answerP5a').value != '') {
-                    saveToDB(document.getElementById('answerP5a').value, 31);
+                    saveToDB(document.getElementById('answerP5a').value, 46);
                 }
             } else {
                 document.getElementById('p5').className += ' invalid';
@@ -181,11 +180,10 @@ function postTest(currentQuestion) {
 
             // go to SUBMIT
             if (valid) {
-                // FINISH Post-Test, next to simulasi2
-                alert('Post-tes 1 Berhasil disimpan!');
-                saveToDB('finish', 0);
-                //updateTahap('simulasi2.php');
-                window.location.href = 'simulasi2.php';
+                // FINISH Post-Test2, next to Selesai
+                alert('Post-tes 2 Berhasil disimpan!');
+                updateTahap('selesai.php');
+                window.location.href = 'selesai.php';
             }
             break;
     }
