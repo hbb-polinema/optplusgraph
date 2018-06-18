@@ -1,0 +1,252 @@
+﻿id_responden,alur_pertanyaan,kategori_pertanyaan,isi_jawaban,kunci_jawaban,durasi_waktu_penyelesaian,isi_pertanyaan
+301,pretest,pretest1,b,b,,Apa yang dimaksud dengan graf ?
+301,pretest,pretest2,e,e,,Apa yang dimaksud dengan simpul (node) pada graf ?
+301,pretest,pretest3,e,e,,Apa yang dimaksud dengan sisi (edge) pada graf ?
+301,pretest,pretest4,c,c,,Apa yang dimaksud dengan derajat (degree) pada graf ?
+301,pretest,pretest5,d,d,,Ada berapa simpul pada gambar graf berikut ini ?
+301,pretest,pretest6,c,b,,Ada berapa sisi pada gambar graf berikut ini ?
+301,pretest,pretest7,b,b,,Berapa derajat pada simpul nomor 2 yang dimiliki oleh graf berikut ?
+301,pretest,pretest8,y,,,Apakah Anda familiar dengan bahasa pemrograman C ?
+301,pretest,pretest8.1,c,,,Apakah Anda pernah memprogram graf dengan bahasa pemrograman C ?
+301,latihan1,latihan1,e,e,,"Dari kode program berikut, ketika variabel x di print bernilai ..."
+301,latihan1,latihan1,e,e,,"Dari kode program berikut, ketika variabel x di print bernilai ..."
+301,latihan1,latihan1,e,e,,"Dari kode program berikut, ketika variabel x di print bernilai ..."
+301,latihan1,latihan1,"int main() {
+  int graf[7][7];
+  graf[7][8] = 0;
+
+  printf(&quot;graf&quot;, graf);
+  return 0;
+}",,,Silakan perbaiki kesalahan sintaks pada kode program berikut ini!
+301,latihan1,latihan1,c,c,,Apa nama algoritma yang paling cocok untuk kode program berikut ini ?
+301,latihan1,latihan1,b,b,,Fungsi X berguna untuk ...
+301,latihan1,latihan1,e,e,,"Dari kode program berikut, ketika variabel x di print bernilai ..."
+301,latihan1,latihan1,"int main() {
+  int graf[7][7];
+  graf[7][8] = 0;
+
+  printf(&quot;graf&quot;, graf);
+  return 0;
+}",,,Silakan perbaiki kesalahan sintaks pada kode program berikut ini!
+301,latihan1,latihan1,c,c,,Apa nama algoritma yang paling cocok untuk kode program berikut ini ?
+301,latihan1,latihan1,b,b,,Fungsi X berguna untuk ...
+301,latihan2,latihan2,"int main() {
+    int x = 17;
+    int y = 29;
+    int z = y * x;
+    printf(&quot;z = %d&quot;, z);
+    return 0;
+}",Output Program: z : 493,,"Silakan perbaiki kesalahan sintaks pada kode program berikut ini!
+Output Program: z : 493"
+301,latihan2,latihan2,b,b,,Prosedur xyz  berguna untuk ...
+301,latihan2,latihan2,b,b,,"Dari kode program berikut ini, berapa nilai M[2][3] pada baris ke-4 ?"
+301,latihan2,latihan2,c,c,,Apa kegunaan kode program berikut ini ?
+301,simulasi1sesi1,Simulasi1Sesi1,d,e,menit 13:detik 54,Berapa bobot antara simpul 7 dan 1 dalam graf kode program berikut ini ?
+301,simulasi1sesi1,Simulasi1Sesi1,"int row = 4, col = 4;
+int i, j,
+cost[4][4];
+
+int main()
+{
+    printf(&quot;nthe matrix:n&quot;);
+    cost[0][1] = 2;
+    cost[0][2] = 3;
+    cost[0][3] = 1;
+    cost[1][2] = 7;
+    cost[1][3] = 9;
+    cost[2][3] = 8;
+   
+    for (i = 0; i &lt; row; i  )
+        for (j = 0; j ",,menit 10:detik 51,Silakan perbaiki kesalahan pada graf kode program berikut ini agar dapat running secara normal.
+301,simulasi1sesi1,Simulasi1Sesi1,a,a,menit 7:detik 49,Apa nama algoritma yang paling cocok digunakan untuk menggambarkan proses eksekusi graf kode program berikut ini ?
+301,simulasi1sesi1,Simulasi1Sesi1,c,d,menit 3:detik 15,Apa kegunaan fungsi XYZ dibuat pada graf kode program berikut ini?
+301,simulasi1sesi1,Simulasi1Sesi1,c,c,menit 0:detik 52,Berapa jumlah simpul dalam graf kode program berikut ini?
+301,simulasi1sesi2,Simulasi1Sesi2,e,e,menit 21:detik 47,Apa nama algoritma yang paling cocok digunakan untuk menggambarkan proses eksekusi graf kode program berikut?
+301,simulasi1sesi2,Simulasi1Sesi2,a,c,menit 16:detik 14,Apa tujuan fungsi M dibuat dalam graf kode program ini ?
+301,simulasi1sesi2,Simulasi1Sesi2,d,b,menit 13:detik 10,Berapa jumlah simpul yang berderajat 3 dalam graf kode program berikut ini ?
+301,simulasi1sesi2,Simulasi1Sesi2,"#include &quot;stdio.h&quot;
+#include &quot;time.h&quot;
+#define infinity 999
+
+int G[10][10], X[10], n, c = 0;
+
+void Z()
+{
+    int i, j;
+    n = M(4, 7);    
+    for (i = 0; i &lt; n; i  )
+    {
+        for (j = 0; j &lt; n; j  )
+        {
+            G[i][j] = M(0, 9);
+            if (G[i][j] == 0)
+            {
+                G[i][j] = infinity;
+                G[j][i] = infinity;
+            }
+            else
+            {
+                G[j][i] = G[i][j];
+            }
+        }
+        X[i] = 0;
+    }    
+    G[1][3] = 9;
+    for (i = 0; i &lt; n; i  )
+    {
+        printf(&quot;n&quot;);
+        for (j = 0; j &lt; n; j  )
+            printf(&quot;t%d&quot;, G[i][j]);
+    }
+}
+
+void F(int s)
+{
+    int i, n;
+    X[s] = 1;
+    printf(&quot;%d---&gt;&quot;, s   1);
+    n = xyz(s);
+    if (n == 999)
+    {
+        n = 0;
+        printf(&quot;%d&quot;, n   1);
+        c  = G[s][n];
+        return;
+    }
+    F(n);
+}
+
+int M(const int x, const int y){
+    return rand() % (y - x)   x;
+}
+
+int xyz(int c)
+{
+    int i, nc = 999;
+    int min = 999, kmin;
+    for (i = 0; i &lt; n; i  )
+    {
+        if ((G[c][i] != 0)",,menit 8:detik 24,Ubahlah nilai bobot antara simpul 1 dan 3 menjadi 9 dari graf kode program berikut ini !
+301,simulasi1sesi2,Simulasi1Sesi2,a,c,menit 6:detik 5,Berapa bobot minimum antara simpul 1 dan 4 pada graf kode program berikut ini ?
+301,post-test1,post-test1,a,c,menit 22:detik 42,Berapa total simpul dalam graf kode program di bawah ini ?
+301,post-test1,post-test1,d,d,menit 21:detik 40,Berapa derajat (degree) yang dimiliki oleh simpul 3 pada graf kode program berikut ini ?
+301,post-test1,post-test1,a,d,menit 17:detik 39,Berapa jumlah minimum biaya (cost) yang diperlukan dari simpul 1 hingga simpul 4 dari graf kode program berikut ini ?
+301,post-test1,post-test1,c,c,menit 16:detik 2,Berapa jumlah sisi (edge) yang dimiliki oleh graf kode program berikut ini ?
+301,post-test1,post-test1,a,a,menit 12:detik 31,"Ada berapa kesalahan sintaks pada kode program berikut ini ?
+Sebutkan pada baris berapa saja? ..."
+301,post-test1,post-test1,"9, 10, 19, 20, 23",a,menit 12:detik 31,"Ada berapa kesalahan sintaks pada kode program berikut ini ?
+Sebutkan pada baris berapa saja? ..."
+301,simulasi2sesi1,Simulasi2Sesi1,"#include &quot;stdio.h&quot;
+
+int main()
+{    
+    int row = 4, col = 4;
+    int i, j,
+    cost[4][4] = {  { 0, 1, 1, 1},
+                    { 1, 0, 1, 1},
+                    { 1, 1, 0, 7},
+                    { 1, 1, 1, 0}
+                 };
+    
+    printf(&quot;nthe matrix:n&quot;);
+    for (i = 0; i &lt; row; i  )
+        for (j = 0; j &lt; col; j  )
+            printf(&quot;cost[%d][%d]: %dn&quot;,i,j,cost[i][j]);
+
+    return 0;
+}",,menit 23:detik 19,Ubahlah bobot antara simpul 2 dan 4 menjadi nilai 7 pada graf kode program berikut ini.
+301,simulasi2sesi1,Simulasi2Sesi1,"#include &quot;stdio.h&quot;
+
+int main()
+{    
+    int row = 4, col = 4;
+    int i, j,
+    cost[4][4] = {  { 0, 1, 1, 1},
+                    { 1, 0, 1, 7},
+                    { 1, 1, 0, 1},
+                    { 1, 1, 1, 0}
+                 };
+    
+    printf(&quot;nthe matrix:n&quot;);
+    for (i = 0; i &lt; row; i  )
+        for (j = 0; j &lt; col; j  )
+            printf(&quot;cost[%d][%d]: %dn&quot;,i,j,cost[i][j]);
+
+    return 0;
+}",,menit 23:detik 13,Ubahlah bobot antara simpul 2 dan 4 menjadi nilai 7 pada graf kode program berikut ini.
+301,simulasi2sesi1,Simulasi2Sesi1,b,b,menit 20:detik 4,Apa kegunaan prosedur Q pada graf kode program berikut ini?
+301,simulasi2sesi1,Simulasi2Sesi1,c,c,menit 19:detik 27,"Berapa derajat (degree) yang dimiliki oleh simpul 3 dari graf kode program berikut ini ? Jika ada error, silakan perbaiki!"
+301,simulasi2sesi1,Simulasi2Sesi1,e,e,menit 17:detik 56,Apa nama algoritma yang paling cocok digunakan untuk menggambarkan proses eksekusi graf kode program berikut ?
+301,simulasi2sesi1,Simulasi2Sesi1,d,b,menit 14:detik 1,Berapa bobot minimum dari simpul 1 ke simpul 7 pada graf kode program berikut ini ?
+301,simulasi2sesi2,Simulasi2Sesi2,e,e,menit 20:detik 27,Berapa jumlah sisi (edge) yang dimiliki oleh graf kode program berikut ini ?
+301,simulasi2sesi2,Simulasi2Sesi2,"#include &quot;stdio.h&quot;
+#include &quot;time.h&quot;
+#define infinity 999
+
+int graf[5][5], X[4], n, c = 0;
+
+int R(const int M, const int N){
+    return rand() % (N - M)   M;
+}
+
+void G(){
+    int i, j;
+    n = R(2, 4);
+
+    for (i = 1; i &lt; n; i  )
+    {
+        for (j = 1; j &lt; n; j  )
+        {
+            graf[i][j] = R(0, 17);
+            if (graf[i][j] == 0){
+                graf[i][j] = infinity;
+                graf[j][i] = infinity;
+            } else {
+                graf[j][i] = graf[i][j];
+            }
+        }
+        X[i] = 0;
+    }
+
+    for (i = 1; i &lt; n; i  ){
+        printf(&quot;n&quot;);
+        for (j = 1; j &lt; n; j  )
+            printf(&quot;t%d&quot;, graf[i][j]);
+    }
+}
+
+void F(int s){
+    int i, n;
+    X[s] = 1;
+    printf(&quot;%d---&gt;&quot;, s);
+    n = minim(s);
+
+    if (n == 999){
+        n = 1;
+        printf(&quot;%d&quot;, n);
+        c  = graf[s][n];
+        return;
+    }
+    F(n);
+}
+
+int minim(int c){
+    int i, nc = 999;
+    int min = 999, g_min;
+
+    for (i = 1; i &lt; n; i  ){
+        if ((graf[c][i] != 0)",,menit 18:detik 11,Ubahlah graf kode program berikut ini agar jumlah simpul menjadi 5 buah.
+301,simulasi2sesi2,Simulasi2Sesi2,e,e,menit 17:detik 1,Apakah tujuan prosedur X dibuat pada graf kode program berikut ini ?
+301,simulasi2sesi2,Simulasi2Sesi2,c,c,menit 12:detik 51,Apa nama algoritma yang paling sesuai pada graf kode program berikut ini ?
+301,simulasi2sesi2,Simulasi2Sesi2,"#include 
+#define infinity 999
+
+void someAlgorithm(int n, int v, int cost[0][0], int dist[10]){
+    int i, u, count, w, F[10], min;
+
+    for (i = 1; i ",,menit 9:detik 52,Perbaiki kesalahan sintaks pada graf kode program berikut ini agar dapat running secara normal!
+301,post-test2,post-test2,b,a,menit 5:detik 50,Berapa derajat (degree) yang dimiliki oleh simpul 3 pada graf kode program berikut ini ?
+301,post-test2,post-test2,d,e,menit 4:detik 45,Apakah tujuan fungsi Z dibuat pada graf kode program berikut ini ?
+301,post-test2,post-test2,b,b,menit 1:detik 44,Berapa jumlah sisi (edge) yang dimiliki oleh graf kode program berikut ini jika tanpa simpul 5 ?
+301,post-test2,post-test2,b,a,menit 1:detik 21,Berapa jumlah simpul dari graf kode program berikut ini ?
+301,post-test2,post-test2,e,e,menit 0:detik 30,Ada berapa kesalahan sintaks pada kode program berikut ini ? Sebutkan di bagian mana saja!
