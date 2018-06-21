@@ -40,13 +40,6 @@
                 opacity: 1;
             }
         }
-
-        #editor-c {
-            width: 100%;
-            margin-bottom: 17px;
-            font-size: 12pt;
-            border: 1px solid #ddd;
-        }
     </style>
 
     <header role="banner" id="fh5co-header" class="navbar-fixed-top">
@@ -109,7 +102,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="OPT" width="100%" height="600" frameborder="0" src="http://localhost/opt/#code=int%20x%28r%29%7B%0A%20%20%20%20return%203.14*r*r%3B%0A%7D%0A%0Aint%20main%28%29%7B%0A%20%20%20%20int%20L%3B%0A%0A%20%20%20%20L%20%3D%20x%2837%29%3B%0A%20%20%20%20print%28%22L%20%3D%20%25d%22,%20L%29%3B%0A%0A%20%20%20%20return%200%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
+                                <iframe id="OPT" width="100%" height="600" frameborder="0" src="http://localhost:3000/opt/#code=int%20x%28r%29%7B%0A%20%20%20%20return%203.14*r*r%3B%0A%7D%0A%0Aint%20main%28%29%7B%0A%20%20%20%20int%20L%3B%0A%0A%20%20%20%20L%20%3D%20x%2837%29%3B%0A%20%20%20%20print%28%22L%20%3D%20%25d%22,%20L%29%3B%0A%0A%20%20%20%20return%200%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
                             </div>
                         </div>
                         
@@ -124,8 +117,8 @@
 
     <div style="height:133px;"></div>
     <?php require_once('footer.php'); ?>
-    <script src="js/simulasi.js?v=6"></script>
-    <script src="js/latihan1.js?v=6"></script>
+    <script src="js/simulasi.js?v=7"></script>
+    <script src="js/latihan1.js?v=8"></script>
     
 <div id="kakasOPT" class="modal fade" role="dialog">
     <div class="modal-dialog">

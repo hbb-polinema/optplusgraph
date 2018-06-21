@@ -42,8 +42,6 @@
         }
     </style>
 
-    <link href="css/prism.css?v=1" rel="stylesheet" type="text/css">
-
     <header role="banner" id="fh5co-header" class="navbar-fixed-top">
         <div class="container">
             
@@ -54,7 +52,7 @@
                     <div class="navbar-brand" style="font-size:12pt">
                         <ul class="social social-circle" style="width: auto;">
                             <li class="icon-head"></li>
-                        </ul> Simulasi 2 - Sesi 2 <p class="timer-simulasi" id="timer">Sisa Waktu: 25 menit 0 detik</p>
+                        </ul> Simulasi 2 - OPT <p class="timer-simulasi" id="timer">Sisa Waktu: 15 menit 0 detik</p>
                     </div>
                 </div>
             </nav>
@@ -67,370 +65,104 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 section-heading text-center">
-                    <h2 class="to-animate">Simulasi 2 - Sesi 2</h2>
+                    <h2 class="to-animate">Simulasi 2 - OPT</h2>
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                            <h3>Anda ditugaskan untuk menyelesaikan 5 soal graf kode program dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasOPT"><b>kakas OPT</b></a>.</h3>
+                            <h3>Anda ditugaskan untuk menyelesaikan 3 soal kode program dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasOPT"><b>kakas OPT</b></a>.</h3>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-sm-6 to-animate">
+                <div class="col-md-12 col-sm-12 to-animate">
                     
                     <div id="DivFormSimulasi">
                         <div id="p1" class="tab form-group">
                             <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 2 - Sesi 2</span></p>
+                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 2 - OPT</span></p>
                                 <p><b>Soal 1</b></p>
-                                <p>Berapa jumlah sisi (edge) yang dimiliki oleh graf kode program berikut ini ?</p>
-                                <select id="answerP1" name="answerP1" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">5</option>                
-                                        <option value="b">6</option>                
-                                        <option value="c">7</option>                
-                                        <option value="d">8</option>    
-                                        <option value="e">10</option>
-                                </select></br>
-<pre><code class="language-c">
-#include "stdio.h"
-
-int main()
-{    
-    int baris = 5, kolom = 5;
-    int x, y,
-    graf[5][5] = {  { 0, 1, 1, 1, 1},
-                    { 1, 0, 1, 1, 1},
-                    { 1, 1, 0, 1, 1},
-                    { 1, 1, 1, 0, 1},
-                    { 1, 1, 1, 1, 0}
-                 };
-    
-    printf("\nGraf:\n");
-    for (x = 0; x < baris; x++)
-        for (y = 0; y < kolom; y++)
-            printf("graf[%d][%d]: %d\n",x,y,graf[x][y]);
-
-    return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas OPT" type="button" onclick="simulasiOPT();"></p>
+                                <p>Silakan perbaiki kesalahan sintaks pada kode program berikut ini !</p>
+                                <p>apa nama algoritma yang paling sesuai untuk kode program berikut ini ?</p>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <select id="answerP1" name="answerP1" class="form-control" onchange="checkAnswer(this, 1);">
+                                            <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
+                                            <option value="a">Dijkstra</option>                
+                                            <option value="b">Bellman Ford</option>                
+                                            <option value="c">Depth First Search (DFS)</option>                
+                                            <option value="d">Breadth First Search (BFS)</option>    
+                                            <option value="e">Tidak diketahui</option>        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <div style="overflow:auto;">
+                                            <div style="float:center;">
+                                                <center><input id="nextBtn1" class="btn btn-primary btn-lg" style="display:none;" value="Simpan" type="button" onclick="simulasi2sesi2NextBtn(1)"></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="OPT1" width="100%" height="600" frameborder="0" src="http://localhost:3000/opt/#code=%23include%20stdio.h%0A%23define%20infinity%20999%0A%0Avoid%20XYZ%28int%20n,%20int%20v,%20int%20cost%5B7%5D%5B7%5D,%20int%20dist%5B10%5D%29%7B%0A%20%20%20%20int%20i,%20u,%20count,%20w,%20flag%5B10%5D,%20min%3B%0A%0A%20%20%20%20for%20%28i%20%3D%201%3B%20i%20%3C%3D%20n%3B%20i%2B%2B%29%7B%0A%20%20%20%20%20%20%20%20flag%5Bi%5D%20%3D%200%3B%0A%20%20%20%20%20%20%20%20dist%5Bi%5D%20%3D%20cost%5Bv%5D%5Bi%5D%3B%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20count%20%3D%202%0A%20%20%20%20%0A%20%20%20%20while%20%28count%20%3C%3D%20n%29%7B%0A%20%20%20%20%20%20%20%20min%20%3D%2099%3B%0A%20%20%20%20%20%20%20%20for%20%28w%20%3D%201%3B%20w%20%3C%3D%20n%3B%20w%2B%2B%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28dist%5Bw%5D%20%3C%20min%20%26%26%20!flag%5Bw%5D%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min%20%3D%20dist%5Bw%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20u%20%3D%20w%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20flag%5Bu%5D%20%3D%201%3B%0A%20%20%20%20%20%20%20%20count%2B%2B%3B%0A%0A%20%20%20%20%20%20%20%20for%20%28w%20%3D%201%3B%20w%20%3C%3D%20n%3B%20w%2B%2B%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%28dist%5Bu%5D%20%2B%20cost%5Bu%5D%5Bw%5D%20%3C%20dist%5Bw%5D%29%20%26%26%20!flag%5Bw%5D%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dist%5Bw%5D%20%3D%20dist%5Bu%5D%20%2B%20cost%5Bu%5D%5Bw%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Aint%20main%28%29%0A%7B%0A%20%20%20%20int%20n,%20v,%20i,%20dist%5B10%5D%20%3D%20%7B0%7D%3B%0A%20%20%20%20%0A%20%20%20%20n%20%3D%206%3B%0A%20%20%20%20printf%28%22%5Cnthe%20number%20of%20nodes%3A%20%25d%20%5Cn%22,%20n%29%3B%0A%20%20%20%20%0A%20%20%20%20print%28%22%5Cnthe%20cost%20matrix%3A%5Cn%22%29%3B%0A%20%20%20%20int%20cost%5B7%5D%5B7%5D%20%3D%20%7B%20%20%7B%200,%20%20%20%20%20%20%20%200,%20%20%20%20%20%20%20%200,%20%20%20%20%20%20%20%200,%20%20%20%20%20%20%20%200,%20%20%20%20%20%20%20%200,%20%20%20%20%20%20%20%200%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%20infinity,%20%20%20%20%20%20%20%205,%20infinity,%20infiniti,%20infinity,%20%20%20%20%20%20%20%208%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%20%20%20%20%20%20%20%205,%20infinity,%20%20%20%20%20%20%20%207,%20infinity,%20%20%20%20%20%20%20%202,%20infinity%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%20infinity,%20%20%20%20%20%20%20%207,%20infiniti,%20%20%20%20%20%20%20%209,%20infinity,%20infinity%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%20infinity,%20infinity,%20%20%20%20%20%20%20%209,%20infinity,%20%20%20%20%20%20%20%204,%20infinity%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%20infinity,%20%20%20%20%20%20%20%202,%20infinity,%20%20%20%20%20%20%20%204,%20infinity,%20infinity%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%20%20%20%20%20%20%20%208,%20infinity,%20infinity,%20infinity,%20infinity,%20infinity%7D%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20v%20%3D%202%3B%0A%20%20%20%20printf%28%22%5Cnthe%20source%20matrix%3A%20%25d%20%5Cn%22,%20v%29%3B%0A%20%20%20%20%0A%20%20%20%20XYZ%28n,%20v,%20cost,%20dist%29%3B%0A%20%20%20%20%0A%20%20%20%20printf%28%22%5CnShortest%20path%3A%5Cn%22%29%3B%0A%20%20%20%20for%20%28i%20%3D%201%3B%20i%20%3C%3D%20n%3B%20i%2B%2B%29%7B%0A%20%20%20%20%20%20%20%20if%20%28i%20!%3D%20v%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20printf%28%22%25d-%3E%25d,cost%3D%25d%5Cn%22,%20v,%20i,%20dist%5Bi%5D%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%200%3B%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
                             </div>
                         </div>
                         <div id="p2" class="tab form-group">
                             <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 2 - Sesi 2</span></p>
+                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 2 - OPT</span></p>
                                 <p><b>Soal 2</b></p>
-                                <p>Ubahlah graf kode program berikut ini agar jumlah simpul menjadi 5 buah.</p>
-<pre><code class="language-c">
-#include "stdio.h"
-#include "time.h"
-#define infinity 999
-
-int graf[4][4], X[4], n, c = 0;
-
-int R(const int M, const int N){
-    return rand() % (N - M) + M;
-}
-
-void G(){
-    int i, j;
-    n = R(2, 4);
-
-    for (i = 1; i < n; i++)
-    {
-        for (j = 1; j < n; j++)
-        {
-            graf[i][j] = R(0, 17);
-            if (graf[i][j] == 0){
-                graf[i][j] = infinity;
-                graf[j][i] = infinity;
-            } else {
-                graf[j][i] = graf[i][j];
-            }
-        }
-        X[i] = 0;
-    }
-
-    for (i = 1; i < n; i++){
-        printf("\n");
-        for (j = 1; j < n; j++)
-            printf("\t%d", graf[i][j]);
-    }
-}
-
-void F(int s){
-    int i, n;
-    X[s] = 1;
-    printf("%d--->", s);
-    n = minim(s);
-
-    if (n == 999){
-        n = 1;
-        printf("%d", n);
-        c += graf[s][n];
-        return;
-    }
-    F(n);
-}
-
-int minim(int c){
-    int i, nc = 999;
-    int min = 999, g_min;
-
-    for (i = 1; i < n; i++){
-        if ((graf[c][i] != 0) && (X[i] == 0))
-            if (graf[c][i] + graf[i][c] < min){
-                min = graf[i][0] + graf[c][i];
-                g_min = graf[c][i];
-                nc = i;
-            }
-    }
-
-    if (min != 999)
-        c += g_min;
-
-    return nc;
-}
-
-int main(){
-    srand(time(NULL));
-    G();
-    printf("\n");
-    F(1);
-    printf("\n\nHasil: %d\n ", c);
-    return 0;
-}</code></pre>
-                                <p>Silakan paste jawaban kode program Anda di bawah ini.</p>
-                                <textarea id="answerP2" style="width:100%;height:111px;"></textarea>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas OPT" type="button" onclick="simulasiOPT();"></p>
+                                <p>Berapa bobot minimum dari simpul 2 ke simpul 3 pada kode program berikut ini ?</p>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <select id="answerP2" name="answerP2" class="form-control" onchange="checkAnswer(this, 2);">
+                                            <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
+                                            <option value="a">2</option>                
+                                            <option value="b">3</option>                
+                                            <option value="c">4</option>                
+                                            <option value="d">8</option>    
+                                            <option value="e">11</option>        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <div style="overflow:auto;">
+                                            <div style="float:center;">
+                                                <center><input id="nextBtn2" class="btn btn-primary btn-lg" style="display:none;" value="Simpan" type="button" onclick="simulasi2sesi2NextBtn(2)"></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="OPT2" width="100%" height="600" frameborder="0" src="http://localhost:3000/opt/#code=%23include%20%22stdio.h%22%0A%0Avoid%20X%28int%20graf%5B4%5D%5B4%5D,%20int%20m,%20int%20n%29%7B%0A%20%20printf%28%22%5CnHitung%20jarak%20antar%20simpul%20%25d%20ke%20%25d%5Cn%22,%20m,%20n%29%3B%0A%7D%0A%0Aint%20main%28%29%7B%0A%20%20int%20row%20%3D%204,%20col%20%3D%204%3B%0A%20%20int%20i,%20j,%0A%20%20graf%5B4%5D%5B4%5D%20%3D%20%7B%20%20%7B%200,%202,%203,%201%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%202,%200,%207,%209%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%203,%207,%200,%208%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%201,%209,%208,%200%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%20%20%20%20%0A%20%20printf%28%22%5CnGraf%3A%5Cn%22%29%3B%0A%20%20for%20%28i%20%3D%200%3B%20i%20%3C%20row%3B%20i%2B%2B%29%0A%20%20%20%20for%20%28j%20%3D%200%3B%20j%20%3C%20col%3B%20j%2B%2B%29%7B%0A%20%20%20%20%20%20printf%28%22graf%5B%25d%5D%5B%25d%5D%3A%20%25d%5Cn%22,i,j,graf%5Bi%5D%5Bj%5D%29%3B%0A%20%20%20%20%20%20X%28graf,%20i,%20j%29%3B%0A%20%20%20%20%7D%0A%20%20return%200%3B%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
                             </div>
                         </div>
                         <div id="p3" class="tab form-group">
                             <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 2 - Sesi 2</span></p>
+                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 2 - OPT</span></p>
                                 <p><b>Soal 3</b></p>
-                                <p>Apakah tujuan prosedur X dibuat pada graf kode program berikut ini ?</p>
-                                <select id="answerP3" name="answerP3" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">untuk menghitung jumlah simpul (node)</option>                
-                                        <option value="b">untuk menghitung jarak antar sisi (edge)</option>                
-                                        <option value="c">untuk menghitung jarak antar simpul (node)</option>                
-                                        <option value="d">untuk menghitung bobot pada sisi</option>    
-                                        <option value="e">tidak diketahui</option>        
-                                </select></br>
-<pre><code class="language-c">
-#include "stdio.h"
-
-void X(int graf[4][4], int m, int n){
-  printf("\nHitung jarak antar simpul %d ke %d\n", m, n);
-}
-
-int main(){
-  int row = 4, col = 4;
-  int i, j,
-  graf[4][4] = {  { 0, 2, 3, 1},
-                  { 2, 0, 7, 9},
-                  { 3, 7, 0, 8},
-                  { 1, 9, 8, 0}
-               };    
-  printf("\nGraf:\n");
-  for (i = 0; i < row; i++)
-    for (j = 0; j < col; j++){
-      printf("graf[%d][%d]: %d\n",i,j,graf[i][j]);
-      X(graf, i, j);
-    }
-  return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas OPT" type="button" onclick="simulasiOPT();"></p>
-                            </div>
-                        </div>
-                        <div id="p4" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 2 - Sesi 2</span></p>
-                                <p><b>Soal 4</b></p>
-                                <p>Apa nama algoritma yang paling sesuai pada graf kode program berikut ini ?</p>
-                                <select id="answerP4" name="answerP4" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">Depth First Search (DFS)</option>                
-                                        <option value="b">Bellman Ford</option>                
-                                        <option value="c">Dijkstra</option>                
-                                        <option value="d">Breadth First Search</option>    
-                                        <option value="e">tidak diketahui</option>        
-                                </select></br>
-<pre><code class="language-c">
-#include "stdio.h"
-#define infinity 999
-
-void XYZ(int n, int v, int cost[7][7], int dist[10]){
-    int i, u, count, w, flag[10], min;
-
-    for (i = 1; i <= n; i++){
-        flag[i] = 0;
-        dist[i] = cost[v][i];
-    }
-    
-    count = 2;
-    
-    while (count <= n){
-        min = 99;
-        for (w = 1; w <= n; w++){
-            if (dist[w] < min && !flag[w]){
-                min = dist[w];
-                u = w;
-            }
-        }
-        
-        flag[u] = 1;
-        count++;
-
-        for (w = 1; w <= n; w++){
-            if ((dist[u] + cost[u][w] < dist[w]) && !flag[w]){
-                dist[w] = dist[u] + cost[u][w];
-            }
-        }
-    }
-}
-
-int main()
-{
-    int n, v, i, dist[10] = {0};
-    
-    n = 6;
-    printf("\nthe number of nodes: %d \n", n);
-    
-    printf("\nthe cost matrix:\n");
-    int cost[7][7] = {  { 0,        0,        0,        0,        0,        0,        0},
-                        { 0, infinity,        5, infinity, infinity, infinity,        8},
-                        { 0,        5, infinity,        7, infinity,        2, infinity},
-                        { 0, infinity,        7, infinity,        9, infinity, infinity},
-                        { 0, infinity, infinity,        9, infinity,        4, infinity},
-                        { 0, infinity,        2, infinity,        4, infinity, infinity},
-                        { 0,        8, infinity, infinity, infinity, infinity, infinity} 
-                    };
-    
-    v = 2;
-    printf("\nthe source matrix: %d \n", v);
-    
-    XYZ(n, v, cost, dist);
-    
-    printf("\nShortest path:\n");
-    for (i = 1; i <= n; i++){
-        if (i != v){
-            printf("%d->%d,cost=%d\n", v, i, dist[i]);
-        }
-    }
-
-    return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas OPT" type="button" onclick="simulasiOPT();"></p>
-                            </div>
-                        </div>
-                        <div id="p5" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 2 - Sesi 2</span></p>
-                                <p><b>Soal 5</b></p>
-                                <p>Perbaiki kesalahan sintaks pada graf kode program berikut ini agar dapat <i>running</i> secara normal!</p>
-<pre><code class="language-c">
-#include < stdio.h >
-#define infinity 999
-
-void someAlgorithm(int n, int v, int cost[][], int dist[10]){
-    int i, u, count, w, F[10], min;
-
-    for (i = 1; i <= n; i++){
-        F[i] = 0;
-        dist[i] = cost[v][i];
-    }
-    
-    count = 2;
-    
-    while (count <= n){
-        min = 99;
-        for (w = 1; w <= n; w++){
-            if (dist[w] < min && !F[w]){
-                min = dist[w];
-                u = w;
-            }
-        }
-        
-        F[u] = 1;
-        count++;
-
-        for (w = 1; w <= n; w++){
-            if ((dist[u] + cost[u][w] < dist[w]) && !F[w]){
-                dist[w] = dist[u] + cost[u][w];
-            }
-        }
-    }
-}
-
-int main()
-{
-    int n, v, i, dist[10] = {0};
-    
-    n = 6;
-    printf("\nthe number of nodes: %d \n", n);
-    
-    printf("\nthe cost matrix:\n");
-    int graf[7][7] = {  { 0,        0,        0,        0,        0,        0,        0}
-                        { 0, infinity,        5, infinity, infinity, infinity,        8},
-                        { 0,        5, infinity,        7, infinity,        2, infinity},
-                        { 0, infinity,        7, infinit,        9, infinity, infinity},
-                        { 0, infinity, infinity,        9, infinity,        4, infinity},
-                        { 0, infinity,        2, infinity,        4, infinity, infinity},
-                        { 0,        8, infinity, infinity, infinity, infinity, infinity} 
-                    };
-    
-    v = 2;
-    printf("\nthe source matrix: %d \n", v);
-    
-    someAlgorithm(n, v, graf, dist);
-    
-    printf("\nShortest path:\n");
-    for (i = 1; i <= n; i++){
-        if (i != v){
-            printf("%d->%d,graf=%d\n", v, i, dist[i]);
-        }
-    }
-
-    return 0;
-}</code></pre>
-                                <p>Silakan paste jawaban kode program Anda di bawah ini.</p>
-                                <textarea id="answerP5" style="width:100%;height:111px;"></textarea>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas OPT" type="button" onclick="simulasiOPT();"></p>
+                                <p>Berapa jumlah sisi (edge) yang dimiliki oleh kode program berikut ini ?</p>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <select id="answerP3" name="answerP3" class="form-control" onchange="checkAnswer(this, 3);">
+                                            <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
+                                            <option value="a">6</option>                
+                                            <option value="b">7</option>                
+                                            <option value="c">8</option>                
+                                            <option value="d">9</option>    
+                                            <option value="e">13</option>        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <div style="overflow:auto;">
+                                            <div style="float:center;">
+                                                <center><input id="nextBtn3" class="btn btn-primary btn-lg" style="display:none;" value="Simpan" type="button" onclick="simulasi2sesi2NextBtn(3)"></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="OPT3" width="100%" height="600" frameborder="0" src="http://localhost:3000/opt/#code=%23include%20%22stdio.h%22%0A%23define%20Z%20999%0A%0Avoid%20A%28int%20n,%20int%20v,%20int%20cost%5B7%5D%5B7%5D,%20int%20dist%5B10%5D%29%7B%0A%20%20%20%20int%20i,%20u,%20count,%20w,%20F%5B10%5D,%20min%3B%0A%0A%20%20%20%20for%20%28i%20%3D%201%3B%20i%20%3C%3D%20n%3B%20i%2B%2B%29%7B%0A%20%20%20%20%20%20%20%20F%5Bi%5D%20%3D%200%3B%0A%20%20%20%20%20%20%20%20dist%5Bi%5D%20%3D%20cost%5Bv%5D%5Bi%5D%3B%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20count%20%3D%202%3B%0A%20%20%20%20%0A%20%20%20%20while%20%28count%20%3C%3D%20n%29%7B%0A%20%20%20%20%20%20%20%20min%20%3D%2099%3B%0A%20%20%20%20%20%20%20%20for%20%28w%20%3D%201%3B%20w%20%3C%3D%20n%3B%20w%2B%2B%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28dist%5Bw%5D%20%3C%20min%20%26%26%20!F%5Bw%5D%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min%20%3D%20dist%5Bw%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20u%20%3D%20w%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20F%5Bu%5D%20%3D%201%3B%0A%20%20%20%20%20%20%20%20count%2B%2B%3B%0A%0A%20%20%20%20%20%20%20%20for%20%28w%20%3D%201%3B%20w%20%3C%3D%20n%3B%20w%2B%2B%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%28dist%5Bu%5D%20%2B%20cost%5Bu%5D%5Bw%5D%20%3C%20dist%5Bw%5D%29%20%26%26%20!F%5Bw%5D%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dist%5Bw%5D%20%3D%20dist%5Bu%5D%20%2B%20cost%5Bu%5D%5Bw%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Aint%20main%28%29%0A%7B%0A%20%20%20%20int%20n,%20v,%20i,%20dist%5B10%5D%20%3D%20%7B0%7D%3B%0A%20%20%20%20%0A%20%20%20%20n%20%3D%206%3B%0A%20%20%20%20printf%28%22%5Cnthe%20number%20of%20nodes%3A%20%25d%20%5Cn%22,%20n%29%3B%0A%20%20%20%20%0A%20%20%20%20printf%28%22%5Cnthe%20cost%20matrix%3A%5Cn%22%29%3B%0A%20%20%20%20int%20graf%5B7%5D%5B7%5D%20%3D%20%7B%20%20%7B%200,%200,%200,%200,%200,%200,%200%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%20Z,%205,%20Z,%20Z,%20Z,%208%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%205,%20Z,%207,%20Z,%202,%20Z%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%20Z,%207,%20Z,%209,%20Z,%20Z%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%20Z,%20Z,%209,%20Z,%204,%20Z%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%20Z,%202,%20Z,%204,%20Z,%20Z%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%200,%208,%20Z,%20Z,%20Z,%20Z,%20Z%7D%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20v%20%3D%202%3B%0A%20%20%20%20printf%28%22%5Cnthe%20source%20matrix%3A%20%25d%20%5Cn%22,%20v%29%3B%0A%20%20%20%20%0A%20%20%20%20A%28n,%20v,%20graf,%20dist%29%3B%0A%20%20%20%20%0A%20%20%20%20printf%28%22%5CnShortest%20path%3A%5Cn%22%29%3B%0A%20%20%20%20for%20%28i%20%3D%201%3B%20i%20%3C%3D%20n%3B%20i%2B%2B%29%7B%0A%20%20%20%20%20%20%20%20if%20%28i%20!%3D%20v%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20printf%28%22%25d-%3E%25d,graf%3D%25d%5Cn%22,%20v,%20i,%20dist%5Bi%5D%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%200%3B%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
                             </div>
                         </div>
 
-                        <div style="overflow:auto;">
-                            <div style="float:center;">
-                                <center><input id="nextBtn" class="btn btn-primary btn-lg" value="Soal Berikutnya" type="button" onclick="simulasi2sesi2NextBtn(1)"></center>
-                            </div>
-                        </div>
                     </div>
 
-                </div>
-
-                <div class="col-md-6 col-sm-6 to-animate">
-                    <div class="fh5co-block to-animate" style="background-color: tomato;color: white;padding: 41px 41px;margin-bottom: 33pt;">
-                        <div class="overlay-darker"></div>
-                        <div class="overlay"></div>
-                        <div class="fh5co-text">
-                            <h2><span class="fh5co-intro-icon icon-gift"></span> Hadiah Utama Domain .ID</h2>
-                            <p>Bagi responden terbaik berdasarkan kelengkapan kuesioner dan poin yang bisa dikumpulkan.</p>
-                            <h5 style="margin-bottom:0px;">Baca syarat dan ketentuannya <a data-toggle="modal" data-target="#skb">di sini</a></h5>
-                        </div>
-                    </div>
-
-                    <h3>Informasi Kontak</h3>
-                    <ul class="fh5co-contact-info">
-                        <li class="fh5co-contact-address ">
-                            <i class="icon-home"></i> Institut Teknologi Bandung<br>Jalan Ganesha Nomor 10, <br>Kota Bandung
-                        </li>
-                        <li><i class="icon-phone"></i> 0811-3200-670</li>
-                        <li><i class="icon-envelope"></i>habibieeddien@students.itb.ac.id</li>
-                        <li><i class="icon-globe"></i> <a href="http://www.itb.ac.id/" target="_blank">ITB.ac.id</a></li>
-                    </ul>
                 </div>
 
             </div>
@@ -441,9 +173,8 @@ int main()
     <div style="height:133px;"></div>
     
     <?php require_once('footer.php'); ?>
-    <script src="js/simulasi.js?v=5"></script>
-    <script src="js/simulasi2sesi2.js?v=2"></script>
-    <script src="js/prism.js?v=1" type="text/javascript"></script>
+    <script src="js/simulasi.js?v=1"></script>
+    <script src="js/simulasi2sesi2.js?v=1"></script>
 
 <div id="kakasOPT" class="modal fade" role="dialog">
     <div class="modal-dialog">

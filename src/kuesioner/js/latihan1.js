@@ -1,19 +1,3 @@
-/*var code = ace.edit("editor-c");
-code.setOptions({
-    mode: "ace/mode/c_cpp",
-    wrap: true,
-    readOnly: true,
-    useSoftTabs: true,
-    minLines: 17,
-    maxLines: 333,
-    newLineMode: "unix",
-    tabSize: 4,
-    useWorker: false,
-    foldStyle: "manual",
-    showPrintMargin: false,
-    behavioursEnabled: false
-});*/
-
 function saveToDB(jwb, id_soal) {
     console.log(id_soal + ' jwb: ' + jwb);
     $.ajax({
@@ -43,7 +27,7 @@ function latihan1NextBtn(currentQuestion) {
     var nextBtn = document.getElementById('nextBtn');
 
     var iframe = document.getElementById("OPT");
-    var viz = iframe.contentWindow.document.getElementsById("vizLayoutTdSecond");
+    var viz = iframe.contentWindow.document.getElementById("vizLayoutTdSecond");
 
     switch (currentQuestion) {
         case 1:

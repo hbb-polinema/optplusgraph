@@ -26,10 +26,19 @@ function latihan2NextBtn(currentQuestion) {
     var valid = true;
     var nextBtn = document.getElementById('nextBtn');
 
+    var iframe = document.getElementById("CODEVIZ");
+    var viz = iframe.contentWindow.document.getElementById("vizLayoutTdSecond");
+
     switch (currentQuestion) {
         case 1:
             if (document.getElementById('answerP1').value != '') {
-                saveToDB(document.getElementById('answerP1').value, 50);
+                if (viz != null) {
+                    saveToDB(document.getElementById('answerP1').value, 50);
+                } else {
+                    valid = false;
+                    console.log('viz: ' + viz);
+                    alert("Silakan gunakan kakas CodeViz terlebih dahulu untuk menjawab soal!");
+                }
             } else {
                 document.getElementById('p1').className += ' invalid';
                 valid = false;

@@ -33,24 +33,51 @@ function simulasi1sesi1NextBtn(currentQuestion) {
 
     switch (currentQuestion) {
         case 1:
+            var iframe1 = document.getElementById("OPT1");
+            var viz1 = iframe1.contentWindow.document.getElementById("vizLayoutTdSecond");
+
             if (document.getElementById('answerP1').value != '') {
-                saveToDB(document.getElementById('answerP1').value, 17);
+                if (viz1 != null) {
+                    saveToDB(document.getElementById('answerP1').value, 17);
+                } else {
+                    valid = false;
+                    console.log('viz1: ' + viz1);
+                    alert("Silakan gunakan kakas OPT terlebih dahulu untuk menjawab soal!");
+                }
             } else {
                 document.getElementById('p1').className += ' invalid';
                 valid = false;
             }
             break;
         case 2:
+            var iframe2 = document.getElementById("OPT2");
+            var viz2 = iframe2.contentWindow.document.getElementById("vizLayoutTdSecond");
+
             if (document.getElementById('answerP2').value != '') {
-                saveToDB(document.getElementById('answerP2').value, 20);
+                if (viz2 != null) {
+                    saveToDB(document.getElementById('answerP2').value, 20);
+                } else {
+                    valid = false;
+                    console.log('viz2: ' + viz2);
+                    alert("Silakan gunakan kakas OPT terlebih dahulu untuk menjawab soal!");
+                }
             } else {
                 document.getElementById('p2').className += ' invalid';
                 valid = false;
             }
             break;
         case 3:
+            var iframe3 = document.getElementById("OPT3");
+            var viz3 = iframe3.contentWindow.document.getElementById("vizLayoutTdSecond");
+
             if (document.getElementById('answerP3').value != '') {
-                saveToDB(document.getElementById('answerP3').value, 21);
+                if (viz3 != null) {
+                    saveToDB(document.getElementById('answerP3').value, 21);
+                } else {
+                    valid = false;
+                    console.log('viz3: ' + viz3);
+                    alert("Silakan gunakan kakas OPT terlebih dahulu untuk menjawab soal!");
+                }
             } else {
                 document.getElementById('p3').className += ' invalid';
                 valid = false;

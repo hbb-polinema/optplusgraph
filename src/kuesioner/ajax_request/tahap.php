@@ -15,7 +15,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
         else echo 'U1 - gagal';
         
     } else {
-        echo 'PRE1 - Terjadi Kesalahan!';
+        echo 'S1 - Terjadi Kesalahan!';
     }
 } else {
     echo '101 - Terjadi Kesalahan';

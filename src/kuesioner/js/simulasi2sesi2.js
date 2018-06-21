@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var divTimer = document.getElementById("timer");
-    timer(25, 0, divTimer);
+    timer(15, 0, divTimer);
 });
 
 function saveToDB(jwb, id_soal) {
@@ -30,66 +30,56 @@ function saveToDB(jwb, id_soal) {
  */
 function simulasi2sesi2NextBtn(currentQuestion) {
     var valid = true;
-    var nextBtn = document.getElementById('nextBtn');
 
     switch (currentQuestion) {
         case 1:
+            var iframe1 = document.getElementById("OPT1");
+            var viz1 = iframe1.contentWindow.document.getElementById("vizLayoutTdSecond");
+
             if (document.getElementById('answerP1').value != '') {
-                saveToDB(document.getElementById('answerP1').value, 37);
+                if (viz1 != null) {
+                    saveToDB(document.getElementById('answerP1').value, 35);
+                } else {
+                    valid = false;
+                    console.log('viz1: ' + viz1);
+                    alert("Silakan gunakan kakas OPT terlebih dahulu untuk menjawab soal!");
+                }
             } else {
                 document.getElementById('p1').className += ' invalid';
                 valid = false;
             }
-
-            // go to p2
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'simulasi2sesi2NextBtn(2)');
-            }
             break;
         case 2:
+            var iframe2 = document.getElementById("OPT2");
+            var viz2 = iframe2.contentWindow.document.getElementById("vizLayoutTdSecond");
+
             if (document.getElementById('answerP2').value != '') {
-                saveToDB(document.getElementById('answerP2').value, 38);
+                if (viz2 != null) {
+                    saveToDB(document.getElementById('answerP2').value, 36);
+                } else {
+                    valid = false;
+                    console.log('viz2: ' + viz2);
+                    alert("Silakan gunakan kakas OPT terlebih dahulu untuk menjawab soal!");
+                }
             } else {
                 document.getElementById('p2').className += ' invalid';
                 valid = false;
             }
-
-            // go to p3
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'simulasi2sesi2NextBtn(3)');
-            }
             break;
         case 3:
+            var iframe3 = document.getElementById("OPT3");
+            var viz3 = iframe3.contentWindow.document.getElementById("vizLayoutTdSecond");
+
             if (document.getElementById('answerP3').value != '') {
-                saveToDB(document.getElementById('answerP3').value, 39);
+                if (viz3 != null) {
+                    saveToDB(document.getElementById('answerP3').value, 30);
+                } else {
+                    valid = false;
+                    console.log('viz3: ' + viz3);
+                    alert("Silakan gunakan kakas OPT terlebih dahulu untuk menjawab soal!");
+                }
             } else {
                 document.getElementById('p3').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p4
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'simulasi2sesi2NextBtn(4)');
-            }
-            break;
-        case 4:
-            if (document.getElementById('answerP4').value != '') {
-                saveToDB(document.getElementById('answerP4').value, 40);
-            } else {
-                document.getElementById('p4').className += ' invalid';
-                valid = false;
-            }
-
-            // go to p5
-            if (valid) {
-                nextBtn.setAttribute('onclick', 'simulasi2sesi2NextBtn(5)');
-            }
-            break;
-        case 5:
-            if (document.getElementById('answerP5').value != '') {
-                saveToDB(document.getElementById('answerP5').value, 41);
-            } else {
-                document.getElementById('p5').className += ' invalid';
                 valid = false;
             }
 
@@ -97,7 +87,7 @@ function simulasi2sesi2NextBtn(currentQuestion) {
             if (valid) {
                 saveToDB("finish", 0);
                 // FINISH Simulasi 2 Sesi 2
-                alert('Jawaban Simulasi 2 Sesi 2 Berhasil Disimpan!');
+                alert('Jawaban Simulasi 2 Sesi OPT Berhasil Disimpan!');
                 window.close();
             }
             break;
@@ -106,4 +96,14 @@ function simulasi2sesi2NextBtn(currentQuestion) {
     if (valid) nextForm(1);
 
     return valid;
+}
+
+function checkAnswer(val, q) {
+    var answer = val.value;
+
+    if (answer != '') {
+        if (q == 1) document.getElementById('nextBtn1').style.display = 'block';
+        else if (q == 2) document.getElementById('nextBtn2').style.display = 'block';
+        else if (q == 3) document.getElementById('nextBtn3').style.display = 'block';
+    }
 }

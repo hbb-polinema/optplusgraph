@@ -134,8 +134,8 @@ if(isset($_SESSION['kode'])){
                         <div id="p1" class="tab form-group" style="background-color: #e67e22;">
                             <div class="form-control" style="height: 100%;color: whitesmoke;">
                                 <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Core Test</span></p>
-                                <p><b>Sesi 1</b> - Waktu Penyelesaian Maksimal: 25 Menit</p>
-                                <p>Anda ditugaskan untuk menyelesaikan 5 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas CodeViz</b>.</p>
+                                <p><b>Sesi 1</b> - Waktu Penyelesaian Maksimal: 15 Menit</p>
+                                <p>Anda ditugaskan untuk menyelesaikan 3 soal <b>kode program struktur data graf</b> dengan bahasa pemrograman C menggunakan <b>kakas CodeViz</b>.</p>
                                 <p>Apa itu <a data-toggle="modal" data-target="#kakasCodeViz"><b>Kakas CodeViz</b></a> ? klik <a data-toggle="modal" data-target="#kakasCodeViz">di sini</a> untuk membaca deskripsinya.</p>
                                 <p id="s2s1"><input class="btn btn-primary btn-lg" value="Mulai - Sesi 1" type="button" onclick="simulasi2sesi1();"></p>
                             </div>
@@ -143,8 +143,8 @@ if(isset($_SESSION['kode'])){
                         <div id="p2" class="tab form-group" style="background-color: #7f8c8d;">
                             <div class="form-control" style="height: 100%;color: whitesmoke;">
                                 <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Core Test</span></p>
-                                <p><b>Sesi 2</b> - Waktu Penyelesaian Maksimal: 25 Menit</p>
-                                <p>Anda ditugaskan untuk menyelesaikan 5 soal <b>graf kode program</b> dengan bahasa pemrograman C menggunakan <b>kakas OPT</b>.</p>
+                                <p><b>Sesi 2</b> - Waktu Penyelesaian Maksimal: 15 Menit</p>
+                                <p>Anda ditugaskan untuk menyelesaikan 3 soal <b>kode program struktur data graf</b> dengan bahasa pemrograman C menggunakan <b>kakas OPT</b>.</p>
                                 <p>Apa itu <a data-toggle="modal" data-target="#kakasOPT"><b>Kakas OPT</b></a> ? klik <a data-toggle="modal" data-target="#kakasOPT">di sini</a> untuk membaca deskripsinya.</p>
                                 <p id="s2s2"><input class="btn btn-primary btn-lg" value="Mulai - Sesi 2" type="button" onclick="simulasi2sesi2();"></p>
                             </div>
@@ -189,7 +189,7 @@ if(isset($_SESSION['kode'])){
     <div style="height:133px;"></div>
 
     <?php require_once('footer.php'); ?>
-    <script src="js/simulasi.js?v=2"></script>
+    <script src="js/simulasi.js?v=3"></script>
 
 <div id="kakasOPT" class="modal fade" role="dialog">
     <div class="modal-dialog">

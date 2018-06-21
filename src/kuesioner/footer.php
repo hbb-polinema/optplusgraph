@@ -35,7 +35,7 @@
     <script src="js/magnific-popup-options.js"></script>
 
     <!-- Main JS (Do not remove) -->
-    <script src="js/main.js?v=11"></script>
+    <script src="js/main.js?v=13"></script>
 
 </body>
 
@@ -124,27 +124,27 @@
                 <p>Spesifikasi hadiah yang dapat diberikan adalah sebagai berikut:
                     <table style="font-size:10pt;">
                     <tr>
-                        <td><b>Jumlah Jawaban Yang Benar dari total soal (30 = 2 skenario x (5 OPT + 5 CodeViz + 5 Post-Tes))</b></td>
+                        <td><b>Jumlah Jawaban Yang Benar dari total soal (14 = 2 skenario x (3 OPT + 3 CodeViz + 1 Post-Tes))</b></td>
                         <td><b>Pulsa Yang akan Diperoleh + Akurasi jumlah jawaban benar sebagai poin untuk hadiah domain</b></td>
                     </tr>
                     <tr>
-                        <td>25 - 30</td>
+                        <td>12 - 14</td>
                         <td>25K</td>
                     </tr>
                     <tr>
-                        <td>20 - 24</td>
+                        <td>9 - 11</td>
                         <td>20K</td>
                     </tr>
                     <tr>
-                        <td>15 - 19</td>
+                        <td>6 - 8</td>
                         <td>15K</td>
                     </tr>
                     <tr>
-                        <td>10 - 14</td>
+                        <td>3 - 5</td>
                         <td>10K</td>
                     </tr>
                     <tr>
-                        <td>1 - 9</td>
+                        <td>1 - 2</td>
                         <td>5K</td>
                     </tr>
                     <tr>

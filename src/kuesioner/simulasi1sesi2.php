@@ -42,8 +42,6 @@
         }
     </style>
 
-    <link href="css/prism.css?v=1" rel="stylesheet" type="text/css">
-
     <header role="banner" id="fh5co-header" class="navbar-fixed-top">
         <div class="container">
             
@@ -54,7 +52,7 @@
                     <div class="navbar-brand" style="font-size:12pt">
                         <ul class="social social-circle" style="width: auto;">
                             <li class="icon-head"></li>
-                        </ul> Simulasi 1 - Sesi 2 <p class="timer-simulasi" id="timer">Sisa Waktu: 25 menit 0 detik</p>
+                        </ul> Simulasi 1 - CodeViz <p class="timer-simulasi" id="timer">Sisa Waktu: 15 menit 0 detik</p>
                     </div>
                 </div>
             </nav>
@@ -67,357 +65,106 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 section-heading text-center">
-                    <h2 class="to-animate">Simulasi 1 - Sesi 2</h2>
+                    <h2 class="to-animate">Simulasi 1 - CodeViz</h2>
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                            <h3>Anda ditugaskan untuk menyelesaikan 5 soal graf kode program dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasCodeViz"><b>kakas CodeViz</b></a>.</h3>
+                            <h3>Anda ditugaskan untuk menyelesaikan 3 soal kode program dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasCodeViz"><b>kakas CodeViz</b></a>.</h3>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-sm-6 to-animate">
+                <div class="col-md-12 col-sm-12 to-animate">
                     
                     <div id="DivFormSimulasi">
                         <div id="p1" class="tab form-group">
                             <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 1 - Sesi 2</span></p>
+                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 1 - CodeViz</span></p>
                                 <p><b>Soal 1</b></p>
-                                <p>Apa nama algoritma yang paling cocok digunakan untuk menggambarkan proses eksekusi graf kode program berikut ?</p>
-                                <select id="answerP1" name="answerP1" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">Bellman Ford</option>                
-                                        <option value="b">BST</option>                
-                                        <option value="c">BFS</option>                
-                                        <option value="d">TSP</option>    
-                                        <option value="e">Tidak diketahui</option>
-                                </select></br>
-<pre><code class="language-c">
-#include "stdio.h"
-
-int row = 4, col = 4;
-int i, j,
-graf[4][4] = {  { 0, 2, 3, 1},
-                { 2, 0, 7, 9},
-                { 3, 7, 0, 8},
-                { 1, 9, 8, 0}
-             };
-
-int main()
-{
-    printf("\nGraf:\n");
-    for (i = 0; i < row; i++)
-        for (j = 0; j < col; j++)
-            printf("graf[%d][%d]: %d\n",i,j,graf[i][j]);
-
-    return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
+                                <p>Silakan perbaiki kesalahan sintaks pada kode program berikut ini !</p>
+                                <p>Apa tujuan fungsi M dibuat ?</p>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <select id="answerP1" name="answerP1" class="form-control" onchange="checkAnswer(this, 1);">
+                                            <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
+                                            <option value="a">Menghitung jarak antar simpul</option>                
+                                            <option value="b">Menghitung jarak antar sisi</option>                
+                                            <option value="c">Menghitung angka random</option>                
+                                            <option value="d">Menghitung angka ganjil / genap</option>    
+                                            <option value="e">Tidak diketahui</option>        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <div style="overflow:auto;">
+                                            <div style="float:center;">
+                                                <center><input id="nextBtn1" class="btn btn-primary btn-lg" style="display:none;" value="Simpan" type="button" onclick="simulasi1sesi2NextBtn(1)"></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="CODEVIZ1" width="100%" height="600" frameborder="0" src="http://localhost:3000/codeviz/#code=%23include%20stdio.h%0A%23include%20time.h%0A%23define%20infiniti%20999%0A%0Aint%20G%5B10%5D%5B10%5D,%20X%5B10%5D,%20n,%20c%20%3D%200%3B%0A%0Avoid%20Z%28%29%0A%7B%0A%20%20%20%20int%20i,%20j%3B%0A%20%20%20%20n%20%3D%20M%281,%207%29%3B%20%20%20%20%0A%20%20%20%20for%20%28i%20%3D%200%3B%20i%20%3C%20n%3B%20i%2B%2B%29%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20for%20%28j%20%3D%200%3B%20j%20%3C%20n%3B%20j%2B%2B%29%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20G%5Bi%5D%5Bj%5D%20%3D%20M%280,%209%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28G%5Bi%5D%5Bj%5D%20%3D%3D%200%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20G%5Bi%5D%5Bj%5D%20%3D%20infinity%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20G%5Bj%5D%5Bi%5D%20%3D%20infinity%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20else%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20G%5Bj%5D%5Bi%5D%20%3D%20G%5Bi%5D%5Bj%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20X%5Bi%5D%20%3D%200%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20%28i%20%3D%200%3B%20i%20%3C%20n%20i%2B%2B%29%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20printf%28%22%5Cn%22%29%3B%0A%20%20%20%20%20%20%20%20for%20%28j%20%3D%200%3B%20j%20%3C%20n%3B%20j%2B%2B%29%0A%20%20%20%20%20%20%20%20%20%20%20%20printf%28%22%5Ct%25d%22,%20G%5Bi%5D%5Bj%5D%29%3B%0A%20%20%20%20%7D%0A%7D%0A%0Avoid%20F%28int%20s%29%0A%7B%0A%20%20%20%20int%20i,%20n%3B%0A%20%20%20%20X%5Bs%5D%20%3D%201%3B%0A%20%20%20%20printf%28%22%25d---%3E%22,%20s%20%2B%201%29%3B%0A%20%20%20%20n%20%3D%20xyz%28s%29%3B%0A%20%20%20%20if%20%28n%20%3D%3D%20999%29%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20n%20%3D%200%3B%0A%20%20%20%20%20%20%20%20printf%28%22%25d%22,%20n%20%2B%201%29%3B%0A%20%20%20%20%20%20%20%20c%20%2B%3D%20G%5Bs%5D%5Bn%5D%3B%0A%20%20%20%20%20%20%20%20return%3B%0A%20%20%20%20%7D%0A%20%20%20%20F%28n%29%3B%0A%7D%0A%0Aint%20M%28const%20int%20x,%20const%20int%20y%29%7B%0A%20%20%20%20return%20rand%28%29%20%25%20%28y%20-%20x%29%20%2B%20x%3B%0A%7D%0A%0Aint%20xyz%28int%20c%29%0A%7B%0A%20%20%20%20int%20i,%20nc%20%3D%20999%3B%0A%20%20%20%20int%20min%20%3D%20999,%20kmin%3B%0A%20%20%20%20for%20%28i%20%3D%200%3B%20i%20%3C%20n%3B%20i%2B%2B%29%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20if%20%28%28G%5Bc%5D%5Bi%5D%20!%3D%200%29%20%26%26%20%28X%5Bi%5D%20%3D%3D%200%29%29%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28G%5Bc%5D%5Bi%5D%20%2B%20G%5Bi%5D%5Bc%5D%20%3C%20min%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min%20%3D%20G%5Bi%5D%5B0%5D%20%2B%20G%5Bc%5D%5Bi%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20kmin%20%3D%20G%5Bc%5D%5Bi%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20n%20%3D%20i%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20if%20%28min%20!%3D%20999%29%0A%20%20%20%20%20%20%20%20c%20%2B%3D%20kmin%3B%0A%20%20%20%20return%20nc%3B%0A%7D%0A%0Aint%20main%28%29%0A%7B%0A%20%20%20%20srand%28time%28NULL%29%29%3B%0A%20%20%20%20Z%28%29%3B%0A%20%20%20%20printf%28%22%5Cn%22%29%3B%0A%20%20%20%20F%280%29%0A%20%20%20%20printf%28%22%5CnMinimun%20cost%3A%20%25d%5Cn%20%22,%20c%29%3B%0A%20%20%20%20return%200%3B%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
                             </div>
                         </div>
                         <div id="p2" class="tab form-group">
                             <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 1 - Sesi 2</span></p>
+                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 1 - CodeViz</span></p>
                                 <p><b>Soal 2</b></p>
-                                <p>Apa tujuan fungsi M dibuat dalam graf kode program ini ?</p>
-                                <select id="answerP2" name="answerP2" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">menghitung jarak antar simpul</option>                
-                                        <option value="b">menghitung jarak antar sisi</option>                
-                                        <option value="c">Menghitung angka random</option>                
-                                        <option value="d">Menghitung angka ganjil / genap</option>    
-                                        <option value="e">Tidak diketahui</option>
-                                </select></br>
-<pre><code class="language-c">
-#include "stdio.h"
-#include "time.h"
-#define infinity 999
-
-int G[10][10], X[10], n, c = 0;
-
-void Z()
-{
-    int i, j;
-    n = M(1, 7);    
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n; j++)
-        {
-            G[i][j] = M(0, 9);
-            if (G[i][j] == 0)
-            {
-                G[i][j] = infinity;
-                G[j][i] = infinity;
-            }
-            else
-            {
-                G[j][i] = G[i][j];
-            }
-        }
-        X[i] = 0;
-    }
-
-    for (i = 0; i < n; i++)
-    {
-        printf("\n");
-        for (j = 0; j < n; j++)
-            printf("\t%d", G[i][j]);
-    }
-}
-
-void F(int s)
-{
-    int i, n;
-    X[s] = 1;
-    printf("%d--->", s + 1);
-    n = xyz(s);
-    if (n == 999)
-    {
-        n = 0;
-        printf("%d", n + 1);
-        c += G[s][n];
-        return;
-    }
-    F(n);
-}
-
-int M(const int x, const int y){
-    return rand() % (y - x) + x;
-}
-
-int xyz(int c)
-{
-    int i, nc = 999;
-    int min = 999, kmin;
-    for (i = 0; i < n; i++)
-    {
-        if ((G[c][i] != 0) && (X[i] == 0))
-            if (G[c][i] + G[i][c] < min)
-            {
-                min = G[i][0] + G[c][i];
-                kmin = G[c][i];
-                nc = i;
-            }
-    }
-    if (min != 999)
-        c += kmin;
-    return nc;
-}
-
-int main()
-{
-    srand(time(NULL));
-    Z();
-    printf("\n");
-    F(0);
-    printf("\nMinimun cost: %d\n ", c);
-    return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
+                                <p>Silakan perbaiki kesalahan sintaks pada kode program berikut ini !</p>
+                                <p>Berapa jumlah simpul yang berderajat 3 dalam kode program berikut ini ?</p>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <select id="answerP2" name="answerP2" class="form-control" onchange="checkAnswer(this, 2);">
+                                            <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
+                                            <option value="a">4</option>                
+                                            <option value="b">5</option>                
+                                            <option value="c">20</option>                
+                                            <option value="d">12</option>    
+                                            <option value="e">0</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <div style="overflow:auto;">
+                                            <div style="float:center;">
+                                                <center><input id="nextBtn2" class="btn btn-primary btn-lg" style="display:none;" value="Simpan" type="button" onclick="simulasi1sesi2NextBtn(2)"></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="CODEVIZ2" width="100%" height="600" frameborder="0" src="http://localhost:3000/codeviz/#code=%23include%20stdio.h%0A%0Aint%20baris%20%3D%205,%20kolom%20%3D%204%3B%0Aint%20x,%20y%3B%0A%0Aint%20main%28%29%0A%7B%0A%20%20%20%20Int%20G%5B5%5D%5B4%5D%20%3D%20%7B%20%7B%200,%202,%203,%201%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%202,%200,%207,%209%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%203,%207,%200,%208%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%201,%209,%208,%200%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20print%28%22%5CnGraf%3A%5Cn%22%29%3B%0A%20%20%20%20for%20%28i%20%3D%200%3B%20i%20%3C%20row%20i%2B%2B%29%0A%20%20%20%20%20%20%20%20for%20%28j%20%3D%200%3B%20j%20%3C%20cols%3B%20j%2B%2B%29%0A%20%20%20%20%20%20%20%20%20%20%20%20printf%28%22graf%5B%25d%5D%5B%25d%5D%3A%20%25d%5Cn%22,i,j,graf%5Bi%5D%5Bj%5D%29%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
                             </div>
                         </div>
                         <div id="p3" class="tab form-group">
                             <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 1 - Sesi 2</span></p>
+                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 1 - CodeViz</span></p>
                                 <p><b>Soal 3</b></p>
-                                <p>Berapa jumlah simpul yang berderajat 3 dalam graf kode program berikut ini ?</p>
-                                <select id="answerP3" name="answerP3" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">3</option>                
-                                        <option value="b">4</option>                
-                                        <option value="c">5</option>                
-                                        <option value="d">6</option>    
-                                        <option value="e">7</option>        
-                                </select></br>
-<pre><code class="language-c">
-#include "stdio.h"
-
-int main()
-{
-    int row = 4, col = 4;
-    int i, j,
-    cost[4][4] = {  { 0, 2, 3, 1},
-                    { 2, 0, 7, 9},
-                    { 3, 7, 0, 8},
-                    { 1, 9, 8, 0}
-                 };
-
-    printf("\nthe matrix:\n");
-    for (i = 0; i < row; i++)
-        for (j = 0; j < col; j++)
-            printf("cost[%d][%d]: %d\n",i,j,cost[i][j]);
-
-    return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
-                            </div>
-                        </div>
-                        <div id="p4" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 1 - Sesi 2</span></p>
-                                <p><b>Soal 4</b></p>
-                                <p>Ubahlah nilai bobot antara simpul 1 dan 3 menjadi 9 dari graf kode program berikut ini !</p>
-<pre><code class="language-c">
-#include "stdio.h"
-#include "time.h"
-#define infinity 999
-
-int G[10][10], X[10], n, c = 0;
-
-void Z()
-{
-    int i, j;
-    n = M(4, 7);    
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n; j++)
-        {
-            G[i][j] = M(0, 9);
-            if (G[i][j] == 0)
-            {
-                G[i][j] = infinity;
-                G[j][i] = infinity;
-            }
-            else
-            {
-                G[j][i] = G[i][j];
-            }
-        }
-        X[i] = 0;
-    }    
-
-    for (i = 0; i < n; i++)
-    {
-        printf("\n");
-        for (j = 0; j < n; j++)
-            printf("\t%d", G[i][j]);
-    }
-}
-
-void F(int s)
-{
-    int i, n;
-    X[s] = 1;
-    printf("%d--->", s + 1);
-    n = xyz(s);
-    if (n == 999)
-    {
-        n = 0;
-        printf("%d", n + 1);
-        c += G[s][n];
-        return;
-    }
-    F(n);
-}
-
-int M(const int x, const int y){
-    return rand() % (y - x) + x;
-}
-
-int xyz(int c)
-{
-    int i, nc = 999;
-    int min = 999, kmin;
-    for (i = 0; i < n; i++)
-    {
-        if ((G[c][i] != 0) && (X[i] == 0))
-            if (G[c][i] + G[i][c] < min)
-            {
-                min = G[i][0] + G[c][i];
-                kmin = G[c][i];
-                nc = i;
-            }
-    }
-    if (min != 999)
-        c += kmin;
-    return nc;
-}
-
-int main()
-{
-    srand(time(NULL));
-    Z();
-    printf("\n");
-    F(0);
-    printf("\nMinimun cost: %d\n ", c);
-    return 0;
-}</code></pre>
-                                <p>Silakan paste jawaban kode program Anda di bawah ini.</p>
-                                <textarea id="answerP4" style="width:100%;height:111px;"></textarea>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
-                            </div>
-                        </div>
-                        <div id="p5" class="tab form-group">
-                            <div class="form-control" style="height: 100%">
-                                <p style="margin-bottom: 7pt;"><span class="badge badge-info">Tes Inti | Simulasi 1 - Sesi 2</span></p>
-                                <p><b>Soal 5</b></p>
-                                <p>Berapa bobot minimum antara simpul 1 dan 4 pada graf kode program berikut ini ?</p>
-                                <select id="answerP5" name="answerP5" class="form-control">
-                                        <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
-                                        <option value="a">7</option>                
-                                        <option value="b">8</option>                
-                                        <option value="c">9</option>                
-                                        <option value="d">10</option>    
-                                        <option value="e">11</option>
-                                </select></br>
-<pre><code class="language-c">
-#include "stdio.h"
-
-int baris = 5, kolom = 5;
-int i, j,
-cost[5][5];
-
-int main()
-{
-    printf("\nthe matrix:\n");
-    cost[0][1] = 2;
-    cost[0][2] = 3;
-    cost[0][3] = 1;
-    cost[1][2] = 7;
-    cost[1][3] = 9;
-    cost[2][3] = 8;
-    cost[2][4] = 4;
-   
-    for (i = 0; i < baris; i++)
-        for (j = 0; j < kolom; j++)
-            printf("cost[%d][%d]: %d\n",i,j,cost[i][j]);
-
-    return 0;
-}</code></pre>
-                                <p><input class="btn btn-primary btn-lg" value="Buka Kakas CodeViz" type="button" onclick="simulasiCodeViz();"></p>
-                            </div>
-                        </div>
-
-                        <div style="overflow:auto;">
-                            <div style="float:center;">
-                                <center><input id="nextBtn" class="btn btn-primary btn-lg" value="Soal Berikutnya" type="button" onclick="simulasi1sesi2NextBtn(1)"></center>
+                                <p>Silakan perbaiki kesalahan sintaks pada kode program berikut ini !</p>
+                                <p>Berapa bobot minimum antara simpul 1 dan 4 pada kode program berikut ini ?</p>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <select id="answerP3" name="answerP3" class="form-control" onchange="checkAnswer(this, 3);">
+                                            <option value="" selected disabled>Silahkan Pilih Jawaban Anda</option>                
+                                            <option value="a">2</option>                
+                                            <option value="b">3</option>                
+                                            <option value="c">7</option>                
+                                            <option value="d">5</option>    
+                                            <option value="e">Tidak ada jawaban</option>        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 to-animate">
+                                        <div style="overflow:auto;">
+                                            <div style="float:center;">
+                                                <center><input id="nextBtn3" class="btn btn-primary btn-lg" style="display:none;" value="Simpan" type="button" onclick="simulasi1sesi2NextBtn(3)"></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="CODEVIZ3" width="100%" height="600" frameborder="0" src="http://localhost:3000/codeviz/#code=%23include%20stdo.h%0A%0Aint%20row%20%3D%203,%20col%20%3D%203%3B%0Aint%20i,%20j%3B%0A%0AInt%20Main%28%29%0A%7B%0A%20%20%20%20int%20Graf%5B3%5D%5B3%5D%20%3D%20%7B%20%20%7B%200,%202,%203%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%202,%200,%207%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%203,%207,%200%7D,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20printf%28%22%5CnGraf%3A%5Cn%22%29%3B%0A%20%20%20%20for%20%28i%20%3D%200%3B%20i%20%3C%20row%3B%20i%2B%2B%29%0A%20%20%20%20%20%20%20%20for%20%28j%20%3D%200%3B%20j%20%3C%20col%3B%20j%2B%2B%29%0A%20%20%20%20%20%20%20%20%20%20%20%20print%28%22G%5B%25d%5D%5B%25d%5D%3A%20%25d%5Cn%22,i,j,G%5Bi%5D%5Bj%5D%29%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
                             </div>
                         </div>
                     </div>
 
-                </div>
-
-                <div class="col-md-6 col-sm-6 to-animate">
-                    <div class="fh5co-block to-animate" style="background-color: tomato;color: white;padding: 41px 41px;margin-bottom: 33pt;">
-                        <div class="overlay-darker"></div>
-                        <div class="overlay"></div>
-                        <div class="fh5co-text">
-                            <h2><span class="fh5co-intro-icon icon-gift"></span> Hadiah Utama Domain .ID</h2>
-                            <p>Bagi responden terbaik berdasarkan kelengkapan kuesioner dan poin yang bisa dikumpulkan.</p>
-                            <h5 style="margin-bottom:0px;">Baca syarat dan ketentuannya <a data-toggle="modal" data-target="#skb">di sini</a></h5>
-                        </div>
-                    </div>
-
-                    <h3>Informasi Kontak</h3>
-                    <ul class="fh5co-contact-info">
-                        <li class="fh5co-contact-address ">
-                            <i class="icon-home"></i> Institut Teknologi Bandung<br>Jalan Ganesha Nomor 10, <br>Kota Bandung
-                        </li>
-                        <li><i class="icon-phone"></i> 0811-3200-670</li>
-                        <li><i class="icon-envelope"></i>habibieeddien@students.itb.ac.id</li>
-                        <li><i class="icon-globe"></i> <a href="http://www.itb.ac.id/" target="_blank">ITB.ac.id</a></li>
-                    </ul>
                 </div>
 
             </div>
@@ -429,8 +176,7 @@ int main()
 
     <?php require_once('footer.php'); ?>
     <script src="js/simulasi.js?v=6"></script>
-    <script src="js/simulasi1sesi2.js?v=4"></script>
-    <script src="js/prism.js?v=1" type="text/javascript"></script>
+    <script src="js/simulasi1sesi2.js?v=5"></script>
 
 <div id="kakasCodeViz" class="modal fade" role="dialog">
     <div class="modal-dialog">

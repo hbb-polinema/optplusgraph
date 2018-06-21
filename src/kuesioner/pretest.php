@@ -155,13 +155,11 @@ if(isset($_SESSION['kode'])){
                                 <div class="form-control" style="height: 100%">
                                     <p style="margin-bottom: 7pt;">Apa yang dimaksud dengan graf ?</p>
                                     <div class="row">
-                                        <input id="answerP1-a" type="radio" name="answerP1" value="a" onclick="clearInvalid(1)"> Graf adalah objek dasar pelajaran dalam teori graf.<br>
-                                        <input id="answerP1-b" type="radio" name="answerP1" value="b" onclick="clearInvalid(1)"> Graf adalah himpunan dari objek-objek yang dinamakan titik, simpul, atau sudut dihubungkan oleh penghubung yang dinamakan
-                                        garis atau sisi.<br>
-                                        <input id="answerP1-c" type="radio" name="answerP1" value="c" onclick="clearInvalid(1)"> Graf adalah gambar kurva (garis atau sisi) yang membentuk bangun datar berupa persegi panjang.
-                                        <br>
-                                        <input id="answerP1-d" type="radio" name="answerP1" value="d" onclick="clearInvalid(1)"> Graf adalah gambar grafik untuk kepentingan visualisasi data.<br>
-                                        <input id="answerP1-e" type="radio" name="answerP1" value="e" onclick="clearInvalid(1)"> Graf adalah objek dasar yang terdiri dari bangun datar dan garis.<br>
+                                        <input id="answerP1-a" type="radio" name="answerP1" value="a" onclick="clearInvalid(1, this)"> Graf adalah objek dasar pelajaran dalam teori graf.<br>
+                                        <input id="answerP1-b" type="radio" name="answerP1" value="b" onclick="clearInvalid(1, this)"> Graf adalah himpunan dari objek-objek yang dinamakan titik, simpul, atau sudut dihubungkan oleh penghubung yang dinamakan garis atau sisi.<br>
+                                        <input id="answerP1-c" type="radio" name="answerP1" value="c" onclick="clearInvalid(1, this)"> Graf adalah gambar kurva (garis atau sisi) yang membentuk bangun datar berupa persegi panjang.<br>
+                                        <input id="answerP1-d" type="radio" name="answerP1" value="d" onclick="clearInvalid(1, this)"> Graf adalah gambar grafik untuk kepentingan visualisasi data.<br>
+                                        <input id="answerP1-e" type="radio" name="answerP1" value="e" onclick="clearInvalid(1, this)"> Graf adalah objek dasar yang terdiri dari bangun datar dan garis.<br>
                                     </div>
                                 </div>
                             </div>
@@ -171,11 +169,11 @@ if(isset($_SESSION['kode'])){
                                     <p>Simpul = ... buah<br>Sisi = ... buah<br>Derajat pada simpul X = ... buah</p>
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
-                                            <input id="answerP2-a" type="radio" name="answerP2" value="a"> 3, 11, dan 5<br>
-                                            <input id="answerP2-b" type="radio" name="answerP2" value="b"> 5, 6, dan 5<br>
-                                            <input id="answerP2-c" type="radio" name="answerP2" value="c"> 9, 18, dan 6<br>
-                                            <input id="answerP2-d" type="radio" name="answerP2" value="d"> 9, 14, dan 5<br>
-                                            <input id="answerP2-e" type="radio" name="answerP2" value="e"> 10, 14, dan 5<br>
+                                            <input id="answerP2-a" type="radio" name="answerP2" value="a" onclick="clearInvalid(2, this)"> 3, 11, dan 5<br>
+                                            <input id="answerP2-b" type="radio" name="answerP2" value="b" onclick="clearInvalid(2, this)"> 5, 6, dan 5<br>
+                                            <input id="answerP2-c" type="radio" name="answerP2" value="c" onclick="clearInvalid(2, this)"> 9, 18, dan 6<br>
+                                            <input id="answerP2-d" type="radio" name="answerP2" value="d" onclick="clearInvalid(2, this)"> 9, 14, dan 5<br>
+                                            <input id="answerP2-e" type="radio" name="answerP2" value="e" onclick="clearInvalid(2, this)"> 10, 14, dan 5<br>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <center><img src="images/pretest-p5.jpg" style="width: 100%;height: 100%;"></center>
@@ -186,7 +184,7 @@ if(isset($_SESSION['kode'])){
                             <div id="p3" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
                                     <p id="p3title" style="margin-bottom: 7pt;">Apakah Anda familiar dengan teori graf ?</p>
-                                    <select id="answerP3" name="answerP3" class="form-control" required>
+                                    <select id="answerP3" name="answerP3" class="form-control" required onchange="checkAnswer(this);">
                                         <option value="" selected disabled>Silahkan Pilih</option>                
                                         <option value="y">Ya</option>                
                                         <option value="t">Tidak</option>       
@@ -232,7 +230,7 @@ if(isset($_SESSION['kode'])){
 
                         <div style="overflow:auto;">
                             <div style="float:right;">
-                                <input id="nextBtn" class="btn btn-primary btn-lg" value="Lanjut" type="button" onclick="preTest(1)">
+                                <input id="nextBtn" style="display:none;" class="btn btn-primary btn-lg" value="Lanjut" type="button" onclick="preTest(1)">
                             </div>
                         </div>
                     </form>
@@ -245,6 +243,6 @@ if(isset($_SESSION['kode'])){
     </section>
 
     <div style="height:133px;"></div>
-    <script src="js/pretest.js?v=7"></script>
 
     <?php require_once('footer.php'); ?>
+    <script src="js/pretest.js?v=11"></script>

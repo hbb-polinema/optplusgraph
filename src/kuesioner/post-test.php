@@ -33,7 +33,7 @@ if(isset($_SESSION['kode'])){
         /* Hide all steps by default: */
 
         .tab {
-            display: none;
+            /*display: none;*/
             box-sizing: border-box;
             -webkit-animation: fadeEffect 1.5s;
             animation: fadeEffect 1.5s;
@@ -77,8 +77,15 @@ if(isset($_SESSION['kode'])){
         .step.finish {
             background-color: #4CAF50;
         }
+
+        .style-code {
+            width: 100%;
+            margin-top: 17px;
+            margin-bottom: 17px;
+            font-size: 12pt;
+            border: 1px solid #ddd;
+        }
     </style>
-    <link href="css/prism.css?v=1" rel="stylesheet" type="text/css">
 
     <header role="banner" id="fh5co-header" class="navbar-fixed-top">
         <div class="container">
@@ -90,7 +97,7 @@ if(isset($_SESSION['kode'])){
                     <div class="navbar-brand" style="font-size:12pt">
                         <ul class="social social-circle" style="width: auto;">
                             <li class="icon-head"></li>
-                        </ul> Anda sebagai Responden | <p id="timer">Sisa Waktu: 25 menit 0 detik</p>
+                        </ul> Anda sebagai Responden | <p id="timer">Sisa Waktu: 5 menit 0 detik</p>
                     </div>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
@@ -132,14 +139,13 @@ if(isset($_SESSION['kode'])){
 
             <div class="row">
 
-                <div class="col-md-2 col-sm-2"></div>
-                <div class="col-md-8 col-sm-8 to-animate">
+                <div class="col-md-12 col-sm-12 to-animate">
                     
                     <form accept-charset="utf-8" method="POST" action="#" name="formPostTest" id="formPostTest">
                         
                         <div style="text-align:center;margin-top:40px;">
                             <h4>Sisa Soal:
-                                <b id="sisaSoal">5</b>
+                                <b id="sisaSoal">1</b>
                             </h4>
                         </div>
 
@@ -148,270 +154,102 @@ if(isset($_SESSION['kode'])){
                             
                             <div id="p1" class="tab form-group">
                                 <div class="form-control" style="height: 100%">
-                                    <p style="margin-bottom: 7pt;">Berapa total simpul dalam graf kode program di bawah ini ?</p>
-                                    <select id="answerP1" name="answerP1" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>                
-                                        <option value="a">7</option>                
-                                        <option value="b">1</option>                
-                                        <option value="c">antara 1 dan 7</option>                
-                                        <option value="d">antara 0 dan 10</option>    
-                                        <option value="e">tidak dapat ditentukan</option>        
-                                    </select>
-<pre><code class="language-c">
-#include "stdio.h"
-#include "time.h"
-#define infinity 999
+                                    <p style="margin-bottom: 7pt;">Berapa total simpul pada kode program di bawah ini ?</p>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 to-animate">
+                                            <select id="answerP1" name="answerP1" class="form-control" onchange="checkAnswer(this);">
+                                                <option value="" selected disabled>Pilih Jawaban Anda</option>                
+                                                <option value="a">7</option>                
+                                                <option value="b">6</option>                
+                                                <option value="c">5</option>                
+                                                <option value="d">4</option>    
+                                                <option value="e">Tidak ada jawaban</option>         
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 to-animate">
+                                            <div style="overflow:auto;">
+                                                <div style="float:center;">
+                                                    <center><input id="nextBtn" class="btn btn-primary btn-lg" style="display:none;" value="Simpan" type="button" onclick="postTest(1)"></center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="code" class="style-code">#include "stdio.h"
+#define X 99
 
-int G[10][10], X[10], n, c = 0;
+void A(int n, int v, int cost[7][7], int dist[10]){
+    int i, u, count, w, F[10], min;
 
-void Z()
-{
-    int i, j;
-    n = M(1, 7);    
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n; j++)
-        {
-            G[i][j] = M(0, 9);
-            if (G[i][j] == 0)
-            {
-                G[i][j] = infinity;
-                G[j][i] = infinity;
-            }
-            else
-            {
-                G[j][i] = G[i][j];
+    for (i = 1; i <= n; i++){
+        F[i] = 0;
+        dist[i] = cost[v][i];
+    }
+    
+    count = 2;
+    
+    while (count <= n){
+        min = 99;
+        for (w = 1; w <= n; w++){
+            if (dist[w] < min && !F[w]){
+                min = dist[w];
+                u = w;
             }
         }
-        X[i] = 0;
-    }
+        
+        F[u] = 1;
+        count++;
 
-    for (i = 0; i < n; i++)
-    {
-        printf("\n");
-        for (j = 0; j < n; j++)
-            printf("\t%d", G[i][j]);
-    }
-}
-
-void F(int s)
-{
-    int i, n;
-    X[s] = 1;
-    printf("%d--->", s + 1);
-    n = xyz(s);
-    if (n == 999)
-    {
-        n = 0;
-        printf("%d", n + 1);
-        c += G[s][n];
-        return;
-    }
-    F(n);
-}
-
-int M(const int x, const int y){
-    return rand() % (y - x) + x;
-}
-
-int xyz(int c)
-{
-    int i, nc = 999;
-    int min = 999, kmin;
-    for (i = 0; i < n; i++)
-    {
-        if ((G[c][i] != 0) && (X[i] == 0))
-            if (G[c][i] + G[i][c] < min)
-            {
-                min = G[i][0] + G[c][i];
-                kmin = G[c][i];
-                nc = i;
+        for (w = 1; w <= n; w++){
+            if ((dist[u] + cost[u][w] < dist[w]) && !F[w]){
+                dist[w] = dist[u] + cost[u][w];
             }
+        }
     }
-    if (min != 999)
-        c += kmin;
-    return nc;
 }
 
 int main()
 {
-    srand(time(NULL));
-    Z();
-    printf("\n");
-    F(0);
-    printf("\nMinimun cost: %d\n ", c);
-    return 0;
-}</code></pre>
-                                </div>
-                            </div>
-                            
-                            <div id="p2" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p id="p2title" style="margin-bottom: 7pt;">Berapa derajat (<i>degree</i>) yang dimiliki oleh simpul 3 pada graf kode program berikut ini ?</p>
-                                    <select id="answerP2" name="answerP2" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="a">1</option>                
-                                        <option value="b">2</option>                
-                                        <option value="c">3</option>                
-                                        <option value="d">4</option>    
-                                        <option value="e">tidak diketahui</option>
-                                    </select>
-<pre><code class="language-c">
-#include "stdio.h"
-
-int main()
-{
-    int row = 5, col = 5;
-    int i, j,
-    G[5][5] = {     { 0, 6, 3, 1, 3},
-                    { 6, 0, 9, 9, 9},
-                    { 3, 9, 0, 8, 8},
-                    { 1, 9, 8, 0, 7},
-                    { 1, 9, 8, 7, 0}
-                 };
-
-    printf("\nthe matrix:\n");
-    for (i = 0; i < row; i++)
-        for (j = 0; j < col; j++)
-            printf("G[%d][%d]: %d\n",i,j,G[i][j]);
+    int n, v, i, dist[10] = {0};
+    
+    n = 6;
+    printf("\nthe number of nodes: %d \n", n);
+    
+    printf("\nthe cost matrix:\n");
+    int graf[7][7] = {  { 0, 0, 0, 0, 0, 0, 0},
+                        { 0, X, 5, X, X, X, 8},
+                        { 0, 5, X, 7, X, 2, X},
+                        { 0, X, 7, X, 9, X, X},
+                        { 0, X, X, 9, X, 4, X},
+                        { 0, X, 2, X, 4, X, X},
+                        { 0, 8, X, X, X, X, X} 
+                    };
+    
+    v = 2;
+    printf("\nthe source matrix: %d \n", v);
+    
+    A(n, v, graf, dist);
+    
+    printf("\nShortest path:\n");
+    for (i = 1; i <= n; i++){
+        if (i != v){
+            printf("%d->%d,graf=%d\n", v, i, dist[i]);
+        }
+    }
 
     return 0;
-}</code></pre>
+}</div>
                                 </div>
-                            </div>
-                            
-                            <div id="p3" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p id="p3title" style="margin-bottom: 7pt;">Berapa jumlah minimum biaya (<i>cost</i>) yang diperlukan dari simpul 1 hingga simpul 4 dari graf kode program berikut ini ?</p>
-                                    <select id="answerP3" name="answerP3" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="a">7</option>                
-                                        <option value="b">9</option>                
-                                        <option value="c">11</option>                
-                                        <option value="d">10</option>    
-                                        <option value="e">12</option>
-                                    </select>
-<pre><code class="language-c">
-#include "stdio.h"
-
-int baris = 5, kolom = 5;
-int i, j,
-cost[5][5];
-
-int main()
-{
-    printf("\nthe matrix:\n")
-    cost[0][1] = 2
-    cost[0][2] = 3;
-    cost[0][3] = 1;
-    cost[1][2] = 7;
-    cost[1][3] = 9;
-    cost[2][3] = 8;
-    cost[2][4] = 4;
-    cost[2][1] = 7;
-   
-    for (i = 0; i < row; i++)
-        for (j = 0; j <= col; j++)
-            printf("cost[%d][%d]: %d\n",i,j,cost[i][j]);
-
-    return 0
-}</code></pre>
-                                </div>
-                            </div>
-
-                            <div id="p4" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p id="p4title" style="margin-bottom: 7pt;">Berapa jumlah sisi (<i>edge</i>) yang dimiliki oleh graf kode program berikut ini ?</p>
-                                    <select id="answerP4" name="answerP4" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="a">1</option>                
-                                        <option value="b">2</option>                
-                                        <option value="c">3</option>                
-                                        <option value="d">4</option>    
-                                        <option value="e">5</option>
-                                    </select>
-<pre><code class="language-c">
-#include "stdio.h"
-
-int row = 3, col = 3;
-int i, j,
-G[3][3] = {  { 0, 2, 3},
-             { 2, 0, 7},
-             { 3, 7, 0},
-          };
-
-int main()
-{
-    printf("\nGraf:\n");
-    for (i = 0; i < row; i++)
-        for (j = 0; j < col; j++)
-            printf("G[%d][%d]: %d\n",i,j,G[i][j]);
-
-    return 0;
-}</code></pre>
-                                </div>
-                            </div>
-
-                            <div id="p5" class="tab form-group">
-                                <div class="form-control" style="height: 100%">
-                                    <p id="p5title" style="margin-bottom: 7pt;">Ada berapa kesalahan sintaks pada kode program berikut ini?</p>
-                                    <select id="answerP5" name="answerP5" class="form-control">
-                                        <option value="" selected disabled>Pilih Jawaban Anda</option>
-                                        <option value="a">5</option>                
-                                        <option value="b">6</option>                
-                                        <option value="c">7</option>                
-                                        <option value="d">8</option>    
-                                        <option value="e">9</option>
-                                    </select><br>
-                                    <p>Sebutkan pada baris berapa saja ...</p>
-                                    <textarea id="answerP5a" style="width:100%;height:111px;"></textarea>
-<pre><code class="language-c">
-#include "stdio.h"
-
-int baris = 5, kolom = 5;
-int i, j,
-cost[5][5];
-
-int main()
-{
-    printf("\nthe matrix:\n")
-    cost[0][1] = 2
-    cost[0][2] = 3;
-    cost[0][3] = 1;
-    cost[1][2] = 7;
-    cost[1][3] = 9;
-    cost[2][3] = 8;
-    cost[2][4] = 4;
-    cost[2][1] = 7;
-   
-    for (i = 0; i < row; i++)
-        for (j = 0; j <= col; j++)
-            printf("cost[%d][%d]: %d\n",i,j,cost[i][j]);
-
-    return 0
-}</code></pre>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div style="overflow:auto;">
-                            <div style="float:right;">
-                                <input id="nextBtn" class="btn btn-primary btn-lg" value="Lanjut" type="button" onclick="postTest(1)">
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-md-2 col-sm-2"></div>
-
             </div>
-
         </div>
     </section>
 
     <div style="height:133px;"></div>
 
 <?php require_once('footer.php'); ?>
-
-<script src="js/post-test.js?v=6"></script>
-<script src="js/prism.js?v=1" type="text/javascript"></script>
+<script src="js/ace/ace.js?v=1"></script>
+<script src="js/ace/mode-c_cpp.js?v=1"></script>
+<script src="js/post-test.js?v=2"></script>

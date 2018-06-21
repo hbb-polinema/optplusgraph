@@ -1,14 +1,10 @@
 <?php
-    //untuk memulai session
     session_start();
-     
-    //set session dulu dengan nama $_SESSION["mulai"]
-    if (isset($_SESSION["mulai"])) { 
-        //jika session sudah ada
-        $telah_berlalu = time() - $_SESSION["mulai"];
+
+    if (isset($_SESSION["timer"])) { 
+        $telah_berlalu = time() - $_SESSION["timer"];
     } else { 
-        //jika session belum ada
-        $_SESSION["mulai"]  = time();
+        $_SESSION["timer"]  = time();
         $telah_berlalu      = 0;
     }
 
@@ -17,7 +13,7 @@
     $temp_detik = $temp_waktu%60;                           //sisa bagi untuk detik
      
     if ($temp_menit < 60) { 
-        /* Apabila $temp_menit yang kurang dari 60 meni */
+        /* Apabila $temp_menit yang kurang dari 60 menit */
         $jam    = 0; 
         $menit  = $temp_menit; 
         $detik  = $temp_detik; 
@@ -35,60 +31,38 @@
 
 <?php require_once('footer.php'); ?>
 
-<!-- Script Timer -->
     <script type="text/javascript">
         $(document).ready(function() {
-            /** Membuat Waktu Mulai Hitung Mundur Dengan 
-             * var detik;
-             * var menit;
-             */
             var detik = <?php echo $detik; ?>;
             var menit = <?php echo $menit; ?>;
 
             var div_timer = document.getElementById("quiz-time-left");
             div_timer.innerHTML = 'Sisa Waktu: ' + menit + ' menit ' + detik + ' detik';
 
-            /**
-             * Membuat function hitung() sebagai Penghitungan Waktu
-             */
             function Timer() {
-                /** setTimout(hitung, 1000) digunakan untuk 
-                 * mengulang atau merefresh halaman selama 1000 (1 detik) 
-                 */
                 setTimeout(Timer, 1000);
 
-                /** Jika waktu kurang dari 1 menit maka Timer akan berubah menjadi warna merah */
-                if (menit == 0 && detik <= 59) {                    
-                    /** Menampilkan Waktu Timer pada Tag #Timer di HTML yang tersedia - WARNING sisa 1 menit*/
+                if (menit == 0 && detik > 0) {
                     div_timer.innerHTML = '<span style="color:red">Sisa Waktu: ' + menit + ' menit ' + detik + ' detik</span>';
-                } else {
-                    /** Menampilkan Waktu Timer pada Tag #Timer di HTML yang tersedia */
+                } else if (menit >= 1) {
                     div_timer.innerHTML = 'Sisa Waktu: ' + menit + ' menit ' + detik + ' detik';
+                } else if (menit == 0 && detik == 0) {
+                    div_timer.innerHTML = '<span style="color:red">Waktu Habis!</span>';
                 }
 
-                /** Melakukan Hitung Mundur dengan Mengurangi variabel detik - 1 */
                 detik--;
 
-                /** Jika var detik <= 0
-                 * var detik akan dikembalikan ke 59
-                 * Menit akan Berkurang 1
-                 */
-                if (detik <= 0) {
+                if (menit >= 0 && detik == 0) {
                     detik = 59;
                     menit--;
 
-                    /** Jika menit <= 0
-                     * SELESAI
-                     */
-                    if (menit <= 0) {
+                    if (menit == 0) {
                         clearInterval(Timer);
-                        /** Variable yang digunakan untuk submit secara otomatis di Form */
-                        setTimeout('document.quiz.submit()', 1);                        
+                        //setTimeout('document.quiz.submit()', 1);                        
                     }
                 }
             }
 
-            /** Menjalankan Function Hitung Waktu Mundur */
             Timer();
         });
     </script>

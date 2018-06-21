@@ -51,7 +51,7 @@ function nextForm(n) {
 function updateTahap(tahap) {
     $.ajax({
         type: "POST",
-        url: "ajax_request/simulasi.php",
+        url: "ajax_request/tahap.php",
         data: "tahap=" + tahap,
         cache: false,
         success: function(result) {
@@ -119,6 +119,10 @@ function Latihan1() {
         _MainDomain + "/latihan1.php", // http://codeviz.tk/survei/latihan1.php
         "_blank",
         "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=yes");
+
+    $(latihan1).on("beforeunload", function() {
+        alert("Do you really want to close?");
+    });
 }
 
 function Latihan2() {

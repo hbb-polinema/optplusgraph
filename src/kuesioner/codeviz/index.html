@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Visualize C/C++ code execution to learn C/C++ online</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script type="text/javascript">
+        window.optOverride = {}
+        window.optOverride.frontendLang = 'c-cpp'; // hacky override before including main.bundle.js
+    </script>
+
+    <script type="text/javascript" src="main.min.js?v=3" charset="utf-8"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-96612449-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-96612449-2');
+    </script>
+
+
+</head>
+
+<body>
+    <header>
+        <center style="padding:0px">
+            <p>Visualize C/C++ code execution to learn C/C++ online</p>
+        </center>
+    </header>
+
+    <div id="loadingScreen"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Please wait ... Code is loading</div>
+
+    <div id="pyInputPane">
+
+        <div id="codeInputWarnings">
+            <select id="pythonVersionSelector" class="form-control btn btn-primary">
+                <option value="c">Write code in <strong>C (gcc 4.8, C11) EXPERIMENTAL</strong></option>
+                <option value="cpp">Write code in <strong>C++ (gcc 4.8, C++11) EXPERIMENTAL</strong></option>
+            </select>
+        </div>
+
+        <div id="someoneIsTypingDiv" style="color: #e93f34; font-weight: bold; display: none;">Someone is typing ...</div>
+        <div id="codeInputPane"></div>
+        <!-- populate with Ace code editor instance -->
+        <div id="frontendErrorOutput"></div>
+        <div id="surveyPane"></div>
+
+        <p>
+            <button id="executeBtn" class="btn btn-warning btn-lg btn-block" type="button"><span class="glyphicon glyphicon-cloud-upload"></span>  Visualize Execution</button>
+        </p>
+
+        <div id="exampleSnippets"></div>
+
+    </div>
+
+    <!-- Visualization Execution -->
+    <div id="pyOutputPane"></div>
+</body>
+
+<footer>
+    <div id="footer"></div>
+    <button id="genUrlBtn" style="position:fixed; bottom: 3px; right: 3px;" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-link"></span> Generate Permanent Link</button>
+    <button id="btnInfo" style="position:fixed; top: 3px; left: 3px;" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-info-sign"></span></button>
+</footer>
+
+</html>

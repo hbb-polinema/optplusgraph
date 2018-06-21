@@ -4,7 +4,56 @@
  */
 
 var currentTab = 0; // Current tab is set to be the first tab (0)
-showTab(currentTab); // Display the crurrent tab
+
+$(document).ready(function() {
+    goTop();
+    initPretest();
+    showTab(currentTab); // Display the crurrent tab
+});
+
+function goTop() {
+    $('html, body').animate({
+        scrollTop: $('html').offset().top
+    }, 500);
+    return false;
+}
+
+function initPretest() {
+    var x = document.getElementsByClassName("tab");
+    var notYet = false,
+        i = 0;
+
+    for (i = 0; i < x.length; i++) {
+        switch (i) {
+            case 0:
+                var cek = checkFromDB(1);
+                if (cek == 'belum')
+                    notYet = true;
+                break;
+            case 1:
+                var cek = checkFromDB(47);
+                if (cek == 'belum')
+                    notYet = true;
+                break;
+            case 2:
+                var cek = checkFromDB(48);
+                if (cek == 'belum')
+                    notYet = true;
+                break;
+            case 3:
+                var cek = checkFromDB(8);
+                if (cek == 'belum')
+                    notYet = true;
+                break;
+        }
+
+        if (notYet) {
+            currentTab = i;
+            break;
+        }
+    }
+    console.log('i: ' + i);
+}
 
 function showTab(n) {
     // This function will display the specified tab of the form...
@@ -61,9 +110,18 @@ function submitPretest() {
     alert('Jawaban Pretest Berhasil Disimpan!');
 }
 
-function clearInvalid(i) {
+function clearInvalid(i, val) {
     var P = document.getElementById('p' + i);
     P.className = P.className.replace('invalid', '');
+    checkAnswer(val);
+}
+
+function checkAnswer(val) {
+    var answer = val.value;
+
+    if (answer != '') {
+        document.getElementById('nextBtn').style.display = 'block';
+    }
 }
 
 function bahasaPem(val) {
@@ -79,6 +137,8 @@ function bahasaPem(val) {
     } else if (bahasa == 'b' || bahasa == 'c') {
         document.getElementById('lastC').style.display = 'none';
     }
+
+    checkAnswer(val);
 }
 
 function saveToDB(val, q) {
@@ -130,7 +190,9 @@ function preTest(currentQuestion) {
             // go to p2
             if (valid) {
                 nextBtn.setAttribute('onclick', 'preTest(2)');
+                nextBtn.style.display = 'none';
                 sisaPertanyaan.textContent = '3';
+                goTop();
             }
             break;
         case 2:
@@ -152,7 +214,9 @@ function preTest(currentQuestion) {
             // go to p3
             if (valid) {
                 nextBtn.setAttribute('onclick', 'preTest(3)');
+                nextBtn.style.display = 'none';
                 sisaPertanyaan.textContent = '2';
+                goTop();
             }
             break;
         case 3:
@@ -167,7 +231,9 @@ function preTest(currentQuestion) {
             if (valid) {
                 nextBtn.value = 'Simpan';
                 nextBtn.setAttribute('onclick', 'preTest(4)');
+                nextBtn.style.display = 'none';
                 sisaPertanyaan.textContent = '1';
+                goTop();
             }
             break;
         case 4:

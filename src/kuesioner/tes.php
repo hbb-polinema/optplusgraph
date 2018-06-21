@@ -41,7 +41,7 @@ $temp_detik = $temp_waktu % 60;
 
     function CheckTime() {
         div_timer.innerHTML = 'Sisa Waktu: ' + max_time + ' menit ' + c_seconds + ' detik';
-        if (total_seconds <= 0) {
+        if (total_seconds <= 0 && max_time <= 0) {
             setTimeout('document.quiz.submit()', 1);
 
         } else {
