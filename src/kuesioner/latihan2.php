@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if(isset($_SESSION['kode'])){
+    # Ok
+} else {
+    header("Location: index.php");
+    exit;
+}
+?>
 <?php require_once('header.php'); ?>
 
 <body>

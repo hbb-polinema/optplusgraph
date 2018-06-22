@@ -1,7 +1,15 @@
 $(document).ready(function() {
+    goTop();
     var divTimer = document.getElementById("timer");
     timer(15, 0, divTimer);
 });
+
+function goTop() {
+    $('html, body').animate({
+        scrollTop: $('html').offset().top
+    }, 500);
+    return false;
+}
 
 function saveToDB(jwb, id_soal) {
     var time = 'menit ' + _MIN + ':detik ' + _SEC;
@@ -38,7 +46,8 @@ function simulasi1sesi2NextBtn(currentQuestion) {
 
             if (document.getElementById('answerP1').value != '') {
                 if (viz1 != null) {
-                    saveToDB(document.getElementById('answerP1').value, 23);
+                    if (checkFromDB(23) == 'belum') saveToDB(document.getElementById('answerP1').value, 23);
+                    goTop();
                 } else {
                     valid = false;
                     console.log('viz1: ' + viz1);
@@ -55,7 +64,8 @@ function simulasi1sesi2NextBtn(currentQuestion) {
 
             if (document.getElementById('answerP2').value != '') {
                 if (viz2 != null) {
-                    saveToDB(document.getElementById('answerP2').value, 26);
+                    if (checkFromDB(26) == 'belum') saveToDB(document.getElementById('answerP2').value, 26);
+                    goTop();
                 } else {
                     valid = false;
                     console.log('viz2: ' + viz2);
@@ -72,7 +82,8 @@ function simulasi1sesi2NextBtn(currentQuestion) {
 
             if (document.getElementById('answerP3').value != '') {
                 if (viz3 != null) {
-                    saveToDB(document.getElementById('answerP3').value, 28);
+                    if (checkFromDB(28) == 'belum') saveToDB(document.getElementById('answerP3').value, 28);
+                    goTop();
                 } else {
                     valid = false;
                     console.log('viz3: ' + viz3);

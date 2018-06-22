@@ -13,7 +13,7 @@ class DB{
         if(!isset(self::$my_connect)){
             // baca konfigurasi berkas DB, agar aman file ini harus diletakkan di luar jangkauan web root
             $config = parse_ini_file('db_config.ini');
-            self::$my_connect = new mysqli('localhost',$config['username'],$config['password'],$config['dbname']);
+            self::$my_connect = new mysqli($config['host'],$config['username'],$config['password'],$config['dbname']);
         }
 
         // jika koneksi gagal

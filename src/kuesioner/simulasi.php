@@ -137,7 +137,7 @@ if(isset($_SESSION['kode'])){
                                 <p><b>Latihan 1</b></p>
                                 <p>Anda ditugaskan untuk menyelesaikan 1 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasOPT"><b>kakas OPT</b></a>.</p>
                                 <p>Apa itu <a data-toggle="modal" data-target="#kakasOPT"><b>Kakas OPT</b></a> ? klik <a data-toggle="modal" data-target="#kakasOPT">di sini</a> untuk membaca deskripsinya.</p>
-                                <p><input class="btn btn-primary btn-lg" value="Mulai - Latihan 1" type="button" onclick="Latihan1();"></p>
+                                <p id="latihanOPT"><input class="btn btn-primary btn-lg" value="Mulai - Latihan 1" type="button" onclick="Latihan1();"></p>
                             </div>
                         </div>
                         <div id="p2" class="tab form-group">
@@ -146,7 +146,7 @@ if(isset($_SESSION['kode'])){
                                 <p><b>Latihan 2</b></p>
                                 <p>Anda ditugaskan untuk menyelesaikan 1 soal kode program sederhana dengan bahasa pemrograman C menggunakan <a data-toggle="modal" data-target="#kakasCodeViz"><b>kakas CodeViz</b></a>.</p>
                                 <p>Apa itu <a data-toggle="modal" data-target="#kakasCodeViz"><b>Kakas CodeViz</b></a> ? klik <a data-toggle="modal" data-target="#kakasCodeViz">di sini</a> untuk membaca deskripsinya.</p>
-                                <p><input class="btn btn-primary btn-lg" value="Mulai - Latihan 2" type="button" onclick="Latihan2();"></p>
+                                <p id="latihanCODEVIZ"><input class="btn btn-primary btn-lg" value="Mulai - Latihan 2" type="button" onclick="Latihan2();"></p>
                             </div>
                         </div>
                         <div id="p3" class="tab form-group" style="background-color: #7f8c8d;">
@@ -206,7 +206,7 @@ if(isset($_SESSION['kode'])){
     <div style="height:133px;"></div>
 
     <?php require_once('footer.php'); ?>
-    <script src="js/simulasi.js?v=7"></script>
+    <script src="js/simulasi.js?v=18"></script>
 
 <div id="kakasOPT" class="modal fade" role="dialog">
     <div class="modal-dialog">

@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if(isset($_SESSION['kode'])){
+    # Ok
+} else {
+    header("Location: index.php");
+    exit;
+}
+?>
 <?php require_once('header.php'); ?>
 
 <body onunload="_DESTROY_CODEVIZ()">
@@ -175,8 +185,8 @@
     <div style="height:133px;"></div>
 
     <?php require_once('footer.php'); ?>
-    <script src="js/simulasi.js?v=6"></script>
-    <script src="js/simulasi1sesi2.js?v=5"></script>
+    <script src="js/simulasi.js?v=7"></script>
+    <script src="js/simulasi1sesi2.js?v=6"></script>
 
 <div id="kakasCodeViz" class="modal fade" role="dialog">
     <div class="modal-dialog">

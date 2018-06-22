@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if(isset($_SESSION['kode'])){
+    # Ok
+} else {
+    header("Location: index.php");
+    exit;
+}
+?>
 <?php require_once('header.php'); ?>
 
 <body>
@@ -118,7 +128,7 @@
     <div style="height:133px;"></div>
     <?php require_once('footer.php'); ?>
     <script src="js/simulasi.js?v=7"></script>
-    <script src="js/latihan1.js?v=8"></script>
+    <script src="js/latihan1.js?v=9"></script>
     
 <div id="kakasOPT" class="modal fade" role="dialog">
     <div class="modal-dialog">

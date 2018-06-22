@@ -1,3 +1,14 @@
+$(document).ready(function() {
+    goTop();
+});
+
+function goTop() {
+    $('html, body').animate({
+        scrollTop: $('html').offset().top
+    }, 500);
+    return false;
+}
+
 function saveToDB(jwb, id_soal) {
     console.log(id_soal + ' jwb: ' + jwb);
     $.ajax({

@@ -189,7 +189,7 @@ if(isset($_SESSION['kode'])){
     <div style="height:133px;"></div>
 
     <?php require_once('footer.php'); ?>
-    <script src="js/simulasi.js?v=3"></script>
+    <script src="js/simulasi.js?v=4"></script>
 
 <div id="kakasOPT" class="modal fade" role="dialog">
     <div class="modal-dialog">

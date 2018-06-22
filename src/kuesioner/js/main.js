@@ -585,25 +585,15 @@ function timer(menit, detik, divTimer) {
 }
 
 function checkFromDB(q) {
-    console.log('q: ' + q);
-    var hasil = '';
-
+    var hasil;
     $.ajax({
         type: "POST",
         url: "ajax_request/cek_q.php",
         data: "q=" + q,
         cache: false,
+        async: false,
         success: function(result) {
-            if (result == 'sudah') {
-                console.log('pertanyaan sudah dijawab');
-                hasil = 'sudah';
-            } else if (result == 'belum') {
-                console.log('pertanyaan belum dijawab');
-                hasil = 'belum';
-            } else {
-                console.log(result);
-                hasil = 'error';
-            }
+            hasil = result;
         },
         error: function(xhr, status, error) {
             console.log('Terjadi koneksi galat: ' + status);

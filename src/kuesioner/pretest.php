@@ -245,4 +245,4 @@ if(isset($_SESSION['kode'])){
     <div style="height:133px;"></div>
 
     <?php require_once('footer.php'); ?>
-    <script src="js/pretest.js?v=11"></script>
+    <script src="js/pretest.js?v=24"></script>

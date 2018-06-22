@@ -19,6 +19,8 @@ function goTop() {
 }
 
 function initPretest() {
+    var nextBtn = document.getElementById('nextBtn');
+    var sisaPertanyaan = document.getElementById("sisaPertanyaan");
     var x = document.getElementsByClassName("tab");
     var notYet = false,
         i = 0;
@@ -26,33 +28,46 @@ function initPretest() {
     for (i = 0; i < x.length; i++) {
         switch (i) {
             case 0:
-                var cek = checkFromDB(1);
-                if (cek == 'belum')
+                if (checkFromDB(1) == 'belum') {
+                    nextBtn.setAttribute('onclick', 'preTest(1)');
+                    sisaPertanyaan.textContent = '4';
                     notYet = true;
+                }
                 break;
             case 1:
-                var cek = checkFromDB(47);
-                if (cek == 'belum')
+                if (checkFromDB(47) == 'belum') {
+                    nextBtn.setAttribute('onclick', 'preTest(2)');
+                    sisaPertanyaan.textContent = '3';
                     notYet = true;
+                }
                 break;
             case 2:
-                var cek = checkFromDB(48);
-                if (cek == 'belum')
+                if (checkFromDB(48) == 'belum') {
+                    nextBtn.setAttribute('onclick', 'preTest(3)');
+                    sisaPertanyaan.textContent = '2';
                     notYet = true;
+                }
                 break;
             case 3:
-                var cek = checkFromDB(8);
-                if (cek == 'belum')
+                if (checkFromDB(8) == 'belum') {
+                    nextBtn.setAttribute('onclick', 'preTest(4)');
+                    sisaPertanyaan.textContent = '1';
                     notYet = true;
+                }
                 break;
         }
-
+        console.log('notYet: ' + notYet);
         if (notYet) {
             currentTab = i;
             break;
         }
     }
-    console.log('i: ' + i);
+
+    if (!notYet && i >= 3) {
+        alert('Anda tidak diperkenankan mengisi soal pretest kembali!');
+        saveToDB('finish', 0);
+        submitPretest();
+    }
 }
 
 function showTab(n) {
@@ -105,9 +120,8 @@ function validateForm() {
 }
 
 function submitPretest() {
-    //document.getElementById("formPreTest").submit();
-    window.location.href = 'simulasi.php';
     alert('Jawaban Pretest Berhasil Disimpan!');
+    window.location.href = 'simulasi.php';
 }
 
 function clearInvalid(i, val) {
@@ -263,9 +277,3 @@ function preTest(currentQuestion) {
 
     return valid;
 }
-
-/**
- * soal pretest yang sudah dijawab dan tersimpan dalam DB, tidak dapat diakses lagi (tidak bisa dijawab lagi).
- * TODO: SELECT id_responden FROM responden WHERE kode_unik = $_SESSION['kode_unik']
- * SELECT 
- */
