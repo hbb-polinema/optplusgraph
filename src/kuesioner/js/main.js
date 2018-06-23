@@ -451,7 +451,7 @@ function checkCode() {
                 if (result == 'sukses') {
                     alert('Sukses');
                     window.location.href = 'data-pribadi.php';
-                } else if (result == 'gagal') {
+                } else {
                     alert('Maaf, kode unik salah');
                 }
             },
@@ -582,23 +582,4 @@ function timer(menit, detik, divTimer) {
         }
     }
     countTimer();
-}
-
-function checkFromDB(q) {
-    var hasil;
-    $.ajax({
-        type: "POST",
-        url: "ajax_request/cek_q.php",
-        data: "q=" + q,
-        cache: false,
-        async: false,
-        success: function(result) {
-            hasil = result;
-        },
-        error: function(xhr, status, error) {
-            console.log('Terjadi koneksi galat: ' + status);
-        }
-    });
-
-    return hasil;
 }

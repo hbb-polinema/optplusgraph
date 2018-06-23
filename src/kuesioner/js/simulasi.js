@@ -53,18 +53,28 @@ function nextForm(n) {
                 nextBtn.style.display = "none";
                 var latihanOPT = document.getElementById("latihanOPT");
 
-                if (latihanOPT && checkFromDB(49) == 'sudah') {
-                    nextBtn.style.display = "block";
-                    latihanOPT.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Latihan ini</span>';
+                if (latihanOPT) {
+                    var cek = $.post("ajax_request/cek_q.php", { id: 49 });
+                    cek.done(function(result) {
+                        if (result == 'sudah') {
+                            nextBtn.style.display = "block";
+                            latihanOPT.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Latihan ini</span>';
+                        }
+                    });
                 }
                 break;
             case 2:
                 nextBtn.style.display = "none";
                 var latihanCODEVIZ = document.getElementById("latihanCODEVIZ");
 
-                if (latihanCODEVIZ && checkFromDB(50) == 'sudah') {
-                    nextBtn.style.display = "block";
-                    latihanCODEVIZ.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Latihan ini</span>';
+                if (latihanCODEVIZ) {
+                    var cek = $.post("ajax_request/cek_q.php", { id: 50 });
+                    cek.done(function(result) {
+                        if (result == 'sudah') {
+                            nextBtn.style.display = "block";
+                            latihanCODEVIZ.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Latihan ini</span>';
+                        }
+                    });
                 }
                 break;
             case 3:
@@ -118,21 +128,21 @@ function simulasiNextBtn(nextStep, cond) {
     return valid;
 }
 
-var _MainDomain = "http://localhost:3000"; // http://codeviz.tk/
+var _MainDomain = "http://localhost:3000"; // http://codeviz.tk/survei
 var _OPT;
 var _CODEVIZ;
 var _TIME = 15 * 60 * 1000; // 15 menit 0 detik
 
 function simulasiOPT() {
     _OPT = window.open(
-        "http://localhost/opt/", // http://codeviz.tk/opt/
+        "http://codeviz.tk/opt/", // http://codeviz.tk/opt/
         "_blank",
         "toolbar=no,scrollbars=yes,resizable=yes,top=0,left=0,width=800,height=600");
 }
 
 function simulasiCodeViz() {
     _CODEVIZ = window.open(
-        "http://localhost/codeviz/", // http://codeviz.tk/codeviz/
+        "http://codeviz.tk/codeviz/", // http://codeviz.tk/codeviz/
         "_blank",
         "toolbar=no,scrollbars=yes,resizable=yes,top=0,left=0,width=1115,height=715");
 }
@@ -146,55 +156,40 @@ function _DESTROY_CODEVIZ() {
 }
 
 function Latihan1() {
-    var nextBtn = document.getElementById("nextBtn");
-    var latihanOPT = document.getElementById("latihanOPT");
-
-    if (checkFromDB(49) == 'sudah') {
-        nextBtn.style.display = "block";
-        latihanOPT.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Latihan ini</span>';
-        return;
-    }
-
     var latihan1 = window.open(
         _MainDomain + "/latihan1.php", // http://codeviz.tk/survei/latihan1.php
         "_blank",
         "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=yes");
 
     $(latihan1).on("beforeunload", function() {
-        if (checkFromDB(49) == 'sudah') {
-            nextBtn.style.display = "block";
-            latihanOPT.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Latihan ini</span>';
-        }
+        var cek = $.post("ajax_request/cek_q.php", { id: 49 });
+        cek.done(function(result) {
+            if (result == 'sudah') {
+                document.getElementById("nextBtn").style.display = "block";
+                document.getElementById("latihanOPT").innerHTML = '<span style="color:red;">Anda sudah mengerjakan Latihan ini</span>';
+            }
+        });
     });
 }
 
 function Latihan2() {
-    var nextBtn = document.getElementById("nextBtn");
-    var latihanCODEVIZ = document.getElementById("latihanCODEVIZ");
-
-    if (checkFromDB(50) == 'sudah') {
-        nextBtn.style.display = "block";
-        latihanCODEVIZ.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Latihan ini</span>';
-        return;
-    }
-
     var latihan2 = window.open(
         _MainDomain + "/latihan2.php", // http://codeviz.tk/survei/latihan2.php
         "_blank",
         "toolbar=no,scrollbars=yes,resizable=yes,fullscreen=yes");
 
     $(latihan2).on("beforeunload", function() {
-        if (checkFromDB(50) == 'sudah') {
-            nextBtn.style.display = "block";
-            latihanCODEVIZ.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Latihan ini</span>';
-        }
+        var cek = $.post("ajax_request/cek_q.php", { id: 50 });
+        cek.done(function(result) {
+            if (result == 'sudah') {
+                document.getElementById("nextBtn").style.display = "block";
+                document.getElementById("latihanCODEVIZ").innerHTML = '<span style="color:red;">Anda sudah mengerjakan Latihan ini</span>';
+            }
+        });
     });
 }
 
 function simulasi1sesi1() {
-    var nextBtn = document.getElementById("nextBtn");
-    var sesi1 = document.getElementById("s1s1");
-
     var S1se1 = window.open(
         _MainDomain + "/simulasi1sesi1.php", // http://codeviz.tk/survei/simulasi1sesi1.php
         "_blank",
@@ -202,23 +197,32 @@ function simulasi1sesi1() {
 
     setTimeout(function() {
         S1se1.close();
-        nextBtn.style.display = "block";
-        sesi1.innerHTML = '<span style="color:red;">Waktu sudah habis untuk mengerjakan Sesi ini</span>';
+        document.getElementById("nextBtn").style.display = "block";
+        document.getElementById("s1s1").innerHTML = '<span style="color:red;">Waktu sudah habis untuk mengerjakan Sesi ini</span>';
     }, _TIME);
 
     $(S1se1).on("beforeunload", function() {
-        if (checkFromDB(17) == 'sudah')
-            if (checkFromDB(20) == 'sudah' && checkFromDB(21) == 'sudah') {
-                nextBtn.style.display = "block";
-                sesi1.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Sesi ini</span>';
+        var cek = $.post("ajax_request/cek_q.php", { id: 17 });
+        cek.done(function(result1) {
+            if (result1 == 'sudah') {
+                cek = $.post("ajax_request/cek_q.php", { id: 20 });
+                cek.done(function(result2) {
+                    if (result2 == 'sudah') {
+                        cek = $.post("ajax_request/cek_q.php", { id: 21 });
+                        cek.done(function(result3) {
+                            if (result3 == 'sudah') {
+                                document.getElementById("nextBtn").style.display = "block";
+                                document.getElementById("s1s1").innerHTML = '<span style="color:red;">Anda sudah mengerjakan Sesi ini</span>';
+                            }
+                        });
+                    }
+                });
             }
+        });
     });
 }
 
 function simulasi1sesi2() {
-    var nextBtn = document.getElementById("nextBtn");
-    var sesi2 = document.getElementById("s1s2");
-
     var S1se2 = window.open(
         _MainDomain + "/simulasi1sesi2.php", // http://codeviz.tk/survei/simulasi1sesi2.php
         "_blank",
@@ -226,23 +230,32 @@ function simulasi1sesi2() {
 
     setTimeout(function() {
         S1se2.close();
-        nextBtn.style.display = "block";
-        sesi2.innerHTML = '<span style="color:red;">Waktu sudah habis untuk mengerjakan Sesi ini</span>';
+        document.getElementById("nextBtn").style.display = "block";
+        document.getElementById("s1s2").innerHTML = '<span style="color:red;">Waktu sudah habis untuk mengerjakan Sesi ini</span>';
     }, _TIME);
 
     $(S1se2).on("beforeunload", function() {
-        if (checkFromDB(23) == 'sudah')
-            if (checkFromDB(26) == 'sudah' && checkFromDB(28) == 'sudah') {
-                nextBtn.style.display = "block";
-                sesi2.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Sesi ini</span>';
+        var cek = $.post("ajax_request/cek_q.php", { id: 23 });
+        cek.done(function(result1) {
+            if (result1 == 'sudah') {
+                cek = $.post("ajax_request/cek_q.php", { id: 26 });
+                cek.done(function(result2) {
+                    if (result2 == 'sudah') {
+                        cek = $.post("ajax_request/cek_q.php", { id: 28 });
+                        cek.done(function(result3) {
+                            if (result3 == 'sudah') {
+                                document.getElementById("nextBtn").style.display = "block";
+                                document.getElementById("s1s2").innerHTML = '<span style="color:red;">Anda sudah mengerjakan Sesi ini</span>';
+                            }
+                        });
+                    }
+                });
             }
+        });
     });
 }
 
 function simulasi2sesi1() {
-    var nextBtn = document.getElementById("nextBtn");
-    var sesi1 = document.getElementById("s2s1");
-
     var S2se1 = window.open(
         _MainDomain + "/simulasi2sesi1.php", // http://codeviz.tk/survei/simulasi2sesi1.php
         "_blank",
@@ -250,23 +263,32 @@ function simulasi2sesi1() {
 
     setTimeout(function() {
         S2se1.close();
-        nextBtn.style.display = "block";
-        sesi1.innerHTML = '<span style="color:red;">Waktu sudah habis untuk mengerjakan Sesi ini</span>';
+        document.getElementById("nextBtn").style.display = "block";
+        document.getElementById("s2s1").innerHTML = '<span style="color:red;">Waktu sudah habis untuk mengerjakan Sesi ini</span>';
     }, _TIME);
 
     $(S2se1).on("beforeunload", function() {
-        if (checkFromDB(24) == 'sudah')
-            if (checkFromDB(29) == 'sudah' && checkFromDB(37) == 'sudah') {
-                nextBtn.style.display = "block";
-                sesi1.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Sesi ini</span>';
+        var cek = $.post("ajax_request/cek_q.php", { id: 24 });
+        cek.done(function(result1) {
+            if (result1 == 'sudah') {
+                cek = $.post("ajax_request/cek_q.php", { id: 29 });
+                cek.done(function(result2) {
+                    if (result2 == 'sudah') {
+                        cek = $.post("ajax_request/cek_q.php", { id: 37 });
+                        cek.done(function(result3) {
+                            if (result3 == 'sudah') {
+                                document.getElementById("nextBtn").style.display = "block";
+                                document.getElementById("s2s1").innerHTML = '<span style="color:red;">Anda sudah mengerjakan Sesi ini</span>';
+                            }
+                        });
+                    }
+                });
             }
+        });
     });
 }
 
 function simulasi2sesi2() {
-    var nextBtn = document.getElementById("nextBtn");
-    var sesi2 = document.getElementById("s2s2");
-
     var S2se2 = window.open(
         _MainDomain + "/simulasi2sesi2.php", // http://codeviz.tk/survei/simulasi2sesi2.php
         "_blank",
@@ -274,15 +296,27 @@ function simulasi2sesi2() {
 
     setTimeout(function() {
         S2se2.close();
-        nextBtn.style.display = "block";
-        sesi2.innerHTML = '<span style="color:red;">Waktu sudah habis untuk mengerjakan Sesi ini</span>';
+        document.getElementById("nextBtn").style.display = "block";
+        document.getElementById("s2s2").innerHTML = '<span style="color:red;">Waktu sudah habis untuk mengerjakan Sesi ini</span>';
     }, _TIME);
 
     $(S2se2).on("beforeunload", function() {
-        if (checkFromDB(35) == 'sudah')
-            if (checkFromDB(36) == 'sudah' && checkFromDB(30) == 'sudah') {
-                nextBtn.style.display = "block";
-                sesi2.innerHTML = '<span style="color:red;">Anda sudah mengerjakan Sesi ini</span>';
+        var cek = $.post("ajax_request/cek_q.php", { id: 35 });
+        cek.done(function(result1) {
+            if (result1 == 'sudah') {
+                cek = $.post("ajax_request/cek_q.php", { id: 36 });
+                cek.done(function(result2) {
+                    if (result2 == 'sudah') {
+                        cek = $.post("ajax_request/cek_q.php", { id: 30 });
+                        cek.done(function(result3) {
+                            if (result3 == 'sudah') {
+                                document.getElementById("nextBtn").style.display = "block";
+                                document.getElementById("s2s2").innerHTML = '<span style="color:red;">Anda sudah mengerjakan Sesi ini</span>';
+                            }
+                        });
+                    }
+                });
             }
+        });
     });
 }

@@ -1,7 +1,7 @@
 $(document).ready(function() {
     goTop();
     var divTimer = document.getElementById("timer");
-    timer(5, 0, divTimer);
+    timer(15, 0, divTimer);
 });
 
 function goTop() {
@@ -46,7 +46,7 @@ function simulasi2sesi1NextBtn(currentQuestion) {
 
             if (document.getElementById('answerP1').value != '') {
                 if (viz1 != null) {
-                    if (checkFromDB(24) == 'belum') saveToDB(document.getElementById('answerP1').value, 24);
+                    saveToDB(document.getElementById('answerP1').value, 24);
                     goTop();
                 } else {
                     valid = false;
@@ -64,7 +64,7 @@ function simulasi2sesi1NextBtn(currentQuestion) {
 
             if (document.getElementById('answerP2').value != '') {
                 if (viz2 != null) {
-                    if (checkFromDB(29) == 'belum') saveToDB(document.getElementById('answerP2').value, 29);
+                    saveToDB(document.getElementById('answerP2').value, 29);
                     goTop();
                 } else {
                     valid = false;
@@ -82,7 +82,7 @@ function simulasi2sesi1NextBtn(currentQuestion) {
 
             if (document.getElementById('answerP3').value != '') {
                 if (viz3 != null) {
-                    if (checkFromDB(37) == 'belum') saveToDB(document.getElementById('answerP3').value, 37);
+                    saveToDB(document.getElementById('answerP3').value, 37);
                     goTop();
                 } else {
                     valid = false;

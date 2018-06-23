@@ -18,6 +18,9 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
             return;
         }
 
+        $cek = $_DB->select('SELECT isi_jawaban FROM jawaban WHERE id_responden = '.$id_responden.' AND id_pertanyaan = '.$q);
+        if($cek) { echo 'Jawaban sudah ada!'; return; }
+        
         $insert = $_DB->query("INSERT INTO `jawaban` 
                                             (`isi_jawaban`, 
                                             `alur_pertanyaan`, 

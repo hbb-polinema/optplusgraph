@@ -8,7 +8,7 @@ if($_SESSION['isSetSession'] && isset($_SESSION['kode'])){
     $select = $_DB->select('SELECT id_responden FROM responden WHERE kode_unik = '.$kode_unik);
 
     if($select){
-        $q = $_POST['q'];
+        $q = $_POST['id'];
         $id_responden = $select[0]['id_responden'];
 
         $cek = $_DB->select('SELECT isi_jawaban FROM jawaban WHERE id_responden = '.$id_responden.' AND id_pertanyaan = '.$q);

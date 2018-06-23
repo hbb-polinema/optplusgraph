@@ -9,6 +9,7 @@ if($_SESSION['isSetSession']){
     if($select){
         $_SESSION['email'] = $select[0]['email_responden'];
         $_SESSION['kode'] = $kode_unik;
+        $_SESSION['host'] = 'localhost:3000'; # codeviz.tk/survei
         $_DB->query("UPDATE `responden` SET `tahap_sekarang` = 'data-pribadi.php' WHERE `kode_unik` = ".$kode_unik);
         echo 'sukses';
     } else {

@@ -46,7 +46,7 @@ function simulasi1sesi1NextBtn(currentQuestion) {
 
             if (document.getElementById('answerP1').value != '') {
                 if (viz1 != null) {
-                    if (checkFromDB(17) == 'belum') saveToDB(document.getElementById('answerP1').value, 17);
+                    saveToDB(document.getElementById('answerP1').value, 17);
                     goTop();
                 } else {
                     valid = false;
@@ -64,7 +64,7 @@ function simulasi1sesi1NextBtn(currentQuestion) {
 
             if (document.getElementById('answerP2').value != '') {
                 if (viz2 != null) {
-                    if (checkFromDB(20) == 'belum') saveToDB(document.getElementById('answerP2').value, 20);
+                    saveToDB(document.getElementById('answerP2').value, 20);
                     goTop();
                 } else {
                     valid = false;
@@ -82,7 +82,7 @@ function simulasi1sesi1NextBtn(currentQuestion) {
 
             if (document.getElementById('answerP3').value != '') {
                 if (viz3 != null) {
-                    if (checkFromDB(21) == 'belum') saveToDB(document.getElementById('answerP3').value, 21);
+                    saveToDB(document.getElementById('answerP3').value, 21);
                     goTop();
                 } else {
                     valid = false;

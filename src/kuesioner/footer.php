@@ -35,7 +35,7 @@
     <script src="js/magnific-popup-options.js"></script>
 
     <!-- Main JS (Do not remove) -->
-    <script src="js/main.js?v=6"></script>
+    <script src="js/main.js?v=7"></script>
 
 </body>
 

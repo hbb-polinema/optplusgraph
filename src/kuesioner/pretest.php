@@ -5,7 +5,8 @@ if(isset($_SESSION['kode'])){
     require_once('db/db.php');
     $kode_unik = $_SESSION['kode'];
     $_DB = new DB();
-    $select = $_DB->select('SELECT nama_responden, tahap_sekarang FROM responden WHERE kode_unik = '.$kode_unik);
+    $select = $_DB->select('SELECT id_responden, nama_responden, tahap_sekarang FROM responden WHERE kode_unik = '.$kode_unik);
+    
     if($select){
         if($select[0]['tahap_sekarang'] == "pretest.php"){
             # Ok, right place!
@@ -245,4 +246,4 @@ if(isset($_SESSION['kode'])){
     <div style="height:133px;"></div>
 
     <?php require_once('footer.php'); ?>
-    <script src="js/pretest.js?v=24"></script>
+    <script src="js/pretest.js?v=1"></script>

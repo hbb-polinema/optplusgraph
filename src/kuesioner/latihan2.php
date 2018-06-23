@@ -52,8 +52,6 @@ if(isset($_SESSION['kode'])){
         }
     </style>
 
-    <link href="css/prism.css?v=1" rel="stylesheet" type="text/css">
-
     <header role="banner" id="fh5co-header" class="navbar-fixed-top">
         <div class="container">
             
@@ -114,7 +112,7 @@ if(isset($_SESSION['kode'])){
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="CODEVIZ" width="100%" height="600" frameborder="0" src="http://localhost:3000/codeviz/#code=int%20main%28%29%7B%0A%20%20int%20M%5B5%5D%5B5%5D%20%3D%20%7B0%7D%3B%0A%20%20int%20y%20%3D%2029%3B%0A%20%20Int%20z%20%3D%20y%20*%20M%5B2%5D%5B3%5D%0A%20%20retun%200%3B%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
+                                <iframe id="CODEVIZ" width="100%" height="600" frameborder="0" src="http://<?php echo $_SESSION['host']; ?>/codeviz/#code=int%20main%28%29%7B%0A%20%20int%20M%5B5%5D%5B5%5D%20%3D%20%7B0%7D%3B%0A%20%20int%20y%20%3D%2029%3B%0A%20%20Int%20z%20%3D%20y%20*%20M%5B2%5D%5B3%5D%0A%20%20retun%200%3B%0A%7D&mode=edit&origin=opt-frontend.js&py=c&rawInputLstJSON=%5B%5D"> </iframe>
                             </div>
                         </div>
 
