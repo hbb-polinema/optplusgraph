@@ -6,7 +6,7 @@ Based on https://github.com/pgbovine/OnlinePythonTutor
 
 1. `git clone https://github.com/habibieeddien/optplusgraph.git`
 
-2. Install first dependencies and read more on [src/dev/README.txt]
+2. Install first dependencies and read more on [src/dev/README.txt](https://github.com/habibieeddien/optplusgraph/blob/master/src/dev/README.txt)
 
 3. *LINUX* : type and ENTER on terminal `./RUN.bash` from path in `src/dev/`
 
@@ -22,7 +22,7 @@ Based on https://github.com/pgbovine/OnlinePythonTutor
 
 # Dependencies #
 
-[docs/dependencies.md] more details
+[docs/dependencies.md](https://github.com/habibieeddien/optplusgraph/blob/master/docs/dependencies.md) more details
 
 
 ## Developed By ##
